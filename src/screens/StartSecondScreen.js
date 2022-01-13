@@ -38,7 +38,7 @@ const StartFirstScreen = () => {
       <View style={styles.ImageBackgroundContiner}>
         <ImageBackground source={require('../assets/image/startimg2.png')} resizeMode='cover' style={styles.ImageStyle} />
         <View style={styles.right}>
-          <StartRightBox />
+          <StartRightBox text={"병원\n이동을\n안전하게"}/>
         </View>
         <View style={styles.CircleSet}>
           <StartWhiteCircle />

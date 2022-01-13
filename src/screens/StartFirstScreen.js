@@ -37,7 +37,7 @@ const StartFirstScreen = () => {
       <View style={styles.ImageBackgroundContiner}>
         <ImageBackground source={require('../assets/image/startimg1.png')} resizeMode='contain' style={styles.ImageStyle} />
         <View style={styles.left}>
-          <StartLeftBox />
+          <StartLeftBox text={"비응급\n병원이동\n서비스"}/>
         </View>
         <View style={styles.CircleSet}>
           <StartOrangeCircle />

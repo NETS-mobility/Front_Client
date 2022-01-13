@@ -38,7 +38,7 @@ const StartFirstScreen = () => {
       <View style={styles.ImageBackgroundContiner}>
         <ImageBackground source={require('../assets/image/startimg3.jpeg')} resizeMode='cover' style={styles.ImageStyle} />
         <View style={styles.right}>
-          <StartRightBox />
+          <StartRightBox text={"집까지\n편안하게"}/>
         </View>
         <View style={styles.CircleSet}>
           <StartWhiteCircle />

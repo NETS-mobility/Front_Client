@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, LogBox} from 'react-native';
+import NetsLogo from '../../assets/image/logo.svg';
 
 const styles = StyleSheet.create({
   btn: {
@@ -8,11 +9,17 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     elevation: 4,
     backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent:'center',
   },
 });
 
 function StartBtn() {
-  return <View style={styles.btn} />;
+  return (
+  <View style={styles.btn}>
+    <NetsLogo width={175} height={70} />
+  </View>
+  );
 }
 
 export default StartBtn;
