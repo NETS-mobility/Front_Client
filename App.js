@@ -1,37 +1,18 @@
 import React from 'react';
-import StartMainScreen from './src/screens/StartMainScreen';
-import StartFirstScreen from './src/screens/StartFirstScreen';
-import StartSecondScreen from './src/screens/StartSecondScreen';
-import StartThirdScreen from './src/screens/StartThirdScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  FindPwNavigator,
+  FindIdNavigator,
+} from './src/navigation/findAuth/findAuth';
 
 const Stack = createNativeStackNavigator();
-
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="StartThird">
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Start"
-          component={StartMainScreen}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="StartFirst"
-          component={StartFirstScreen}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="StartSecond"
-          component={StartSecondScreen}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="StartThird"
-          component={StartThirdScreen}
-        />
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="FindPwNavigator" component={FindPwNavigator} />
+        <Stack.Screen name="FindIdNavigator" component={FindIdNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
