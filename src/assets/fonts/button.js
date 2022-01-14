@@ -1,5 +1,24 @@
-import {StyleSheet} from 'react-native';
-const btnStyles = StyleSheet.create({
+import React from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+const CustomBtn = ({
+  viewStyle,
+  textStyle,
+  viewStyleDisabled,
+  textStyleDisabled,
+  text,
+  onPress,
+  disabled,
+}) => {
+  return (
+    <TouchableOpacity activeOpacity={0.5} onPress={onPress} disabled={disabled}>
+      <View style={disabled ? viewStyleDisabled : viewStyle}>
+        <Text style={disabled ? textStyleDisabled : textStyle}>{text}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+export const btnStyles = StyleSheet.create({
   btnDisable: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -24,4 +43,4 @@ const btnStyles = StyleSheet.create({
   },
 });
 
-export default btnStyles;
+export default CustomBtn;
