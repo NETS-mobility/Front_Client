@@ -47,6 +47,16 @@ const typoStyles = StyleSheet.create({
   fwBold: {
     fontWeight: '700',
   },
+
+  /* line-height */
+  line35: {
+    lineHeight: 35,
+  },
+
+  /* textAlign */
+  alignright: {
+    textAlign: 'right',
+  },
 });
 
 export default typoStyles;
