@@ -19,7 +19,10 @@ const CommonLayout = ({children}) => {
 const styles = StyleSheet.create({
   layout: {
     flex: 1,
-    justifyContent: 'space-between',
+    paddingBottom: 100,
+  },
+  header: {
+    marginBottom: 14,
   },
 });
 export default CommonLayout;
