@@ -26,11 +26,14 @@ const BottomTab = () => {
 
 const styles = StyleSheet.create({
   bottomTab: {
-    backgroundColor: '#fff',
-    height: 70,
+    position: 'absolute',
+    bottom: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
+    width: '100%',
+    height: 70,
+    backgroundColor: '#fff',
   },
 });
 export default BottomTab;

@@ -3,10 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const ServiceBlock = ({children}) => {
   return (
     <View style={styles.serviceBlock}>
-      <View style={styles.shadow}>
-        <Text>hi</Text>
-        {children}
-      </View>
+      <View style={styles.shadow}>{children}</View>
     </View>
   );
 };

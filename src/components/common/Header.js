@@ -21,13 +21,13 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   header: {
-    paddingHorizontal: 16,
     width: '100%',
     height: 57,
-    backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 16,
+    backgroundColor: '#fff',
   },
 });
 

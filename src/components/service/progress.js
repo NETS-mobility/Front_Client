@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   progress: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 28,
   },
   step: {
     height: 30,
