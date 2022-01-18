@@ -32,7 +32,11 @@ const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
                 typoStyles.fwBold,
                 styles.title,
               ]}>
-              {pageType == 'pw' ? '비밀번호 찾기' : '아이디 찾기'}
+              {pageType == 'pw'
+                ? '비밀번호 찾기'
+                : pageType == 'id'
+                ? '아이디 찾기'
+                : '비밀번호 변경'}
             </Text>
             {children}
           </View>
