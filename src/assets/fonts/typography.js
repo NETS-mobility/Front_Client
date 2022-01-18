@@ -36,6 +36,9 @@ const typoStyles = StyleSheet.create({
   textDisable: {
     color: '#dad8e0',
   },
+  textExplainBold: {
+    color: '#424242',
+  },
   textExplain: {
     color: '#737373',
   },
