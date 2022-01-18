@@ -24,7 +24,7 @@ const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
             <Close width={25} height={25} />
           </TouchableOpacity>
           <ProgressBar num={num} />
-          <View style={styles.children}>
+          <View style={styles.contents}>
             <Text
               style={[
                 typoStyles.textMain,
@@ -41,31 +41,29 @@ const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
             {children}
           </View>
         </ScrollView>
-        <View style={styles.center}>
-          {btnType == 'login' ? (
-            <CustomBtn
-              viewStyle={[btnStyles.btnBlue, styles.btn]}
-              textStyle={[
-                typoStyles.textWhite,
-                typoStyles.fs20,
-                typoStyles.fwBold,
-              ]}
-              text={'로그인'}
-              onPress={goNext}
-            />
-          ) : (
-            <CustomBtn
-              viewStyle={[btnStyles.btnWhite, styles.btn]}
-              textStyle={[
-                typoStyles.textMain,
-                typoStyles.fs20,
-                typoStyles.fwBold,
-              ]}
-              text={'계속'}
-              onPress={goNext}
-            />
-          )}
-        </View>
+        {btnType == 'login' ? (
+          <CustomBtn
+            viewStyle={[btnStyles.btnBlue, styles.nextStepBtn]}
+            textStyle={[
+              typoStyles.textWhite,
+              typoStyles.fs20,
+              typoStyles.fwBold,
+            ]}
+            text={'로그인'}
+            onPress={goNext}
+          />
+        ) : (
+          <CustomBtn
+            viewStyle={[btnStyles.btnWhite, styles.nextStepBtn]}
+            textStyle={[
+              typoStyles.textMain,
+              typoStyles.fs20,
+              typoStyles.fwBold,
+            ]}
+            text={'계속'}
+            onPress={goNext}
+          />
+        )}
       </View>
     </WholeLayout>
   );
@@ -78,23 +76,20 @@ const styles = StyleSheet.create({
     paddingBottom: 31,
     backgroundColor: '#fff',
   },
-  closeBtn: {
-    marginBottom: 8,
-  },
-  btn: {
-    width: 245,
-    height: 47,
-  },
   title: {
     marginBottom: 87,
   },
-  center: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+  closeBtn: {
+    marginBottom: 8,
   },
-  children: {
+  contents: {
     paddingLeft: 15,
     paddingRight: 15,
+  },
+  nextStepBtn: {
+    width: 245,
+    height: 47,
+    alignSelf: 'center',
   },
 });
 

@@ -15,7 +15,7 @@ const FindID2 = ({navigation}) => {
           typoStyles.textExplain,
           typoStyles.fs15,
           typoStyles.fwBold,
-          styles.line,
+          styles.oneLine,
         ]}>
         가입하신 아이디는
       </Text>
@@ -32,7 +32,7 @@ const FindID2 = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  line: {marginBottom: 20},
+  oneLine: {marginBottom: 20},
 });
 
 export default FindID2;

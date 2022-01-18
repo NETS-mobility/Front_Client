@@ -29,8 +29,8 @@ const FindID = ({navigation}) => {
         styles={styles.telInput}
       />
       <CustomBtn
-        viewStyleDisabled={[btnStyles.btnDisable, styles.btn]}
-        viewStyle={[btnStyles.btnBlue, styles.btn]}
+        viewStyleDisabled={[btnStyles.btnDisable, styles.getNumBtn]}
+        viewStyle={[btnStyles.btnBlue, styles.getNumBtn]}
         textStyleDisabled={[
           typoStyles.textWhite,
           typoStyles.fs14,
@@ -51,7 +51,7 @@ const FindID = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  btn: {
+  getNumBtn: {
     width: '100%',
     height: 45,
     marginBottom: 15,

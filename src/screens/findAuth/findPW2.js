@@ -19,7 +19,7 @@ const FindPW2 = ({navigation}) => {
         변경하실 비밀번호를 입력해주세요.
       </Text>
       <InputBox
-        placeholder="휴대전화 번호"
+        placeholder="비밀번호"
         keyBoard="number-pad"
         returnKey="next"
         value={pw}
@@ -31,7 +31,7 @@ const FindPW2 = ({navigation}) => {
         비밀번호를 다시 한 번 입력해주세요.
       </Text>
       <InputBox
-        placeholder="발송된 인증번호 입력"
+        placeholder="비밀번호 확인"
         keyBoard="number-pad"
         value={pwConfirm}
         setVal={setPwConfirm}
