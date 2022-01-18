@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Text, StyleSheet} from 'react-native';
 import CustomBtn, {btnStyles} from '../../assets/fonts/button';
 import typoStyles from '../../assets/fonts/typography';
-import {InputBox} from '../../components/findAuth/components';
-import FindAuthLayout from '../../components/findAuth/layout';
+import {InputBox} from '../../components/findAuth/findAuthComponent';
+import FindAuthLayout from '../../components/findAuth/findAuthLayout';
 import {PhoneValidation} from '../../utils/validation';
 
 const FindPW = ({navigation}) => {
@@ -29,8 +29,8 @@ const FindPW = ({navigation}) => {
         styles={styles.telInput}
       />
       <CustomBtn
-        viewStyleDisabled={[btnStyles.btnDisable, styles.btn]}
-        viewStyle={[btnStyles.btnBlue, styles.btn]}
+        viewStyleDisabled={[btnStyles.btnDisable, styles.getNumBtn]}
+        viewStyle={[btnStyles.btnBlue, styles.getNumBtn]}
         textStyleDisabled={[
           typoStyles.textWhite,
           typoStyles.fs14,
@@ -51,7 +51,7 @@ const FindPW = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  btn: {
+  getNumBtn: {
     width: '100%',
     height: 45,
     marginBottom: 15,
