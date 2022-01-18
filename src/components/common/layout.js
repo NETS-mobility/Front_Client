@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Header from './Header';
-import BottomTab from './bottomTab';
 import WholeLayout from '../wholeLayout';
 
 const CommonLayout = ({children}) => {
@@ -10,7 +9,6 @@ const CommonLayout = ({children}) => {
       <View style={styles.layout}>
         <Header />
         {children}
-        <BottomTab />
       </View>
     </WholeLayout>
   );
@@ -19,7 +17,7 @@ const CommonLayout = ({children}) => {
 const styles = StyleSheet.create({
   layout: {
     flex: 1,
-    paddingBottom: 100,
+    paddingBottom: 65,
   },
   header: {
     marginBottom: 14,
