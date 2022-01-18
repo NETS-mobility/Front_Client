@@ -6,6 +6,8 @@ import {
   ScrollView,
 } from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+import BottomTab from './common/bottomTab';
+
 const WholeLayout = ({children}) => {
   return (
     <SafeAreaProvider>
@@ -14,6 +16,7 @@ const WholeLayout = ({children}) => {
           behavior={Platform.select({ios: 'padding'})}
           style={styles.avoid}>
           <ScrollView>{children}</ScrollView>
+          <BottomTab />
         </KeyboardAvoidingView>
       </SafeAreaView>
     </SafeAreaProvider>
