@@ -1,21 +1,21 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
-import FindAuthLayout from '../../components/findAuth/layout';
+import FindAuthLayout from '../../components/findAuth/findAuthLayout';
 
 const FindID2 = ({navigation}) => {
   return (
     <FindAuthLayout
       pageType="id"
       num={0}
-      btnType="next"
+      btnType="login"
       goBack={() => navigation.pop()}>
       <Text
         style={[
           typoStyles.textExplain,
           typoStyles.fs15,
           typoStyles.fwBold,
-          styles.line,
+          styles.oneLine,
         ]}>
         가입하신 아이디는
       </Text>
@@ -32,7 +32,7 @@ const FindID2 = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  line: {marginBottom: 20},
+  oneLine: {marginBottom: 20},
 });
 
 export default FindID2;

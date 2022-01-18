@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
-import FindAuthLayout from '../../components/findAuth/layout';
+import FindAuthLayout from '../../components/findAuth/findAuthLayout';
 
 const FindPW3 = ({navigation}) => {
   return (
@@ -15,7 +15,7 @@ const FindPW3 = ({navigation}) => {
           typoStyles.textExplain,
           typoStyles.fs15,
           typoStyles.fwBold,
-          styles.line,
+          styles.oneLine,
         ]}>
         비밀번호 변경이 완료되었습니다.
       </Text>
@@ -28,7 +28,7 @@ const FindPW3 = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  line: {
+  oneLine: {
     marginBottom: 30,
   },
 });

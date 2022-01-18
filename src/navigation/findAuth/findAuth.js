@@ -9,6 +9,7 @@ import {
 } from '../../screens/findAuth';
 
 const Stack = createNativeStackNavigator();
+
 const FindPwNavigator = () => {
   return (
     <Stack.Navigator
