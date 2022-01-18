@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import StartBtn from '../components/start/StartBtn';
+import StartBtn from '../../components/start/StartBtn';
 
 const styles = StyleSheet.create({
   back: {

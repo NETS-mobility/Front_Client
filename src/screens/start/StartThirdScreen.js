@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, ImageBackground, View} from 'react-native';
-import {StartLeftBox} from '../components/start/StartTextBox';
-import { StartOrangeCircle, StartWhiteCircle } from '../components/start/StartCircle';
+import {StartRightBox} from '../../components/start/StartTextBox';
+import { StartOrangeCircle, StartWhiteCircle } from '../../components/start/StartCircle';
 
 const styles = StyleSheet.create({
   ImageStyle: {
@@ -12,14 +12,15 @@ const styles = StyleSheet.create({
   },
 
   ImageBackgroundContiner: {
-    backgroundColor: '#E5E8E7',
+    backgroundColor: 'black',
     width: '100%',
     height: '100%',
   },
 
-  left: {
-    position:'absolute',
-    top: 90,
+  right: {
+    flex: 1,
+    alignItems: 'flex-end',
+    top: 320,
   },
 
   CircleSet: {
@@ -35,14 +36,14 @@ const StartFirstScreen = () => {
   return (
     <SafeAreaView>
       <View style={styles.ImageBackgroundContiner}>
-        <ImageBackground source={require('../assets/image/startimg1.png')} resizeMode='contain' style={styles.ImageStyle} />
-        <View style={styles.left}>
-          <StartLeftBox text={"비응급\n병원이동\n서비스"}/>
+        <ImageBackground source={require('../../assets/image/startimg3.jpeg')} resizeMode='cover' style={styles.ImageStyle} />
+        <View style={styles.right}>
+          <StartRightBox text={"집까지\n편안하게"}/>
         </View>
         <View style={styles.CircleSet}>
+          <StartWhiteCircle />
+          <StartWhiteCircle />
           <StartOrangeCircle />
-          <StartWhiteCircle />
-          <StartWhiteCircle />
         </View>
       </View>
     </SafeAreaView>
