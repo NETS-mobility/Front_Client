@@ -1,14 +1,14 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
-import FindAuthLayout from '../../components/findAuth/layout';
+import FindAuthLayout from '../../components/findAuth/findAuthLayout';
 
 const FindID2 = ({navigation}) => {
   return (
     <FindAuthLayout
       pageType="id"
       num={0}
-      btnType="next"
+      btnType="login"
       goBack={() => navigation.pop()}>
       <Text
         style={[

@@ -9,12 +9,12 @@ import {
 import Close from '../../assets/icon/close.svg';
 import CustomBtn, {btnStyles} from '../../assets/fonts/button';
 import typoStyles from '../../assets/fonts/typography';
-import {ProgressBar} from './components';
+import {ProgressBar} from './findAuthComponent';
 import WholeLayout from '../wholeLayout';
 
 const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
   return (
-    <WholeLayout>
+    <WholeLayout check={1}>
       <View style={styles.block}>
         <ScrollView>
           <TouchableOpacity
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     paddingBottom: 31,
+    backgroundColor: '#fff',
   },
   closeBtn: {
     marginBottom: 8,

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
-import FindAuthLayout from '../../components/findAuth/layout';
+import FindAuthLayout from '../../components/findAuth/findAuthLayout';
 
 const FindPW3 = ({navigation}) => {
   return (
