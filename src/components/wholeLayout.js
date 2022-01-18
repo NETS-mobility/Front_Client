@@ -1,5 +1,10 @@
 import React from 'react';
-import {KeyboardAvoidingView, Platform, StyleSheet} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 const WholeLayout = ({children}) => {
   return (
@@ -8,7 +13,7 @@ const WholeLayout = ({children}) => {
         <KeyboardAvoidingView
           behavior={Platform.select({ios: 'padding'})}
           style={styles.avoid}>
-          {children}
+          <ScrollView>{children}</ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
     </SafeAreaProvider>

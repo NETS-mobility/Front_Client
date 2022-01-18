@@ -12,7 +12,7 @@ import ServiceProgress from './progress';
 import ServiceBlock from './serviceBlock';
 import Payment from './payment';
 
-const Step1 = () => {
+export const Step1 = () => {
   const [r1, setR1] = useState(false);
   const [r2, setR2] = useState(false);
   const [r3, setR3] = useState(false);
@@ -39,7 +39,7 @@ const Step1 = () => {
   );
 };
 
-const Step2 = () => {
+export const Step2 = () => {
   return (
     <ServiceBlock>
       <Text
