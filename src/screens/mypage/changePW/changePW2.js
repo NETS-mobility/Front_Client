@@ -14,8 +14,7 @@ const ChangePW2 = ({navigation}) => {
       btnType="next"
       goNext={() => navigation.navigate('ChangePW3')}
       goBack={() => navigation.pop()}>
-      <Text
-        style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
+      <Text style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fw700]}>
         변경하실 비밀번호를 입력해주세요.
       </Text>
       <InputBox
@@ -25,8 +24,7 @@ const ChangePW2 = ({navigation}) => {
         setVal={setPw}
         styles={styles.pwInput}
       />
-      <Text
-        style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
+      <Text style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fw700]}>
         비밀번호를 다시 한 번 입력해주세요.
       </Text>
       <InputBox

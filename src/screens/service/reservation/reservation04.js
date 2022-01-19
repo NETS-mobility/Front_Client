@@ -17,7 +17,7 @@ import {
   Step3,
 } from '../../../components/service/reservation/reservation04';
 
-const Reservation04 = () => {
+const Reservation04 = ({navigation}) => {
   return (
     <CommonLayout>
       <ScrollView>
@@ -26,7 +26,7 @@ const Reservation04 = () => {
             style={[
               typoStyles.fs32,
               typoStyles.textMain,
-              typoStyles.fwBold,
+              typoStyles.fw700,
               styles.title,
             ]}>
             서비스 예약
@@ -35,11 +35,7 @@ const Reservation04 = () => {
           <TouchableOpacity
             style={[btnStyles.btnBlue, styles.checkBtn, shadowStyles.shadow]}>
             <Text
-              style={[
-                typoStyles.textWhite,
-                typoStyles.fs14,
-                typoStyles.fwBold,
-              ]}>
+              style={[typoStyles.textWhite, typoStyles.fs14, typoStyles.fw700]}>
               서비스 요금 확인하기
             </Text>
           </TouchableOpacity>
@@ -48,9 +44,11 @@ const Reservation04 = () => {
         <Step1 />
         <Step2 />
         <Step3 />
-        <TouchableOpacity style={[btnStyles.btnBlue, styles.btn]}>
+        <TouchableOpacity
+          style={[btnStyles.btnBlue, styles.btn]}
+          onPress={() => navigation.push('ReservationComplete')}>
           <Text
-            style={[typoStyles.fs20, typoStyles.fwBold, typoStyles.textWhite]}>
+            style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
             결제
           </Text>
         </TouchableOpacity>

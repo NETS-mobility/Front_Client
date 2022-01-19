@@ -5,7 +5,7 @@ const ServiceIndividualStep = ({style, step}) => {
   return (
     <View style={styles.step}>
       <View style={[styles.bar, style]} />
-      <Text style={[typoStyles.textMain, typoStyles.fs13, typoStyles.fwBold]}>
+      <Text style={[typoStyles.textMain, typoStyles.fs13, typoStyles.fw700]}>
         {step}
       </Text>
     </View>

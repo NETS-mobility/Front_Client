@@ -34,7 +34,7 @@ export const AdditionalPayment = () => {
         <Text
           style={[
             typoStyles.fs14,
-            typoStyles.fwBold,
+            typoStyles.fw700,
             typoStyles.textExplainBold,
           ]}>
           사전 예약 시간/거리
@@ -42,7 +42,7 @@ export const AdditionalPayment = () => {
         <Text
           style={[
             typoStyles.fs14,
-            typoStyles.fwBold,
+            typoStyles.fw700,
             typoStyles.textExplainBold,
           ]}>
           서비스 진행 시간/거리
@@ -50,21 +50,21 @@ export const AdditionalPayment = () => {
       </View>
       <View style={[styles.box, styles.lightLine]}>
         <Text
-          style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textExplain]}>
+          style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
           16:00
         </Text>
         <Text
-          style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textPrimary]}>
+          style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textPrimary]}>
           17:00
         </Text>
       </View>
       <View style={[styles.box, styles.lightLine]}>
         <Text
-          style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textExplain]}>
+          style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
           10km
         </Text>
         <Text
-          style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textPrimary]}>
+          style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textPrimary]}>
           11km
         </Text>
       </View>

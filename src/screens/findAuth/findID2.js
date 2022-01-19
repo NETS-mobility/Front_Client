@@ -14,16 +14,15 @@ const FindID2 = ({navigation}) => {
         style={[
           typoStyles.textExplain,
           typoStyles.fs15,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           styles.oneLine,
         ]}>
         가입하신 아이디는
       </Text>
-      <Text
-        style={[typoStyles.textPrimary, typoStyles.fs20, typoStyles.fwBold]}>
+      <Text style={[typoStyles.textPrimary, typoStyles.fs20, typoStyles.fw700]}>
         jisu****@gmail.com
         <Text
-          style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
+          style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fw700]}>
           입니다.
         </Text>
       </Text>

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
-import {ServiceStatus} from '../../../components/service/detail/serviceHistory';
+import {ServiceStatus} from '../../../components/service/detail/serviceHistoryComponent';
 import {
   ManagerComment,
   ManagerProfile,
@@ -30,7 +30,7 @@ const ServiceDetail = () => {
             style={[
               typoStyles.fs32,
               typoStyles.textMain,
-              typoStyles.fwBold,
+              typoStyles.fw700,
               styles.title,
             ]}>
             서비스 상세보기

@@ -22,7 +22,7 @@ export const Step1 = () => {
       <Text
         style={[
           typoStyles.fs18,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           typoStyles.textMain,
           styles.explain1,
         ]}>
@@ -53,7 +53,7 @@ export const Step2 = ({additional}) => {
       <Text
         style={[
           typoStyles.fs18,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           typoStyles.textMain,
           styles.title2,
         ]}>
@@ -68,7 +68,7 @@ export const Step2 = ({additional}) => {
           <Text
             style={[
               typoStyles.fs12,
-              typoStyles.fwBold,
+              typoStyles.fw700,
               typoStyles.textPrimary,
               styles.explain2,
             ]}>
@@ -79,7 +79,7 @@ export const Step2 = ({additional}) => {
             <Text
               style={[
                 typoStyles.fs14,
-                typoStyles.fwBold,
+                typoStyles.fw700,
                 typoStyles.textExplain,
               ]}>
               결제 시 유의사항
@@ -87,7 +87,7 @@ export const Step2 = ({additional}) => {
             <Text
               style={[
                 typoStyles.fs14,
-                typoStyles.fwBold,
+                typoStyles.fw700,
                 typoStyles.textExplain,
               ]}>
               자세히 보기
@@ -126,7 +126,7 @@ export const Step3 = () => {
       <Text
         style={[
           typoStyles.fs18,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           typoStyles.textMain,
           styles.title,
         ]}>

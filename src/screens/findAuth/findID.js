@@ -16,8 +16,7 @@ const FindID = ({navigation}) => {
       btnType="next"
       goNext={() => navigation.navigate('FindID2')}
       goBack={() => navigation.pop()}>
-      <Text
-        style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
+      <Text style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fw700]}>
         가입 시 기입하신 휴대전화 번호를 입력해주세요.
       </Text>
       <InputBox
@@ -34,9 +33,9 @@ const FindID = ({navigation}) => {
         textStyleDisabled={[
           typoStyles.textWhite,
           typoStyles.fs14,
-          typoStyles.fwBold,
+          typoStyles.fw700,
         ]}
-        textStyle={[typoStyles.textWhite, typoStyles.fs14, typoStyles.fwBold]}
+        textStyle={[typoStyles.textWhite, typoStyles.fs14, typoStyles.fw700]}
         text={'인증번호 받기'}
         disabled={!PhoneValidation(tel)}
       />

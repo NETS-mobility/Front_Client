@@ -42,13 +42,13 @@ export const ManagerProfile = ({name, img, certificate, comment, type}) => {
           <Text
             style={[
               typoStyles.fs18,
-              typoStyles.fwBold,
+              typoStyles.fw700,
               typoStyles.textExplainBold,
             ]}>
             {name}
           </Text>
           <Text
-            style={[typoStyles.fs12, typoStyles.fwBold, typoStyles.textMain]}>
+            style={[typoStyles.fs12, typoStyles.fw700, typoStyles.textMain]}>
             {certificate.map(data => {
               return data + ' ';
             })}
@@ -64,7 +64,7 @@ export const ManagerProfile = ({name, img, certificate, comment, type}) => {
           onPress={() => Linking.openURL(`tel:02-0000-0000`)}
           style={[btnStyles.btnBlue, styles.btn]}>
           <Text
-            style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textWhite]}>
+            style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textWhite]}>
             전화 걸기
           </Text>
         </TouchableOpacity>
@@ -86,7 +86,7 @@ export const ManagerComment = ({comment}) => {
       <Text
         style={[
           typoStyles.fs14,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           typoStyles.textExplainBold,
           styles.title,
         ]}>
@@ -118,7 +118,7 @@ export const ServiceInfo = ({num}) => {
         <Text
           style={[
             typoStyles.fs14,
-            typoStyles.fwBold,
+            typoStyles.fw700,
             typoStyles.textExplainBold,
             styles.title,
           ]}>
