@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View, Text, TouchableNativeFeedback} from 'react-native';
 import NetsLogo from '../../assets/image/logo.svg';
-import btnStyles from '../../assets/fonts/button';
-import typoStyles from '../../assets/fonts/typography';
-import LoginInputBox from '../../components/login/LoginInputBox';
+import LoginInputBox from '../../components/login/LoginInputBox'
 import { LoginBtn } from '../../components/login/LoginBtn';
 
 const styles = StyleSheet.create({

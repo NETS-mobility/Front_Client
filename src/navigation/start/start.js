@@ -4,7 +4,7 @@ import {
     StartMainScreen,
     StartFirstScreen,
     StartSecondScreen,
-    StartThirdScreen
+    StartThirdScreen,
 } from '../../screens/start';
 
 const Stack = createNativeStackNavigator();
