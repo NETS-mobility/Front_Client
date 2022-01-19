@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import typoStyles from '../../assets/fonts/typography';
+import typoStyles from '../../../assets/fonts/typography';
 
-const Payment = () => {
+export const Payment = () => {
   return (
     <View>
       <View style={[styles.box, styles.boldLine]}>
@@ -85,4 +85,61 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Payment;
+const AdditionalTimeDist = () => {
+  return (
+    <View>
+      <View style={[styles.box, styles.boldLine]}>
+        <Text
+          style={[
+            typoStyles.fs14,
+            typoStyles.fwBold,
+            typoStyles.textExplainBold,
+          ]}>
+          사전 예약 시간/거리
+        </Text>
+        <Text
+          style={[
+            typoStyles.fs14,
+            typoStyles.fwBold,
+            typoStyles.textExplainBold,
+          ]}>
+          서비스 진행 시간/거리
+        </Text>
+      </View>
+      <View style={[styles.box, styles.lightLine]}>
+        <Text
+          style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textExplain]}>
+          16:00
+        </Text>
+        <Text
+          style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textPrimary]}>
+          17:00
+        </Text>
+      </View>
+      <View style={[styles.box, styles.lightLine]}>
+        <Text
+          style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textExplain]}>
+          10km
+        </Text>
+        <Text
+          style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textPrimary]}>
+          11km
+        </Text>
+      </View>
+
+      <View style={styles.total}>
+        <Text
+          style={[
+            typoStyles.fwBold,
+            typoStyles.fs18,
+            typoStyles.textExplainBold,
+          ]}>
+          최종결제금액
+        </Text>
+        <Text style={[typoStyles.fwBold, typoStyles.fs18, typoStyles.textMain]}>
+          44,000원
+        </Text>
+      </View>
+    </View>
+  );
+};

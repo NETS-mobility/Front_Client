@@ -22,6 +22,9 @@ const typoStyles = StyleSheet.create({
   fs12: {
     fontSize: 12,
   },
+  fs10: {
+    fontSize: 10,
+  },
 
   /* color */
   textMain: {

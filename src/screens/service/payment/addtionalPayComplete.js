@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {btnStyles} from '../../assets/fonts/button';
-import typoStyles from '../../assets/fonts/typography';
-import CommonLayout from '../common/layout';
-import {Step1, Step2} from './layout';
+import {btnStyles} from '../../../assets/fonts/button';
+import typoStyles from '../../../assets/fonts/typography';
+import CommonLayout from '../../../components/common/layout';
 
 const AdditionalPayComplete = () => {
   const styles = StyleSheet.create({
