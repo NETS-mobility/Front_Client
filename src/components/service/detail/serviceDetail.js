@@ -1,12 +1,7 @@
 import React from 'react';
-import CommonLayout from '../common/layout';
 import {View, StyleSheet, Text} from 'react-native';
-import typoStyles from '../../assets/fonts/typography';
-import {ServiceStatus} from './serviceHistory';
-import {ManagerComment, Profile} from './payment/resComplete';
-import {ServiceInfo} from './payment/resComplete';
-import ServiceBlock from './serviceBlock';
-import Payment from './payment';
+import typoStyles from '../../../assets/fonts/typography';
+import ServiceBlock from '../serviceBlock';
 
 const DetailProgressCircle = ({time, text}) => {
   const styles = StyleSheet.create({
@@ -60,7 +55,7 @@ const DetailProgressCircle = ({time, text}) => {
   );
 };
 
-const ServiceDetailProgress = () => {
+export const ServiceDetailProgress = () => {
   const styles = StyleSheet.create({
     title: {marginBottom: 12},
     steps: {
@@ -73,7 +68,7 @@ const ServiceDetailProgress = () => {
     },
     line: {
       position: 'absolute',
-      bottom: '53%',
+      bottom: '52%',
       width: '100%',
       height: 13,
       backgroundColor: '#19B7CD',
@@ -101,47 +96,3 @@ const ServiceDetailProgress = () => {
     </ServiceBlock>
   );
 };
-
-const ServiceDetail = () => {
-  const styles = StyleSheet.create({
-    block1: {
-      width: '100%',
-      paddingVertical: 14,
-      paddingHorizontal: 18,
-      backgroundColor: '#fff',
-    },
-    title: {marginBottom: 12},
-  });
-  return (
-    <CommonLayout>
-      <View style={styles.block1}>
-        <Text
-          style={[
-            typoStyles.fs32,
-            typoStyles.textMain,
-            typoStyles.fwBold,
-            styles.title,
-          ]}>
-          서비스 상세보기
-        </Text>
-        <ServiceStatus text={'현재 운행 중'} />
-      </View>
-      <Profile
-        name={'홍길동'}
-        certificate={['간호조무사', '요양보호사']}
-        comment={
-          '모든 일에 적극적이며 긍정적이라는 평가를 받아왔습니다. 따뜻한 배려와 친절함으로 동행하겠습니다.'
-        }
-        type={2}
-      />
-      <ServiceDetailProgress />
-      <ManagerComment comment={'문 앞에 도착하면 연락드리겠습니다!'} />
-      <ServiceBlock>
-        <ServiceInfo />
-      </ServiceBlock>
-      <Payment />
-    </CommonLayout>
-  );
-};
-
-export default ServiceDetail;

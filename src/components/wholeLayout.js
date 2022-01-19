@@ -1,7 +1,8 @@
 import React from 'react';
 import {KeyboardAvoidingView, Platform, StyleSheet} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
-const WholeLayout = ({children}) => {
+// import BottomTab from './common/bottomTab';
+const WholeLayout = ({children, num}) => {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.block}>
@@ -11,6 +12,7 @@ const WholeLayout = ({children}) => {
           {children}
         </KeyboardAvoidingView>
       </SafeAreaView>
+      {/* {num == 1 ? <></> : <BottomTab></BottomTab>} */}
     </SafeAreaProvider>
   );
 };
