@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
-import {InputBox} from '../../../components/findAuth/components';
-import FindAuthLayout from '../../../components/findAuth/layout';
+import {InputBox} from '../../../components/findAuth/findAuthComponent';
+import FindAuthLayout from '../../../components/findAuth/findAuthLayout';
 
 const ChangePW2 = ({navigation}) => {
   const [pw, setPw] = useState('');
@@ -19,8 +19,7 @@ const ChangePW2 = ({navigation}) => {
         변경하실 비밀번호를 입력해주세요.
       </Text>
       <InputBox
-        placeholder="휴대전화 번호"
-        keyBoard="number-pad"
+        placeholder="비밀번호"
         returnKey="next"
         value={pw}
         setVal={setPw}
@@ -31,8 +30,7 @@ const ChangePW2 = ({navigation}) => {
         비밀번호를 다시 한 번 입력해주세요.
       </Text>
       <InputBox
-        placeholder="발송된 인증번호 입력"
-        keyBoard="number-pad"
+        placeholder="비밀번호 확인"
         value={pwConfirm}
         setVal={setPwConfirm}
       />

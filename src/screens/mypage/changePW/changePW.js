@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import {Text, StyleSheet} from 'react-native';
 import CustomBtn, {btnStyles} from '../../../assets/fonts/button';
 import typoStyles from '../../../assets/fonts/typography';
-import {InputBox} from '../../../components/findAuth/components';
-import FindAuthLayout from '../../../components/findAuth/layout';
+import {InputBox} from '../../../components/findAuth/findAuthComponent';
+import FindAuthLayout from '../../../components/findAuth/findAuthLayout';
 import {PhoneValidation} from '../../../utils/validation';
 
 const ChangePW = ({navigation}) => {
+  const [id, setID] = useState('');
   const [tel, setTel] = useState('');
   const [authNum, setAuthNum] = useState();
   return (
@@ -18,7 +19,18 @@ const ChangePW = ({navigation}) => {
       goBack={() => navigation.pop()}>
       <Text
         style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
-        가입 시 기입하신 휴대전화 번호를 입력해주세요.
+        아이디를 입력해주세요.
+      </Text>
+      <InputBox
+        placeholder="아이디"
+        returnKey="next"
+        value={id}
+        setVal={setID}
+        styles={styles.idInput}
+      />
+      <Text
+        style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
+        휴대전화 번호를 입력해주세요.
       </Text>
       <InputBox
         placeholder="휴대전화 번호"
@@ -27,18 +39,6 @@ const ChangePW = ({navigation}) => {
         value={tel}
         setVal={setTel}
         styles={styles.telInput}
-      />
-      <CustomBtn
-        viewStyleDisabled={[btnStyles.btnDisable, styles.btn]}
-        viewStyle={[btnStyles.btnBlue, styles.btn]}
-        textStyleDisabled={[
-          typoStyles.textWhite,
-          typoStyles.fs14,
-          typoStyles.fwBold,
-        ]}
-        textStyle={[typoStyles.textWhite, typoStyles.fs14, typoStyles.fwBold]}
-        text={'인증번호 받기'}
-        disabled={!PhoneValidation(tel)}
       />
       <InputBox
         placeholder="발송된 인증번호 입력"
@@ -56,8 +56,11 @@ const styles = StyleSheet.create({
     height: 45,
     marginBottom: 15,
   },
+  idInput: {
+    marginBottom: 53,
+  },
   telInput: {
-    marginBottom: 6,
+    marginBottom: 2,
   },
 });
 
