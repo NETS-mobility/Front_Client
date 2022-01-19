@@ -11,7 +11,6 @@ const ServiceDetailNavigator = () => {
       initialRouteName="ServiceHistory"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="ServiceHistory" component={ServiceHistory} />
-      <Stack.Screen name="FindID" component={FindID} />
       <Stack.Screen name="ServiceDetail" component={ServiceDetail} />
     </Stack.Navigator>
   );

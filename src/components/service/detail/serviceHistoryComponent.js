@@ -26,14 +26,13 @@ export const ServiceStatus = ({text}) => {
   });
   return text == '서비스 종료' ? (
     <View style={[styles.greyBtn, styles.btn]}>
-      <Text
-        style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textExplain]}>
+      <Text style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
         {text}
       </Text>
     </View>
   ) : (
     <View style={[styles.whiteBtn, styles.btn]}>
-      <Text style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textMain]}>
+      <Text style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textMain]}>
         {text}
       </Text>
     </View>
@@ -66,13 +65,13 @@ export const ServiceHistoryBlock = ({date, type, goNext}) => {
         <Text
           style={[
             typoStyles.fs14,
-            typoStyles.fwBold,
+            typoStyles.fw700,
             typoStyles.textExplainBold,
             styles.date,
           ]}>
           {date}
         </Text>
-        <Text style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textMain]}>
+        <Text style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textMain]}>
           {type}
         </Text>
       </View>
@@ -85,7 +84,7 @@ export const ServiceHistoryBlock = ({date, type, goNext}) => {
           style={[btnStyles.btnBlue, styles.detailBtn]}
           onPress={goNext}>
           <Text
-            style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textWhite]}>
+            style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textWhite]}>
             상세보기
           </Text>
         </TouchableOpacity>

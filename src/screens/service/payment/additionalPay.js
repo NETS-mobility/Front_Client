@@ -40,7 +40,7 @@ const AdditionalPay = () => {
           <Text
             style={[
               typoStyles.fs32,
-              typoStyles.fwBold,
+              typoStyles.fw700,
               typoStyles.textMain,
               styles.title,
             ]}>
@@ -51,7 +51,7 @@ const AdditionalPay = () => {
         <Step2 additional={true} />
         <TouchableOpacity style={[btnStyles.btnBlue, styles.btn]}>
           <Text
-            style={[typoStyles.fs20, typoStyles.fwBold, typoStyles.textWhite]}>
+            style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
             결제
           </Text>
         </TouchableOpacity>

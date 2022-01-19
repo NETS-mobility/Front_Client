@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
-import {ServiceHistoryBlock} from '../../../components/service/detail/serviceHistory';
+import {ServiceHistoryBlock} from '../../../components/service/detail/serviceHistoryComponent';
 
 const ServiceHistory = ({navigation}) => {
   const styles = StyleSheet.create({
@@ -47,7 +47,7 @@ const ServiceHistory = ({navigation}) => {
             style={[
               typoStyles.fs32,
               typoStyles.textMain,
-              typoStyles.fwBold,
+              typoStyles.fw700,
               styles.title,
             ]}>
             서비스 내역
@@ -57,7 +57,7 @@ const ServiceHistory = ({navigation}) => {
               <Text
                 style={[
                   typoStyles.fs13,
-                  typoStyles.fwBold,
+                  typoStyles.fw700,
                   typoStyles.textMain,
                 ]}>
                 진행 내역
@@ -68,7 +68,7 @@ const ServiceHistory = ({navigation}) => {
               <Text
                 style={[
                   typoStyles.fs13,
-                  typoStyles.fwBold,
+                  typoStyles.fw700,
                   typoStyles.textDisable,
                 ]}>
                 완료 내역
@@ -82,12 +82,12 @@ const ServiceHistory = ({navigation}) => {
             date={'2021.10.20'}
             type={'네츠 휠체어 플러스'}
             goNext={navigation}
-            goNext={() => navigation.navigate('FindID')}
+            goNext={() => navigation.navigate('ServiceDetail')}
           />
           <ServiceHistoryBlock
             date={'2021.10.22'}
             type={'네츠 휠체어 플러스'}
-            goNext={() => navigation.navigate('FindID')}
+            goNext={() => navigation.navigate('ServiceDetail')}
           />
         </View>
       </ScrollView>

@@ -33,7 +33,7 @@ const DetailProgressCircle = ({time, text}) => {
       <Text
         style={[
           typoStyles.fs13,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           typoStyles.textExplain,
           styles.text,
         ]}>
@@ -45,7 +45,7 @@ const DetailProgressCircle = ({time, text}) => {
       <Text
         style={[
           typoStyles.fs13,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           typoStyles.textExplain,
           styles.text,
         ]}>
@@ -79,7 +79,7 @@ export const ServiceDetailProgress = () => {
       <Text
         style={[
           typoStyles.fs14,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           typoStyles.textExplainBold,
           styles.title,
         ]}>

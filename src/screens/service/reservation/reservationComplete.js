@@ -38,21 +38,17 @@ const ReservationComplete = () => {
             style={[
               typoStyles.fs32,
               typoStyles.textMain,
-              typoStyles.fwBold,
+              typoStyles.fw700,
               styles.title,
             ]}>
             서비스 예약 완료
           </Text>
           <Text
-            style={[
-              typoStyles.fs14,
-              typoStyles.fwBold,
-              typoStyles.textExplain,
-            ]}>
+            style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
             <Text
               style={[
                 typoStyles.fs14,
-                typoStyles.fwBold,
+                typoStyles.fw700,
                 typoStyles.textPrimary,
               ]}>
               서비스 예약이 완료
@@ -61,7 +57,7 @@ const ReservationComplete = () => {
             <Text
               style={[
                 typoStyles.fs14,
-                typoStyles.fwBold,
+                typoStyles.fw700,
                 typoStyles.textPrimary,
               ]}>
               서비스 내역
@@ -83,7 +79,7 @@ const ReservationComplete = () => {
         </ServiceBlock>
         <TouchableOpacity style={[btnStyles.btnBlue, styles.btn]}>
           <Text
-            style={[typoStyles.fs20, typoStyles.fwBold, typoStyles.textWhite]}>
+            style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
             확인
           </Text>
         </TouchableOpacity>
