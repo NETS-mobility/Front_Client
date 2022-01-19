@@ -14,11 +14,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="FindPwNavigator" component={FindPwNavigator} />
-        <Stack.Screen name="FindIdNavigator" component={FindIdNavigator} />
         <Stack.Screen name="StartNavigator" component={StartNavigator} />
         <Stack.Screen name="LoginNavigator" component={LoginNavigator} />
         <Stack.Screen name="SignUpNavigator" component={SignUpNavigator} />
+        <Stack.Screen name="FindPwNavigator" component={FindPwNavigator} />
+        <Stack.Screen name="FindIdNavigator" component={FindIdNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

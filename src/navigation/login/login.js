@@ -2,7 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
     LoginMainScreen,
-    LoginScreen
+    LoginScreen,
 } from '../../screens/login';
 
 const Stack = createNativeStackNavigator();
