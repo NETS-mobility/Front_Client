@@ -5,16 +5,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {NavigationContainer} from '@react-navigation/native';
 import Reservation04 from '../../screens/service/reservation/reservation04';
 import {LoginMainScreen} from '../../screens/login';
-import {FindID} from '../../screens/findAuth';
-import {ChangePW} from '../../screens/mypage/changePW';
-import {ServiceDetail, ServiceHistory} from '../../screens/service';
 import ServiceDetailNavigator from '../../navigation/service/serviceDetail';
+import ChangePwNavigator from '../../navigation/mypage/changePW/changePW';
+import {ReservationNavigator} from '../../navigation/service/reservation';
 
 const Tab = createBottomTabNavigator();
-
-const AlarmTab = () => {
-  return <Text>알림</Text>;
-};
 
 const MyPageTab = () => {
   return <Text>마이페이지</Text>;
@@ -37,9 +32,8 @@ const BottomTab = () => {
           },
         }}>
         <Tab.Screen
-          name="Home"
-          component={ChangePW}
-          // component={LoginMainScreen}
+          name="홈"
+          component={ReservationNavigator}
           options={{
             headerShown: false,
             tabBarIcon: ({color}) => (
@@ -48,8 +42,8 @@ const BottomTab = () => {
           }}
         />
         <Tab.Screen
-          name="ServiceHistory"
-          component={ServiceHistory}
+          name="서비스내역"
+          component={ServiceDetailNavigator}
           options={{
             headerShown: false,
             tabBarIcon: ({color}) => (
@@ -58,8 +52,8 @@ const BottomTab = () => {
           }}
         />
         <Tab.Screen
-          name="Alarm"
-          component={AlarmTab}
+          name="알림"
+          component={ChangePwNavigator}
           options={{
             headerShown: false,
             tabBarIcon: ({color}) => (
@@ -68,8 +62,8 @@ const BottomTab = () => {
           }}
         />
         <Tab.Screen
-          name="MyPage"
-          component={MyPageTab}
+          name="마이페이지"
+          component={ChangePwNavigator}
           options={{
             headerShown: false,
             tabBarIcon: ({color}) => (
