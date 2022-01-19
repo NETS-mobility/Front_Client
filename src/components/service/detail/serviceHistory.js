@@ -40,7 +40,7 @@ export const ServiceStatus = ({text}) => {
   );
 };
 
-export const ServiceHistoryBlock = ({date, type}) => {
+export const ServiceHistoryBlock = ({date, type, goNext}) => {
   const styles = StyleSheet.create({
     serviceType: {
       flexDirection: 'row',
@@ -81,7 +81,9 @@ export const ServiceHistoryBlock = ({date, type}) => {
       <View style={styles.btnSection}>
         {/* <ServiceStatus text={'서비스 종료'} /> */}
         <ServiceStatus text={'서비스 진행 중'} />
-        <TouchableOpacity style={[btnStyles.btnBlue, styles.detailBtn]}>
+        <TouchableOpacity
+          style={[btnStyles.btnBlue, styles.detailBtn]}
+          onPress={goNext}>
           <Text
             style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textWhite]}>
             상세보기

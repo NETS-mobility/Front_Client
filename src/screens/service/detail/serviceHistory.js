@@ -10,7 +10,7 @@ import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import {ServiceHistoryBlock} from '../../../components/service/detail/serviceHistory';
 
-const ServiceHistory = () => {
+const ServiceHistory = ({navigation}) => {
   const styles = StyleSheet.create({
     block1: {
       width: '100%',
@@ -81,10 +81,13 @@ const ServiceHistory = () => {
           <ServiceHistoryBlock
             date={'2021.10.20'}
             type={'네츠 휠체어 플러스'}
+            goNext={navigation}
+            goNext={() => navigation.navigate('FindID')}
           />
           <ServiceHistoryBlock
             date={'2021.10.22'}
             type={'네츠 휠체어 플러스'}
+            goNext={() => navigation.navigate('FindID')}
           />
         </View>
       </ScrollView>
