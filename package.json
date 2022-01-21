@@ -1,5 +1,5 @@
 {
-  "name": "rn-tmap-bridge",
+  "name": "nets",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -12,7 +12,16 @@
   "dependencies": {
     "@react-native-community/cli-platform-android": "^4.13.0",
     "react": "16.13.1",
-    "react-native": "0.63.4"
+    "react-native": "0.63.4",
+    "@react-native-community/checkbox": "^0.5.9",
+    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.10.1",
+    "react-native-svg": "^12.1.1",
+    "react-native-svg-transformer": "^1.0.0",
+    "react-native-vector-icons": "^9.0.0"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -29,7 +38,7 @@
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3"    
   },
   "resolutions": {
     "@types/react": "^16"

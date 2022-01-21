@@ -13,17 +13,19 @@ import {StyleSheet, StatusBar} from 'react-native';
 import MapView from './src/MapView';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import BottomTab from './src/components/common/bottomTab';
 
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      {/* <StatusBar barStyle="dark-content" />
       <MapView
         appKey="l7xx9d4d587fe7104a57b8feda886c846d1f"
         style={styles.map}
         lat={48.577741}
         lng={27.602706}
-      />
+      /> */}
+      <BottomTab />
     </>
   );
 };
