@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 28,
+    width: '83%',
   },
   step: {
     height: 30,
