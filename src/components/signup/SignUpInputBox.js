@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TouchableNativeFeedback, TextInput, Text} from 'react-native';
-import btnStyles from '../../assets/fonts/button';
+import {btnStyles} from '../../assets/fonts/button';
 import typoStyles from '../../assets/fonts/typography';
 
 const styles = StyleSheet.create({
