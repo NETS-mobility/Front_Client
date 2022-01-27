@@ -1,3 +1,5 @@
+"use strict";
+
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
@@ -27,3 +29,20 @@ const App = () => {
 };
 
 export default App;
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const app=express();
+
+//라우팅
+const home = require("./src/routes/home");
+
+app.set("screens", "./src/screens");
+app.set("view engine", "ejs");
+//app.use(express.static(`${__dirname}/src/public`));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/", home);
+
+module.exports = app;
