@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const jwt = require('../modules/jwt');
 const pool = require('../modules/mysql');
 const pool2 = require('../modules/mysql2');
 
