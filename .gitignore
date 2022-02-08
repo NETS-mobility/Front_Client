@@ -28,6 +28,10 @@ build/
 .gradle
 local.properties
 *.iml
+
+# Visual Studio Code
+#
+.vscode/
 *.hprof
 
 # node.js
