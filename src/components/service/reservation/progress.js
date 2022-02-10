@@ -9,7 +9,12 @@ const ServiceIndividualStep = ({style, step, num, stepNum}) => {
           num >= stepNum ? [styles.bar, style] : [styles.bar, styles.greyColor]
         }
       />
-      <Text style={[typoStyles.textMain, typoStyles.fs13, typoStyles.fw700]}>
+      <Text
+        style={
+          num >= stepNum
+            ? [typoStyles.textMain, typoStyles.fs13, typoStyles.fw700]
+            : [typoStyles.textDisable, typoStyles.fs13, typoStyles.fw700]
+        }>
         {step}
       </Text>
     </View>
