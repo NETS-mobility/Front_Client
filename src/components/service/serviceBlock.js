@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     paddingVertical: 20,
     paddingHorizontal: 40,
-    elevation: 13,
+    elevation: 4,
   },
 });
 
