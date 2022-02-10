@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 const MypageNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="ChangeInfo"
+      initialRouteName="MypageMain"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="MypageMain" component={MypageMain} />
       <Stack.Screen name="ChangeInfo" component={ChangeInfo} />

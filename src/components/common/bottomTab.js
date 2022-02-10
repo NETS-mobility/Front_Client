@@ -8,6 +8,8 @@ import {LoginMainScreen} from '../../screens/login';
 import ServiceDetailNavigator from '../../navigation/service/serviceDetail';
 import ChangePwNavigator from '../../navigation/mypage/changePW/changePW';
 import {ReservationNavigator} from '../../navigation/service/reservation';
+import AlarmNavigator from '../../navigation/alarm/alarm';
+import MypageNavigator from '../../navigation/mypage/mypageMain/mypageMain';
 
 const Tab = createBottomTabNavigator();
 
@@ -53,7 +55,7 @@ const BottomTab = () => {
         />
         <Tab.Screen
           name="알림"
-          component={ChangePwNavigator}
+          component={AlarmNavigator}
           options={{
             headerShown: false,
             tabBarIcon: ({color}) => (
@@ -63,7 +65,7 @@ const BottomTab = () => {
         />
         <Tab.Screen
           name="마이페이지"
-          component={ChangePwNavigator}
+          component={MypageNavigator}
           options={{
             headerShown: false,
             tabBarIcon: ({color}) => (
