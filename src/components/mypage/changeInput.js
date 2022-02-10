@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    btnset:{
-    }
 });
 
 const ChangeInput = ({title, place1, Text1, setText1}) => {
