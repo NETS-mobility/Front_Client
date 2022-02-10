@@ -17,7 +17,6 @@ import {btnStyles} from '../../../assets/fonts/button';
 
 const styles = StyleSheet.create({
   title: {
-    marginLeft: 30,
     marginBottom: 22,
   },
   proset: {
@@ -36,6 +35,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
   },
+  background: {
+    flex: 1,
+  },
+  block1: {
+    width: '100%',
+    paddingVertical: 14,
+    paddingHorizontal: 18,
+    backgroundColor: '#fff',
+  },
 });
 
 const Reservation03 = ({navigation}) => {
@@ -50,17 +58,14 @@ const Reservation03 = ({navigation}) => {
 
   return (
     <CommonLayout>
-      <SafeAreaView style={styles.background}>
         <ScrollView style={styles.background}>
-          <View style={styles.title}>
+          <View style={styles.block1}>
             <Text
-              style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
+              style={[typoStyles.fs32, typoStyles.fw700, typoStyles.textMain, styles.title]}>
               서비스예약
             </Text>
-          </View>
-          <View style={styles.proset}>
             <ServiceProgress num={3} />
-          </View>
+            </View>
           <ServiceBlock>
             <Text
               style={[
@@ -131,7 +136,6 @@ const Reservation03 = ({navigation}) => {
             />
           </View>
         </ScrollView>
-      </SafeAreaView>
     </CommonLayout>
   );
 };
