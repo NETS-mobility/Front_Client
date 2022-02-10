@@ -9,6 +9,17 @@
  */
 
 import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  FindPwNavigator,
+  FindIdNavigator,
+} from './src/navigation/findAuth/findAuth';
+import StartNavigator from './src/navigation/start/start';
+import LoginNavigator from './src/navigation/login/login';
+import SignUpNavigator from './src/navigation/signup/signup';
+import ReservationNavigator from './src/navigation/reservation/reservation';
+import MypageNavigator from './src/navigation/mypage/mypageMain/mypageMain';
 import {StyleSheet, StatusBar} from 'react-native';
 import MapView from './src/MapView';
 
