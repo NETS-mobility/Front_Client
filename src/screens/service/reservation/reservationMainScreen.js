@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
 
   qbox: {
     alignItems: 'center',
+    paddingHorizontal: 30,
   },
 
   statbig: {

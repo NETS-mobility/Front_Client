@@ -4,6 +4,7 @@ import typoStyles from "../../../assets/fonts/typography";
 import CommonLayout from "../../../components/common/layout";
 import { btnStyles } from "../../../assets/fonts/button";
 import { ChangeInput, ChangeInputWithBtn } from "../../../components/mypage/changeInput";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const styles=StyleSheet.create({
     background:{
@@ -37,6 +38,7 @@ const ChangeInfo = () => {
 
     return(
         <CommonLayout>
+            <KeyboardAwareScrollView contentContainerStyle={styles.container} resetScrollToCoords={{ x: 0, y: 0 }} scrollEnabled={false}>
             <SafeAreaView style={styles.background}>
                 <View style={styles.title}>
                     <Text style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>마이페이지</Text>
@@ -56,6 +58,7 @@ const ChangeInfo = () => {
                     </TouchableNativeFeedback>
                 </View>
             </SafeAreaView>
+            </KeyboardAwareScrollView>
         </CommonLayout>
     );
 };

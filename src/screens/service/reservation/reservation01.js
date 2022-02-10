@@ -22,6 +22,7 @@ import {
 const styles = StyleSheet.create({
   background: {
     // backgroundColor: 'white',
+    flex: 1,
   },
   step1title: {
     marginBottom: 7,
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
   btn: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
   },
   title: {
     marginLeft: 30,
