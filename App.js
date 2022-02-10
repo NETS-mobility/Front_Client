@@ -10,14 +10,16 @@ import LoginNavigator from './src/navigation/login/login';
 import SignUpNavigator from './src/navigation/signup/signup';
 import ReservationNavigator from './src/navigation/reservation/reservation';
 import MypageNavigator from './src/navigation/mypage/mypageMain/mypageMain';
+import AlarmNavigator from './src/navigation/alarm/alarm';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="MypageMainNavigator" component={MypageNavigator} />
         <Stack.Screen name="ReservationNavigator" component={ReservationNavigator} />
+        <Stack.Screen name="AlarmNavigator" component={AlarmNavigator} />
+        <Stack.Screen name="MypageMainNavigator" component={MypageNavigator} />
         <Stack.Screen name="StartNavigator" component={StartNavigator} />
         <Stack.Screen name="LoginNavigator" component={LoginNavigator} />
         <Stack.Screen name="SignUpNavigator" component={SignUpNavigator} />
