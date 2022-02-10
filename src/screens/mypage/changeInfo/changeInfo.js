@@ -7,6 +7,7 @@ import { ChangeInput, ChangeInputWithBtn } from "../../../components/mypage/chan
 
 const styles=StyleSheet.create({
     background:{
+        flex: 1,
         backgroundColor: 'white',
     },
     title:{
@@ -25,7 +26,7 @@ const styles=StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-end',
-        marginTop: 100,
+        marginBottom: 30,
     },
 });
 
