@@ -32,6 +32,9 @@ const styles=StyleSheet.create({
 
 const ChangeInfo = () => {
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+
     return(
         <CommonLayout>
             <SafeAreaView style={styles.background}>
@@ -41,8 +44,8 @@ const ChangeInfo = () => {
                 <View>
                     <View style={styles.setcenter}>
                         <ChangeInput title={"이름"} place1={"이름"} Text1={name} setText1={setName} />
-                        <ChangeInputWithBtn title={"이메일"} place1={"이메일"} Text1={name} setText1={setName} btntext={"중복확인"} />
-                        <ChangeInputWithBtn title={"휴대전화"} place1={"휴대전화"} Text1={name} setText1={setName} btntext={"중복확인"}/>
+                        <ChangeInputWithBtn title={"이메일"} place1={"이메일"} Text1={email} setText1={setEmail} btntext={"중복확인"} />
+                        <ChangeInputWithBtn title={"휴대전화"} place1={"휴대전화"} Text1={phone} setText1={setPhone} btntext={"중복확인"}/>
                     </View>
                 </View>
                 <View style={styles.wrapbtn}>
