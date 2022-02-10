@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableNativeFeedback} from 'react-native';
+import {StyleSheet, View, Text, TouchableNativeFeedback, TouchableOpacity} from 'react-native';
 import {btnStyles} from '../../assets/fonts/button';
 import typoStyles from '../../assets/fonts/typography';
 
@@ -50,12 +50,10 @@ const NextBtn = ({navWhere}) => {
 
 const CheckBtn = ({check, setCheck, contents}) => {
     return(
-        <View style={styles.checkset}>
-            <TouchableNativeFeedback onPress={()=>setCheck(!check)}>
+            <TouchableOpacity onPress={()=>setCheck(!check)} style={styles.checkset}>
                 <View style={!check? (styles.nonecheckcircle) : (styles.checkcircle)} />
-            </TouchableNativeFeedback>
-            <Text style={[typoStyles.fs14, typoStyles.fwRegular, styles.contents]}>{contents}</Text>
-        </View>
+                <Text style={[typoStyles.fs14, typoStyles.fwRegular, styles.contents]}>{contents}</Text>
+            </TouchableOpacity>
     );
 };
 

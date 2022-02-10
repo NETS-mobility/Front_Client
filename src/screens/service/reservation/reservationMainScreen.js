@@ -64,7 +64,7 @@ const ReservationMainScreen = ({navigation}) => {
       <ScrollView style={styles.background}>
         <View style={styles.title}>
           <Text
-            style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
+            style={[typoStyles.fs32, typoStyles.fw700, typoStyles.textMain]}>
             서비스 예약
           </Text>
           <TouchableNativeFeedback
