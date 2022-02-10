@@ -7,8 +7,6 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import SearchInput from './ui/searchInput';
-import ZoomButton from './ui/zoomButton';
 
 const {RNTMap: TMap} = NativeModules;
 
@@ -32,30 +30,13 @@ function MapView(props) {
     }
   }, [lat, lng]);
 
-  const setMapKey = useCallback((key) => {
+  const setMapKey = useCallback(key => {
     IS_IOS && TMap.setApiKey(key);
-  }, []);
-
-  const handleSearch = useCallback((value) => {
-    IS_IOS && TMap.search(value || '');
-  }, []);
-
-  const zoomIn = useCallback(() => {
-    IS_IOS && TMap.zoomIn();
-  }, []);
-
-  const zoomOut = useCallback(() => {
-    IS_IOS && TMap.zoomOut();
   }, []);
 
   return (
     <Fragment>
       <RNTMap {...props} />
-      <SearchInput handleSearch={handleSearch} />
-      <View style={styles.zoomWrapper}>
-        <ZoomButton label="+" onZoom={zoomIn} />
-        <ZoomButton label="-" onZoom={zoomOut} />
-      </View>
     </Fragment>
   );
 }
