@@ -29,7 +29,7 @@ const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
               style={[
                 typoStyles.textMain,
                 typoStyles.fs32,
-                typoStyles.fwBold,
+                typoStyles.fw700,
                 styles.title,
               ]}>
               {pageType == 'pw'
@@ -47,7 +47,7 @@ const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
             textStyle={[
               typoStyles.textWhite,
               typoStyles.fs20,
-              typoStyles.fwBold,
+              typoStyles.fw700,
             ]}
             text={'로그인'}
             onPress={goNext}
@@ -55,11 +55,7 @@ const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
         ) : (
           <CustomBtn
             viewStyle={[btnStyles.btnWhite, styles.nextStepBtn]}
-            textStyle={[
-              typoStyles.textMain,
-              typoStyles.fs20,
-              typoStyles.fwBold,
-            ]}
+            textStyle={[typoStyles.textMain, typoStyles.fs20, typoStyles.fw700]}
             text={'계속'}
             onPress={goNext}
           />

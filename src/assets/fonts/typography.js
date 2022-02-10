@@ -50,8 +50,11 @@ const typoStyles = StyleSheet.create({
   fwRegular: {
     fontWeight: '400',
   },
-  fwBold: {
+  fw700: {
     fontWeight: '700',
+  },
+  fw900: {
+    fontWeight: '900',
   },
 
   /* line-height */

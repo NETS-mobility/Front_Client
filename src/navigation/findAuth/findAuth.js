@@ -14,7 +14,7 @@ const FindPwNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName="FindPW"
-      screenOptions={{headerShown: false}}>
+      screenOptions={{headerShown: false, tabBarVisible: false}}>
       <Stack.Screen name="FindPW" component={FindPW} />
       <Stack.Screen name="FindPW2" component={FindPW2} />
       <Stack.Screen name="FindPW3" component={FindPW3} />
