@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   proset: {
     alignItems: 'center',
+    marginTop: 10,
   },
   checkset: {
     height: 150,

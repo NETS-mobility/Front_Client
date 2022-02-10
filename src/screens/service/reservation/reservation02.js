@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   proset: {
     alignItems: 'center',
+    marginTop: 10,
   },
   exptext: {
     marginTop: 38,
@@ -42,6 +43,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
   },
+  background:{
+    flex: 1,
+  }
 });
 
 const Reservation02 = ({navigation}) => {
@@ -58,7 +62,6 @@ const Reservation02 = ({navigation}) => {
 
   return (
     <CommonLayout>
-      <SafeAreaView style={styles.background}>
         <ScrollView style={styles.background}>
           <View style={styles.title}>
             <Text
@@ -208,7 +211,6 @@ const Reservation02 = ({navigation}) => {
             />
           </View>
         </ScrollView>
-      </SafeAreaView>
     </CommonLayout>
   );
 };
