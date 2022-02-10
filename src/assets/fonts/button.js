@@ -104,7 +104,7 @@ export const CheckBox = ({text, onPress, value, styles}) => {
 
 export const shadowStyles = StyleSheet.create({
   shadow: {
-    elevation: 13,
+    elevation: 6,
   },
 });
 
