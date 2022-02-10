@@ -11,6 +11,7 @@ import {ServiceInfo} from '../../../components/service/reservation/serviceInfo';
 import ServiceBlock from '../../../components/service/serviceBlock';
 import {Payment} from '../../../components/service/payment/payment';
 import {ServiceDetailProgress} from '../../../components/service/detail/serviceDetail';
+import MapView from '../../../MapView';
 
 const ServiceDetail = () => {
   const styles = StyleSheet.create({
@@ -21,6 +22,17 @@ const ServiceDetail = () => {
       backgroundColor: '#fff',
     },
     title: {marginBottom: 12},
+    mapContainer: {
+      width: '100%',
+      height: 260,
+      backgroundColor: '#fff',
+      paddingBottom: 16,
+    },
+    map: {
+      width: '90%',
+      height: 244,
+      alignSelf: 'center',
+    },
   });
   return (
     <CommonLayout>
@@ -36,6 +48,14 @@ const ServiceDetail = () => {
             서비스 상세보기
           </Text>
           <ServiceStatus text={'현재 운행 중'} />
+        </View>
+        <View style={styles.mapContainer}>
+          <MapView
+            appKey="l7xx9d4d587fe7104a57b8feda886c846d1f"
+            style={styles.map}
+            lat={37.566481622437934}
+            lng={126.98502302169841}
+          />
         </View>
         <ManagerProfile
           name={'홍길동'}
