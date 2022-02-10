@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 const ReservationNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Reservation"
+      initialRouteName="Reservation01"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Reservation" component={ReservationMainScreen} />
       <Stack.Screen name="Reservation01" component={Reservation01} />

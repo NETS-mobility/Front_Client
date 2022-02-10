@@ -27,8 +27,8 @@ const LoginMainScreen = ({navigation}) => {
     return(
         <SafeAreaView style={styles.wrap}>
             <NetsLogo width={175} height={70} style={styles.netImg}/>
-            <LoginBtn navWhere={()=>{navigation.push('Login')}} btnName={"로그인"} style={styles.loginBtn}/>
-            <SignBtn navWhere={()=>{navigation.push('SignUp')}} btnName={"회원가입"} style={styles.signBtn}/>
+            <LoginBtn navWhere={()=>{('Login')}} btnName={"로그인"} style={styles.loginBtn}/>
+            <SignBtn navWhere={()=>{navigation.navigate('SignUp')}} btnName={"회원가입"} style={styles.signBtn}/>
         </SafeAreaView>
     );
 };

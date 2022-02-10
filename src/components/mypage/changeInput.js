@@ -10,13 +10,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
     },
     boxalign: {
-        width: '90%',
+        width: '85%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        marginBottom: 25,
+    },
+    boxalign2:{
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     btnbox: {
-        width: 153,
+        width: 163,
         height: 52,
         borderBottomWidth: 2,
     },
@@ -26,9 +31,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    btnset:{
-        width: 250,
-    }
 });
 
 const ChangeInput = ({title, place1, Text1, setText1}) => {
@@ -59,25 +61,25 @@ const ChangeInputWithBtn = ({title, place1, Text1, setText1, btntext}) => {
     return (
         <View style={styles.boxalign}>
             <Text style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textExplain]}>{title}</Text>
-            <View style={styles.boxalign}>
-            <TextInput
-                    onFocus={() => setFocus(true)}
-                    onBlur={() => setFocus(false)}
-                    style={[styles.btnbox, {borderBottomColor: isfocused? '#19B7CD' : '#DAD8E0'}]}
-                    underlineColorAndroid={"transparent"}
-                    placeholder={place1}
-                    placeholderTextColor={typoStyles.textDisable}
-                    autoCapitalize='none'
-                    value={Text1}
-                    onChangeText={setText1}
-            />
-            <View style={styles.btnset}>
-                <TouchableNativeFeedback>
-                    <View style={[btnStyles.btnDisable, styles.btn]}>
-                        <Text style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textWhite]}>{btntext}</Text>
-                    </View>
-                </TouchableNativeFeedback>
-            </View>
+            <View style={styles.boxalign2}>
+                <TextInput
+                        onFocus={() => setFocus(true)}
+                        onBlur={() => setFocus(false)}
+                        style={[styles.btnbox, {borderBottomColor: isfocused? '#19B7CD' : '#DAD8E0'}]}
+                        underlineColorAndroid={"transparent"}
+                        placeholder={place1}
+                        placeholderTextColor={typoStyles.textDisable}
+                        autoCapitalize='none'
+                        value={Text1}
+                        onChangeText={setText1}
+                />
+                <View style={styles.btnset}>
+                    <TouchableNativeFeedback>
+                        <View style={[btnStyles.btnDisable, styles.btn]}>
+                            <Text style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textWhite]}>{btntext}</Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                </View>
             </View>
         </View>
     );

@@ -20,6 +20,7 @@ import LoginNavigator from './src/navigation/login/login';
 import SignUpNavigator from './src/navigation/signup/signup';
 import ReservationNavigator from './src/navigation/reservation/reservation';
 import MypageNavigator from './src/navigation/mypage/mypageMain/mypageMain';
+import AlarmNavigator from './src/navigation/alarm/alarm';
 import {StyleSheet, StatusBar} from 'react-native';
 import MapView from './src/MapView';
 
