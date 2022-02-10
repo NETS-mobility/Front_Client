@@ -31,14 +31,20 @@ const styles = StyleSheet.create({
 
   logo: {
     marginBottom: 30,
-  }
+  },
 });
 
 const StartLeftBox = ({text}) => {
   return (
     <View style={styles.leftbox}>
       <NetsLogo width={126} height={48} style={styles.logo} />
-      <Text style={[typoStyles.fs32, typoStyles.textExplain, typoStyles.fwBold, typoStyles.line35]}>
+      <Text
+        style={[
+          typoStyles.fs32,
+          typoStyles.textExplain,
+          typoStyles.fw700,
+          typoStyles.line35,
+        ]}>
         {text}
       </Text>
     </View>
@@ -48,8 +54,15 @@ const StartLeftBox = ({text}) => {
 const StartRightBox = ({text}) => {
   return (
     <View style={styles.rightbox}>
-       <NetsLogo width={126} height={48} style={styles.logo} />
-       <Text style={[typoStyles.fs32, typoStyles.textExplain, typoStyles.fwBold, typoStyles.line35, typoStyles.alignright]}>
+      <NetsLogo width={126} height={48} style={styles.logo} />
+      <Text
+        style={[
+          typoStyles.fs32,
+          typoStyles.textExplain,
+          typoStyles.fw700,
+          typoStyles.line35,
+          typoStyles.alignright,
+        ]}>
         {text}
       </Text>
     </View>

@@ -1,6 +1,6 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
 import {
   FindPwNavigator,
   FindIdNavigator,
@@ -11,22 +11,21 @@ import SignUpNavigator from './src/navigation/signup/signup';
 import ReservationNavigator from './src/navigation/reservation/reservation';
 import MypageNavigator from './src/navigation/mypage/mypageMain/mypageMain';
 import AlarmNavigator from './src/navigation/alarm/alarm';
+import BottomTab from './src/components/common/bottomTab';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="ReservationNavigator" component={ReservationNavigator} />
-        <Stack.Screen name="AlarmNavigator" component={AlarmNavigator} />
-        <Stack.Screen name="MypageMainNavigator" component={MypageNavigator} />
-        <Stack.Screen name="StartNavigator" component={StartNavigator} />
-        <Stack.Screen name="LoginNavigator" component={LoginNavigator} />
-        <Stack.Screen name="SignUpNavigator" component={SignUpNavigator} />
-        <Stack.Screen name="FindPwNavigator" component={FindPwNavigator} />
-        <Stack.Screen name="FindIdNavigator" component={FindIdNavigator} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <Stack.Navigator screenOptions={{headerShown: false}}>
+    //     <Stack.Screen name="StartNavigator" component={StartNavigator} />
+    //     <Stack.Screen name="LoginNavigator" component={LoginNavigator} />
+    //     <Stack.Screen name="SignUpNavigator" component={SignUpNavigator} />
+    //     <Stack.Screen name="FindIdNavigator" component={FindIdNavigator} />
+    //     <Stack.Screen name="FindPwNavigator" component={FindPwNavigator} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
+    <BottomTab />
   );
 };
 

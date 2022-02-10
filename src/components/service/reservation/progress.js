@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import typoStyles from '../../assets/fonts/typography';
-const ServiceStep = ({style, step}) => {
+import typoStyles from '../../../assets/fonts/typography';
+const ServiceIndividualStep = ({style, step}) => {
   return (
     <View style={styles.step}>
       <View style={[styles.bar, style]} />
-      <Text style={[typoStyles.textMain, typoStyles.fs13, typoStyles.fwBold]}>
+      <Text style={[typoStyles.textMain, typoStyles.fs13, typoStyles.fw700]}>
         {step}
       </Text>
     </View>
@@ -15,10 +15,10 @@ const ServiceStep = ({style, step}) => {
 const ServiceProgress = () => {
   return (
     <View style={styles.progress}>
-      <ServiceStep style={styles.color1} step={'일정 설정'} />
-      <ServiceStep style={styles.color2} step={'이용자 정보'} />
-      <ServiceStep style={styles.color3} step={'내원 정보'} />
-      <ServiceStep style={styles.color4} step={'결제 진행'} />
+      <ServiceIndividualStep style={styles.color1} step={'일정 설정'} />
+      <ServiceIndividualStep style={styles.color2} step={'이용자 정보'} />
+      <ServiceIndividualStep style={styles.color3} step={'내원 정보'} />
+      <ServiceIndividualStep style={styles.color4} step={'결제 진행'} />
     </View>
   );
 };
