@@ -31,7 +31,7 @@ const Reservation04 = ({navigation}) => {
             ]}>
             서비스 예약
           </Text>
-          <ServiceProgress />
+          <ServiceProgress num={4} />
           <TouchableOpacity
             style={[btnStyles.btnBlue, styles.checkBtn, shadowStyles.shadow]}>
             <Text
