@@ -1,7 +1,14 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../../components/home/home';
-import {Reservation04, ReservationComplete} from '../../screens/service';
+import {
+  Reservation01,
+  Reservation02,
+  Reservation03,
+  Reservation04,
+  ReservationComplete,
+  ReservationMainScreen,
+} from '../../screens/service';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,6 +18,13 @@ const ReservationNavigator = () => {
       initialRouteName="Home"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen
+        name="ReservationMainScreen"
+        component={ReservationMainScreen}
+      />
+      <Stack.Screen name="Reservation01" component={Reservation01} />
+      <Stack.Screen name="Reservation02" component={Reservation02} />
+      <Stack.Screen name="Reservation03" component={Reservation03} />
       <Stack.Screen name="Reservation04" component={Reservation04} />
       <Stack.Screen
         name="ReservationComplete"
@@ -20,4 +34,4 @@ const ReservationNavigator = () => {
   );
 };
 
-export {ReservationNavigator};
+export default ReservationNavigator;

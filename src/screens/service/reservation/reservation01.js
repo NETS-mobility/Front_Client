@@ -66,7 +66,7 @@ const Reservation01 = ({navigation}) => {
             </Text>
           </View>
           <View style={styles.proset}>
-            <ServiceProgress />
+            <ServiceProgress num={1} />
           </View>
           <ServiceBlock>
             <Text

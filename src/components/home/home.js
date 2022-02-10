@@ -78,7 +78,7 @@ const Home = ({navigation}) => {
         </Text>
         <TouchableOpacity
           style={[shadowStyles.shadow, btnStyles.btnBlue, styles.btn]}
-          onPress={() => navigation.push('Reservation04')}>
+          onPress={() => navigation.push('ReservationMainScreen')}>
           <Text
             style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
             클릭해서 서비스 예약하기

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Reservation03 = () => {
+const Reservation03 = ({navigation}) => {
   const [diagnosis, setDiagnosis] = useState('');
   const [etc, setEtc] = useState('');
 
@@ -58,7 +58,7 @@ const Reservation03 = () => {
             </Text>
           </View>
           <View style={styles.proset}>
-            <ServiceProgress />
+            <ServiceProgress num={3} />
           </View>
           <ServiceBlock>
             <Text
@@ -123,7 +123,11 @@ const Reservation03 = () => {
             )}
           </ServiceBlock>
           <View style={styles.proset}>
-            <NextBtn />
+            <NextBtn
+              navWhere={() => {
+                navigation.push('Reservation04');
+              }}
+            />
           </View>
         </ScrollView>
       </SafeAreaView>

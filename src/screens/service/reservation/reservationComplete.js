@@ -16,7 +16,7 @@ import {
   ServiceInfo,
 } from '../../../components/service/reservation/serviceInfo';
 
-const ReservationComplete = () => {
+const ReservationComplete = ({navigation}) => {
   const styles = StyleSheet.create({
     block1: {
       width: '100%',
