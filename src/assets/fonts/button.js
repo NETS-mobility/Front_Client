@@ -61,13 +61,16 @@ export const RadioButton = ({text, onPress, value}) => {
   );
 };
 
-export const CheckBox = ({text, onPress, value}) => {
+export const CheckBox = ({text, onPress, value, styles}) => {
   return (
     <TouchableOpacity
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-      }}
+      style={[
+        {
+          flexDirection: 'row',
+          alignItems: 'center',
+        },
+        styles,
+      ]}
       onPress={onPress}>
       <View
         style={{
@@ -110,7 +113,7 @@ export const btnStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#dad8e0',
-    border: 0,
+    borderWidth: 0,
     borderRadius: 30,
   },
   btnWhite: {
@@ -125,7 +128,7 @@ export const btnStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#19b7cd',
-    border: 0,
+    borderWidth: 0,
     borderRadius: 30,
   },
 });
