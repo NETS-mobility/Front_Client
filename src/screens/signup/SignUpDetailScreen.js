@@ -5,8 +5,8 @@ import typoStyles from '../../assets/fonts/typography';
 const styles = StyleSheet.create({
   background: {
     backgroundColor: 'white',
-    flex: 1,
     alignItems: 'center',
+    paddingBottom: 30,
   },
 
   title: {

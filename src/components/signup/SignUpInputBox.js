@@ -6,7 +6,7 @@ import {
   TextInput,
   Text,
 } from 'react-native';
-import btnStyles from '../common/button';
+import { btnStyles } from '../common/button';
 import typoStyles from '../../assets/fonts/typography';
 
 const styles = StyleSheet.create({
@@ -14,12 +14,14 @@ const styles = StyleSheet.create({
     width: 245,
     height: 56,
     borderBottomWidth: 2,
+    color: '#000',
   },
 
   inputwithbtn: {
     width: 160,
     height: 56,
     borderBottomWidth: 2,
+    color: '#000',
   },
 
   signbtn: {
@@ -57,7 +59,7 @@ const SignUpInputBoxWithBtn = ({
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={placeHolder}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={"#737373"}
         autoCapitalize="none"
         value={Text1}
         onChangeText={setText}
@@ -94,7 +96,7 @@ const SignUpInputBox = ({isPass, placeHolder, Text, setText}) => {
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={placeHolder}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={"#737373"}
         autoCapitalize="none"
         value={Text}
         onChangeText={setText}
