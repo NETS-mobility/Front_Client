@@ -107,19 +107,20 @@ export const Step3 = () => {
   const [r4, setR4] = useState(false);
 
   useEffect(() => {
-    if (all) {
-      setR1(all);
-      setR2(all);
-      setR3(all);
-      setR4(all);
-    }
-  }, [all]);
-
-  useEffect(() => {
-    if (!(r1 && r2 && r3 && r4)) {
+    if (r1 && r2 && r3 && r4) {
+      setAll(true);
+    } else if (!(r1 && r2 && r3 && r4)) {
       setAll(false);
     }
   }, [r1, r2, r3, r4]);
+
+  const onClickAll = () => {
+    setR1(!all);
+    setR2(!all);
+    setR3(!all);
+    setR4(!all);
+    setAll(!all);
+  };
 
   return (
     <ServiceBlock>
@@ -134,7 +135,7 @@ export const Step3 = () => {
       </Text>
       <CheckBox
         text={'전체 선택'}
-        onPress={() => setAll(!all)}
+        onPress={() => onClickAll()}
         value={all}
         styles={{marginBottom: 28}}
       />
