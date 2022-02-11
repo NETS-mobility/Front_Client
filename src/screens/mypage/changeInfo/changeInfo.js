@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   },
   setcenter: {
     alignItems: 'center',
-    height: '70%',
   },
   savebtn: {
     width: 300,
@@ -48,18 +47,16 @@ const ChangeInfo = () => {
   return (
     <CommonLayout>
       <KeyboardAwareScrollView
-        contentContainerStyle={styles.container}
+        contentContainerStyle={styles.background}
         resetScrollToCoords={{x: 0, y: 0}}
         scrollEnabled={false}>
-        <SafeAreaView style={styles.background}>
           <View style={styles.title}>
             <Text
               style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
               마이페이지
             </Text>
           </View>
-          <View>
-            <View style={styles.setcenter}>
+          <View style={styles.setcenter}>
               <ChangeInput
                 title={'이름'}
                 place1={'이름'}
@@ -80,9 +77,9 @@ const ChangeInfo = () => {
                 setText1={setPhone}
                 btntext={'중복확인'}
               />
-            </View>
           </View>
           <View style={styles.wrapbtn}>
+            <View>
             <TouchableNativeFeedback>
               <View style={[btnStyles.btnDisable, styles.savebtn]}>
                 <Text
@@ -95,8 +92,8 @@ const ChangeInfo = () => {
                 </Text>
               </View>
             </TouchableNativeFeedback>
+            </View>
           </View>
-        </SafeAreaView>
       </KeyboardAwareScrollView>
     </CommonLayout>
   );
