@@ -90,6 +90,7 @@ const Reservation02 = ({navigation}) => {
             title={'보호자 정보를 입력해주세요.'}
             place1={'최지우'}
             place2={'010-1234-1234'}
+            placetextcolor={'black'}
             Text1={guardName}
             setText1={setGuardName}
             Text2={guardPhone}
@@ -99,6 +100,7 @@ const Reservation02 = ({navigation}) => {
             title={'이용자 정보를 입력해주세요.'}
             place1={'이용자 이름'}
             place2={'이용자 전화번호'}
+            placetextcolor={'#DAD8E0'}
             Text1={userName}
             setText1={setUserName}
             Text2={userPhone}

@@ -1,13 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   View,
   Text,
-  TouchableNativeFeedback,
 } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
-import btnStyles from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
 import {
   SignUpInputBox,
@@ -15,6 +12,7 @@ import {
 } from '../../components/signup/SignUpInputBox';
 import SignUpDetailBtn from '../../components/signup/SignUpDetailBtn';
 import {LoginBtn} from '../../components/login/LoginBtn';
+import { CheckBox } from '../../components/common/button';
 
 const styles = StyleSheet.create({
   backGround: {
@@ -38,11 +36,14 @@ const styles = StyleSheet.create({
 
   bigcheckbox: {
     alignItems: 'flex-start',
+    width: '60%'
   },
 
   checkboxline: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 
   checkboxtopline: {
@@ -77,6 +78,33 @@ const SignUpScreen = ({navigation}) => {
   const [authNum, setAuthNum] = useState('');
   const [check, setCheck] = useState(false);
   const [isSelected, setSelection] = useState(false);
+
+  const [all, setAll] = useState(false);
+  const [r1, setR1] = useState(false);
+  const [r2, setR2] = useState(false);
+  const [r3, setR3] = useState(false);
+
+  useEffect(() => {
+    if (r1 && r2 && r3) {
+      setAll(true);
+    } else if (!(r1 && r2 && r3)) {
+      setAll(false);
+    }
+  }, [r1, r2, r3]);
+
+  const onClickAll = () => {
+    if(all){
+      setR1(false);
+      setR2(false);
+      setR3(false);
+    }
+    else{
+      setR1(true);
+      setR2(true);
+      setR3(true);
+    }
+    setAll(!all);
+  };
 
   return (
     <SafeAreaView style={styles.backGround}>
@@ -131,65 +159,30 @@ const SignUpScreen = ({navigation}) => {
       <View style={styles.bigcheckbox}>
         <View style={styles.checkboxtopline}>
           <CheckBox
-            value={isSelected}
-            onValueChange={setSelection}
-            style={styles.checkbox}
-          />
-          <Text
-            style={[
-              styles.checkboxtext,
-              typoStyles.fs14,
-              typoStyles.fwRegular,
-            ]}>
-            전체 동의
-          </Text>
+          text={'전체 선택'}
+          onPress={() => onClickAll()}
+          value={all}
+        />
         </View>
         <View style={styles.checkboxline}>
           <CheckBox
-            value={isSelected}
-            onValueChange={setSelection}
-            style={styles.checkbox}
-          />
-          <Text
-            style={[
-              styles.checkboxtext,
-              typoStyles.fs14,
-              typoStyles.fwRegular,
-            ]}>
-            (필수) 서비스 이용약관 동의{' '}
-          </Text>
+            text={'(필수) 서비스 이용약관 동의'}
+            onPress={()=>setR1(!r1)}
+            value={r1} />
           <SignUpDetailBtn style={styles.detailbtn} />
         </View>
         <View style={styles.checkboxline}>
           <CheckBox
-            value={isSelected}
-            onValueChange={setSelection}
-            style={styles.checkbox}
-          />
-          <Text
-            style={[
-              styles.checkboxtext,
-              typoStyles.fs14,
-              typoStyles.fwRegular,
-            ]}>
-            (필수) 개인정보 처리방침 동의{' '}
-          </Text>
+            text={'(필수) 개인정보 처리방침 동의'}
+            onPress={()=>setR2(!r2)}
+            value={r2} />
           <SignUpDetailBtn style={styles.detailbtn} />
         </View>
         <View style={styles.checkboxline}>
           <CheckBox
-            value={isSelected}
-            onValueChange={setSelection}
-            style={styles.checkbox}
-          />
-          <Text
-            style={[
-              styles.checkboxtext,
-              typoStyles.fs14,
-              typoStyles.fwRegular,
-            ]}>
-            (필수) 위치정보 이용 동의{' '}
-          </Text>
+            text={'(필수) 위치정보 이용 동의'}
+            onPress={()=>setR3(!r3)}
+            value={r3} />
           <SignUpDetailBtn
             navWhere={() => {
               navigation.push('SignUpDetail');

@@ -57,7 +57,7 @@ const ChangeInput = ({title, place1, Text1, setText1}) => {
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={place1}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
         value={Text1}
         onChangeText={setText1}
@@ -85,7 +85,7 @@ const ChangeInputWithBtn = ({title, place1, Text1, setText1, btntext}) => {
           ]}
           underlineColorAndroid={'transparent'}
           placeholder={place1}
-          placeholderTextColor={typoStyles.textDisable}
+          placeholderTextColor={'#DAD8E0'}
           autoCapitalize="none"
           value={Text1}
           onChangeText={setText1}

@@ -59,7 +59,7 @@ const SignUpInputBoxWithBtn = ({
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={placeHolder}
-        placeholderTextColor={"#737373"}
+        placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
         value={Text1}
         onChangeText={setText}
@@ -96,7 +96,7 @@ const SignUpInputBox = ({isPass, placeHolder, Text, setText}) => {
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={placeHolder}
-        placeholderTextColor={"#737373"}
+        placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
         value={Text}
         onChangeText={setText}
