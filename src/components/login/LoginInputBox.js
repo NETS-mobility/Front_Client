@@ -32,7 +32,7 @@ const LoginInputBox = ({isPass, placeHolder, Text, setText}) => {
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={placeHolder}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
         value={Text}
         onChangeText={setText}

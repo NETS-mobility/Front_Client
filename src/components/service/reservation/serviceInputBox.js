@@ -14,12 +14,14 @@ const styles = StyleSheet.create({
     width: 217,
     height: 52,
     borderBottomWidth: 2,
+    color: 'black',
   },
 
   detailbox: {
     width: 300,
     height: 52,
     borderBottomWidth: 2,
+    color: 'black',
   },
 
   signbtn: {
@@ -77,7 +79,7 @@ const ServiceAddress = ({
           ]}
           underlineColorAndroid={'transparent'}
           placeholder={placeHolder}
-          placeholderTextColor={typoStyles.textDisable}
+          placeholderTextColor={'#DAD8E0'}
           autoCapitalize="none"
           value={Text1}
           onChangeText={setText1}
@@ -109,7 +111,7 @@ const ServiceAddress = ({
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={'상세주소'}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
         value={Text2}
         onChangeText={setText2}
@@ -122,6 +124,7 @@ const ServiceInputBox = ({
   title,
   place1,
   place2,
+  placetextcolor,
   Text1,
   setText1,
   Text2,
@@ -147,7 +150,7 @@ const ServiceInputBox = ({
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={place1}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={placetextcolor}
         autoCapitalize="none"
         value={Text1}
         onChangeText={setText1}
@@ -161,7 +164,7 @@ const ServiceInputBox = ({
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={place2}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={placetextcolor}
         autoCapitalize="none"
         value={Text2}
         onChangeText={setText2}
@@ -198,7 +201,7 @@ const ServiceInputBoxWithoutBtn = ({title, place1, Text1, setText1}) => {
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={place1}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
         value={Text1}
         onChangeText={setText1}

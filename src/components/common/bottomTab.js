@@ -7,6 +7,7 @@ import ServiceDetailNavigator from '../../navigation/service/serviceDetail';
 import ReservationNavigator from '../../navigation/service/reservation';
 import AlarmNavigator from '../../navigation/alarm/alarm';
 import MypageNavigator from '../../navigation/mypage/mypageMain/mypageMain';
+import SignUpNavigator from '../../navigation/signup/signup';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +19,6 @@ const BottomTab = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Home"
         screenOptions={{
           tabBarActiveTintColor: '#19b7cd',
           tabBarStyle: {
