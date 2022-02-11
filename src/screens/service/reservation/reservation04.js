@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {btnStyles, shadowStyles} from '../../../assets/fonts/button';
+import {btnStyles, shadowStyles} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import ServiceProgress from '../../../components/service/reservation/progress';

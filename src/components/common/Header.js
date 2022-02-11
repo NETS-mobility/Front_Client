@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../../assets/image/logo.svg';
-import Call from '../../assets/icon/tab/call.svg';
+import Call from '../../assets/icon/call.svg';
 import {View, TouchableOpacity, StyleSheet, Linking} from 'react-native';
 const Header = () => {
   return (

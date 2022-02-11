@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableNativeFeedback} from 'react-native';
-import btnStyles from '../../assets/fonts/button';
+import btnStyles from '../common/button';
 import typoStyles from '../../assets/fonts/typography';
 
 const styles = StyleSheet.create({

@@ -7,7 +7,7 @@ import {
   TouchableNativeFeedback,
 } from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
-import btnStyles from '../../assets/fonts/button';
+import btnStyles from '../../components/common/button';
 
 const styles = StyleSheet.create({
   background: {

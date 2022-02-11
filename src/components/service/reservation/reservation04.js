@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
-import {RadioButton, CheckBox} from '../../../assets/fonts/button';
+import {RadioButton, CheckBox} from '../../common/button';
 import ServiceBlock from '../serviceBlock';
 import {Payment} from '../payment/payment';
 import {AdditionalPayment} from '../payment/additionalPayment';

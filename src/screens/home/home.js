@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {btnStyles, shadowStyles} from '../../assets/fonts/button';
+import {btnStyles, shadowStyles} from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
-import CommonLayout from '../common/layout';
+import CommonLayout from '../../components/common/layout';
 
 const Home = ({navigation}) => {
   const styles = StyleSheet.create({

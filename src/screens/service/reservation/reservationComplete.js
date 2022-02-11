@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import CustomBtn, {btnStyles} from '../../../assets/fonts/button';
+import CustomBtn, {btnStyles} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import ServiceBlock from '../../../components/service/serviceBlock';

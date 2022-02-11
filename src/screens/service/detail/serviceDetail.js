@@ -11,7 +11,7 @@ import {ServiceInfo} from '../../../components/service/reservation/serviceInfo';
 import ServiceBlock from '../../../components/service/serviceBlock';
 import {Payment} from '../../../components/service/payment/payment';
 import {ServiceDetailProgress} from '../../../components/service/detail/serviceDetail';
-import MapView from '../../../MapView';
+import MapView from '../../../components/service/detail/MapView';
 
 const ServiceDetail = () => {
   const styles = StyleSheet.create({

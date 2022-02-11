@@ -7,7 +7,7 @@ import {
   TouchableNativeFeedback,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import btnStyles from '../../assets/fonts/button';
+import btnStyles from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
 import {
   SignUpInputBox,

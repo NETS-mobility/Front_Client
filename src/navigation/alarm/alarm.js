@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { AlarmScreen } from '../../screens/alarm';
+import AlarmScreen from '../../screens/alarm/alarmScreen';
 
 const Stack = createNativeStackNavigator();
 

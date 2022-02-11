@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
-import CustomBtn from '../../assets/fonts/button';
-import {btnStyles} from '../../assets/fonts/button';
+import CustomBtn from './button';
+import {btnStyles} from './button';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 const ImageSubmit = ({img, setImg}) => {

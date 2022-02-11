@@ -1,19 +1,14 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  Text,
-  SafeAreaView,
-  View,
-  TouchableNativeFeedback,
-} from 'react-native';
+import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import ServiceBlock from '../../../components/service/serviceBlock';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
-import {NextBtn, CheckBtn} from '../../../components/service/serviceBtn';
-import {ServiceInputBox} from '../../../components/service/serviceInputBox';
+import {
+  NextBtn,
+  CheckBtn,
+} from '../../../components/service/reservation/serviceBtn';
+import {ServiceInputBox} from '../../../components/service/reservation/serviceInputBox';
 import ServiceProgress from '../../../components/service/reservation/progress';
-import {btnStyles} from '../../../assets/fonts/button';
 import ImageSubmit from '../../../components/common/imageSubmit';
 
 const styles = StyleSheet.create({

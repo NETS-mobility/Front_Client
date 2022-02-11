@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import typoStyles from './typography';
+import typoStyles from '../../assets/fonts/typography';
 const CustomBtn = ({
   viewStyle,
   textStyle,

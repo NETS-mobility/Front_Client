@@ -3,14 +3,12 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  SafeAreaView,
   View,
   TouchableNativeFeedback,
 } from 'react-native';
-import ResRadioBtn from '../../../components/reservation/ResRadioBtn';
-import ResStatus from '../../../components/reservation/ResStatus';
+import ResRadioBtn from '../../../components/service/reservation/ResRadioBtn';
 import typoStyles from '../../../assets/fonts/typography';
-import {btnStyles} from '../../../assets/fonts/button';
+import {btnStyles} from '../../../components/common/button';
 import CommonLayout from '../../../components/common/layout';
 
 const styles = StyleSheet.create({
