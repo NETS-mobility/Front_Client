@@ -7,12 +7,13 @@ import {
   TouchableNativeFeedback,
 } from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
-import btnStyles from '../../assets/fonts/button';
+import {btnStyles} from '../../components/common/button';
 
 const styles = StyleSheet.create({
   background: {
     backgroundColor: 'white',
     flex: 1,
+    paddingBottom: 60,
   },
 
   bigbox: {
@@ -51,7 +52,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const SignUpDoneScreen = () => {
+const SignUpDoneScreen = ({route, navigation}) => {
+  const data = route.params;
   return (
     <SafeAreaView style={styles.background}>
       <View style={styles.bigbox}>
@@ -79,16 +81,7 @@ const SignUpDoneScreen = () => {
                 typoStyles.textExplain,
                 styles.leftcontents,
               ]}>
-              아이디
-            </Text>
-            <Text
-              style={[
-                typoStyles.fs15,
-                typoStyles.fw700,
-                typoStyles.textExplain,
-                styles.leftcontents,
-              ]}>
-              생년월일
+              이메일
             </Text>
             <Text
               style={[
@@ -103,25 +96,21 @@ const SignUpDoneScreen = () => {
           <View>
             <Text
               style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
-              홍길동
+              {data.name}
             </Text>
             <Text
               style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
-              gildong0101@gmail.com
+              {data.id}
             </Text>
             <Text
               style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
-              00.01.12
-            </Text>
-            <Text
-              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
-              010-0000-1111
+              {data.phone}
             </Text>
           </View>
         </View>
       </View>
       <View style={styles.login}>
-        <TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={() => navigation.push('Login')}>
           <View style={[styles.loginbtn, btnStyles.btnBlue]}>
             <Text
               style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>

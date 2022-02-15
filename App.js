@@ -14,7 +14,10 @@ import MapView from './src/MapView';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import BottomTab from './src/components/common/bottomTab';
-
+import SignUpNavigator from './src/navigation/signup/signup';
+import {SignUpScreen} from './src/screens/signup';
+import axios from 'axios';
+axios.defaults.baseURL = 'http://10.0.2.2:5000';
 const App = () => {
   return (
     <>
@@ -26,6 +29,8 @@ const App = () => {
         lng={27.602706}
       /> */}
       <BottomTab />
+      {/* <SignUpNavigator /> */}
+      {/* <SignUpScreen /> */}
     </>
   );
 };
