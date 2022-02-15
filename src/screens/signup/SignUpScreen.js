@@ -1,10 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
 import {
   SignUpInputBox,
@@ -12,7 +7,12 @@ import {
 } from '../../components/signup/SignUpInputBox';
 import SignUpDetailBtn from '../../components/signup/SignUpDetailBtn';
 import {LoginBtn} from '../../components/login/LoginBtn';
-import { CheckBox } from '../../components/common/button';
+import {CheckBox} from '../../components/common/button';
+import SignUpAPI from '../../api/signup/signup';
+import LoginAPI from '../../api/login/login';
+import CheckPhoneAPI from '../../api/signup/checkPhone';
+import CheckDupAPI from '../../api/signup/checkDup';
+import {EmailValidation, PhoneValidation} from '../../utils/validation';
 
 const styles = StyleSheet.create({
   backGround: {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
   bigcheckbox: {
     alignItems: 'flex-start',
-    width: '60%'
+    width: '60%',
   },
 
   checkboxline: {
@@ -76,8 +76,91 @@ const SignUpScreen = ({navigation}) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [authNum, setAuthNum] = useState('');
-  const [check, setCheck] = useState(false);
-  const [isSelected, setSelection] = useState(false);
+  const [success, setSuccess] = useState(0);
+  const [res, setRes] = useState(0);
+  const [error, setError] = useState('');
+
+  const [all, setAll] = useState(false);
+  const [r1, setR1] = useState(false);
+  const [r2, setR2] = useState(false);
+  const [r3, setR3] = useState(false);
+
+  const Checksignup = async () => {
+    // if (
+    //   email === '' ||
+    //   password === '' ||
+    //   confirmPassword === '' ||
+    //   name === '' ||
+    //   phone === '' ||
+    //   authNum === ''
+    // ) {
+    //   setError('빈칸을 모두 채워주세요.');
+    // } else
+    if (!EmailValidation(email)) {
+      setError('이메일 형식을 확인해주세요.');
+    } else if (success == 0) {
+      setError('이메일 중복 확인을 진행해주세요.');
+    } else if (success == 1) {
+      setError('이미 가입된 이메일입니다.');
+    } else if (password !== confirmPassword) {
+      setError('비밀번호가 일치하지 않습니다.');
+    } else if (!PhoneValidation(phone)) {
+      setError('휴대전화 번호를 010-0000-0000 형식으로 입력해주세요.');
+    } //else if (res == 0) {
+    //   setError('휴대전화 인증을 진행해주세요.');
+    // }
+    else if (authNum != res) {
+      console.log('authNum: ', authNum);
+      console.log('res', res);
+      setError('인증번호가 일치하지 않습니다.');
+      // setRes(0);
+    } else if (!all) {
+      setError('약관에 동의해주세요');
+    } else {
+      setError('');
+
+      //       console.log(
+      // SignUpAPI({
+      //         id: email,
+      //         password: password,
+      //         name: name,
+      //         phone: phone,
+      //       }),
+      //       );
+
+      const res = await SignUpAPI({
+        id: email,
+        password: password,
+        name: name,
+        phone: phone,
+      });
+
+      if (res == 200) {
+        navigation.push('SignUpDone', {name: name, id: email, phone: phone});
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (success == 1) {
+      setSuccess(0);
+    }
+  }, [email]);
+
+  useEffect(() => {
+    if (r1 && r2 && r3) {
+      setAll(true);
+    } else if (!(r1 && r2 && r3)) {
+      setAll(false);
+    }
+  }, [r1, r2, r3]);
+
+  const onClickAll = () => {
+    setR1(!all);
+    setR2(!all);
+    setR3(!all);
+    setAll(!all);
+  };
 
   const [all, setAll] = useState(false);
   const [r1, setR1] = useState(false);
@@ -120,69 +203,78 @@ const SignUpScreen = ({navigation}) => {
       <SignUpInputBoxWithBtn
         isPass={false}
         placeHolder={'이메일'}
-        Text1={email}
+        text={email}
         setText={setEmail}
-        navWhere={'Signup'}
+        onPress={() => {
+          setSuccess(1);
+          CheckDupAPI(email, setSuccess);
+        }}
         btnName={'중복확인'}
       />
       <SignUpInputBox
         isPass={true}
         placeHolder={'비밀번호'}
-        Text={password}
+        text={password}
         setText={setPassword}
       />
       <SignUpInputBox
         isPass={true}
         placeHolder={'비밀번호 확인'}
-        Text={confirmPassword}
+        text={confirmPassword}
         setText={setConfirmPassword}
       />
       <SignUpInputBox
         isPass={false}
         placeHolder={'이름'}
-        Text={name}
+        text={name}
         setText={setName}
       />
       <SignUpInputBoxWithBtn
         isPass={false}
-        placeHolder={'휴대전화 번호'}
-        Text={phone}
+        placeHolder={'휴대전화'}
+        text={phone}
         setText={setPhone}
+        onPress={() => {
+          CheckPhoneAPI({phone: phone}, setRes);
+        }}
         btnName={'인증번호받기'}
       />
       <SignUpInputBox
         isPass={false}
         placeHolder={'인증번호'}
-        Text={authNum}
+        text={authNum}
         setText={setAuthNum}
       />
       <View style={styles.bigcheckbox}>
         <View style={styles.checkboxtopline}>
           <CheckBox
-          text={'전체 선택'}
-          onPress={() => onClickAll()}
-          value={all}
-        />
+            text={'전체 선택'}
+            onPress={() => onClickAll()}
+            value={all}
+          />
         </View>
         <View style={styles.checkboxline}>
           <CheckBox
             text={'(필수) 서비스 이용약관 동의'}
-            onPress={()=>setR1(!r1)}
-            value={r1} />
+            onPress={() => setR1(!r1)}
+            value={r1}
+          />
           <SignUpDetailBtn style={styles.detailbtn} />
         </View>
         <View style={styles.checkboxline}>
           <CheckBox
             text={'(필수) 개인정보 처리방침 동의'}
-            onPress={()=>setR2(!r2)}
-            value={r2} />
+            onPress={() => setR2(!r2)}
+            value={r2}
+          />
           <SignUpDetailBtn style={styles.detailbtn} />
         </View>
         <View style={styles.checkboxline}>
           <CheckBox
             text={'(필수) 위치정보 이용 동의'}
-            onPress={()=>setR3(!r3)}
-            value={r3} />
+            onPress={() => setR3(!r3)}
+            value={r3}
+          />
           <SignUpDetailBtn
             navWhere={() => {
               navigation.push('SignUpDetail');
@@ -191,8 +283,20 @@ const SignUpScreen = ({navigation}) => {
           />
         </View>
       </View>
+
+      <Text
+        style={[typoStyles.fs12, typoStyles.fwRegular, typoStyles.textPrimary]}>
+        {error}
+      </Text>
+
       <View style={styles.signupbtn}>
-        <LoginBtn btnName={'가입하기'} />
+        <LoginBtn
+          btnName={'가입하기'}
+          navWhere={() =>
+            // SignUpAPI({id: email, password: password, name: name, phone: phone})
+            Checksignup()
+          }
+        />
       </View>
     </SafeAreaView>
   );

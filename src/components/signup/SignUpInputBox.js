@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
-  TouchableNativeFeedback,
+  TouchableOpacity,
   TextInput,
   Text,
 } from 'react-native';
-import { btnStyles } from '../common/button';
+import {btnStyles} from '../common/button';
 import typoStyles from '../../assets/fonts/typography';
 
 const styles = StyleSheet.create({
@@ -40,12 +40,16 @@ const styles = StyleSheet.create({
 const SignUpInputBoxWithBtn = ({
   isPass,
   placeHolder,
-  Text1,
+  text,
   setText,
-  navWhere,
+  onPress,
   btnName,
 }) => {
   const [isfocused, setFocus] = useState(false);
+
+  useEffect(() => {
+    console.log(text);
+  }, [text]);
 
   return (
     <View style={styles.outside}>
@@ -61,10 +65,10 @@ const SignUpInputBoxWithBtn = ({
         placeholder={placeHolder}
         placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
-        value={Text1}
+        value={text}
         onChangeText={setText}
       />
-      <TouchableNativeFeedback onPress={navWhere}>
+      <TouchableOpacity onPress={onPress}>
         <View
           style={
             isfocused
@@ -76,12 +80,12 @@ const SignUpInputBoxWithBtn = ({
             {btnName}
           </Text>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const SignUpInputBox = ({isPass, placeHolder, Text, setText}) => {
+const SignUpInputBox = ({isPass, placeHolder, text, setText}) => {
   const [isfocused, setFocus] = useState(false);
 
   return (
@@ -98,7 +102,7 @@ const SignUpInputBox = ({isPass, placeHolder, Text, setText}) => {
         placeholder={placeHolder}
         placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
-        value={Text}
+        value={text}
         onChangeText={setText}
       />
     </View>

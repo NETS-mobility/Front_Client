@@ -35,7 +35,7 @@ const LoginMainScreen = ({navigation}) => {
       <NetsLogo width={175} height={70} style={styles.netImg} />
       <LoginBtn
         navWhere={() => {
-          ('Login');
+          navigation.push('Login');
         }}
         btnName={'로그인'}
         style={styles.loginBtn}
