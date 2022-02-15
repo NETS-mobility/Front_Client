@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {btnStyles} from '../../../assets/fonts/button';
+import CustomBtn, {btnStyles} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import ServiceBlock from '../../../components/service/serviceBlock';
@@ -16,7 +16,7 @@ import {
   ServiceInfo,
 } from '../../../components/service/reservation/serviceInfo';
 
-const ReservationComplete = () => {
+const ReservationComplete = ({navigation}) => {
   const styles = StyleSheet.create({
     block1: {
       width: '100%',
@@ -77,12 +77,12 @@ const ReservationComplete = () => {
         <ServiceBlock>
           <ServiceInfo />
         </ServiceBlock>
-        <TouchableOpacity style={[btnStyles.btnBlue, styles.btn]}>
-          <Text
-            style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
-            확인
-          </Text>
-        </TouchableOpacity>
+        <CustomBtn
+          viewStyle={[btnStyles.btnBlue, styles.btn]}
+          textStyle={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}
+          text={'확인'}
+          onPress={() => navigation.push('Home')}
+        />
       </ScrollView>
     </CommonLayout>
   );

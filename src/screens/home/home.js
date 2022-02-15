@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {btnStyles, shadowStyles} from '../../assets/fonts/button';
+import {btnStyles, shadowStyles} from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
-import CommonLayout from '../common/layout';
+import CommonLayout from '../../components/common/layout';
 
 const Home = ({navigation}) => {
   const styles = StyleSheet.create({
@@ -78,7 +78,7 @@ const Home = ({navigation}) => {
         </Text>
         <TouchableOpacity
           style={[shadowStyles.shadow, btnStyles.btnBlue, styles.btn]}
-          onPress={() => navigation.push('Reservation04')}>
+          onPress={() => navigation.push('ReservationMainScreen')}>
           <Text
             style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
             클릭해서 서비스 예약하기

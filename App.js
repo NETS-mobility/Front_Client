@@ -10,8 +10,6 @@
 
 import React from 'react';
 import {StyleSheet, StatusBar} from 'react-native';
-import MapView from './src/MapView';
-
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import BottomTab from './src/components/common/bottomTab';
 import SignUpNavigator from './src/navigation/signup/signup';

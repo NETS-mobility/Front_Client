@@ -1,3 +1,3 @@
-import RNTMap from './MapView';
+import RNTMap from './components/service/detail/MapView';
 
 module.exports = RNTMap;

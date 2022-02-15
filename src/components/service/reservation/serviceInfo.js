@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
   Linking,
 } from 'react-native';
-import {btnStyles} from '../../../assets/fonts/button';
 import typoStyles from '../../../assets/fonts/typography';
+import {btnStyles} from '../../common/button';
 import ServiceBlock from '../serviceBlock';
 
 export const ManagerProfile = ({name, img, certificate, comment, type}) => {

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {btnStyles} from '../../../assets/fonts/button';
+import {btnStyles} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import {AdditionalPayment} from '../../../components/service/payment/additionalPayment';

@@ -1,24 +1,53 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
-const ServiceIndividualStep = ({style, step}) => {
+const ServiceIndividualStep = ({style, step, num, stepNum}) => {
   return (
     <View style={styles.step}>
-      <View style={[styles.bar, style]} />
-      <Text style={[typoStyles.textMain, typoStyles.fs13, typoStyles.fw700]}>
+      <View
+        style={
+          num >= stepNum ? [styles.bar, style] : [styles.bar, styles.greyColor]
+        }
+      />
+      <Text
+        style={
+          num >= stepNum
+            ? [typoStyles.textMain, typoStyles.fs13, typoStyles.fw700]
+            : [typoStyles.textDisable, typoStyles.fs13, typoStyles.fw700]
+        }>
         {step}
       </Text>
     </View>
   );
 };
 
-const ServiceProgress = () => {
+const ServiceProgress = ({num}) => {
   return (
     <View style={styles.progress}>
-      <ServiceIndividualStep style={styles.color1} step={'일정 설정'} />
-      <ServiceIndividualStep style={styles.color2} step={'이용자 정보'} />
-      <ServiceIndividualStep style={styles.color3} step={'내원 정보'} />
-      <ServiceIndividualStep style={styles.color4} step={'결제 진행'} />
+      <ServiceIndividualStep
+        style={styles.color1}
+        step={'일정 설정'}
+        num={num}
+        stepNum={1}
+      />
+      <ServiceIndividualStep
+        style={styles.color2}
+        step={'이용자 정보'}
+        num={num}
+        stepNum={2}
+      />
+      <ServiceIndividualStep
+        style={styles.color3}
+        step={'내원 정보'}
+        num={num}
+        stepNum={3}
+      />
+      <ServiceIndividualStep
+        style={styles.color4}
+        step={'결제 진행'}
+        num={num}
+        stepNum={4}
+      />
     </View>
   );
 };
@@ -51,6 +80,9 @@ const styles = StyleSheet.create({
   },
   color4: {
     opacity: 1,
+  },
+  greyColor: {
+    backgroundColor: '#dad8e0',
   },
 });
 

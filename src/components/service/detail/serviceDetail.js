@@ -68,7 +68,7 @@ export const ServiceDetailProgress = () => {
     },
     line: {
       position: 'absolute',
-      bottom: '52%',
+      bottom: '50%',
       width: '100%',
       height: 13,
       backgroundColor: '#19B7CD',

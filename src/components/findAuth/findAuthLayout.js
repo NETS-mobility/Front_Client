@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Close from '../../assets/icon/close.svg';
-import CustomBtn, {btnStyles} from '../../assets/fonts/button';
+import CustomBtn, {btnStyles} from '../common/button';
 import typoStyles from '../../assets/fonts/typography';
 import {ProgressBar} from './findAuthComponent';
 import WholeLayout from '../wholeLayout';

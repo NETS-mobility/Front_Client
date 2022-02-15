@@ -14,12 +14,14 @@ const styles = StyleSheet.create({
     width: 245,
     height: 56,
     borderBottomWidth: 2,
+    color: '#000',
   },
 
   inputwithbtn: {
     width: 160,
     height: 56,
     borderBottomWidth: 2,
+    color: '#000',
   },
 
   signbtn: {
@@ -61,7 +63,7 @@ const SignUpInputBoxWithBtn = ({
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={placeHolder}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
         value={text}
         onChangeText={setText}
@@ -98,7 +100,7 @@ const SignUpInputBox = ({isPass, placeHolder, text, setText}) => {
         ]}
         underlineColorAndroid={'transparent'}
         placeholder={placeHolder}
-        placeholderTextColor={typoStyles.textDisable}
+        placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
         value={text}
         onChangeText={setText}
