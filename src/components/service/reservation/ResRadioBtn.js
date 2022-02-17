@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 
@@ -37,18 +37,14 @@ const styles = StyleSheet.create({
 });
 
 const ResRadioBtn = ({
+  check,
+  setCheck,
   check1,
-  setCheck1,
-  check2,
-  setCheck2,
   primtitle,
   explaintitle,
   text1,
   text2,
 }) => {
-  // const [check1, setCheck1] = useState(false);
-  // const [check2, setCheck2] = useState(false);
-
   return (
     <View>
       <View style={styles.textline}>
@@ -62,9 +58,13 @@ const ResRadioBtn = ({
         </Text>
       </View>
       <View style={styles.btnset}>
-        {!check1 || check2 ? (
+        {!check[check1] || check[check1 + 1] ? (
           <TouchableNativeFeedback
-            onPress={() => (setCheck1(true), setCheck2(false))}>
+            onPress={() => {
+              check[check1] = true;
+              check[check1 + 1] = false;
+              setCheck([...check]);
+            }}>
             <View style={styles.nonebtn}>
               <Text
                 style={[
@@ -78,7 +78,11 @@ const ResRadioBtn = ({
           </TouchableNativeFeedback>
         ) : (
           <TouchableNativeFeedback
-            onPress={() => (setCheck1(false), setCheck2(true))}>
+            onPress={() => {
+              check[check1] = false;
+              check[check1 + 1] = true;
+              setCheck([...check]);
+            }}>
             <View style={styles.clickbtn}>
               <Text
                 style={[
@@ -91,9 +95,13 @@ const ResRadioBtn = ({
             </View>
           </TouchableNativeFeedback>
         )}
-        {check1 || !check2 ? (
+        {check[check1] || !check[check1 + 1] ? (
           <TouchableNativeFeedback
-            onPress={() => (setCheck2(true), setCheck1(false))}>
+            onPress={() => {
+              check[check1] = false;
+              check[check1 + 1] = true;
+              setCheck([...check]);
+            }}>
             <View style={styles.nonebtn}>
               <Text
                 style={[
@@ -107,7 +115,11 @@ const ResRadioBtn = ({
           </TouchableNativeFeedback>
         ) : (
           <TouchableNativeFeedback
-            onPress={() => (setCheck2(false), setCheck1(true))}>
+            onPress={() => {
+              check[check1] = true;
+              check[check1 + 1] = false;
+              setCheck([...check]);
+            }}>
             <View style={styles.clickbtn}>
               <Text
                 style={[

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -48,65 +48,22 @@ const styles = StyleSheet.create({
 });
 
 const ReservationMainScreen = ({navigation}) => {
-  const [check, setCheck] = useState([
-    false, //병원동행
-    false,
-    false, //휠체어
-    false,
-    false, //이동방식
-    false,
-    false, //이동 방향
-    false,
-  ]);
+  const [check11, setCheck11] = useState(false);
+  const [check12, setCheck12] = useState(false);
+  const [check21, setCheck21] = useState(false);
+  const [check22, setCheck22] = useState(false);
+  const [check31, setCheck31] = useState(false);
+  const [check32, setCheck32] = useState(false);
+  const [check41, setCheck41] = useState(false);
+  const [check42, setCheck42] = useState(false);
+
   const [serviceName, setServiceName] = useState('모든 질문에 답해주세요.');
-  const [cnt, setCnt] = useState(0);
 
-  useEffect(() => {
-    if (check[0] && check[4]) {
-      setCnt(3);
-    } else if (check[0] && check[5]) {
-      setCnt(4);
-    } else if (check[1]) {
-      setCnt(2);
-    }
-  }, [check]);
+  //병원동행 필요 x -> setCnt(2)
+  //check11~check42까지 돌면서 true인게 2개이면 다 체크... -> 이때 확인
 
-  // useE
-
-  useEffect(() => {
-    if (check.filter(i => i == true).length == cnt) {
-      if (check[0] && check[2]) {
-        if (check[4]) {
-          setServiceName('네츠 휠체어 플러스 왕복 서비스');
-        } else {
-          setServiceName('네츠 휠체어 플러스 편도 서비스');
-        }
-      } else if (check[0] && check[3]) {
-        if (check[4]) {
-          setServiceName('네츠 휠체어 왕복 서비스');
-        } else {
-          setServiceName('네츠 휠체어 편도 서비스');
-        }
-      } else if (check[1]) {
-        setServiceName('네츠 무브 서비스');
-      }
-    }
-  }, [cnt, check]);
-
-  useEffect(() => {
-    if (check[1]) {
-      check[2] = false;
-      check[3] = false;
-      check[4] = false;
-      check[5] = false;
-      setCheck([...check]);
-    }
-    if (check[4]) {
-      check[6] = false;
-      check[7] = false;
-      setCheck([...check]);
-    }
-  }, [check[1], check[4]]);
+  //병원동행 필요 o -> setCnt(4)
+  //check11~check42까지 돌면서 true인게 4개이면 다 체크... -> 이때 확인
 
   return (
     <CommonLayout>
@@ -132,40 +89,57 @@ const ReservationMainScreen = ({navigation}) => {
         </View>
         <View style={styles.qbox}>
           <ResRadioBtn
-            check={check}
-            setCheck={setCheck}
-            check1={0}
+            check1={check21}
+            setCheck1={setCheck21}
+            check2={check22}
+            setCheck2={setCheck22}
             primtitle={'병원동행'}
             explaintitle={'이 필요하신가요?'}
             text1={'네'}
             text2={'아니요 차량만 이용'}
           />
 
-          {check[0] ? (
+          {/* 네츠무브
+-> 병원동행 질문 필요 x
+-> 계단 리프트 질문 필요 x
+-> 이동 방식 질문 필요 x(무조건 편도)
+-> 이동방향 질문 필요 o
+
+네츠 휠체어, 휠체어 플러스
+-> 병원동행 질문 필요 o
+-> 계단 리프트 질문 필요 o
+-> 이동 방식 질문 필요 o
+-> 이동방향 질문 필요 o - 조건문으로 처리
+*/}
+
+          {check21 ? (
             <>
               <ResRadioBtn
-                check={check}
-                setCheck={setCheck}
-                check1={2}
+                check1={check11}
+                setCheck1={setCheck11}
+                check2={check12}
+                setCheck2={setCheck12}
                 primtitle={'계단 리프트 서비스'}
                 explaintitle={'가 필요하신가요?'}
                 text1={'네'}
                 text2={'아니요'}
               />
               <ResRadioBtn
-                check={check}
-                setCheck={setCheck}
-                check1={4}
+                check1={check31}
+                setCheck1={setCheck31}
+                check2={check32}
+                setCheck2={setCheck32}
                 primtitle={'이동방식'}
                 explaintitle={'이 어떻게 되시나요?'}
                 text1={'왕복'}
                 text2={'편도'}
               />
-              {check[5] ? (
+              {check32 ? (
                 <ResRadioBtn
-                  check={check}
-                  setCheck={setCheck}
-                  check1={6}
+                  check1={check41}
+                  setCheck1={setCheck41}
+                  check2={check42}
+                  setCheck2={setCheck42}
                   primtitle={'이동방향'}
                   explaintitle={'이 어떻게 되시나요?'}
                   text1={'자택 -> 병원'}
@@ -177,9 +151,10 @@ const ReservationMainScreen = ({navigation}) => {
             </>
           ) : (
             <ResRadioBtn
-              check={check}
-              setCheck={setCheck}
-              check1={6}
+              check1={check41}
+              setCheck1={setCheck41}
+              check2={check42}
+              setCheck2={setCheck42}
               primtitle={'이동방향'}
               explaintitle={'이 어떻게 되시나요?'}
               text1={'자택 -> 병원'}
@@ -191,16 +166,12 @@ const ReservationMainScreen = ({navigation}) => {
           <View style={styles.statbox}>
             <Text
               style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textMain]}>
+              네츠휠체어플러스 왕복서비스
               {serviceName}
             </Text>
           </View>
           <TouchableNativeFeedback
-            onPress={() =>
-              navigation.push('Reservation01', {
-                serviceName: serviceName,
-                way: check[6],
-              })
-            }>
+            onPress={() => navigation.push('Reservation01')}>
             <View style={[btnStyles.btnBlue, styles.resbtn]}>
               <Text
                 style={[
@@ -208,7 +179,8 @@ const ReservationMainScreen = ({navigation}) => {
                   typoStyles.fwBold,
                   typoStyles.textWhite,
                 ]}>
-                클릭해서 서비스 예약하기
+                {' '}
+                클릭해서 서비스 예약하기{' '}
               </Text>
             </View>
           </TouchableNativeFeedback>

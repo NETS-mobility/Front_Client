@@ -45,12 +45,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const Reservation01 = ({navigation}) => {
-  const [pickaddr, setPickaddr] = useState('');
-  const [pickdetail, setPickdetail] = useState('');
-
-  const [hosaddr, setHosaddr] = useState('');
-  const [hosdetail, setHosdetail] = useState('');
+const Reservation01 = ({route, navigation}) => {
+  const {serviceName} = route.params;
+  const {way} = route.params;
 
   const [isChecked, setCheck] = useState(true);
 
@@ -79,24 +76,6 @@ const Reservation01 = ({navigation}) => {
             ]}>
             STEP1. 장소 설정
           </Text>
-          <ServiceAddress
-            prititle={'픽업'}
-            exptitle={' 주소를 입력해주세요'}
-            placeHolder={'픽업 주소'}
-            Text1={pickaddr}
-            setText1={setPickaddr}
-            Text2={pickdetail}
-            setText2={setPickdetail}
-          />
-          <ServiceAddress
-            prititle={'병원'}
-            exptitle={' 주소를 입력해주세요'}
-            placeHolder={'병원 주소'}
-            Text1={hosaddr}
-            setText1={setHosaddr}
-            Text2={hosdetail}
-            setText2={setHosdetail}
-          />
         </ServiceBlock>
         <ServiceBlock>
           <Text
@@ -108,114 +87,6 @@ const Reservation01 = ({navigation}) => {
             ]}>
             STEP2. 일정 설정
           </Text>
-          <View style={styles.pickbox}>
-            <View style={styles.textline}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                서비스 원하시는 날짜
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                를 입력해주세요.
-              </Text>
-            </View>
-            <ServiceDatePicker />
-          </View>
-          <View style={styles.pickbox}>
-            <View style={styles.textline}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                예약된 병원 검사/진료 시간
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                을 입력해주세요.
-              </Text>
-            </View>
-            <ServiceTimePicker />
-          </View>
-          <View style={styles.pickbox}>
-            <View style={styles.textline}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                희망하는 병원 도착 시간
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                을 입력해주세요.
-              </Text>
-            </View>
-            <ServiceTimePicker />
-            <Text
-              style={[
-                typoStyles.fs12,
-                typoStyles.fwBold,
-                typoStyles.textExplain,
-              ]}>
-              원활한 서비스 진행을 위해,{'\n'}도착 시간이{' '}
-              <Text
-                style={[
-                  typoStyles.fs12,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                진료시간 20분 이전
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs12,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                으로 설정되어있습니다.
-              </Text>{' '}
-            </Text>
-          </View>
-          <View style={styles.pickbox}>
-            <View style={styles.textline}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                귀가 출발 시간
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                을 입력해주세요.
-              </Text>
-            </View>
-            <ServiceTimePicker />
-          </View>
         </ServiceBlock>
         <View style={styles.btn}>
           <NextBtn

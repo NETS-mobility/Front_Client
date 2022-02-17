@@ -25,41 +25,41 @@ const BottomTab = () => {
 
   return (
     <NavigationContainer>
-      {GetToken() == null ? (
-        <Tab.Navigator
-          screenOptions={{
-            tabBarActiveTintColor: '#19b7cd',
-            tabBarStyle: {
-              height: 65,
-              position: 'absolute',
-              bottom: 0,
-            },
-            tabBarLabelStyle: {
-              fontSize: 13,
-            },
-          }}>
-          <Tab.Screen
-            name="홈"
-            component={LoginNavigator}
-            options={{
-              headerShown: false,
-              tabBarIcon: ({color}) => (
-                <Icon name="home" color={color} size={35} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="로그인"
-            component={LoginNavigator}
-            options={{
-              headerShown: false,
-              tabBarIcon: ({color}) => (
-                <Icon name="person" color={color} size={35} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      ) : (
+      {/* {GetToken() == null ? ( */}
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: '#19b7cd',
+          tabBarStyle: {
+            height: 65,
+            position: 'absolute',
+            bottom: 0,
+          },
+          tabBarLabelStyle: {
+            fontSize: 13,
+          },
+        }}>
+        <Tab.Screen
+          name="홈"
+          component={ReservationNavigator}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({color}) => (
+              <Icon name="home" color={color} size={35} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="로그인"
+          component={LoginNavigator}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({color}) => (
+              <Icon name="person" color={color} size={35} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+      {/* ) : (
         <Tab.Navigator
           screenOptions={{
             tabBarActiveTintColor: '#19b7cd',
@@ -113,7 +113,7 @@ const BottomTab = () => {
             }}
           />
         </Tab.Navigator>
-      )}
+      )} */}
     </NavigationContainer>
   );
 };
