@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import ServiceBlock from '../../../components/service/serviceBlock';
 import typoStyles from '../../../assets/fonts/typography';
-import {ServiceAddress} from '../../../components/service/reservation/serviceInputBox';
 import CommonLayout from '../../../components/common/layout';
 import {NextBtn} from '../../../components/service/reservation/serviceBtn';
 import ServiceProgress from '../../../components/service/reservation/progress';
 import {
-  ServiceDatePicker,
-  ServiceTimePicker,
-} from '../../../components/service/reservation/servicePicker';
+  ResDate,
+  GetAddr,
+  GetTime,
+} from '../../../components/service/reservation/reservation01';
 
 const styles = StyleSheet.create({
   background: {
@@ -49,7 +49,23 @@ const Reservation01 = ({route, navigation}) => {
   const {serviceName} = route.params;
   const {way} = route.params;
 
-  const [isChecked, setCheck] = useState(true);
+  const [resTimes, setResTimes] = useState({
+    resResTime: '0',
+    resArrTime: '0',
+    resDepTime: '0',
+  });
+  const [resAddrs, setResAddrs] = useState({
+    hospitalAddr: '0',
+    homeAddr: '0',
+    dropAddr: '0',
+  });
+  const [resDate, setResDate] = useState('0');
+
+  useEffect(() => {
+    console.log('resTimes==', resTimes.resArrTime);
+  }, [resTimes]);
+
+  //'0'이 아닌 애들만 param으로 넘기기
 
   return (
     <CommonLayout>
@@ -76,6 +92,12 @@ const Reservation01 = ({route, navigation}) => {
             ]}>
             STEP1. 장소 설정
           </Text>
+          <GetAddr
+            serviceName={serviceName}
+            way={way}
+            addr={resAddrs}
+            setAddr={setResAddrs}
+          />
         </ServiceBlock>
         <ServiceBlock>
           <Text
@@ -87,6 +109,13 @@ const Reservation01 = ({route, navigation}) => {
             ]}>
             STEP2. 일정 설정
           </Text>
+          <ResDate />
+          <GetTime
+            serviceName={serviceName}
+            way={way}
+            time={resTimes}
+            setTime={setResTimes}
+          />
         </ServiceBlock>
         <View style={styles.btn}>
           <NextBtn
