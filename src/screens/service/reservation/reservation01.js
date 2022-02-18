@@ -61,12 +61,6 @@ const Reservation01 = ({route, navigation}) => {
   });
   const [resDate, setResDate] = useState('0');
 
-  useEffect(() => {
-    console.log('resTimes==', resTimes.resArrTime);
-  }, [resTimes]);
-
-  //'0'이 아닌 애들만 param으로 넘기기
-
   return (
     <CommonLayout>
       <ScrollView style={styles.background}>
@@ -109,7 +103,7 @@ const Reservation01 = ({route, navigation}) => {
             ]}>
             STEP2. 일정 설정
           </Text>
-          <ResDate />
+          <ResDate setDate={setResDate} />
           <GetTime
             serviceName={serviceName}
             way={way}
@@ -120,7 +114,13 @@ const Reservation01 = ({route, navigation}) => {
         <View style={styles.btn}>
           <NextBtn
             navWhere={() => {
-              navigation.push('Reservation02');
+              navigation.push('Reservation02', {
+                serviceName: serviceName,
+                way: way,
+                resAddrs: resAddrs,
+                resDate: resDate,
+                resTimes: resTimes,
+              });
             }}
           />
         </View>

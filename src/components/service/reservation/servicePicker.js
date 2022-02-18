@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ServiceDatePicker = () => {
+const ServiceDatePicker = ({setDate}) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [pickdate, setPickdate] = useState('//');
   const [datearr, setDatearr] = useState([]);
@@ -104,7 +104,7 @@ const ServiceDatePicker = () => {
 
   useEffect(() => {
     setDatearr(pickdate.split('/'));
-    console.log(datearr[0] + datearr[1] + datearr[2]);
+    setDate(pickdate);
   }, [pickdate]);
 
   return (

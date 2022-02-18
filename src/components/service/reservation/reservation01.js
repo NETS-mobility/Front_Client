@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
 // 방향이 병원->자택이면
 // DropAddr / HospitalAddr / ResArrTime
 
-export const GetAddr = ({serviceName, way}) => {
+export const GetAddr = ({serviceName, way, addr, setAddr}) => {
   if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
     return (
       <>
-        <HomeAddr />
-        <HospitalAddr />
-        <DropAddr />
+        <HomeAddr addr={addr} setAddr={setAddr} />
+        <HospitalAddr addr={addr} setAddr={setAddr} />
+        <DropAddr addr={addr} setAddr={setAddr} />
       </>
     );
   } else if (
@@ -42,15 +42,15 @@ export const GetAddr = ({serviceName, way}) => {
     if (way) {
       return (
         <>
-          <HomeAddr />
-          <HospitalAddr />
+          <HomeAddr addr={addr} setAddr={setAddr} />
+          <HospitalAddr addr={addr} setAddr={setAddr} />
         </>
       );
     } else {
       return (
         <>
-          <DropAddr />
-          <HospitalAddr />
+          <DropAddr addr={addr} setAddr={setAddr} />
+          <HospitalAddr addr={addr} setAddr={setAddr} />
         </>
       );
     }
@@ -58,20 +58,12 @@ export const GetAddr = ({serviceName, way}) => {
 };
 
 export const GetTime = ({serviceName, way, time, setTime}) => {
-  // const [resTimes, setResTimes] = useState([
-  //   {resResTime: '0',
-  //   {resArrTime: '0'},
-  //   {resDepTime: '0'},
-  // ]);
   if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
-    /*
-    setTime({...time,resResTime:'19:00:00'})
-    */
     return (
       <>
         <ResArrTime time={time} setTime={setTime} />
-        <ResResTime />
-        <ResDepTime />
+        <ResResTime time={time} setTime={setTime} />
+        <ResDepTime time={time} setTime={setTime} />
       </>
     );
   } else if (
@@ -81,17 +73,17 @@ export const GetTime = ({serviceName, way, time, setTime}) => {
     if (way) {
       return (
         <>
-          <ResArrTime />
-          <ResResTime />
+          <ResArrTime time={time} setTime={setTime} />
+          <ResResTime time={time} setTime={setTime} />
         </>
       );
     } else {
-      return <ResDepTime />;
+      return <ResDepTime time={time} setTime={setTime} />;
     }
   }
 };
 
-const ResDate = () => {
+const ResDate = ({setDate}) => {
   return (
     <View style={styles.pickbox}>
       <View style={styles.textline}>
@@ -104,7 +96,7 @@ const ResDate = () => {
           를 입력해주세요.
         </Text>
       </View>
-      <ServiceDatePicker />
+      <ServiceDatePicker setDate={setDate} />
     </View>
   );
 };

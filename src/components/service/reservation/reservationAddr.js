@@ -1,50 +1,41 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ServiceAddress} from './serviceInputBox';
 
-export const HospitalAddr = () => {
-  const [hosaddr, setHosaddr] = useState('');
-  const [hosdetail, setHosdetail] = useState('');
+export const HospitalAddr = ({addr, setAddr}) => {
   return (
     <ServiceAddress
       prititle={'병원'}
       exptitle={' 주소를 입력해주세요'}
       placeHolder={'병원 주소'}
-      Text1={hosaddr}
-      setText1={setHosaddr}
-      Text2={hosdetail}
-      setText2={setHosdetail}
+      addr={addr}
+      setAddr={setAddr}
+      propName={'hospitalAddr'}
     />
   );
 };
 
-export const HomeAddr = () => {
-  const [pickaddr, setPickaddr] = useState('');
-  const [pickdetail, setPickdetail] = useState('');
+export const HomeAddr = ({addr, setAddr}) => {
   return (
     <ServiceAddress
       prititle={'픽업'}
       exptitle={' 주소를 입력해주세요'}
       placeHolder={'픽업 주소'}
-      Text1={pickaddr}
-      setText1={setPickaddr}
-      Text2={pickdetail}
-      setText2={setPickdetail}
+      addr={addr}
+      setAddr={setAddr}
+      propName={'homeAddr'}
     />
   );
 };
 
-export const DropAddr = () => {
-  const [dropaddr, setDropaddr] = useState('');
-  const [dropdetail, setDropdetail] = useState('');
+export const DropAddr = ({addr, setAddr}) => {
   return (
     <ServiceAddress
       prititle={'귀가'}
       exptitle={' 주소를 입력해주세요'}
       placeHolder={'귀가 주소'}
-      Text1={dropaddr}
-      setText1={setDropaddr}
-      Text2={dropdetail}
-      setText2={setDropdetail}
+      addr={addr}
+      setAddr={setAddr}
+      propName={'dropAddr'}
     />
   );
 };

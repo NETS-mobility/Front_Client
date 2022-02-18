@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Reservation02 = ({navigation}) => {
+const Reservation02 = ({route, navigation}) => {
+  const {serviceName, way, resAddrs, resDate, resTimes} = route.params;
   const [guardName, setGuardName] = useState('');
   const [guardPhone, setGuardPhone] = useState('');
 

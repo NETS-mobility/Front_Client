@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ResResTime = () => {
+export const ResResTime = ({time, setTime}) => {
   return (
     <View style={styles.pickbox}>
       <View style={styles.textline}>
@@ -26,7 +26,11 @@ export const ResResTime = () => {
           을 입력해주세요.
         </Text>
       </View>
-      <ServiceTimePicker />
+      <ServiceTimePicker
+        time={time}
+        setTime={setTime}
+        propName={'resResTime'}
+      />
     </View>
   );
 };
@@ -65,7 +69,7 @@ export const ResArrTime = ({time, setTime}) => {
   );
 };
 
-export const ResDepTime = () => {
+export const ResDepTime = ({time, setTime}) => {
   return (
     <View style={styles.pickbox}>
       <View style={styles.textline}>
@@ -78,7 +82,11 @@ export const ResDepTime = () => {
           을 입력해주세요.
         </Text>
       </View>
-      <ServiceTimePicker />
+      <ServiceTimePicker
+        time={time}
+        setTime={setTime}
+        propName={'resDepTime'}
+      />
     </View>
   );
 };
