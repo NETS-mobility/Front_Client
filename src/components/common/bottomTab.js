@@ -26,7 +26,7 @@ const BottomTab = () => {
   return (
     <NavigationContainer>
       {/* {GetToken() == null ? ( */}
-      {/* <Tab.Navigator
+      <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: '#19b7cd',
           tabBarStyle: {
@@ -58,62 +58,62 @@ const BottomTab = () => {
             ),
           }}
         />
-      </Tab.Navigator> 
-      ) : (*/}
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: '#19b7cd',
-          tabBarStyle: {
-            height: 65,
-            position: 'absolute',
-            bottom: 0,
-          },
-          tabBarLabelStyle: {
-            fontSize: 13,
-          },
-        }}>
-        <Tab.Screen
-          name="홈"
-          component={ReservationNavigator}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({color}) => (
-              <Icon name="home" color={color} size={35} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="서비스내역"
-          component={ServiceDetailNavigator}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({color}) => (
-              <Icon name="map" color={color} size={35} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="알림"
-          component={AlarmNavigator}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({color}) => (
-              <Icon name="notifications" color={color} size={35} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="마이페이지"
-          component={MypageNavigator}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({color}) => (
-              <Icon name="person" color={color} size={35} />
-            ),
-          }}
-        />
       </Tab.Navigator>
-      {/* )} */}
+      {/* ) : (
+        <Tab.Navigator
+          screenOptions={{
+            tabBarActiveTintColor: '#19b7cd',
+            tabBarStyle: {
+              height: 65,
+              position: 'absolute',
+              bottom: 0,
+            },
+            tabBarLabelStyle: {
+              fontSize: 13,
+            },
+          }}>
+          <Tab.Screen
+            name="홈"
+            component={ReservationNavigator}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({color}) => (
+                <Icon name="home" color={color} size={35} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="서비스내역"
+            component={ServiceDetailNavigator}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({color}) => (
+                <Icon name="map" color={color} size={35} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="알림"
+            component={AlarmNavigator}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({color}) => (
+                <Icon name="notifications" color={color} size={35} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="마이페이지"
+            component={MypageNavigator}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({color}) => (
+                <Icon name="person" color={color} size={35} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+      )} */}
     </NavigationContainer>
   );
 };

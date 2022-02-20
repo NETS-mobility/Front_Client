@@ -90,6 +90,8 @@ const ReservationMainScreen = ({navigation}) => {
       } else if (check[1]) {
         setServiceName('네츠 무브 서비스');
       }
+    } else {
+      setServiceName('모든 질문에 답해주세요.');
     }
   }, [cnt, check]);
 
@@ -101,12 +103,12 @@ const ReservationMainScreen = ({navigation}) => {
       check[5] = false;
       setCheck([...check]);
     }
-    if (check[4]) {
+    if (check[0] || check[4]) {
       check[6] = false;
       check[7] = false;
       setCheck([...check]);
     }
-  }, [check[1], check[4]]);
+  }, [check[0], check[1], check[4]]);
 
   return (
     <CommonLayout>
