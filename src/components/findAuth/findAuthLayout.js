@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
   block: {
     flex: 1,
     padding: 15,
-    paddingBottom: 31,
+    // paddingBottom: 31,
+    paddingBottom: 70, //bottomTab이 버튼을 가려 임시 수정, BottomTab해결 후 수정해야함.
     backgroundColor: '#fff',
   },
   title: {

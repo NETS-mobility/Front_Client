@@ -9,7 +9,6 @@ import SignUpDetailBtn from '../../components/signup/SignUpDetailBtn';
 import {LoginBtn} from '../../components/login/LoginBtn';
 import {CheckBox} from '../../components/common/button';
 import SignUpAPI from '../../api/signup/signup';
-import LoginAPI from '../../api/login/login';
 import CheckPhoneAPI from '../../api/signup/checkPhone';
 import CheckDupAPI from '../../api/signup/checkDup';
 import {EmailValidation, PhoneValidation} from '../../utils/validation';
