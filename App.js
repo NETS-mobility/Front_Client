@@ -1,21 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React from 'react';
+import React, {useContext, createContext} from 'react';
 import {StyleSheet, StatusBar} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import BottomTab from './src/components/common/bottomTab';
-import SignUpNavigator from './src/navigation/signup/signup';
-import {SignUpScreen} from './src/screens/signup';
+
 import axios from 'axios';
 axios.defaults.baseURL = 'http://10.0.2.2:5000';
+
 const App = () => {
   return (
     <>

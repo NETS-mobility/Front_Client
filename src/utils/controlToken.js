@@ -6,10 +6,10 @@ export const SetToken = token => {
 };
 
 export const GetToken = async () => {
-  let token;
+  let token = '';
   await AsyncStorage.getItem('jwtToken', (err, result) => {
+    console.log('err는 ', err);
     console.log('result는 ' + result + '입니다');
-    console.log('err는 ' + err + '입니다');
     token = result;
   });
   return token;

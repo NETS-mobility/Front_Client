@@ -12,6 +12,7 @@ import CommonLayout from '../../../components/common/layout';
 import BlueBlock from '../../../components/mypage/blueBlock';
 import {ArrowBtn} from '../../../components/mypage/arrowBtn';
 import {btnStyles} from '../../../components/common/button';
+import {DeleteToken} from '../../../utils/controlToken';
 
 const styles = StyleSheet.create({
   title: {
@@ -63,7 +64,7 @@ const MypageMain = ({navigation}) => {
               style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
               마이페이지
             </Text>
-            <TouchableNativeFeedback>
+            <TouchableNativeFeedback onPress={() => DeleteToken()}>
               <View style={[btnStyles.btnBlue, styles.logoutbtn]}>
                 <Text
                   style={[

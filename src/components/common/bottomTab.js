@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {NavigationContainer} from '@react-navigation/native';
@@ -8,24 +7,28 @@ import ReservationNavigator from '../../navigation/service/reservation';
 import AlarmNavigator from '../../navigation/alarm/alarm';
 import MypageNavigator from '../../navigation/mypage/mypageMain/mypageMain';
 import LoginNavigator from '../../navigation/login/login';
-import {GetToken, SetToken} from '../../utils/controlToken';
+import {GetToken} from '../../utils/controlToken';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTab = () => {
-  // const [token, setToken] = useState(GetToken());
-  let token;
-  // useEffect(async () => {
-  //   token = await GetToken();
-  //   console.log(token);
-  //   return () => {
-  //     console.log('return token');
-  //   };
-  // }, []);
+  const [token, setToken] = useState();
+  const getget = async () => {
+    await GetToken().then(r => {
+      setTimeout(() => {
+        console.log('this is r: ', r);
+        setToken(r);
+      }, 100);
+    });
+  };
+
+  useEffect(() => {
+    getget();
+  }, []);
 
   return (
     <NavigationContainer>
-      {GetToken() == null ? (
+      {token == null ? (
         <Tab.Navigator
           screenOptions={{
             tabBarActiveTintColor: '#19b7cd',
@@ -40,7 +43,7 @@ const BottomTab = () => {
           }}>
           <Tab.Screen
             name="홈"
-            component={LoginNavigator}
+            component={ReservationNavigator}
             options={{
               headerShown: false,
               tabBarIcon: ({color}) => (
