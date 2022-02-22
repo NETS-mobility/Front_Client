@@ -3,7 +3,7 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
   TextInput,
 } from 'react-native';
 import btnStyles from '../common/button';

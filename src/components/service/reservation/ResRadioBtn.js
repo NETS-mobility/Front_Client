@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 
 const styles = StyleSheet.create({
@@ -59,7 +59,7 @@ const ResRadioBtn = ({
       </View>
       <View style={styles.btnset}>
         {!check[check1] || check[check1 + 1] ? (
-          <TouchableNativeFeedback
+          <TouchableOpacity
             onPress={() => {
               check[check1] = true;
               check[check1 + 1] = false;
@@ -75,9 +75,9 @@ const ResRadioBtn = ({
                 {text1}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         ) : (
-          <TouchableNativeFeedback
+          <TouchableOpacity
             onPress={() => {
               check[check1] = false;
               check[check1 + 1] = true;
@@ -93,10 +93,10 @@ const ResRadioBtn = ({
                 {text1}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         )}
         {check[check1] || !check[check1 + 1] ? (
-          <TouchableNativeFeedback
+          <TouchableOpacity
             onPress={() => {
               check[check1] = false;
               check[check1 + 1] = true;
@@ -112,9 +112,9 @@ const ResRadioBtn = ({
                 {text2}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         ) : (
-          <TouchableNativeFeedback
+          <TouchableOpacity
             onPress={() => {
               check[check1] = true;
               check[check1 + 1] = false;
@@ -130,7 +130,7 @@ const ResRadioBtn = ({
                 {text2}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         )}
       </View>
     </View>

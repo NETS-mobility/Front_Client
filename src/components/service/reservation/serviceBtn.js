@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import {btnStyles} from '../../common/button';
 
@@ -42,23 +36,30 @@ const styles = StyleSheet.create({
   },
 });
 
-const NextBtn = ({navWhere}) => {
+const NextBtn = ({navWhere, disable}) => {
   return (
-    <TouchableNativeFeedback onPress={navWhere}>
+    <TouchableOpacity onPress={navWhere} disabled={disable}>
       <View style={[btnStyles.btnBlue, styles.nextbtn]}>
         <Text
           style={[typoStyles.fs20, typoStyles.textWhite, typoStyles.fwBold]}>
           다음단계
         </Text>
       </View>
-    </TouchableNativeFeedback>
+    </TouchableOpacity>
   );
 };
 
-const CheckBtn = ({check, setCheck, contents}) => {
+const CheckBtn = ({num, check, setCheck, contents}) => {
   return (
-    <TouchableOpacity onPress={() => setCheck(!check)} style={styles.checkset}>
-      <View style={!check ? styles.nonecheckcircle : styles.checkcircle} />
+    <TouchableOpacity
+      onPress={() => {
+        const newCheck = check;
+        newCheck[num] = !newCheck[num];
+        check = newCheck;
+        setCheck([...check]);
+      }}
+      style={styles.checkset}>
+      <View style={!check[num] ? styles.nonecheckcircle : styles.checkcircle} />
       <Text style={[typoStyles.fs14, typoStyles.fwRegular, styles.contents]}>
         {contents}
       </Text>

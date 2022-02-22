@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
   StyleSheet,
   TextInput,
 } from 'react-native';
@@ -86,7 +86,7 @@ const ServiceAddress = ({
           {exptitle}
         </Text>
       </View>
-      <TouchableNativeFeedback onPress={() => setModal(true)}>
+      <TouchableOpacity onPress={() => setModal(true)}>
         <View style={styles.outside}>
           <View
             style={[
@@ -124,7 +124,7 @@ const ServiceAddress = ({
             </Text>
           </View>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
       {sido != '서울' && sido != '경기' && sido != '' ? (
         <Text style={[typoStyles.fs14, typoStyles.textPrimary]}>
           현재 서울, 경기 지역만 서비스 가능합니다.
@@ -160,18 +160,16 @@ const ServiceAddress = ({
   );
 };
 
-const ServiceInputBox = ({
-  title,
-  place1,
-  place2,
-  placetextcolor,
-  Text1,
-  setText1,
-  Text2,
-  setText2,
-}) => {
+const ServiceInputBox = ({title, place1, place2, placetextcolor, setText}) => {
   const [isfocused, setFocus] = useState(false);
   const [isfocused2, setFocus2] = useState(false);
+
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+
+  useEffect(() => {
+    setText({['name']: name, ['phone']: phone});
+  }, [name, phone]);
 
   return (
     <View>
@@ -192,8 +190,8 @@ const ServiceInputBox = ({
         placeholder={place1}
         placeholderTextColor={placetextcolor}
         autoCapitalize="none"
-        value={Text1}
-        onChangeText={setText1}
+        value={name}
+        onChangeText={setName}
       />
       <TextInput
         onFocus={() => setFocus2(true)}
@@ -206,8 +204,8 @@ const ServiceInputBox = ({
         placeholder={place2}
         placeholderTextColor={placetextcolor}
         autoCapitalize="none"
-        value={Text2}
-        onChangeText={setText2}
+        value={phone}
+        onChangeText={setPhone}
       />
     </View>
   );
@@ -215,7 +213,6 @@ const ServiceInputBox = ({
 
 const ServiceInputBoxWithoutBtn = ({title, place1, Text1, setText1}) => {
   const [isfocused, setFocus] = useState(false);
-
   return (
     <View>
       {title == '없음' ? (

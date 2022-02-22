@@ -4,7 +4,7 @@ import {
   Text,
   SafeAreaView,
   View,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import {btnStyles} from '../common/button';
 import typoStyles from '../../assets/fonts/typography';

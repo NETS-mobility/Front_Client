@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import NetsLogo from '../../assets/image/logo.svg';
 import btnStyles from '../../components/common/button';

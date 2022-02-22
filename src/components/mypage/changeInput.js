@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import {btnStyles} from '../common/button';
 import typoStyles from '../../assets/fonts/typography';
@@ -91,7 +91,7 @@ const ChangeInputWithBtn = ({title, place1, Text1, setText1, btntext}) => {
           onChangeText={setText1}
         />
         <View style={styles.btnset}>
-          <TouchableNativeFeedback>
+          <TouchableOpacity>
             <View style={[btnStyles.btnDisable, styles.btn]}>
               <Text
                 style={[
@@ -102,7 +102,7 @@ const ChangeInputWithBtn = ({title, place1, Text1, setText1, btntext}) => {
                 {btntext}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
