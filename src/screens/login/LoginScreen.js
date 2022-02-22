@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import NetsLogo from '../../assets/image/logo.svg';
 import LoginInputBox from '../../components/login/LoginInputBox';
@@ -57,7 +57,7 @@ const LoginScreen = ({navigation}) => {
         />
       </View>
       <View style={styles.bottom}>
-        <TouchableNativeFeedback onPress={() => navigation.navigate('FindID')}>
+        <TouchableOpacity onPress={() => navigation.navigate('FindID')}>
           <Text
             style={[
               typoStyles.fs14,
@@ -66,7 +66,7 @@ const LoginScreen = ({navigation}) => {
             ]}>
             아이디 찾기{' '}
           </Text>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
         <Text
           style={[
             typoStyles.fs14,
@@ -75,7 +75,7 @@ const LoginScreen = ({navigation}) => {
           ]}>
           |
         </Text>
-        <TouchableNativeFeedback onPress={() => navigation.navigate('FindPW')}>
+        <TouchableOpacity onPress={() => navigation.navigate('FindPW')}>
           <Text
             style={[
               typoStyles.fs14,
@@ -85,7 +85,7 @@ const LoginScreen = ({navigation}) => {
             {' '}
             비밀번호 찾기
           </Text>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

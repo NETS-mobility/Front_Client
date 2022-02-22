@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableNativeFeedback} from 'react-native';
-import { btnStyles } from '../common/button';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {btnStyles} from '../common/button';
 import typoStyles from '../../assets/fonts/typography';
 
 const styles = StyleSheet.create({
@@ -12,13 +12,13 @@ const styles = StyleSheet.create({
 
 const SignUpDetailBtn = ({navWhere}) => {
   return (
-    <TouchableNativeFeedback onPress={navWhere}>
+    <TouchableOpacity onPress={navWhere}>
       <View style={[btnStyles.btnDisable, styles.detailbtn]}>
         <Text style={[typoStyles.fs10, typoStyles.textWhite, typoStyles.fw700]}>
           보기
         </Text>
       </View>
-    </TouchableNativeFeedback>
+    </TouchableOpacity>
   );
 };
 

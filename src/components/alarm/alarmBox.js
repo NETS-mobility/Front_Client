@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableNativeFeedback} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import BlueBlock from '../../components/mypage/blueBlock';
 import typoStyles from '../../assets/fonts/typography';
 import {btnStyles} from '../common/button';
@@ -20,14 +20,14 @@ const styles = StyleSheet.create({
 
 const AlarmBoxBtn = ({btnName}) => {
   return (
-    <TouchableNativeFeedback>
+    <TouchableOpacity>
       <View style={[btnStyles.btnBlue, styles.btnsize]}>
         <Text
           style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textWhite]}>
           {btnName}
         </Text>
       </View>
-    </TouchableNativeFeedback>
+    </TouchableOpacity>
   );
 };
 

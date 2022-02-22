@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import ResRadioBtn from '../../../components/service/reservation/ResRadioBtn';
 import typoStyles from '../../../assets/fonts/typography';
@@ -73,7 +73,7 @@ const ReservationMainScreen = ({navigation}) => {
             style={[typoStyles.fs32, typoStyles.fw700, typoStyles.textMain]}>
             서비스 예약
           </Text>
-          <TouchableNativeFeedback
+          <TouchableOpacity
             onPress={() => {
               navigation.push('Reservation01');
             }}>
@@ -85,7 +85,7 @@ const ReservationMainScreen = ({navigation}) => {
               ]}>
               ! 서비스 요금 확인하기
             </Text>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         </View>
         <View style={styles.qbox}>
           <ResRadioBtn
@@ -170,8 +170,7 @@ const ReservationMainScreen = ({navigation}) => {
               {serviceName}
             </Text>
           </View>
-          <TouchableNativeFeedback
-            onPress={() => navigation.push('Reservation01')}>
+          <TouchableOpacity onPress={() => navigation.push('Reservation01')}>
             <View style={[btnStyles.btnBlue, styles.resbtn]}>
               <Text
                 style={[
@@ -183,7 +182,7 @@ const ReservationMainScreen = ({navigation}) => {
                 클릭해서 서비스 예약하기{' '}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </CommonLayout>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, TouchableNativeFeedback} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import typoStyles from '../../../assets/fonts/typography';
@@ -109,7 +109,7 @@ const ServiceDatePicker = ({setDate}) => {
 
   return (
     <View>
-      <TouchableNativeFeedback onPress={showDatePicker}>
+      <TouchableOpacity onPress={showDatePicker}>
         <View style={styles.dateline}>
           <View style={styles.frame}>
             <Text
@@ -142,7 +142,7 @@ const ServiceDatePicker = ({setDate}) => {
             </Text>
           </View>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"

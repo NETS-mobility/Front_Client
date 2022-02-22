@@ -4,7 +4,7 @@ import {
   View,
   SafeAreaView,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
@@ -50,37 +50,37 @@ const ChangeInfo = () => {
         contentContainerStyle={styles.background}
         resetScrollToCoords={{x: 0, y: 0}}
         scrollEnabled={false}>
-          <View style={styles.title}>
-            <Text
-              style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
-              마이페이지
-            </Text>
-          </View>
-          <View style={styles.setcenter}>
-              <ChangeInput
-                title={'이름'}
-                place1={'이름'}
-                Text1={name}
-                setText1={setName}
-              />
-              <ChangeInputWithBtn
-                title={'이메일'}
-                place1={'이메일'}
-                Text1={email}
-                setText1={setEmail}
-                btntext={'중복확인'}
-              />
-              <ChangeInputWithBtn
-                title={'휴대전화'}
-                place1={'휴대전화'}
-                Text1={phone}
-                setText1={setPhone}
-                btntext={'중복확인'}
-              />
-          </View>
-          <View style={styles.wrapbtn}>
-            <View>
-            <TouchableNativeFeedback>
+        <View style={styles.title}>
+          <Text
+            style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
+            마이페이지
+          </Text>
+        </View>
+        <View style={styles.setcenter}>
+          <ChangeInput
+            title={'이름'}
+            place1={'이름'}
+            Text1={name}
+            setText1={setName}
+          />
+          <ChangeInputWithBtn
+            title={'이메일'}
+            place1={'이메일'}
+            Text1={email}
+            setText1={setEmail}
+            btntext={'중복확인'}
+          />
+          <ChangeInputWithBtn
+            title={'휴대전화'}
+            place1={'휴대전화'}
+            Text1={phone}
+            setText1={setPhone}
+            btntext={'중복확인'}
+          />
+        </View>
+        <View style={styles.wrapbtn}>
+          <View>
+            <TouchableOpacity>
               <View style={[btnStyles.btnDisable, styles.savebtn]}>
                 <Text
                   style={[
@@ -91,9 +91,9 @@ const ChangeInfo = () => {
                   변경 정보 저장
                 </Text>
               </View>
-            </TouchableNativeFeedback>
-            </View>
+            </TouchableOpacity>
           </View>
+        </View>
       </KeyboardAwareScrollView>
     </CommonLayout>
   );

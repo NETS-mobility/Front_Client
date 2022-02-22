@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
 import {btnStyles} from '../../components/common/button';
@@ -110,14 +110,14 @@ const SignUpDoneScreen = ({route, navigation}) => {
         </View>
       </View>
       <View style={styles.login}>
-        <TouchableNativeFeedback onPress={() => navigation.push('Login')}>
+        <TouchableOpacity onPress={() => navigation.push('Login')}>
           <View style={[styles.loginbtn, btnStyles.btnBlue]}>
             <Text
               style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
               로그인하기
             </Text>
           </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
