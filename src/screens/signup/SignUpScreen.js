@@ -162,33 +162,6 @@ const SignUpScreen = ({navigation}) => {
     setAll(!all);
   };
 
-  const [all, setAll] = useState(false);
-  const [r1, setR1] = useState(false);
-  const [r2, setR2] = useState(false);
-  const [r3, setR3] = useState(false);
-
-  useEffect(() => {
-    if (r1 && r2 && r3) {
-      setAll(true);
-    } else if (!(r1 && r2 && r3)) {
-      setAll(false);
-    }
-  }, [r1, r2, r3]);
-
-  const onClickAll = () => {
-    if(all){
-      setR1(false);
-      setR2(false);
-      setR3(false);
-    }
-    else{
-      setR1(true);
-      setR2(true);
-      setR3(true);
-    }
-    setAll(!all);
-  };
-
   return (
     <SafeAreaView style={styles.backGround}>
       <Text

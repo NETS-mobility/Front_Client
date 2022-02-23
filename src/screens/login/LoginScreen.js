@@ -10,6 +10,9 @@ import NetsLogo from '../../assets/image/logo.svg';
 import LoginInputBox from '../../components/login/LoginInputBox';
 import {LoginBtn} from '../../components/login/LoginBtn';
 import LoginAPI from '../../api/login/login';
+import {StackActions} from '@react-navigation/native';
+import {CommonActions} from '@react-navigation/native';
+import RNRestart from 'react-native-restart';
 
 const styles = StyleSheet.create({
   wrap: {
@@ -49,10 +52,20 @@ const LoginScreen = ({navigation}) => {
       <View style={styles.inputBox}>
         <LoginBtn
           btnName={'로그인'}
-          navWhere={() => {
+          navWhere={async () => {
             LoginAPI({id: email, password: password});
-            navigation.push('Home');
+            await navigation.navigate('Home');
           }}
+          // RNRestart.Restart();
+          // navigation.dispatch(
+          //   CommonActions.reset({
+          //     index: 1,
+          //     routes: [{name: 'Home'}],
+          //   }),
+          // );
+          // navigation.push('Home');
+          // navigation.reset({index: 0, routes: [{name: 'Home'}]});
+          // navigation.dispatch(StackActions.popToTop());
         />
       </View>
       <View style={styles.bottom}>
