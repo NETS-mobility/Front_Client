@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -10,8 +10,11 @@ import {
 import {btnStyles, shadowStyles} from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
 import CommonLayout from '../../components/common/layout';
+import {useIsFocused} from '@react-navigation/native';
 
 const Home = ({navigation}) => {
+  //  const isFocused = useIsFocused();
+
   const styles = StyleSheet.create({
     img: {
       position: 'relative',
@@ -50,6 +53,16 @@ const Home = ({navigation}) => {
       textAlign: 'center',
     },
   });
+
+  // React.useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //     // The screen is focused
+  //     // Call any action and update data
+  //   });
+  //   // Return the function to unsubscribe from the event so it gets removed on unmount
+  //   return unsubscribe;
+  // }, [navigation]);
+
   return (
     <CommonLayout>
       <Image
