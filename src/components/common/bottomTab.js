@@ -1,32 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {Text} from 'react-native';
+import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {NavigationContainer, useIsFocused} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import ServiceDetailNavigator from '../../navigation/service/serviceDetail';
 import ReservationNavigator from '../../navigation/service/reservation';
 import AlarmNavigator from '../../navigation/alarm/alarm';
 import MypageNavigator from '../../navigation/mypage/mypageMain/mypageMain';
 import LoginNavigator from '../../navigation/login/login';
-import {GetToken, SetToken} from '../../utils/controlToken';
+import {RefreshContext} from '../../../App';
 
 const Tab = createBottomTabNavigator();
-
 const BottomTab = () => {
-  const [token, setToken] = useState();
-
-  const getget = async () => {
-    await GetToken().then(r => {
-      setTimeout(() => {
-        console.log('this is r: ', r);
-        setToken(r);
-      }, 100);
-    });
-  };
-
-  useEffect(() => {
-    getget();
-  }, []);
+  const {refresh, setRefresh} = useContext(RefreshContext);
 
   return (
     <NavigationContainer>
@@ -42,51 +27,29 @@ const BottomTab = () => {
             fontSize: 13,
           },
         }}>
-        {token == null ? (
-          <>
-            <Tab.Screen
-              name="홈"
-              component={ReservationNavigator}
-              options={{
-                headerShown: false,
-                tabBarIcon: ({color}) => (
-                  <Icon name="home" color={color} size={35} />
-                ),
-                unmountOnBlur: true,
-              }}
-              listeners={({navigation}) => ({
-                blur: () => navigation.setParams({screen: undefined}),
-              })}
-            />
-            <Tab.Screen
-              name="로그인"
-              component={LoginNavigator}
-              options={{
-                headerShown: false,
-                tabBarIcon: ({color}) => (
-                  <Icon name="person" color={color} size={35} />
-                ),
-                unmountOnBlur: true,
-              }}
-              listeners={({navigation}) => ({
-                blur: () =>
-                  navigation.setParams({component: ReservationNavigator}),
-              })}
-            />
-          </>
+        <Tab.Screen
+          name="홈"
+          component={ReservationNavigator}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({color}) => (
+              <Icon name="home" color={color} size={35} />
+            ),
+          }}
+        />
+        {refresh == null ? (
+          <Tab.Screen
+            name="로그인"
+            component={LoginNavigator}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({color}) => (
+                <Icon name="person" color={color} size={35} />
+              ),
+            }}
+          />
         ) : (
           <>
-            <Tab.Screen
-              name="홈"
-              component={ReservationNavigator}
-              options={{
-                headerShown: false,
-                tabBarIcon: ({color}) => (
-                  <Icon name="home" color={color} size={35} />
-                ),
-                unmountOnBlur: true,
-              }}
-            />
             <Tab.Screen
               name="서비스내역"
               component={ServiceDetailNavigator}
@@ -95,7 +58,6 @@ const BottomTab = () => {
                 tabBarIcon: ({color}) => (
                   <Icon name="map" color={color} size={35} />
                 ),
-                unmountOnBlur: true,
               }}
             />
             <Tab.Screen
@@ -106,7 +68,6 @@ const BottomTab = () => {
                 tabBarIcon: ({color}) => (
                   <Icon name="notifications" color={color} size={35} />
                 ),
-                unmountOnBlur: true,
               }}
             />
             <Tab.Screen
@@ -117,7 +78,6 @@ const BottomTab = () => {
                 tabBarIcon: ({color}) => (
                   <Icon name="person" color={color} size={35} />
                 ),
-                unmountOnBlur: true,
               }}
             />
           </>
