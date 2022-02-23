@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -13,6 +13,11 @@ import BlueBlock from '../../../components/mypage/blueBlock';
 import {ArrowBtn} from '../../../components/mypage/arrowBtn';
 import {btnStyles} from '../../../components/common/button';
 import {DeleteToken} from '../../../utils/controlToken';
+import {StackActions} from '@react-navigation/native';
+import {CommonActions} from '@react-navigation/native';
+import RNRestart from 'react-native-restart';
+import GetUserInfo from '../../../api/mypage/getUserInfo';
+import {useIsFocused} from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   title: {
@@ -55,6 +60,24 @@ const styles = StyleSheet.create({
 });
 
 const MypageMain = ({navigation}) => {
+  const isFocused = useIsFocused();
+  const [result, setResult] = useState();
+
+  useEffect(() => {
+    async function fetchData() {
+      setResult(
+        await GetUserInfo()
+          .then(res => res)
+          .catch(err => err),
+      );
+    }
+    fetchData();
+  }, [isFocused]);
+
+  useEffect(() => {
+    console.log('result===', result);
+  }, [result]);
+
   return (
     <CommonLayout>
       <SafeAreaView>
@@ -64,7 +87,20 @@ const MypageMain = ({navigation}) => {
               style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
               마이페이지
             </Text>
-            <TouchableNativeFeedback onPress={() => DeleteToken()}>
+            <TouchableNativeFeedback
+              onPress={() => {
+                DeleteToken();
+                navigation.navigate('Home');
+                // RNRestart.Restart();
+
+                // navigation.dispatch(
+                //   CommonActions.reset({
+                //     index: 1,
+                //     routes: [{name: 'Home'}],
+                //   }),
+                // );
+                // navigation.dispatch(StackActions.popToTop());
+              }}>
               <View style={[btnStyles.btnBlue, styles.logoutbtn]}>
                 <Text
                   style={[
@@ -83,11 +119,11 @@ const MypageMain = ({navigation}) => {
             <View style={styles.infoalign}>
               <Text
                 style={[typoStyles.fs20, typoStyles.fwBold, styles.usertext]}>
-                최지우 고객님
+                {result?.name} 고객님
               </Text>
               <TouchableNativeFeedback
                 onPress={() => {
-                  navigation.push('ChangeInfo');
+                  navigation.push('ChangeInfo', {data: result});
                 }}>
                 <View style={[btnStyles.btnBlue, styles.changebtn]}>
                   <Text
