@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   StyleSheet,
-  ScrollView,
   Text,
   SafeAreaView,
   View,
@@ -13,11 +12,9 @@ import BlueBlock from '../../../components/mypage/blueBlock';
 import {ArrowBtn} from '../../../components/mypage/arrowBtn';
 import {btnStyles} from '../../../components/common/button';
 import {DeleteToken} from '../../../utils/controlToken';
-import {StackActions} from '@react-navigation/native';
-import {CommonActions} from '@react-navigation/native';
-import RNRestart from 'react-native-restart';
 import GetUserInfo from '../../../api/mypage/getUserInfo';
 import {useIsFocused} from '@react-navigation/native';
+import {RefreshContext} from '../../../../App';
 
 const styles = StyleSheet.create({
   title: {
@@ -62,6 +59,7 @@ const styles = StyleSheet.create({
 const MypageMain = ({navigation}) => {
   const isFocused = useIsFocused();
   const [result, setResult] = useState();
+  const {refresh, setRefresh} = useContext(RefreshContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -90,16 +88,8 @@ const MypageMain = ({navigation}) => {
             <TouchableNativeFeedback
               onPress={() => {
                 DeleteToken();
+                setRefresh(null);
                 navigation.navigate('Home');
-                // RNRestart.Restart();
-
-                // navigation.dispatch(
-                //   CommonActions.reset({
-                //     index: 1,
-                //     routes: [{name: 'Home'}],
-                //   }),
-                // );
-                // navigation.dispatch(StackActions.popToTop());
               }}>
               <View style={[btnStyles.btnBlue, styles.logoutbtn]}>
                 <Text

@@ -5,13 +5,13 @@ export const SetToken = token => {
   });
 };
 
-export const GetToken = async () => {
-  const token = await AsyncStorage.getItem('jwtToken', (err, result) => {
-    console.log('err는 ', err);
-    console.log('result는 ' + result + '입니다');
-    return result;
+export const GetToken = () => {
+  return new Promise((resolve, reject) => {
+    const res = AsyncStorage.getItem('jwtToken', (err, result) => {
+      return result;
+    });
+    resolve(res);
   });
-  return token;
 };
 
 export const DeleteToken = async () => {

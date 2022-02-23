@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,9 +10,7 @@ import NetsLogo from '../../assets/image/logo.svg';
 import LoginInputBox from '../../components/login/LoginInputBox';
 import {LoginBtn} from '../../components/login/LoginBtn';
 import LoginAPI from '../../api/login/login';
-import {StackActions} from '@react-navigation/native';
-import {CommonActions} from '@react-navigation/native';
-import RNRestart from 'react-native-restart';
+import {RefreshContext} from '../../../App';
 
 const styles = StyleSheet.create({
   wrap: {
@@ -38,6 +36,7 @@ const styles = StyleSheet.create({
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {refresh, setRefresh} = useContext(RefreshContext);
 
   return (
     <SafeAreaView style={styles.wrap}>
@@ -53,19 +52,17 @@ const LoginScreen = ({navigation}) => {
         <LoginBtn
           btnName={'로그인'}
           navWhere={async () => {
-            LoginAPI({id: email, password: password});
-            await navigation.navigate('Home');
+            await LoginAPI({id: email, password: password})
+              .then(res => {
+                if (res == 200) {
+                  setRefresh(true);
+                  navigation.navigate('Home');
+                } else {
+                  setRefresh(null);
+                }
+              })
+              .catch(err => console.log('err========', err));
           }}
-          // RNRestart.Restart();
-          // navigation.dispatch(
-          //   CommonActions.reset({
-          //     index: 1,
-          //     routes: [{name: 'Home'}],
-          //   }),
-          // );
-          // navigation.push('Home');
-          // navigation.reset({index: 0, routes: [{name: 'Home'}]});
-          // navigation.dispatch(StackActions.popToTop());
         />
       </View>
       <View style={styles.bottom}>
