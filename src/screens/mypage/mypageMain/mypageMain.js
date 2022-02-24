@@ -4,7 +4,7 @@ import {
   Text,
   SafeAreaView,
   View,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
@@ -85,7 +85,7 @@ const MypageMain = ({navigation}) => {
               style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
               마이페이지
             </Text>
-            <TouchableNativeFeedback
+            <TouchableOpacity
               onPress={() => {
                 DeleteToken();
                 setRefresh(null);
@@ -101,7 +101,7 @@ const MypageMain = ({navigation}) => {
                   로그아웃
                 </Text>
               </View>
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
           </View>
         </View>
         <BlueBlock>
@@ -111,7 +111,7 @@ const MypageMain = ({navigation}) => {
                 style={[typoStyles.fs20, typoStyles.fwBold, styles.usertext]}>
                 {result?.name} 고객님
               </Text>
-              <TouchableNativeFeedback
+              <TouchableOpacity
                 onPress={() => {
                   navigation.push('ChangeInfo', {data: result});
                 }}>
@@ -125,7 +125,7 @@ const MypageMain = ({navigation}) => {
                     내 정보 수정
                   </Text>
                 </View>
-              </TouchableNativeFeedback>
+              </TouchableOpacity>
             </View>
           </View>
         </BlueBlock>

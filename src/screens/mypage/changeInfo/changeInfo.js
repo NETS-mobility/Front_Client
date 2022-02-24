@@ -4,7 +4,7 @@ import {
   View,
   SafeAreaView,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';

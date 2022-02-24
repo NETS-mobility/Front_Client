@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import ServiceBlock from '../../../components/service/serviceBlock';
 import typoStyles from '../../../assets/fonts/typography';
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginBottom: 29,
   },
   checkset: {
-    height: 100,
+    height: 80,
     justifyContent: 'space-between',
     marginBottom: 40,
   },
@@ -49,18 +49,42 @@ const styles = StyleSheet.create({
   },
 });
 
-const Reservation02 = ({navigation}) => {
-  const [guardName, setGuardName] = useState('');
-  const [guardPhone, setGuardPhone] = useState('');
+const Reservation02 = ({route, navigation}) => {
+  const {serviceKindId, moveDirection, resAddrs, resDate, resTimes} = route.params;
 
-  const [userName, setUserName] = useState('');
-  const [userPhone, setUserPhone] = useState('');
   const [img, setImg] = useState('');
+  const [guard, setGuard] = useState({
+    name: '',
+    phone: '',
+  });
+  const [user, setUser] = useState({
+    name: '',
+    phone: '',
+  });
+  const [check, setCheck] = useState([false, false, false]);
+  const [result, setResult] = useState('');
+  const checkStaticString = ['고령자', '장애인', '거동불편자'];
+  let checkString = '';
 
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
-  const [check3, setCheck3] = useState(false);
-  const [check4, setCheck4] = useState(false);
+  useEffect(() => {
+    for (let i = 0; i < 3; i++) {
+      if (check[i]) {
+        checkString += checkStaticString[i] + ',';
+      }
+      if (i == 2) {
+        if (checkString[checkString.length - 1] == ',') {
+          setResult(checkString.substring(0, checkString.length - 1));
+        } else {
+          setResult('');
+        }
+      }
+    }
+  }, [check]);
+
+  useEffect(() => {
+    console.log('result===', result);
+  }, [result]);
+
   return (
     <CommonLayout>
       <ScrollView style={styles.background}>
@@ -90,21 +114,15 @@ const Reservation02 = ({navigation}) => {
             title={'보호자 정보를 입력해주세요.'}
             place1={'최지우'}
             place2={'010-1234-1234'}
-            placetextcolor={'black'}
-            Text1={guardName}
-            setText1={setGuardName}
-            Text2={guardPhone}
-            setText2={setGuardPhone}
+            placetextcolor={'#000'}
+            setText={setGuard}
           />
           <ServiceInputBox
             title={'이용자 정보를 입력해주세요.'}
             place1={'이용자 이름'}
             place2={'이용자 전화번호'}
             placetextcolor={'#DAD8E0'}
-            Text1={userName}
-            setText1={setUserName}
-            Text2={userPhone}
-            setText2={setUserPhone}
+            setText={setUser}
           />
         </ServiceBlock>
         <ServiceBlock>
@@ -131,20 +149,22 @@ const Reservation02 = ({navigation}) => {
           </Text>
           <View style={styles.checkset}>
             <CheckBtn
-              check={check1}
-              setCheck={setCheck1}
+              num={0}
+              check={check}
+              setCheck={setCheck}
               contents={'65세 이상 고령자'}
             />
-            <CheckBtn check={check2} setCheck={setCheck2} contents={'장애인'} />
             <CheckBtn
-              check={check3}
-              setCheck={setCheck3}
-              contents={'거동불편자'}
+              num={1}
+              check={check}
+              setCheck={setCheck}
+              contents={'장애인'}
             />
             <CheckBtn
-              check={check4}
-              setCheck={setCheck4}
-              contents={'해당없음'}
+              num={2}
+              check={check}
+              setCheck={setCheck}
+              contents={'거동불편자'}
             />
           </View>
           <Text
@@ -188,8 +208,18 @@ const Reservation02 = ({navigation}) => {
         <View style={styles.proset}>
           <NextBtn
             navWhere={() => {
-              navigation.push('Reservation03');
+              navigation.push('Reservation03', {
+                serviceKindId: serviceKindId,
+                moveDirection: moveDirection,
+                resAddrs: resAddrs,
+                resDate: resDate,
+                resTimes: resTimes,
+                guardInfo: guard,
+                userInfo: user,
+                validTargetKind: result,
+              });
             }}
+            disable={result == '' ? true : false}
           />
         </View>
       </ScrollView>

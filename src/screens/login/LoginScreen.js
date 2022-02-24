@@ -4,12 +4,13 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import NetsLogo from '../../assets/image/logo.svg';
 import LoginInputBox from '../../components/login/LoginInputBox';
 import {LoginBtn} from '../../components/login/LoginBtn';
 import LoginAPI from '../../api/login/login';
+import typoStyles from '../../assets/fonts/typography';
 import {RefreshContext} from '../../../App';
 
 const styles = StyleSheet.create({
@@ -66,13 +67,35 @@ const LoginScreen = ({navigation}) => {
         />
       </View>
       <View style={styles.bottom}>
-        <TouchableNativeFeedback onPress={() => navigation.push('LoginMain')}>
-          <Text>아이디 찾기 </Text>
-        </TouchableNativeFeedback>
-        <Text>|</Text>
-        <TouchableNativeFeedback onPress={() => navigation.push('LoginMain')}>
-          <Text> 비밀번호 찾기</Text>
-        </TouchableNativeFeedback>
+        <TouchableOpacity onPress={() => navigation.navigate('FindID')}>
+          <Text
+            style={[
+              typoStyles.fs14,
+              typoStyles.fwRegular,
+              typoStyles.textExplain,
+            ]}>
+            아이디 찾기{' '}
+          </Text>
+        </TouchableOpacity>
+        <Text
+          style={[
+            typoStyles.fs14,
+            typoStyles.fwRegular,
+            typoStyles.textExplain,
+          ]}>
+          |
+        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('FindPW')}>
+          <Text
+            style={[
+              typoStyles.fs14,
+              typoStyles.fwRegular,
+              typoStyles.textExplain,
+            ]}>
+            {' '}
+            비밀번호 찾기
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
