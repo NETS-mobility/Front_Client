@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
 import FindAuthLayout from '../../components/findAuth/findAuthLayout';
-import FindIDAPI from '../../api/auth/findID';
+import FindIDAPI from '../../api/auth/findIDAPI';
 
 const FindID2 = ({route, navigation}) => {
   const {phone} = route.params;
