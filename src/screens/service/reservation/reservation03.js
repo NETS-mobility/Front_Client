@@ -57,6 +57,9 @@ const Reservation03 = ({route, navigation}) => {
 
   const [diagnosis, setDiagnosis] = useState('');
   const [etc, setEtc] = useState('');
+  const [disable, setDisable] = useState(true);
+
+  console.log('res03==', serviceKindId);
 
   const [check, setCheck] = useState([false, false, false, false, false]);
   const [result, setResult] = useState('');
@@ -68,6 +71,12 @@ const Reservation03 = ({route, navigation}) => {
     '기타',
   ];
   let checkString = '';
+
+  useEffect(() => {
+    if (result != '0' && diagnosis != '') {
+      setDisable(false);
+    }
+  }, [result, diagnosis]);
 
   useEffect(() => {
     for (let i = 0; i < 5; i++) {
@@ -183,7 +192,7 @@ const Reservation03 = ({route, navigation}) => {
                 pickupDetailAddr: '123동',
                 dropBaseAddr: resAddrs.dropAddr,
                 dropDetailAddr: '123동',
-                hospitalBaseAddr: resAddrs.hosAddr,
+                hospitalBaseAddr: resAddrs.hospitalAddr,
                 hospitalDetailAddr: '123동',
                 hospitalName: '백병원',
                 hopeReservationDate: resDate,
@@ -198,6 +207,7 @@ const Reservation03 = ({route, navigation}) => {
                 reservationStateId: 1,
               });
             }}
+            disable={disable}
           />
         </View>
       </ScrollView>

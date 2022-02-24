@@ -39,7 +39,12 @@ const styles = StyleSheet.create({
 const NextBtn = ({navWhere, disable}) => {
   return (
     <TouchableOpacity onPress={navWhere} disabled={disable}>
-      <View style={[btnStyles.btnBlue, styles.nextbtn]}>
+      <View
+        style={
+          disable
+            ? [btnStyles.btnDisable, styles.nextbtn]
+            : [btnStyles.btnBlue, styles.nextbtn]
+        }>
         <Text
           style={[typoStyles.fs20, typoStyles.textWhite, typoStyles.fwBold]}>
           다음단계

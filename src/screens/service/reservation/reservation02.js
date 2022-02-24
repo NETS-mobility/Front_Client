@@ -66,6 +66,10 @@ const Reservation02 = ({route, navigation}) => {
   });
   const [check, setCheck] = useState([false, false, false]);
   const [result, setResult] = useState('');
+  const [disable, setDisable] = useState(true);
+
+  console.log('res02==', serviceKindId);
+
   const checkStaticString = ['고령자', '장애인', '거동불편자'];
   let checkString = '';
   const isFocused = useIsFocused();
@@ -99,8 +103,10 @@ const Reservation02 = ({route, navigation}) => {
   }, [check]);
 
   useEffect(() => {
-    console.log('result===', result);
-  }, [result]);
+    if (result != '0' && user.name != '' && user.phone != '') {
+      setDisable(false);
+    }
+  }, [result, user]);
 
   useEffect(() => {
     console.log('guard===', guard);
@@ -242,7 +248,7 @@ const Reservation02 = ({route, navigation}) => {
                 validTargetKind: result,
               });
             }}
-            disable={result == '' ? true : false}
+            disable={disable}
           />
         </View>
       </ScrollView>
