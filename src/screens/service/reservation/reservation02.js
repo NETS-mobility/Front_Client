@@ -10,6 +10,8 @@ import {
 import {ServiceInputBox} from '../../../components/service/reservation/serviceInputBox';
 import ServiceProgress from '../../../components/service/reservation/progress';
 import ImageSubmit from '../../../components/common/imageSubmit';
+import GetUserInfo from '../../../api/mypage/getUserInfo';
+import {useIsFocused} from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   title: {
@@ -50,7 +52,8 @@ const styles = StyleSheet.create({
 });
 
 const Reservation02 = ({route, navigation}) => {
-  const {serviceName, way, resAddrs, resDate, resTimes} = route.params;
+  const {serviceKindId, moveDirection, resAddrs, resDate, resTimes} =
+    route.params;
 
   const [img, setImg] = useState('');
   const [guard, setGuard] = useState({
@@ -65,6 +68,20 @@ const Reservation02 = ({route, navigation}) => {
   const [result, setResult] = useState('');
   const checkStaticString = ['고령자', '장애인', '거동불편자'];
   let checkString = '';
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    async function fetchData() {
+      const userInfo = await GetUserInfo()
+        .then(res => res)
+        .catch(err => err);
+      setGuard({
+        name: userInfo.name,
+        phone: userInfo.phone,
+      });
+    }
+    fetchData();
+  }, [isFocused]);
 
   useEffect(() => {
     for (let i = 0; i < 3; i++) {
@@ -79,6 +96,14 @@ const Reservation02 = ({route, navigation}) => {
       }
     }
   }, [check]);
+
+  useEffect(() => {
+    console.log('result===', result);
+  }, [result]);
+
+  useEffect(() => {
+    console.log('guard===', guard);
+  }, [guard]);
 
   return (
     <CommonLayout>
@@ -107,17 +132,19 @@ const Reservation02 = ({route, navigation}) => {
           </Text>
           <ServiceInputBox
             title={'보호자 정보를 입력해주세요.'}
-            place1={'최지우'}
-            place2={'010-1234-1234'}
-            placetextcolor={'#000'}
-            setText={setGuard}
+            place1={'보호자 이름'}
+            place2={'보호자 전화번호'}
+            placetextcolor={'#dad8e0'}
+            value={guard}
+            setValue={setGuard}
           />
           <ServiceInputBox
             title={'이용자 정보를 입력해주세요.'}
             place1={'이용자 이름'}
             place2={'이용자 전화번호'}
             placetextcolor={'#DAD8E0'}
-            setText={setUser}
+            value={user}
+            setValue={setUser}
           />
         </ServiceBlock>
         <ServiceBlock>
