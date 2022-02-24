@@ -4,6 +4,7 @@ import typoStyles from '../../../assets/fonts/typography';
 import {ServiceDatePicker} from './servicePicker';
 import {HospitalAddr, HomeAddr, DropAddr} from './reservationAddr';
 import {ResArrTime, ResResTime, ResDepTime} from './reservationTime';
+import {ServiceGowithPicker} from './servicePicker';
 const styles = StyleSheet.create({
   textline: {
     flexDirection: 'row',
@@ -64,6 +65,11 @@ export const GetTime = ({serviceName, way, time, setTime}) => {
         <ResResTime time={time} setTime={setTime} />
         <ResArrTime time={time} setTime={setTime} />
         <ResDepTime time={time} setTime={setTime} />
+        <ServiceGowithPicker
+          type={true}
+          title={'병원 동행 예상 시간은 다음과 같습니다.'}
+          time={'20'} //귀가 출발 시간-병원 도착 시간으로 설정되도록 변경
+        />
       </>
     );
   } else if (
@@ -75,10 +81,24 @@ export const GetTime = ({serviceName, way, time, setTime}) => {
         <>
           <ResResTime time={time} setTime={setTime} />
           <ResArrTime time={time} setTime={setTime} />
+          <ServiceGowithPicker
+            type={false}
+            title={'병원 동행 기본 시간은 다음과 같습니다.'}
+            time={'20'} //관리자에서 설정한 기본 병원동행 시간으로 입력되도록 변경
+          />
         </>
       );
     } else {
-      return <ResDepTime time={time} setTime={setTime} />;
+      return (
+        <>
+          <ResDepTime time={time} setTime={setTime} />
+          <ServiceGowithPicker
+            type={false}
+            title={'병원 동행 기본 시간은 다음과 같습니다.'}
+            time={'20'} //관리자에서 설정한 기본 병원동행 시간으로 입력되도록 변경
+          />
+        </>
+      );
     }
   }
 };

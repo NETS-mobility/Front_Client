@@ -82,6 +82,20 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#737373',
   },
+  gowithbox: {
+    borderBottomColor: '#DAD8E0',
+    borderBottomWidth: 2,
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#737373',
+  },
+  textline: {
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  pickbox: {
+    marginTop: 30,
+  },
 });
 
 const ServiceDatePicker = ({setDate}) => {
@@ -115,7 +129,7 @@ const ServiceDatePicker = ({setDate}) => {
             <Text
               style={[
                 typoStyles.fs18,
-                typoStyles.fwBold,
+                typoStyles.fw700,
                 typoStyles.textExplain,
               ]}>
               {datearr[0] + '년'}
@@ -125,7 +139,7 @@ const ServiceDatePicker = ({setDate}) => {
             <Text
               style={[
                 typoStyles.fs18,
-                typoStyles.fwBold,
+                typoStyles.fw700,
                 typoStyles.textExplain,
               ]}>
               {datearr[1] + '월'}
@@ -135,7 +149,7 @@ const ServiceDatePicker = ({setDate}) => {
             <Text
               style={[
                 typoStyles.fs18,
-                typoStyles.fwBold,
+                typoStyles.fw700,
                 typoStyles.textExplain,
               ]}>
               {datearr[2] + '일'}
@@ -294,4 +308,82 @@ const ServiceTimePicker = ({time, setTime, propName}) => {
   );
 };
 
-export {ServiceDatePicker, ServiceTimePicker};
+const ServiceGowithPicker = ({type, title, time}) => {
+  const [gowithtime, setGowithtime] = useState('');
+  const onChangeGowith = value => {
+    setGowithtime(value);
+  };
+  return (
+    <>
+      <View style={styles.pickbox}>
+        <Text style={[typoStyles.fs14, typoStyles.textExplain]}>{title}</Text>
+        <View
+          style={{
+            marginTop: 18,
+            borderBottomWidth: 2,
+            borderBottomColor: '#DAD8E0',
+          }}>
+          <Text
+            style={[
+              typoStyles.fs18,
+              typoStyles.fw700,
+              typoStyles.textExplain,
+              {marginBottom: 15, marginLeft: 3},
+            ]}>
+            {time}분
+          </Text>
+        </View>
+      </View>
+      {type ? (
+        <></>
+      ) : (
+        <View style={styles.pickbox}>
+          <View style={styles.textline}>
+            <Text
+              style={[
+                typoStyles.fs14,
+                typoStyles.fwBold,
+                typoStyles.textPrimary,
+              ]}>
+              {'병원 동행 추가 시간'}
+            </Text>
+            <Text
+              style={[
+                typoStyles.fs14,
+                typoStyles.fwBold,
+                typoStyles.textExplain,
+              ]}>
+              {'을 선택해주세요.'}
+            </Text>
+          </View>
+          <RNPickerSelect
+            textInputProps={{underlineColorAndroid: 'transparent'}}
+            placeholder={{
+              label: '동행 시간을 추가하시려면 클릭하세요',
+            }}
+            fixAndroidTouchableBug={true}
+            value={gowithtime}
+            onValueChange={value => onChangeGowith(value)}
+            useNativeAndroidPickerStyle={false}
+            items={[
+              {label: '추가시간 필요없음', value: '00', key: '0'},
+              {label: '20분', value: '20', key: '20'},
+              {label: '40분', value: '40', key: '40'},
+              {label: '1시간', value: '60', key: '60'},
+              {label: '1시간 20분', value: '80', key: '80'},
+              {label: '1시간 40분', value: '100', key: '100'},
+              {label: '2시간', value: '120', key: '120'},
+            ]}
+            style={{
+              placeholder: styles.gowithbox,
+              inputAndroid: styles.gowithbox,
+              inputIOS: styles.gowithbox,
+            }}
+          />
+        </View>
+      )}
+    </>
+  );
+};
+
+export {ServiceDatePicker, ServiceTimePicker, ServiceGowithPicker};

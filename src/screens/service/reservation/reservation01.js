@@ -13,6 +13,8 @@ import {
 } from '../../../components/service/reservation/reservation01';
 import CustomBtn from '../../../components/common/button';
 import ReservationTimeChange from '../../../components/service/reservation/reservationTimeChange';
+import {ServiceInputBoxWithoutBtn} from '../../../components/service/reservation/serviceInputBox';
+import {ServiceGowithPicker} from '../../../components/service/reservation/servicePicker';
 
 const styles = StyleSheet.create({
   background: {
@@ -154,12 +156,14 @@ const Reservation01 = ({route, navigation}) => {
           {resDate == '--' ? (
             <></>
           ) : (
-            <GetTime
-              serviceName={serviceName}
-              way={way}
-              time={resTimes}
-              setTime={setResTimes}
-            />
+            <>
+              <GetTime
+                serviceName={serviceName}
+                way={way}
+                time={resTimes}
+                setTime={setResTimes}
+              />
+            </>
           )}
         </ServiceBlock>
         <View style={styles.btn}>
