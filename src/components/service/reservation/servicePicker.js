@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 
 const ServiceDatePicker = ({setDate}) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [pickdate, setPickdate] = useState('//');
+  const [pickdate, setPickdate] = useState('--');
   const [datearr, setDatearr] = useState([]);
 
   const showDatePicker = () => {

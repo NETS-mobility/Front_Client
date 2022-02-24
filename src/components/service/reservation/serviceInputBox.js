@@ -160,16 +160,16 @@ const ServiceAddress = ({
   );
 };
 
-const ServiceInputBox = ({title, place1, place2, placetextcolor, setText}) => {
+const ServiceInputBox = ({
+  title,
+  place1,
+  place2,
+  placetextcolor,
+  value,
+  setValue,
+}) => {
   const [isfocused, setFocus] = useState(false);
   const [isfocused2, setFocus2] = useState(false);
-
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-
-  useEffect(() => {
-    setText({['name']: name, ['phone']: phone});
-  }, [name, phone]);
 
   return (
     <View>
@@ -190,8 +190,8 @@ const ServiceInputBox = ({title, place1, place2, placetextcolor, setText}) => {
         placeholder={place1}
         placeholderTextColor={placetextcolor}
         autoCapitalize="none"
-        value={name}
-        onChangeText={setName}
+        value={value.name}
+        onChangeText={text => setValue(prev => ({...prev, name: text}))}
       />
       <TextInput
         onFocus={() => setFocus2(true)}
@@ -204,8 +204,8 @@ const ServiceInputBox = ({title, place1, place2, placetextcolor, setText}) => {
         placeholder={place2}
         placeholderTextColor={placetextcolor}
         autoCapitalize="none"
-        value={phone}
-        onChangeText={setPhone}
+        value={value.phone}
+        onChangeText={text => setValue(prev => ({...prev, phone: text}))}
       />
     </View>
   );
