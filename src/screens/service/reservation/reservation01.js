@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import ServiceBlock from '../../../components/service/serviceBlock';
+import {btnStyles} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import {NextBtn} from '../../../components/service/reservation/serviceBtn';
@@ -10,6 +11,7 @@ import {
   GetAddr,
   GetTime,
 } from '../../../components/service/reservation/reservation01';
+import CustomBtn from '../../../components/common/button';
 
 const styles = StyleSheet.create({
   background: {
@@ -46,9 +48,11 @@ const styles = StyleSheet.create({
 });
 
 const Reservation01 = ({route, navigation}) => {
-  const {serviceName} = route.params;
+  const {serviceKindID, serviceName} = route.params;
   const {way} = route.params;
+  const {moveDirection, serviceKindID} = route.params;
 
+  const [dis, setDis] = useState(true);
   const [resTimes, setResTimes] = useState({
     resResTime: '0',
     resArrTime: '0',
@@ -60,6 +64,19 @@ const Reservation01 = ({route, navigation}) => {
     dropAddr: '0',
   });
   const [resDate, setResDate] = useState('0');
+
+  useEffect(() => {
+    if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
+      if (
+        resAddrs.homeAddr != '0' ||
+        resAddrs.hospitalAddr != '0' ||
+        resAddrs.dropAddr != '0'
+      ) {
+        setDis(false);
+      }
+    } else if (serviceName == '네츠 휠체어 플러스 편도 서비스') {
+    }
+  }, [check]);
 
   return (
     <CommonLayout>
@@ -115,8 +132,8 @@ const Reservation01 = ({route, navigation}) => {
           <NextBtn
             navWhere={() => {
               navigation.push('Reservation02', {
-                serviceName: serviceName,
-                way: way,
+                serviceKindID: serviceKindID,
+                moveDirection: moveDirection,
                 resAddrs: resAddrs,
                 resDate: resDate,
                 resTimes: resTimes,

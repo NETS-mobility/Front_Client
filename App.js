@@ -1,24 +1,28 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React, {useState} from 'react';
-import {StyleSheet, StatusBar, Modal, Button, Text} from 'react-native';
+import React, {useState, useMemo, createContext, useEffect} from 'react';
+import {StyleSheet, StatusBar} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import BottomTab from './src/components/common/bottomTab';
-import SignUpNavigator from './src/navigation/signup/signup';
-import {SignUpScreen} from './src/screens/signup';
-import Postcode from '@actbase/react-daum-postcode';
+import {GetToken} from './src/utils/controlToken';
+
 import axios from 'axios';
 axios.defaults.baseURL = 'http://10.0.2.2:5000';
+
+export const RefreshContext = createContext({
+  refresh: false,
+  setRefresh: () => {},
+});
+
 const App = () => {
-  const [isModal, setModal] = useState(false);
+  const [refresh, setRefresh] = useState();
+  const value = useMemo(() => ({refresh, setRefresh}), [refresh, setRefresh]);
+  const mainR = async () => {
+    await GetToken().then(r => setRefresh(r));
+  };
+
+  useEffect(() => {
+    mainR();
+  }, []);
+
   return (
     <>
       {/* <StatusBar barStyle="dark-content" />
@@ -28,24 +32,9 @@ const App = () => {
         lat={48.577741}
         lng={27.602706}
       /> */}
-      {/* <>
-        <Modal isVisible={isModal}>
-          <Postcode
-            style={{width: 320, height: 320}}
-            jsOptions={{animation: true, hideMapBtn: true}}
-            onSelected={data => {
-              alert(JSON.stringify(data));
-              setModal(false);
-            }}
-          />
-        </Modal>
-        <Button onClick={() => setModal(true)} title={'주소검색'}>
-          hi
-        </Button>
-      </> */}
-      <BottomTab />
-      {/* <SignUpNavigator /> */}
-      {/* <SignUpScreen /> */}
+      <RefreshContext.Provider value={value}>
+        <BottomTab />
+      </RefreshContext.Provider>
     </>
   );
 };

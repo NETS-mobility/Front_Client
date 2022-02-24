@@ -10,6 +10,7 @@ import ResRadioBtn from '../../../components/service/reservation/ResRadioBtn';
 import typoStyles from '../../../assets/fonts/typography';
 import {btnStyles} from '../../../components/common/button';
 import CommonLayout from '../../../components/common/layout';
+import CustomBtn from '../../../components/common/button';
 
 const styles = StyleSheet.create({
   background: {
@@ -60,6 +61,8 @@ const ReservationMainScreen = ({navigation}) => {
   ]);
   const [serviceName, setServiceName] = useState('모든 질문에 답해주세요.');
   const [cnt, setCnt] = useState(0);
+  const [serviceKindID, setServiceKindID] = useState(0);
+  const [moveDirection, setMoveDirection] = useState('');
 
   useEffect(() => {
     if (check[0] && check[4]) {
@@ -78,17 +81,29 @@ const ReservationMainScreen = ({navigation}) => {
       if (check[0] && check[2]) {
         if (check[4]) {
           setServiceName('네츠 휠체어 플러스 왕복 서비스');
+          setServiceKindID(1);
+          setMoveDirection('집-집');
         } else {
           setServiceName('네츠 휠체어 플러스 편도 서비스');
+          setServiceKindID(1);
+          if (check[6]) {
+            setMoveDirection('집-병원');
+          } else {
+            setMoveDirection('병원-집');
+          }
         }
       } else if (check[0] && check[3]) {
         if (check[4]) {
           setServiceName('네츠 휠체어 왕복 서비스');
+          setServiceKindID(2);
+          setMoveDirection('집-집');
         } else {
           setServiceName('네츠 휠체어 편도 서비스');
+          setServiceKindID(2);
         }
       } else if (check[1]) {
         setServiceName('네츠 무브 서비스');
+        setServiceKindID(3);
       }
     } else {
       setServiceName('모든 질문에 답해주세요.');
@@ -196,24 +211,26 @@ const ReservationMainScreen = ({navigation}) => {
               {serviceName}
             </Text>
           </View>
-          <TouchableOpacity
+
+          <CustomBtn
+            viewStyle={[btnStyles.btnBlue, styles.resbtn]}
+            textStyle={[
+              typoStyles.fs14,
+              typoStyles.fwBold,
+              typoStyles.textWhite,
+            ]}
+            viewStyleDisabled={[btnStyles.btnDisable, styles.resbtn]}
+            text={'클릭해서 서비스 예약 계속하기'}
             onPress={() =>
               navigation.push('Reservation01', {
+                serviceKindID: serviceKindID,
                 serviceName: serviceName,
                 way: check[6],
+                moveDirection: moveDirection,
               })
-            }>
-            <View style={[btnStyles.btnBlue, styles.resbtn]}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textWhite,
-                ]}>
-                클릭해서 서비스 예약하기
-              </Text>
-            </View>
-          </TouchableOpacity>
+            }
+            disabled={serviceName == '모든 질문에 답해주세요.' ? true : false}
+          />
         </View>
       </ScrollView>
     </CommonLayout>

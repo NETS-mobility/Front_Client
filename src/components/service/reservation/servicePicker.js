@@ -98,12 +98,12 @@ const ServiceDatePicker = ({setDate}) => {
   };
 
   const handleConfirm = date => {
-    setPickdate(date.format('yyyy/MM/dd'));
+    setPickdate(date.format('yyyy-MM-dd'));
     hideDatePicker();
   };
 
   useEffect(() => {
-    setDatearr(pickdate.split('/'));
+    setDatearr(pickdate.split('-'));
     setDate(pickdate);
   }, [pickdate]);
 

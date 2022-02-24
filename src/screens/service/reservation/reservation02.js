@@ -91,7 +91,8 @@ const Reservation02 = ({route, navigation}) => {
       if (i == 2) {
         if (checkString[checkString.length - 1] == ',') {
           setResult(checkString.substring(0, checkString.length - 1));
-          console.log('result==', result);
+        } else {
+          setResult('');
         }
       }
     }
@@ -231,8 +232,8 @@ const Reservation02 = ({route, navigation}) => {
           <NextBtn
             navWhere={() => {
               navigation.push('Reservation03', {
-                serviceName: serviceName,
-                way: way,
+                serviceKindId: serviceKindId,
+                moveDirection: moveDirection,
                 resAddrs: resAddrs,
                 resDate: resDate,
                 resTimes: resTimes,
@@ -241,9 +242,7 @@ const Reservation02 = ({route, navigation}) => {
                 validTargetKind: result,
               });
             }}
-            disable={() => {
-              return result == '' ? true : false;
-            }}
+            disable={result == '' ? true : false}
           />
         </View>
       </ScrollView>
