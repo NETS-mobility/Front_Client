@@ -16,6 +16,7 @@ import {
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CheckEmailDupAPI from '../../../api/mypage/checkEmailDup';
 import ChangeUserInfo from '../../../api/mypage/changeUserInfo';
+import CheckPhoneAPI from '../../../api/signup/checkPhone';
 
 const styles = StyleSheet.create({
   background: {
@@ -56,6 +57,8 @@ const ChangeInfo = ({route}) => {
   const [emailAvailable, setEmailAvailable] = useState(0);
   const [disable, setDisable] = useState(true);
   const [succeed, setSucceed] = useState(0);
+  const [authNum, setAuthNum] = useState('');
+  const [authAnswer, setAuthAnswer] = useState('');
 
   useEffect(() => {
     setName(data.name);
@@ -64,10 +67,25 @@ const ChangeInfo = ({route}) => {
   }, [data]);
 
   useEffect(() => {
-    if (name != '' && email != '' && phone != '' && emailAvailable == 2) {
+    if (
+      name != '' &&
+      email != '' &&
+      phone != '' &&
+      emailAvailable == 2 &&
+      authNum == authAnswer &&
+      authAnswer != ''
+    ) {
       setDisable(false);
+    } else {
+      setDisable(true);
     }
   }, [name, email, phone, emailAvailable]);
+
+  useEffect(() => {
+    if (emailAvailable == 2) {
+      setEmailAvailable(0);
+    }
+  }, [email]);
 
   return (
     <CommonLayout>
@@ -119,8 +137,34 @@ const ChangeInfo = ({route}) => {
             place1={'휴대전화'}
             Text1={phone}
             setText1={setPhone}
-            btntext={'중복확인'}
+            btntext={'인증번호받기'}
+            onPress={() => {
+              CheckPhoneAPI({phone: phone}, setAuthAnswer);
+            }}
           />
+          <ChangeInput
+            title={'인증번호'}
+            place1={'인증번호'}
+            Text1={authNum}
+            setText1={setAuthNum}
+          />
+
+          <Text
+            style={[
+              styles.dupMsg,
+              typoStyles.fs16,
+              typoStyles.fwBold,
+              styles.successMsg,
+              authAnswer != authNum || authAnswer == ''
+                ? typoStyles.textPrimary
+                : typoStyles.textMain,
+            ]}>
+            {authAnswer == ''
+              ? '휴대폰 인증을 진행해주세요'
+              : authAnswer != authNum
+              ? '인증번호가 일치하지 않습니다.'
+              : '인증에 성공하였습니다.'}
+          </Text>
         </View>
 
         <View style={styles.wrapbtn}>
