@@ -1,17 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   StyleSheet,
-  ScrollView,
   Text,
   SafeAreaView,
   View,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import BlueBlock from '../../../components/mypage/blueBlock';
 import {ArrowBtn} from '../../../components/mypage/arrowBtn';
 import {btnStyles} from '../../../components/common/button';
+import {DeleteToken} from '../../../utils/controlToken';
+import GetUserInfo from '../../../api/mypage/getUserInfo';
+import {useIsFocused} from '@react-navigation/native';
+import {RefreshContext} from '../../../../App';
 
 const styles = StyleSheet.create({
   title: {
@@ -54,6 +57,25 @@ const styles = StyleSheet.create({
 });
 
 const MypageMain = ({navigation}) => {
+  const isFocused = useIsFocused();
+  const [result, setResult] = useState();
+  const {refresh, setRefresh} = useContext(RefreshContext);
+
+  useEffect(() => {
+    async function fetchData() {
+      setResult(
+        await GetUserInfo()
+          .then(res => res)
+          .catch(err => err),
+      );
+    }
+    fetchData();
+  }, [isFocused]);
+
+  useEffect(() => {
+    console.log('result===', result);
+  }, [result]);
+
   return (
     <CommonLayout>
       <SafeAreaView>
@@ -63,7 +85,12 @@ const MypageMain = ({navigation}) => {
               style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
               마이페이지
             </Text>
-            <TouchableNativeFeedback>
+            <TouchableOpacity
+              onPress={() => {
+                DeleteToken();
+                setRefresh(null);
+                navigation.navigate('Home');
+              }}>
               <View style={[btnStyles.btnBlue, styles.logoutbtn]}>
                 <Text
                   style={[
@@ -74,7 +101,7 @@ const MypageMain = ({navigation}) => {
                   로그아웃
                 </Text>
               </View>
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
           </View>
         </View>
         <BlueBlock>
@@ -82,11 +109,11 @@ const MypageMain = ({navigation}) => {
             <View style={styles.infoalign}>
               <Text
                 style={[typoStyles.fs20, typoStyles.fwBold, styles.usertext]}>
-                최지우 고객님
+                {result?.name} 고객님
               </Text>
-              <TouchableNativeFeedback
+              <TouchableOpacity
                 onPress={() => {
-                  navigation.push('ChangeInfo');
+                  navigation.push('ChangeInfo', {data: result});
                 }}>
                 <View style={[btnStyles.btnBlue, styles.changebtn]}>
                   <Text
@@ -98,7 +125,7 @@ const MypageMain = ({navigation}) => {
                     내 정보 수정
                   </Text>
                 </View>
-              </TouchableNativeFeedback>
+              </TouchableOpacity>
             </View>
           </View>
         </BlueBlock>

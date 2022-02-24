@@ -1,15 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   View,
   Text,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import NetsLogo from '../../assets/image/logo.svg';
 import LoginInputBox from '../../components/login/LoginInputBox';
 import {LoginBtn} from '../../components/login/LoginBtn';
 import LoginAPI from '../../api/login/login';
+import typoStyles from '../../assets/fonts/typography';
+import {RefreshContext} from '../../../App';
 
 const styles = StyleSheet.create({
   wrap: {
@@ -35,6 +37,7 @@ const styles = StyleSheet.create({
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {refresh, setRefresh} = useContext(RefreshContext);
 
   return (
     <SafeAreaView style={styles.wrap}>
@@ -49,20 +52,50 @@ const LoginScreen = ({navigation}) => {
       <View style={styles.inputBox}>
         <LoginBtn
           btnName={'로그인'}
-          navWhere={() => {
-            LoginAPI({id: email, password: password});
-            navigation.push('Home');
+          navWhere={async () => {
+            await LoginAPI({id: email, password: password})
+              .then(res => {
+                if (res == 200) {
+                  setRefresh(true);
+                  navigation.navigate('Home');
+                } else {
+                  setRefresh(null);
+                }
+              })
+              .catch(err => console.log('err========', err));
           }}
         />
       </View>
       <View style={styles.bottom}>
-        <TouchableNativeFeedback onPress={() => navigation.push('LoginMain')}>
-          <Text>아이디 찾기 </Text>
-        </TouchableNativeFeedback>
-        <Text>|</Text>
-        <TouchableNativeFeedback onPress={() => navigation.push('LoginMain')}>
-          <Text> 비밀번호 찾기</Text>
-        </TouchableNativeFeedback>
+        <TouchableOpacity onPress={() => navigation.navigate('FindID')}>
+          <Text
+            style={[
+              typoStyles.fs14,
+              typoStyles.fwRegular,
+              typoStyles.textExplain,
+            ]}>
+            아이디 찾기{' '}
+          </Text>
+        </TouchableOpacity>
+        <Text
+          style={[
+            typoStyles.fs14,
+            typoStyles.fwRegular,
+            typoStyles.textExplain,
+          ]}>
+          |
+        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('FindPW')}>
+          <Text
+            style={[
+              typoStyles.fs14,
+              typoStyles.fwRegular,
+              typoStyles.textExplain,
+            ]}>
+            {' '}
+            비밀번호 찾기
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

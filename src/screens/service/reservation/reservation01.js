@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import ServiceBlock from '../../../components/service/serviceBlock';
+import {btnStyles} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
-import {ServiceAddress} from '../../../components/service/reservation/serviceInputBox';
 import CommonLayout from '../../../components/common/layout';
 import {NextBtn} from '../../../components/service/reservation/serviceBtn';
 import ServiceProgress from '../../../components/service/reservation/progress';
 import {
-  ServiceDatePicker,
-  ServiceTimePicker,
-} from '../../../components/service/reservation/servicePicker';
+  ResDate,
+  GetAddr,
+  GetTime,
+} from '../../../components/service/reservation/reservation01';
+import CustomBtn from '../../../components/common/button';
 
 const styles = StyleSheet.create({
   background: {
@@ -45,14 +47,36 @@ const styles = StyleSheet.create({
   },
 });
 
-const Reservation01 = ({navigation}) => {
-  const [pickaddr, setPickaddr] = useState('');
-  const [pickdetail, setPickdetail] = useState('');
+const Reservation01 = ({route, navigation}) => {
+  const {serviceKindID, serviceName} = route.params;
+  const {way} = route.params;
+  const {moveDirection, serviceKindID} = route.params;
 
-  const [hosaddr, setHosaddr] = useState('');
-  const [hosdetail, setHosdetail] = useState('');
+  const [dis, setDis] = useState(true);
+  const [resTimes, setResTimes] = useState({
+    resResTime: '0',
+    resArrTime: '0',
+    resDepTime: '0',
+  });
+  const [resAddrs, setResAddrs] = useState({
+    hospitalAddr: '0',
+    homeAddr: '0',
+    dropAddr: '0',
+  });
+  const [resDate, setResDate] = useState('0');
 
-  const [isChecked, setCheck] = useState(true);
+  useEffect(() => {
+    if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
+      if (
+        resAddrs.homeAddr != '0' ||
+        resAddrs.hospitalAddr != '0' ||
+        resAddrs.dropAddr != '0'
+      ) {
+        setDis(false);
+      }
+    } else if (serviceName == '네츠 휠체어 플러스 편도 서비스') {
+    }
+  }, [check]);
 
   return (
     <CommonLayout>
@@ -79,23 +103,11 @@ const Reservation01 = ({navigation}) => {
             ]}>
             STEP1. 장소 설정
           </Text>
-          <ServiceAddress
-            prititle={'픽업'}
-            exptitle={' 주소를 입력해주세요'}
-            placeHolder={'픽업 주소'}
-            Text1={pickaddr}
-            setText1={setPickaddr}
-            Text2={pickdetail}
-            setText2={setPickdetail}
-          />
-          <ServiceAddress
-            prititle={'병원'}
-            exptitle={' 주소를 입력해주세요'}
-            placeHolder={'병원 주소'}
-            Text1={hosaddr}
-            setText1={setHosaddr}
-            Text2={hosdetail}
-            setText2={setHosdetail}
+          <GetAddr
+            serviceName={serviceName}
+            way={way}
+            addr={resAddrs}
+            setAddr={setResAddrs}
           />
         </ServiceBlock>
         <ServiceBlock>
@@ -108,119 +120,24 @@ const Reservation01 = ({navigation}) => {
             ]}>
             STEP2. 일정 설정
           </Text>
-          <View style={styles.pickbox}>
-            <View style={styles.textline}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                서비스 원하시는 날짜
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                를 입력해주세요.
-              </Text>
-            </View>
-            <ServiceDatePicker />
-          </View>
-          <View style={styles.pickbox}>
-            <View style={styles.textline}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                예약된 병원 검사/진료 시간
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                을 입력해주세요.
-              </Text>
-            </View>
-            <ServiceTimePicker />
-          </View>
-          <View style={styles.pickbox}>
-            <View style={styles.textline}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                희망하는 병원 도착 시간
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                을 입력해주세요.
-              </Text>
-            </View>
-            <ServiceTimePicker />
-            <Text
-              style={[
-                typoStyles.fs12,
-                typoStyles.fwBold,
-                typoStyles.textExplain,
-              ]}>
-              원활한 서비스 진행을 위해,{'\n'}도착 시간이{' '}
-              <Text
-                style={[
-                  typoStyles.fs12,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                진료시간 20분 이전
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs12,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                으로 설정되어있습니다.
-              </Text>{' '}
-            </Text>
-          </View>
-          <View style={styles.pickbox}>
-            <View style={styles.textline}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textPrimary,
-                ]}>
-                귀가 출발 시간
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                을 입력해주세요.
-              </Text>
-            </View>
-            <ServiceTimePicker />
-          </View>
+          <ResDate setDate={setResDate} />
+          <GetTime
+            serviceName={serviceName}
+            way={way}
+            time={resTimes}
+            setTime={setResTimes}
+          />
         </ServiceBlock>
         <View style={styles.btn}>
           <NextBtn
             navWhere={() => {
-              navigation.push('Reservation02');
+              navigation.push('Reservation02', {
+                serviceKindID: serviceKindID,
+                moveDirection: moveDirection,
+                resAddrs: resAddrs,
+                resDate: resDate,
+                resTimes: resTimes,
+              });
             }}
           />
         </View>

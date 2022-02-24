@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableNativeFeedback} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {btnStyles} from '../common/button';
 import typoStyles from '../../assets/fonts/typography';
 
@@ -18,25 +18,25 @@ const styles = StyleSheet.create({
 
 const LoginBtn = ({navWhere, btnName}) => {
   return (
-    <TouchableNativeFeedback onPress={navWhere}>
+    <TouchableOpacity onPress={navWhere}>
       <View style={[btnStyles.btnWhite, styles.loginBtn]}>
         <Text style={[typoStyles.fs20, typoStyles.textMain, typoStyles.fw700]}>
           {btnName}
         </Text>
       </View>
-    </TouchableNativeFeedback>
+    </TouchableOpacity>
   );
 };
 
 const SignBtn = ({navWhere, btnName}) => {
   return (
-    <TouchableNativeFeedback onPress={navWhere}>
+    <TouchableOpacity onPress={navWhere}>
       <View style={[btnStyles.btnBlue, styles.signBtn]}>
         <Text style={[typoStyles.fs20, typoStyles.textWhite, typoStyles.fw700]}>
           {btnName}
         </Text>
       </View>
-    </TouchableNativeFeedback>
+    </TouchableOpacity>
   );
 };
 

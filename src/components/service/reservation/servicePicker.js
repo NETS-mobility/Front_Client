@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, TouchableNativeFeedback} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import typoStyles from '../../../assets/fonts/typography';
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ServiceDatePicker = () => {
+const ServiceDatePicker = ({setDate}) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [pickdate, setPickdate] = useState('//');
   const [datearr, setDatearr] = useState([]);
@@ -98,20 +98,18 @@ const ServiceDatePicker = () => {
   };
 
   const handleConfirm = date => {
-    // console.warn("A date has been picked: ", date.format("yyyy/MM/dd"));
-    setPickdate(date.format('yyyy/MM/dd'));
-    // console.warn(pickdate);
+    setPickdate(date.format('yyyy-MM-dd'));
     hideDatePicker();
   };
 
   useEffect(() => {
-    setDatearr(pickdate.split('/'));
-    console.log(datearr[0] + datearr[1] + datearr[2]);
+    setDatearr(pickdate.split('-'));
+    setDate(pickdate);
   }, [pickdate]);
 
   return (
     <View>
-      <TouchableNativeFeedback onPress={showDatePicker}>
+      <TouchableOpacity onPress={showDatePicker}>
         <View style={styles.dateline}>
           <View style={styles.frame}>
             <Text
@@ -144,7 +142,7 @@ const ServiceDatePicker = () => {
             </Text>
           </View>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
@@ -155,7 +153,7 @@ const ServiceDatePicker = () => {
   );
 };
 
-const ServiceTimePicker = () => {
+const ServiceTimePicker = ({time, setTime, propName}) => {
   const [timetype, setTimetype] = useState('');
   const [hour, setHour] = useState('');
   const [min, setMin] = useState('');
@@ -164,18 +162,28 @@ const ServiceTimePicker = () => {
   const placeholder2 = '시';
   const placeholder3 = '분';
 
+  useEffect(() => {
+    if (timetype != '' && hour != '' && min != '') {
+      if (timetype == '오후') {
+        setTime({...time, [propName]: `${parseInt(hour) + 12}:${min}:00`});
+      } else {
+        setTime({...time, [propName]: `${hour}:${min}:00`});
+      }
+    }
+  }, [timetype, hour, min]);
+
   const onChangeText = value => {
-    console.warn(value);
+    console.log('timetype==', value);
     setTimetype(value);
   };
 
   const onChangeHour = value => {
-    console.warn(value);
+    console.log('hour==', value);
     setHour(value);
   };
 
   const onChangeMin = value => {
-    console.warn(value);
+    console.log('min==', value);
     setMin(value);
   };
 
@@ -215,16 +223,16 @@ const ServiceTimePicker = () => {
           onValueChange={value => onChangeHour(value)}
           useNativeAndroidPickerStyle={false}
           items={[
-            {label: '00', value: '0', key: '0'},
-            {label: '01', value: '1', key: '1'},
-            {label: '02', value: '2', key: '2'},
-            {label: '03', value: '3', key: '3'},
-            {label: '04', value: '4', key: '4'},
-            {label: '05', value: '5', key: '5'},
-            {label: '06', value: '6', key: '6'},
-            {label: '07', value: '7', key: '7'},
-            {label: '08', value: '8', key: '8'},
-            {label: '09', value: '9', key: '9'},
+            {label: '00', value: '00', key: '0'},
+            {label: '01', value: '01', key: '1'},
+            {label: '02', value: '02', key: '2'},
+            {label: '03', value: '03', key: '3'},
+            {label: '04', value: '04', key: '4'},
+            {label: '05', value: '05', key: '5'},
+            {label: '06', value: '06', key: '6'},
+            {label: '07', value: '07', key: '7'},
+            {label: '08', value: '08', key: '8'},
+            {label: '09', value: '09', key: '9'},
             {label: '10', value: '10', key: '10'},
             {label: '11', value: '11', key: '11'},
             {label: '12', value: '12', key: '12'},
@@ -248,7 +256,7 @@ const ServiceTimePicker = () => {
           onValueChange={value => onChangeMin(value)}
           useNativeAndroidPickerStyle={false}
           items={[
-            {label: '00', value: '0', key: '0'},
+            {label: '00', value: '00', key: '0'},
             {label: '20', value: '20', key: '20'},
             {label: '40', value: '40', key: '40'},
           ]}

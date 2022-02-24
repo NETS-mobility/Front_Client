@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
   Text,
   View,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import ResRadioBtn from '../../../components/service/reservation/ResRadioBtn';
 import typoStyles from '../../../assets/fonts/typography';
 import {btnStyles} from '../../../components/common/button';
 import CommonLayout from '../../../components/common/layout';
+import CustomBtn from '../../../components/common/button';
 
 const styles = StyleSheet.create({
   background: {
@@ -48,14 +49,81 @@ const styles = StyleSheet.create({
 });
 
 const ReservationMainScreen = ({navigation}) => {
-  const [check11, setCheck11] = useState(false);
-  const [check12, setCheck12] = useState(false);
-  const [check21, setCheck21] = useState(false);
-  const [check22, setCheck22] = useState(false);
-  const [check31, setCheck31] = useState(false);
-  const [check32, setCheck32] = useState(false);
-  const [check41, setCheck41] = useState(false);
-  const [check42, setCheck42] = useState(false);
+  const [check, setCheck] = useState([
+    false, //병원동행
+    false,
+    false, //휠체어
+    false,
+    false, //이동방식
+    false,
+    false, //이동 방향
+    false,
+  ]);
+  const [serviceName, setServiceName] = useState('모든 질문에 답해주세요.');
+  const [cnt, setCnt] = useState(0);
+  const [serviceKindID, setServiceKindID] = useState(0);
+  const [moveDirection, setMoveDirection] = useState('');
+
+  useEffect(() => {
+    if (check[0] && check[4]) {
+      setCnt(3);
+    } else if (check[0] && check[5]) {
+      setCnt(4);
+    } else if (check[1]) {
+      setCnt(2);
+    }
+  }, [check]);
+
+  // useE
+
+  useEffect(() => {
+    if (check.filter(i => i == true).length == cnt) {
+      if (check[0] && check[2]) {
+        if (check[4]) {
+          setServiceName('네츠 휠체어 플러스 왕복 서비스');
+          setServiceKindID(1);
+          setMoveDirection('집-집');
+        } else {
+          setServiceName('네츠 휠체어 플러스 편도 서비스');
+          setServiceKindID(1);
+          if (check[6]) {
+            setMoveDirection('집-병원');
+          } else {
+            setMoveDirection('병원-집');
+          }
+        }
+      } else if (check[0] && check[3]) {
+        if (check[4]) {
+          setServiceName('네츠 휠체어 왕복 서비스');
+          setServiceKindID(2);
+          setMoveDirection('집-집');
+        } else {
+          setServiceName('네츠 휠체어 편도 서비스');
+          setServiceKindID(2);
+        }
+      } else if (check[1]) {
+        setServiceName('네츠 무브 서비스');
+        setServiceKindID(3);
+      }
+    } else {
+      setServiceName('모든 질문에 답해주세요.');
+    }
+  }, [cnt, check]);
+
+  useEffect(() => {
+    if (check[1]) {
+      check[2] = false;
+      check[3] = false;
+      check[4] = false;
+      check[5] = false;
+      setCheck([...check]);
+    }
+    if (check[0] || check[4]) {
+      check[6] = false;
+      check[7] = false;
+      setCheck([...check]);
+    }
+  }, [check[0], check[1], check[4]]);
 
   return (
     <CommonLayout>
@@ -65,7 +133,7 @@ const ReservationMainScreen = ({navigation}) => {
             style={[typoStyles.fs32, typoStyles.fw700, typoStyles.textMain]}>
             서비스 예약
           </Text>
-          <TouchableNativeFeedback
+          <TouchableOpacity
             onPress={() => {
               navigation.push('Reservation01');
             }}>
@@ -77,75 +145,92 @@ const ReservationMainScreen = ({navigation}) => {
               ]}>
               ! 서비스 요금 확인하기
             </Text>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         </View>
         <View style={styles.qbox}>
           <ResRadioBtn
-            check1={check11}
-            setCheck1={setCheck11}
-            check2={check12}
-            setCheck2={setCheck12}
-            primtitle={'계단 리프트 서비스'}
-            explaintitle={'가 필요하신가요?'}
-            text1={'네'}
-            text2={'아니요'}
-          />
-          <ResRadioBtn
-            check1={check21}
-            setCheck1={setCheck21}
-            check2={check22}
-            setCheck2={setCheck22}
+            check={check}
+            setCheck={setCheck}
+            check1={0}
             primtitle={'병원동행'}
             explaintitle={'이 필요하신가요?'}
             text1={'네'}
             text2={'아니요 차량만 이용'}
           />
-          <ResRadioBtn
-            check1={check31}
-            setCheck1={setCheck31}
-            check2={check32}
-            setCheck2={setCheck32}
-            primtitle={'이동방식'}
-            explaintitle={'이 어떻게 되시나요?'}
-            text1={'왕복'}
-            text2={'편도'}
-          />
-          {check32 ? (
+
+          {check[0] ? (
+            <>
+              <ResRadioBtn
+                check={check}
+                setCheck={setCheck}
+                check1={2}
+                primtitle={'계단 리프트 서비스'}
+                explaintitle={'가 필요하신가요?'}
+                text1={'네'}
+                text2={'아니요'}
+              />
+              <ResRadioBtn
+                check={check}
+                setCheck={setCheck}
+                check1={4}
+                primtitle={'이동방식'}
+                explaintitle={'이 어떻게 되시나요?'}
+                text1={'왕복'}
+                text2={'편도'}
+              />
+              {check[5] ? (
+                <ResRadioBtn
+                  check={check}
+                  setCheck={setCheck}
+                  check1={6}
+                  primtitle={'이동방향'}
+                  explaintitle={'이 어떻게 되시나요?'}
+                  text1={'자택 -> 병원'}
+                  text2={'병원 -> 자택'}
+                />
+              ) : (
+                <></>
+              )}
+            </>
+          ) : (
             <ResRadioBtn
-              check1={check41}
-              setCheck1={setCheck41}
-              check2={check42}
-              setCheck2={setCheck42}
+              check={check}
+              setCheck={setCheck}
+              check1={6}
               primtitle={'이동방향'}
               explaintitle={'이 어떻게 되시나요?'}
               text1={'자택 -> 병원'}
               text2={'병원 -> 자택'}
             />
-          ) : (
-            <></>
           )}
         </View>
         <View style={styles.statbig}>
           <View style={styles.statbox}>
             <Text
               style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textMain]}>
-              네츠휠체어플러스 왕복서비스
+              {serviceName}
             </Text>
           </View>
-          <TouchableNativeFeedback
-            onPress={() => navigation.push('Reservation01')}>
-            <View style={[btnStyles.btnBlue, styles.resbtn]}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textWhite,
-                ]}>
-                {' '}
-                클릭해서 서비스 예약하기{' '}
-              </Text>
-            </View>
-          </TouchableNativeFeedback>
+
+          <CustomBtn
+            viewStyle={[btnStyles.btnBlue, styles.resbtn]}
+            textStyle={[
+              typoStyles.fs14,
+              typoStyles.fwBold,
+              typoStyles.textWhite,
+            ]}
+            viewStyleDisabled={[btnStyles.btnDisable, styles.resbtn]}
+            text={'클릭해서 서비스 예약 계속하기'}
+            onPress={() =>
+              navigation.push('Reservation01', {
+                serviceKindID: serviceKindID,
+                serviceName: serviceName,
+                way: check[6],
+                moveDirection: moveDirection,
+              })
+            }
+            disabled={serviceName == '모든 질문에 답해주세요.' ? true : false}
+          />
         </View>
       </ScrollView>
     </CommonLayout>

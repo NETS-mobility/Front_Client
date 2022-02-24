@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableNativeFeedback, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 
 const styles = StyleSheet.create({
@@ -37,18 +37,14 @@ const styles = StyleSheet.create({
 });
 
 const ResRadioBtn = ({
+  check,
+  setCheck,
   check1,
-  setCheck1,
-  check2,
-  setCheck2,
   primtitle,
   explaintitle,
   text1,
   text2,
 }) => {
-  // const [check1, setCheck1] = useState(false);
-  // const [check2, setCheck2] = useState(false);
-
   return (
     <View>
       <View style={styles.textline}>
@@ -62,9 +58,13 @@ const ResRadioBtn = ({
         </Text>
       </View>
       <View style={styles.btnset}>
-        {!check1 || check2 ? (
-          <TouchableNativeFeedback
-            onPress={() => (setCheck1(true), setCheck2(false))}>
+        {!check[check1] || check[check1 + 1] ? (
+          <TouchableOpacity
+            onPress={() => {
+              check[check1] = true;
+              check[check1 + 1] = false;
+              setCheck([...check]);
+            }}>
             <View style={styles.nonebtn}>
               <Text
                 style={[
@@ -75,10 +75,14 @@ const ResRadioBtn = ({
                 {text1}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         ) : (
-          <TouchableNativeFeedback
-            onPress={() => (setCheck1(false), setCheck2(true))}>
+          <TouchableOpacity
+            onPress={() => {
+              check[check1] = false;
+              check[check1 + 1] = true;
+              setCheck([...check]);
+            }}>
             <View style={styles.clickbtn}>
               <Text
                 style={[
@@ -89,11 +93,15 @@ const ResRadioBtn = ({
                 {text1}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         )}
-        {check1 || !check2 ? (
-          <TouchableNativeFeedback
-            onPress={() => (setCheck2(true), setCheck1(false))}>
+        {check[check1] || !check[check1 + 1] ? (
+          <TouchableOpacity
+            onPress={() => {
+              check[check1] = false;
+              check[check1 + 1] = true;
+              setCheck([...check]);
+            }}>
             <View style={styles.nonebtn}>
               <Text
                 style={[
@@ -104,10 +112,14 @@ const ResRadioBtn = ({
                 {text2}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         ) : (
-          <TouchableNativeFeedback
-            onPress={() => (setCheck2(false), setCheck1(true))}>
+          <TouchableOpacity
+            onPress={() => {
+              check[check1] = true;
+              check[check1 + 1] = false;
+              setCheck([...check]);
+            }}>
             <View style={styles.clickbtn}>
               <Text
                 style={[
@@ -118,7 +130,7 @@ const ResRadioBtn = ({
                 {text2}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         )}
       </View>
     </View>

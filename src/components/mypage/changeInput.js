@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import {btnStyles} from '../common/button';
 import typoStyles from '../../assets/fonts/typography';
@@ -21,6 +21,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 25,
+  },
+  boxAlignWithBtn: {
+    width: '85%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 5,
   },
   boxalign2: {
     flexDirection: 'row',
@@ -66,11 +73,18 @@ const ChangeInput = ({title, place1, Text1, setText1}) => {
   );
 };
 
-const ChangeInputWithBtn = ({title, place1, Text1, setText1, btntext}) => {
+const ChangeInputWithBtn = ({
+  title,
+  place1,
+  Text1,
+  setText1,
+  btntext,
+  onPress,
+}) => {
   const [isfocused, setFocus] = useState(false);
 
   return (
-    <View style={styles.boxalign}>
+    <View style={styles.boxAlignWithBtn}>
       <Text
         style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textExplain]}>
         {title}
@@ -91,8 +105,8 @@ const ChangeInputWithBtn = ({title, place1, Text1, setText1, btntext}) => {
           onChangeText={setText1}
         />
         <View style={styles.btnset}>
-          <TouchableNativeFeedback>
-            <View style={[btnStyles.btnDisable, styles.btn]}>
+          <TouchableOpacity onPress={onPress}>
+            <View style={[btnStyles.btnBlue, styles.btn]}>
               <Text
                 style={[
                   typoStyles.fs14,
@@ -102,7 +116,7 @@ const ChangeInputWithBtn = ({title, place1, Text1, setText1, btntext}) => {
                 {btntext}
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
