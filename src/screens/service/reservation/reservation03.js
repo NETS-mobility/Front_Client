@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import ServiceBlock from '../../../components/service/serviceBlock';
 import typoStyles from '../../../assets/fonts/typography';
@@ -9,6 +9,8 @@ import {
 } from '../../../components/service/reservation/serviceBtn';
 import {ServiceInputBoxWithoutBtn} from '../../../components/service/reservation/serviceInputBox';
 import ServiceProgress from '../../../components/service/reservation/progress';
+import ReservationAPI from '../../../api/reservation/reservation';
+import {GetToken} from '../../../utils/controlToken';
 
 const styles = StyleSheet.create({
   title: {
@@ -41,16 +43,50 @@ const styles = StyleSheet.create({
   },
 });
 
-const Reservation03 = ({navigation}) => {
+const Reservation03 = ({route, navigation}) => {
+  const {
+    serviceKindId,
+    moveDirection,
+    resAddrs,
+    resDate,
+    resTimes,
+    guardInfo,
+    userInfo,
+    validTargetKind,
+  } = route.params;
+
   const [diagnosis, setDiagnosis] = useState('');
   const [etc, setEtc] = useState('');
 
-  const [check1, setCheck1] = useState(false);
-  const [check2, setCheck2] = useState(false);
-  const [check3, setCheck3] = useState(false);
-  const [check4, setCheck4] = useState(false);
-  const [check5, setCheck5] = useState(false);
+  const [check, setCheck] = useState([false, false, false, false, false]);
+  const [result, setResult] = useState('');
+  const checkStaticString = [
+    '진료실 동행',
+    '진료 내용 전달',
+    '진료 서류 전달',
+    '약국 동행',
+    '기타',
+  ];
+  let checkString = '';
 
+  useEffect(() => {
+    for (let i = 0; i < 5; i++) {
+      if (check[i]) {
+        checkString += checkStaticString[i] + ',';
+      }
+      if (i == 4) {
+        if (checkString[checkString.length - 1] == ',') {
+          setResult(checkString.substring(0, checkString.length - 1));
+        } else {
+          setResult('');
+        }
+      }
+    }
+  }, [check]);
+
+  useEffect(() => {
+    console.log('result===', result);
+  }, [result]);
   return (
     <CommonLayout>
       <ScrollView style={styles.background}>
@@ -92,32 +128,37 @@ const Reservation03 = ({navigation}) => {
               어떤 서비스가 필요하신지 선택해주세요.
             </Text>
             <CheckBtn
-              check={check1}
-              setCheck={setCheck1}
+              num={0}
+              check={check}
+              setCheck={setCheck}
               contents={'진료실 동행'}
             />
             <CheckBtn
-              check={check2}
-              setCheck={setCheck2}
+              num={1}
+              check={check}
+              setCheck={setCheck}
               contents={'지정한 보호자에게 진료 내용 전달'}
             />
             <CheckBtn
-              check={check3}
-              setCheck={setCheck3}
+              num={2}
+              check={check}
+              setCheck={setCheck}
               contents={'진료 관련 서류 촬영 후 지정한 보호자에게 전달'}
             />
             <CheckBtn
-              check={check4}
-              setCheck={setCheck4}
+              num={3}
+              check={check}
+              setCheck={setCheck}
               contents={'약국 동행'}
             />
             <CheckBtn
-              check={check5}
-              setCheck={setCheck5}
+              num={4}
+              check={check}
+              setCheck={setCheck}
               contents={'기타 서비스'}
             />
           </View>
-          {check5 == true ? (
+          {check[4] == true ? (
             <ServiceInputBoxWithoutBtn
               title={'없음'}
               place1={'입력'}
@@ -130,8 +171,32 @@ const Reservation03 = ({navigation}) => {
         </ServiceBlock>
         <View style={styles.proset}>
           <NextBtn
-            navWhere={() => {
+            navWhere={async () => {
               navigation.push('Reservation04');
+              ReservationAPI({
+                jwtToken: await GetToken(),
+                reservationId: '123456789',
+                serviceKindId: serviceKindId,
+                moveDirection: moveDirection,
+                gowithHospitalTime: 20,
+                pickupBaseAddr: resAddrs.homeAddr,
+                pickupDetailAddr: '123동',
+                dropBaseAddr: resAddrs.dropAddr,
+                dropDetailAddr: '123동',
+                hospitalBaseAddr: resAddrs.hosAddr,
+                hospitalDetailAddr: '123동',
+                hospitalName: '백병원',
+                hopeReservationDate: resDate,
+                hopeHospitalArrivalTime: resTimes.resArrTime,
+                fixedMedicalTime: resTimes.resResTime,
+                hopeHospitalDepartureTime: resTimes.resDepTime,
+                fixedMedicalDetail: diagnosis,
+                hopeRequires: result,
+                patientName: userInfo.name,
+                patientPhone: userInfo.phone,
+                validTargetKind: validTargetKind,
+                reservationStateId: 1,
+              });
             }}
           />
         </View>

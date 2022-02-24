@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 });
 
 const Reservation02 = ({route, navigation}) => {
-  const {serviceName, way, resAddrs, resDate, resTimes} = route.params;
+  const {serviceKindId, moveDirection, resAddrs, resDate, resTimes} = route.params;
 
   const [img, setImg] = useState('');
   const [guard, setGuard] = useState({
@@ -74,11 +74,16 @@ const Reservation02 = ({route, navigation}) => {
       if (i == 2) {
         if (checkString[checkString.length - 1] == ',') {
           setResult(checkString.substring(0, checkString.length - 1));
-          console.log('result==', result);
+        } else {
+          setResult('');
         }
       }
     }
   }, [check]);
+
+  useEffect(() => {
+    console.log('result===', result);
+  }, [result]);
 
   return (
     <CommonLayout>
@@ -204,8 +209,8 @@ const Reservation02 = ({route, navigation}) => {
           <NextBtn
             navWhere={() => {
               navigation.push('Reservation03', {
-                serviceName: serviceName,
-                way: way,
+                serviceKindId: serviceKindId,
+                moveDirection: moveDirection,
                 resAddrs: resAddrs,
                 resDate: resDate,
                 resTimes: resTimes,
@@ -214,9 +219,7 @@ const Reservation02 = ({route, navigation}) => {
                 validTargetKind: result,
               });
             }}
-            disable={() => {
-              return result == '' ? true : false;
-            }}
+            disable={result == '' ? true : false}
           />
         </View>
       </ScrollView>
