@@ -154,37 +154,61 @@ const ServiceDatePicker = ({setDate}) => {
 };
 
 const ServiceTimePicker = ({time, setTime, propName}) => {
-  const [timetype, setTimetype] = useState('');
-  const [hour, setHour] = useState('');
-  const [min, setMin] = useState('');
+  const newTime = time[propName];
+  // 문제... ->  <button onClick={testFunc()}/>
 
-  const placeholder1 = '시간대';
-  const placeholder2 = '시';
-  const placeholder3 = '분';
+  // <button onClick={()=>testFunc()}/>
+  // <button onClick={testFunc}/>
 
-  useEffect(() => {
-    if (timetype != '' && hour != '' && min != '') {
-      if (timetype == '오후') {
-        setTime({...time, [propName]: `${parseInt(hour) + 12}:${min}:00`});
-      } else {
-        setTime({...time, [propName]: `${hour}:${min}:00`});
-      }
-    }
-  }, [timetype, hour, min]);
+  // useEffect(() => {
+  //   if (newTime.timetype != '' && newTime.hour != '' && newTime.min != '') {
+  //     if (newTime.timetype == '오후') {
+  //       if (newTime.hour == '12') {
+  //         setTime({
+  //           ...time,
+  //           [propName]: {
+  //             ...time[propName],
+  //             time: `${newTime.hour}:${newTime.min}:00`,
+  //           },
+  //         });
+  //       } else {
+  //         setTime({
+  //           ...time,
+  //           [propName]: {
+  //             ...time[propName],
+  //             time: `${parseInt(newTime.hour) + 12}:${newTime.min}:00`,
+  //           },
+  //         });
+  //       }
+  //     } else {
+  //       if (newTime.hour == '12') {
+  //         setTime({
+  //           ...time,
+  //           [propName]: {
+  //             ...time[propName],
+  //             time: `${parseInt(newTime.hour) - 12}:${newTime.min}:00`,
+  //           },
+  //         });
+  //       } else {
+  //         setTime({
+  //           ...time,
+  //           [propName]: {time: `${newTime.hour}:${newTime.min}:00`},
+  //         });
+  //       }
+  //     }
+  //   }
+  // }, [newTime.hour, newTime.min, newTime.timetype]);
 
-  const onChangeText = value => {
-    console.log('timetype==', value);
-    setTimetype(value);
+  const onChangeTimeType = value => {
+    setTime({...time, [propName]: {...newTime, timetype: value}});
   };
 
   const onChangeHour = value => {
-    console.log('hour==', value);
-    setHour(value);
+    setTime({...time, [propName]: {...newTime, hour: value}});
   };
 
   const onChangeMin = value => {
-    console.log('min==', value);
-    setMin(value);
+    setTime({...time, [propName]: {...newTime, min: value}});
   };
 
   return (
@@ -193,12 +217,12 @@ const ServiceTimePicker = ({time, setTime, propName}) => {
         <RNPickerSelect
           textInputProps={{underlineColorAndroid: 'transparent'}}
           placeholder={{
-            label: placeholder1,
+            label: '시간대',
           }}
           placeholderTextColor="black"
           fixAndroidTouchableBug={true}
-          value={timetype}
-          onValueChange={value => onChangeText(value)}
+          value={newTime.timetype}
+          onValueChange={value => onChangeTimeType(value)}
           useNativeAndroidPickerStyle={false}
           items={[
             {label: '오전', value: '오전', key: '1'},
@@ -215,15 +239,14 @@ const ServiceTimePicker = ({time, setTime, propName}) => {
         <RNPickerSelect
           textInputProps={{underlineColorAndroid: 'transparent'}}
           placeholder={{
-            label: placeholder2,
+            label: '시',
           }}
           placeholderTextColor="black"
           fixAndroidTouchableBug={true}
-          value={hour}
+          value={newTime.hour}
           onValueChange={value => onChangeHour(value)}
           useNativeAndroidPickerStyle={false}
           items={[
-            {label: '00', value: '00', key: '0'},
             {label: '01', value: '01', key: '1'},
             {label: '02', value: '02', key: '2'},
             {label: '03', value: '03', key: '3'},
@@ -248,11 +271,11 @@ const ServiceTimePicker = ({time, setTime, propName}) => {
         <RNPickerSelect
           textInputProps={{underlineColorAndroid: 'transparent'}}
           placeholder={{
-            label: placeholder3,
+            label: '분',
           }}
           placeholderTextColor="black"
           fixAndroidTouchableBug={true}
-          value={min}
+          value={newTime.min}
           onValueChange={value => onChangeMin(value)}
           useNativeAndroidPickerStyle={false}
           items={[

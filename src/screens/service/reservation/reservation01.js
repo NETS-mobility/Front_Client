@@ -12,6 +12,7 @@ import {
   GetTime,
 } from '../../../components/service/reservation/reservation01';
 import CustomBtn from '../../../components/common/button';
+import ReservationTimeChange from '../../../components/service/reservation/reservationTimeChange';
 
 const styles = StyleSheet.create({
   background: {
@@ -54,55 +55,58 @@ const Reservation01 = ({route, navigation}) => {
 
   const [dis, setDis] = useState(true);
   const [resTimes, setResTimes] = useState({
-    resResTime: '0',
-    resArrTime: '0',
-    resDepTime: '0',
+    resResTime: {time: '0', timetype: '', hour: '', min: ''},
+    resArrTime: {time: '0', timetype: '', hour: '', min: ''},
+    resDepTime: {time: '0', timetype: '', hour: '', min: ''},
   });
+
   const [resAddrs, setResAddrs] = useState({
     hospitalAddr: '0',
     homeAddr: '0',
     dropAddr: '0',
   });
   const [resDate, setResDate] = useState('0');
-  console.log('res01==', serviceKindID);
 
-  useEffect(() => {
-    if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
-      if (
-        resAddrs.homeAddr != '0' &&
-        resAddrs.hospitalAddr != '0' &&
-        resAddrs.dropAddr != '0' &&
-        resTimes.resArrTime != '0' &&
-        resTimes.resResTime != '0' &&
-        resTimes.resDepTime != '0'
-      ) {
-        setDis(false);
-      }
-    } else if (
-      serviceName == '네츠 휠체어 플러스 편도 서비스' ||
-      '네츠 휠체어 편도 서비스'
-    ) {
-      if (way) {
-        if (
-          resAddrs.homeAddr != '0' &&
-          resAddrs.hospitalAddr != '0' &&
-          resTimes.resArrTime != '0' &&
-          resTimes.resResTime != '0'
-        ) {
-          setDis(false);
-        }
-      } else {
-        if (
-          resAddrs.dropAddr != '0' &&
-          resAddrs.hospitalAddr != '0' &&
-          resTimes.resDepTime != '0'
-        ) {
-          setDis(false);
-        }
-      }
-    }
-    console.log(resAddrs, resTimes);
-  }, [resAddrs, resTimes]);
+  // useEffect(() => {
+  //   if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
+  //     if (
+  //       resAddrs.homeAddr != '0' &&
+  //       resAddrs.hospitalAddr != '0' &&
+  //       resAddrs.dropAddr != '0'
+  //       // resTimes.resArrTime != '0' &&
+  //       // resTimes.resResTime != '0' &&
+  //       // resTimes.resDepTime != '0'
+  //     ) {
+  //       setDis(false);
+  //     }
+  //   } else if (
+  //     serviceName == '네츠 휠체어 플러스 편도 서비스' ||
+  //     '네츠 휠체어 편도 서비스'
+  //   ) {
+  //     if (way) {
+  //       if (
+  //         resAddrs.homeAddr != '0' &&
+  //         resAddrs.hospitalAddr != '0'
+  //         // resTimes.resArrTime != '0' &&
+  //         // resTimes.resResTime != '0'
+  //       ) {
+  //         setDis(false);
+  //       }
+  //     } else {
+  //       if (
+  //         resAddrs.dropAddr != '0' &&
+  //         resAddrs.hospitalAddr != '0'
+  //         // resTimes.resDepTime != '0'
+  //       ) {
+  //         setDis(false);
+  //       }
+  //     }
+  //   }
+  // }, [resAddrs]);
+
+  // useEffect(() => {
+  //   ReservationTimeChange(resTimes, setResTimes, resDate, setResDate);
+  // }, [resTimes.resResTime.time]);
 
   return (
     <CommonLayout>
@@ -147,12 +151,16 @@ const Reservation01 = ({route, navigation}) => {
             STEP2. 일정 설정
           </Text>
           <ResDate setDate={setResDate} />
-          <GetTime
-            serviceName={serviceName}
-            way={way}
-            time={resTimes}
-            setTime={setResTimes}
-          />
+          {resDate == '--' ? (
+            <></>
+          ) : (
+            <GetTime
+              serviceName={serviceName}
+              way={way}
+              time={resTimes}
+              setTime={setResTimes}
+            />
+          )}
         </ServiceBlock>
         <View style={styles.btn}>
           <NextBtn

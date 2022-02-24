@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import {ServiceDatePicker} from './servicePicker';
@@ -61,8 +61,8 @@ export const GetTime = ({serviceName, way, time, setTime}) => {
   if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
     return (
       <>
-        <ResArrTime time={time} setTime={setTime} />
         <ResResTime time={time} setTime={setTime} />
+        <ResArrTime time={time} setTime={setTime} />
         <ResDepTime time={time} setTime={setTime} />
       </>
     );
@@ -73,8 +73,8 @@ export const GetTime = ({serviceName, way, time, setTime}) => {
     if (way) {
       return (
         <>
-          <ResArrTime time={time} setTime={setTime} />
           <ResResTime time={time} setTime={setTime} />
+          <ResArrTime time={time} setTime={setTime} />
         </>
       );
     } else {
