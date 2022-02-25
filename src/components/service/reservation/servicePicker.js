@@ -174,44 +174,47 @@ const ServiceTimePicker = ({time, setTime, propName}) => {
   // <button onClick={()=>testFunc()}/>
   // <button onClick={testFunc}/>
 
-  // useEffect(() => {
-  //   if (newTime.timetype != '' && newTime.hour != '' && newTime.min != '') {
-  //     if (newTime.timetype == '오후') {
-  //       if (newTime.hour == '12') {
-  //         setTime({
-  //           ...time,
-  //           [propName]: {
-  //             ...time[propName],
-  //             time: `${newTime.hour}:${newTime.min}:00`,
-  //           },
-  //         });
-  //       } else {
-  //         setTime({
-  //           ...time,
-  //           [propName]: {
-  //             ...time[propName],
-  //             time: `${parseInt(newTime.hour) + 12}:${newTime.min}:00`,
-  //           },
-  //         });
-  //       }
-  //     } else {
-  //       if (newTime.hour == '12') {
-  //         setTime({
-  //           ...time,
-  //           [propName]: {
-  //             ...time[propName],
-  //             time: `${parseInt(newTime.hour) - 12}:${newTime.min}:00`,
-  //           },
-  //         });
-  //       } else {
-  //         setTime({
-  //           ...time,
-  //           [propName]: {time: `${newTime.hour}:${newTime.min}:00`},
-  //         });
-  //       }
-  //     }
-  //   }
-  // }, [newTime.hour, newTime.min, newTime.timetype]);
+  useEffect(() => {
+    if (newTime.timetype != '' && newTime.hour != '' && newTime.min != '') {
+      if (newTime.timetype == '오후') {
+        if (newTime.hour == '12') {
+          setTime({
+            ...time,
+            [propName]: {
+              ...time[propName],
+              time: `${newTime.hour}:${newTime.min}:00`,
+            },
+          });
+        } else {
+          setTime({
+            ...time,
+            [propName]: {
+              ...time[propName],
+              time: `${parseInt(newTime.hour) + 12}:${newTime.min}:00`,
+            },
+          });
+        }
+      } else {
+        if (newTime.hour == '12') {
+          setTime({
+            ...time,
+            [propName]: {
+              ...time[propName],
+              time: `0${parseInt(newTime.hour) - 12}:${newTime.min}:00`,
+            },
+          });
+        } else {
+          setTime({
+            ...time,
+            [propName]: {
+              ...time[propName],
+              time: `${newTime.hour}:${newTime.min}:00`,
+            },
+          });
+        }
+      }
+    }
+  }, [newTime.hour, newTime.min, newTime.timetype]);
 
   const onChangeTimeType = value => {
     setTime({...time, [propName]: {...newTime, timetype: value}});
@@ -313,6 +316,7 @@ const ServiceGowithPicker = ({type, title, time}) => {
   const onChangeGowith = value => {
     setGowithtime(value);
   };
+
   return (
     <>
       <View style={styles.pickbox}>

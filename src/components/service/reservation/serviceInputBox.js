@@ -64,11 +64,6 @@ const ServiceAddress = ({
   const [detailAddr, setDetailAddr] = useState('');
 
   useEffect(() => {
-    console.log('fullAddr==', fullAddr);
-    console.log('sido==', sido);
-  }, [fullAddr, sido]);
-
-  useEffect(() => {
     if (fullAddr != '') {
       setAddr({...addr, [propName]: `${fullAddr} ${detailAddr}`});
     }

@@ -52,8 +52,14 @@ const styles = StyleSheet.create({
 });
 
 const Reservation02 = ({route, navigation}) => {
-  const {serviceKindId, moveDirection, resAddrs, resDate, resTimes} =
-    route.params;
+  const {
+    serviceKindId,
+    moveDirection,
+    resAddrs,
+    resDate,
+    resTimes,
+    gowithHospitalTime,
+  } = route.params;
 
   const [img, setImg] = useState('');
   const [guard, setGuard] = useState({
@@ -67,8 +73,6 @@ const Reservation02 = ({route, navigation}) => {
   const [check, setCheck] = useState([false, false, false]);
   const [result, setResult] = useState('');
   const [disable, setDisable] = useState(true);
-
-  console.log('res02==', serviceKindId);
 
   const checkStaticString = ['고령자', '장애인', '거동불편자'];
   let checkString = '';
@@ -103,14 +107,16 @@ const Reservation02 = ({route, navigation}) => {
   }, [check]);
 
   useEffect(() => {
-    if (result != '0' && user.name != '' && user.phone != '') {
+    if (
+      result != '0' &&
+      user.name != '' &&
+      user.phone != '' &&
+      guard.name != '' &&
+      guard.phone != ''
+    ) {
       setDisable(false);
     }
   }, [result, user]);
-
-  useEffect(() => {
-    console.log('guard===', guard);
-  }, [guard]);
 
   return (
     <CommonLayout>
@@ -246,6 +252,7 @@ const Reservation02 = ({route, navigation}) => {
                 guardInfo: guard,
                 userInfo: user,
                 validTargetKind: result,
+                gowithHospitalTime: gowithHospitalTime,
               });
             }}
             disable={disable}

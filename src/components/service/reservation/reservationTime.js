@@ -53,18 +53,28 @@ export const ResArrTime = ({time, setTime}) => {
         setTime={setTime}
         propName={'resArrTime'}
       />
-      <Text
-        style={[typoStyles.fs12, typoStyles.fwBold, typoStyles.textExplain]}>
-        원활한 서비스 진행을 위해,{'\n'}도착 시간이
-        <Text
-          style={[typoStyles.fs12, typoStyles.fwBold, typoStyles.textPrimary]}>
-          진료시간 20분 이전
-        </Text>
+      <View style={{marginTop: 10}}>
         <Text
           style={[typoStyles.fs12, typoStyles.fwBold, typoStyles.textExplain]}>
-          으로 설정되어있습니다.
+          원활한 서비스 진행을 위해,{'\n'}도착 시간이
+          <Text
+            style={[
+              typoStyles.fs12,
+              typoStyles.fwBold,
+              typoStyles.textPrimary,
+            ]}>
+            진료시간 20분 이전
+          </Text>
+          <Text
+            style={[
+              typoStyles.fs12,
+              typoStyles.fwBold,
+              typoStyles.textExplain,
+            ]}>
+            으로 설정되어있습니다.
+          </Text>
         </Text>
-      </Text>
+      </View>
     </View>
   );
 };

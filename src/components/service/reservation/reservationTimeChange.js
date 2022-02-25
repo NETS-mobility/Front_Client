@@ -1,4 +1,10 @@
-import {useEffect, useState} from 'react';
+const hourchange = hourchange => {
+  if (parseInt(hourchange) - 1 >= 10) {
+    return `${parseInt(hourchange) - 1}`;
+  } else {
+    return '0' + `${parseInt(hourchange) - 1}`;
+  }
+};
 
 const ReservationTimeChange = (time, setTime, date, setDate) => {
   if (time.resResTime.min == '40') {
@@ -51,10 +57,11 @@ const ReservationTimeChange = (time, setTime, date, setDate) => {
         ...time,
         resArrTime: {
           timetype: time.resResTime.timetype,
-          hour: `${parseInt(time.resResTime.hour) - 1}`,
+          hour: hourchange(time.resResTime.hour),
           min: '40',
         },
       });
+
       // -> hour,min
       // -> 시간만 빼....
     }
