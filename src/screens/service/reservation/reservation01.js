@@ -12,6 +12,9 @@ import {
   GetTime,
 } from '../../../components/service/reservation/reservation01';
 import CustomBtn from '../../../components/common/button';
+import ReservationTimeChange from '../../../components/service/reservation/reservationTimeChange';
+import {ServiceInputBoxWithoutBtn} from '../../../components/service/reservation/serviceInputBox';
+import {ServiceGowithPicker} from '../../../components/service/reservation/servicePicker';
 
 const styles = StyleSheet.create({
   background: {
@@ -54,30 +57,55 @@ const Reservation01 = ({route, navigation}) => {
 
   const [dis, setDis] = useState(true);
   const [resTimes, setResTimes] = useState({
-    resResTime: '0',
-    resArrTime: '0',
-    resDepTime: '0',
+    resResTime: {time: '0', timetype: '', hour: '', min: ''},
+    resArrTime: {time: '0', timetype: '', hour: '', min: ''},
+    resDepTime: {time: '0', timetype: '', hour: '', min: ''},
   });
+
   const [resAddrs, setResAddrs] = useState({
     hospitalAddr: '0',
     homeAddr: '0',
     dropAddr: '0',
   });
   const [resDate, setResDate] = useState('0');
-  console.log('res01==', serviceKindID);
+  const [gowithtime, setGowithtime] = useState(-1);
 
   useEffect(() => {
+    const Test = async () => {
+      if (resTimes.resResTime.time != '0' && resTimes.resArrTime.time != '0') {
+        const compResTime = new Date();
+        const compArrivalTime = new Date();
+        const testResTime = resTimes.resResTime.time;
+        const testArrTime = resTimes.resArrTime.time;
+        compResTime.setHours(
+          testResTime.substring(0, 2),
+          testResTime.substring(3, 5),
+          testResTime.substring(6, 8),
+        );
+        compArrivalTime.setHours(
+          testArrTime.substring(0, 2),
+          testArrTime.substring(3, 5),
+          testArrTime.substring(6, 8),
+        );
+        if (compArrivalTime >= compResTime) {
+          setDis(true);
+        } else {
+          setDis(false);
+        }
+      }
+    };
+
     if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
       if (
         resAddrs.homeAddr != '0' &&
         resAddrs.hospitalAddr != '0' &&
         resAddrs.dropAddr != '0' &&
-        resTimes.resArrTime != '0' &&
-        resTimes.resResTime != '0' &&
-        resTimes.resDepTime != '0'
+        resTimes.resArrTime.time != '0' &&
+        resTimes.resResTime.time != '0' &&
+        resTimes.resDepTime.time != '0'
       ) {
         setDis(false);
-      }
+      } else setDis(true);
     } else if (
       serviceName == '네츠 휠체어 플러스 편도 서비스' ||
       '네츠 휠체어 편도 서비스'
@@ -86,23 +114,30 @@ const Reservation01 = ({route, navigation}) => {
         if (
           resAddrs.homeAddr != '0' &&
           resAddrs.hospitalAddr != '0' &&
-          resTimes.resArrTime != '0' &&
-          resTimes.resResTime != '0'
+          resTimes.resArrTime.time != '0' &&
+          resTimes.resResTime.time != '0'
         ) {
           setDis(false);
-        }
+        } else setDis(true);
       } else {
         if (
           resAddrs.dropAddr != '0' &&
           resAddrs.hospitalAddr != '0' &&
-          resTimes.resDepTime != '0'
+          resTimes.resDepTime.time != '0'
         ) {
           setDis(false);
-        }
+        } else setDis(true);
       }
     }
-    console.log(resAddrs, resTimes);
+
+    if (!dis) {
+      Test();
+    }
   }, [resAddrs, resTimes]);
+
+  useEffect(() => {
+    ReservationTimeChange(resTimes, setResTimes, resDate, setResDate);
+  }, [resTimes.resResTime.time]);
 
   return (
     <CommonLayout>
@@ -147,12 +182,21 @@ const Reservation01 = ({route, navigation}) => {
             STEP2. 일정 설정
           </Text>
           <ResDate setDate={setResDate} />
-          <GetTime
-            serviceName={serviceName}
-            way={way}
-            time={resTimes}
-            setTime={setResTimes}
-          />
+          {resDate == '--' ? (
+            <></>
+          ) : (
+            <>
+              <GetTime
+                serviceName={serviceName}
+                way={way}
+                time={resTimes}
+                setTime={setResTimes}
+                setDis={setDis}
+                gowithTime={gowithtime}
+                setGowithTime={setGowithtime}
+              />
+            </>
+          )}
         </ServiceBlock>
         <View style={styles.btn}>
           <NextBtn
@@ -163,6 +207,7 @@ const Reservation01 = ({route, navigation}) => {
                 resAddrs: resAddrs,
                 resDate: resDate,
                 resTimes: resTimes,
+                gowithHospitalTime: gowithtime,
               });
             }}
             disable={dis}
