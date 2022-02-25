@@ -45,6 +45,9 @@ const typoStyles = StyleSheet.create({
   textWhite: {
     color: '#fff',
   },
+  textBlack: {
+    color: '#000',
+  },
 
   /* font-weight */
   fwRegular: {
