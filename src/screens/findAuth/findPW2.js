@@ -3,10 +3,28 @@ import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
 import {InputBox} from '../../components/findAuth/findAuthComponent';
 import FindAuthLayout from '../../components/findAuth/findAuthLayout';
+import FindIDAPI from '../../api/auth/findIDAPI';
 
-const FindPW2 = ({navigation}) => {
+const FindPW2 = ({route, navigation}) => {
+  const {phone} = route.params;
+
+  const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState();
+
+  const getemail = async () => {
+    await FindIDAPI({phone: phone}).then(r => {
+      setTimeout(() => {
+        console.log('this is r: ', r);
+        setEmail(r);
+      }, 100);
+    });
+  };
+
+  useEffect(() => {
+    getemail();
+  }, []);
+
   return (
     <FindAuthLayout
       pageType="pw"

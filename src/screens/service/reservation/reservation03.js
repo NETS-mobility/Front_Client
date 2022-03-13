@@ -53,11 +53,12 @@ const Reservation03 = ({route, navigation}) => {
     guardInfo,
     userInfo,
     validTargetKind,
+    gowithHospitalTime,
   } = route.params;
 
   const [diagnosis, setDiagnosis] = useState('');
   const [etc, setEtc] = useState('');
-
+  const [disable, setDisable] = useState(true);
   const [check, setCheck] = useState([false, false, false, false, false]);
   const [result, setResult] = useState('');
   const checkStaticString = [
@@ -68,6 +69,12 @@ const Reservation03 = ({route, navigation}) => {
     '기타',
   ];
   let checkString = '';
+
+  useEffect(() => {
+    if (result != '0' && diagnosis != '') {
+      setDisable(false);
+    }
+  }, [result, diagnosis]);
 
   useEffect(() => {
     for (let i = 0; i < 5; i++) {
@@ -175,29 +182,26 @@ const Reservation03 = ({route, navigation}) => {
               navigation.push('Reservation04');
               ReservationAPI({
                 jwtToken: await GetToken(),
-                reservationId: '123456789',
                 serviceKindId: serviceKindId,
                 moveDirection: moveDirection,
-                gowithHospitalTime: 20,
-                pickupBaseAddr: resAddrs.homeAddr,
-                pickupDetailAddr: '123동',
-                dropBaseAddr: resAddrs.dropAddr,
-                dropDetailAddr: '123동',
-                hospitalBaseAddr: resAddrs.hosAddr,
-                hospitalDetailAddr: '123동',
-                hospitalName: '백병원',
+                gowithHospitalTime: gowithHospitalTime, //바꿔야댐
+                pickupAddr: resAddrs.homeAddr,
+                dropAddr: resAddrs.dropAddr,
+                hospitalAddr: resAddrs.hospitalAddr,
                 hopeReservationDate: resDate,
-                hopeHospitalArrivalTime: resTimes.resArrTime,
-                fixedMedicalTime: resTimes.resResTime,
-                hopeHospitalDepartureTime: resTimes.resDepTime,
+                hopeHospitalArrivalTime: resTimes.resArrTime.time,
+                fixedMedicalTime: resTimes.resResTime.time,
+                hopeHospitalDepartureTime: resTimes.resDepTime.time,
                 fixedMedicalDetail: diagnosis,
                 hopeRequires: result,
                 patientName: userInfo.name,
                 patientPhone: userInfo.phone,
+                protectorName: guardInfo.name,
+                protectorPhone: guardInfo.phone,
                 validTargetKind: validTargetKind,
-                reservationStateId: 1,
               });
             }}
+            disable={disable}
           />
         </View>
       </ScrollView>
