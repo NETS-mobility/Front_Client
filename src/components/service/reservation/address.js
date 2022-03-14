@@ -1,9 +1,8 @@
 import React from 'react';
-import {Modal, View, Pressable, Dimensions} from 'react-native';
+import {Modal, Pressable} from 'react-native';
 import Postcode from '@actbase/react-daum-postcode';
 
 //postcode 가운데정렬 해야함
-
 const PutAddress = ({isModal, setModal, setAddr, setSido}) => {
   return (
     <>

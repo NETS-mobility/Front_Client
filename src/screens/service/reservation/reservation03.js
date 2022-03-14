@@ -11,6 +11,7 @@ import {ServiceInputBoxWithoutBtn} from '../../../components/service/reservation
 import ServiceProgress from '../../../components/service/reservation/progress';
 import ReservationAPI from '../../../api/reservation/reservation';
 import {GetToken} from '../../../utils/controlToken';
+import GeoCoding from '../../../utils/geocoding';
 
 const styles = StyleSheet.create({
   title: {
@@ -69,6 +70,39 @@ const Reservation03 = ({route, navigation}) => {
     '기타',
   ];
   let checkString = '';
+
+  const [xy, setXY] = useState({
+    pickup_x: 0,
+    pickup_y: 0,
+    drop_x: 0,
+    drop_y: 0,
+    hos_x: 0,
+    hos_y: 0,
+  });
+
+  const GetXY = async (addr, prop) => {
+    await GeoCoding(addr).then(res => {
+      const prop_x = `${prop}_x`;
+      const prop_y = `${prop}_y`;
+      setXY(prev => ({...prev, [prop_x]: res.x, [prop_y]: res.y}));
+    });
+  };
+
+  useEffect(() => {
+    if (resAddrs.homeAddr != '0') {
+      GetXY(resAddrs.homeAddr, 'pickup');
+    }
+    if (resAddrs.hospitalAddr != '0') {
+      GetXY(resAddrs.hospitalAddr, 'hos');
+    }
+    if (resAddrs.dropAddr != '0') {
+      GetXY(resAddrs.dropAddr, 'drop');
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('xy==', xy);
+  }, [xy]);
 
   useEffect(() => {
     if (result != '0' && diagnosis != '') {
@@ -179,27 +213,47 @@ const Reservation03 = ({route, navigation}) => {
         <View style={styles.proset}>
           <NextBtn
             navWhere={async () => {
-              navigation.push('Reservation04');
-              ReservationAPI({
-                jwtToken: await GetToken(),
-                serviceKindId: serviceKindId,
-                moveDirection: moveDirection,
-                gowithHospitalTime: gowithHospitalTime, //바꿔야댐
-                pickupAddr: resAddrs.homeAddr,
-                dropAddr: resAddrs.dropAddr,
-                hospitalAddr: resAddrs.hospitalAddr,
-                hopeReservationDate: resDate,
-                hopeHospitalArrivalTime: resTimes.resArrTime.time,
-                fixedMedicalTime: resTimes.resResTime.time,
-                hopeHospitalDepartureTime: resTimes.resDepTime.time,
-                fixedMedicalDetail: diagnosis,
-                hopeRequires: result,
-                patientName: userInfo.name,
-                patientPhone: userInfo.phone,
-                protectorName: guardInfo.name,
-                protectorPhone: guardInfo.phone,
-                validTargetKind: validTargetKind,
+              DispatchAPI({
+                revData: {
+                  rev_id: '1',
+                  pickup: resAddrs.homeAddr,
+                  hos: resAddrs.hospitalAddr,
+                  drop: resAddrs.dropAddr,
+                  dire: moveDirection,
+                  pickup_x: xy.pickup_x,
+                  pickup_y: xy.pickup_y,
+                  drop_x: xy.drop_x,
+                  drop_y: xy.drop_y,
+                  hos_x: xy.hos_x,
+                  hos_y: xy.hos_y,
+                  old_hos_arr_time: resTimes.resArrTime.time,
+                  old_hos_dep_time: resTimes.resDepTime.time,
+                  rev_date: resDate,
+                  gowithHospitalTime: gowithHospitalTime,
+                  service_kind_id: serviceKindId,
+                },
               });
+              // navigation.push('Reservation04');
+              // ReservationAPI({
+              //   jwtToken: await GetToken(),
+              //   serviceKindId: serviceKindId,
+              //   moveDirection: moveDirection,
+              //   gowithHospitalTime: gowithHospitalTime, //바꿔야댐
+              //   pickupAddr: resAddrs.homeAddr,
+              //   dropAddr: resAddrs.dropAddr,
+              //   hospitalAddr: resAddrs.hospitalAddr,
+              //   hopeReservationDate: resDate,
+              //   hopeHospitalArrivalTime: resTimes.resArrTime.time,
+              //   fixedMedicalTime: resTimes.resResTime.time,
+              //   hopeHospitalDepartureTime: resTimes.resDepTime.time,
+              //   fixedMedicalDetail: diagnosis,
+              //   hopeRequires: result,
+              //   patientName: userInfo.name,
+              //   patientPhone: userInfo.phone,
+              //   protectorName: guardInfo.name,
+              //   protectorPhone: guardInfo.phone,
+              //   validTargetKind: validTargetKind,
+              // });
             }}
             disable={disable}
           />
