@@ -11,6 +11,7 @@ import typoStyles from '../../../assets/fonts/typography';
 import {btnStyles} from '../../../components/common/button';
 import CommonLayout from '../../../components/common/layout';
 import CustomBtn from '../../../components/common/button';
+import GeoCoding from '../../../utils/geocoding';
 
 const styles = StyleSheet.create({
   background: {
@@ -74,7 +75,17 @@ const ReservationMainScreen = ({navigation}) => {
     }
   }, [check]);
 
-  // useE
+  // // useE
+  // const Test = async () => {
+  //   console.log('Geocoding start');
+  //   const res = await GeoCoding();
+  //   // console.log('res==', res.documents);
+  //   console.log('Geocoding end');
+  // };
+
+  // useEffect(() => {
+  //   Test();
+  // }, []);
 
   useEffect(() => {
     if (check.filter(i => i == true).length == cnt) {
