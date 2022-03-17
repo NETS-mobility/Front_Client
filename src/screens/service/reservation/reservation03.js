@@ -12,6 +12,7 @@ import ServiceProgress from '../../../components/service/reservation/progress';
 import ReservationAPI from '../../../api/reservation/reservation';
 import {GetToken} from '../../../utils/controlToken';
 import GeoCoding from '../../../utils/geocoding';
+import DispatchAPI from '../../../api/dispatch/dispatch';
 
 const styles = StyleSheet.create({
   title: {
@@ -213,9 +214,8 @@ const Reservation03 = ({route, navigation}) => {
         <View style={styles.proset}>
           <NextBtn
             navWhere={async () => {
-              DispatchAPI({
+              const res = await DispatchAPI({
                 revData: {
-                  rev_id: '1',
                   pickup: resAddrs.homeAddr,
                   hos: resAddrs.hospitalAddr,
                   drop: resAddrs.dropAddr,
@@ -229,31 +229,32 @@ const Reservation03 = ({route, navigation}) => {
                   old_hos_arr_time: resTimes.resArrTime.time,
                   old_hos_dep_time: resTimes.resDepTime.time,
                   rev_date: resDate,
-                  gowithHospitalTime: gowithHospitalTime,
+                  gowithHospitalTime: 20,
                   service_kind_id: serviceKindId,
                 },
+              }).then(response => response);
+              console.log('배차성공?', res);
+              navigation.push('Reservation04', {
+                jwtToken: await GetToken(),
+                serviceKindId: serviceKindId,
+                moveDirection: moveDirection,
+                gowithHospitalTime: 20, //바꿔야댐
+                pickupAddr: resAddrs.homeAddr,
+                dropAddr: resAddrs.dropAddr,
+                hospitalAddr: resAddrs.hospitalAddr,
+                hopeReservationDate: resDate,
+                hopeHospitalArrivalTime: resTimes.resArrTime.time,
+                fixedMedicalTime: resTimes.resResTime.time,
+                hopeHospitalDepartureTime: resTimes.resDepTime.time,
+                fixedMedicalDetail: diagnosis,
+                hopeRequires: result,
+                patientName: userInfo.name,
+                patientPhone: userInfo.phone,
+                protectorName: guardInfo.name,
+                protectorPhone: guardInfo.phone,
+                validTargetKind: validTargetKind,
+                dispatch: res,
               });
-              // navigation.push('Reservation04');
-              // ReservationAPI({
-              //   jwtToken: await GetToken(),
-              //   serviceKindId: serviceKindId,
-              //   moveDirection: moveDirection,
-              //   gowithHospitalTime: gowithHospitalTime, //바꿔야댐
-              //   pickupAddr: resAddrs.homeAddr,
-              //   dropAddr: resAddrs.dropAddr,
-              //   hospitalAddr: resAddrs.hospitalAddr,
-              //   hopeReservationDate: resDate,
-              //   hopeHospitalArrivalTime: resTimes.resArrTime.time,
-              //   fixedMedicalTime: resTimes.resResTime.time,
-              //   hopeHospitalDepartureTime: resTimes.resDepTime.time,
-              //   fixedMedicalDetail: diagnosis,
-              //   hopeRequires: result,
-              //   patientName: userInfo.name,
-              //   patientPhone: userInfo.phone,
-              //   protectorName: guardInfo.name,
-              //   protectorPhone: guardInfo.phone,
-              //   validTargetKind: validTargetKind,
-              // });
             }}
             disable={disable}
           />

@@ -81,7 +81,7 @@ const ServiceHistory = ({navigation}) => {
           <ServiceHistoryBlock
             date={'2021.10.20'}
             type={'네츠 휠체어 플러스'}
-            goNext={navigation}
+            // goNext={navigation}
             goNext={() => navigation.navigate('ServiceDetail')}
           />
           <ServiceHistoryBlock

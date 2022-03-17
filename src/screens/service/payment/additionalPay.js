@@ -13,7 +13,7 @@ import {AdditionalPayment} from '../../../components/service/payment/additionalP
 import {
   Step1,
   Step2,
-} from '../../../components/service/reservation/reservation04';
+} from '../../../components/service/reservation/reservationPay';
 
 const AdditionalPay = () => {
   const styles = StyleSheet.create({
