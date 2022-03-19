@@ -42,12 +42,12 @@ const ServiceProgress = ({num}) => {
         num={num}
         stepNum={3}
       />
-      <ServiceIndividualStep
+      {/* <ServiceIndividualStep
         style={styles.color4}
-        step={'결제 진행'}
+        step={''}
         num={num}
         stepNum={4}
-      />
+      /> */}
     </View>
   );
 };
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bar: {
-    width: 75,
+    width: 110,
     height: 8,
     borderRadius: 30,
     backgroundColor: '#19b7cd',
