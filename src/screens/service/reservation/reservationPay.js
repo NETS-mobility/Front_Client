@@ -9,8 +9,6 @@ import {
 import {btnStyles, shadowStyles} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
-import ServiceProgress from '../../../components/service/reservation/progress';
-
 import {
   Step1,
   Step2,
@@ -29,9 +27,8 @@ const ReservationPay = ({navigation}) => {
               typoStyles.fw700,
               styles.title,
             ]}>
-            서비스 예약
+            결제하기
           </Text>
-          <ServiceProgress num={4} />
           <TouchableOpacity
             style={[btnStyles.btnBlue, styles.checkBtn, shadowStyles.shadow]}>
             <Text

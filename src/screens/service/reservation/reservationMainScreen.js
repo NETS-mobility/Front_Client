@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
   },
 
   qbox: {
+    flex: 1,
     alignItems: 'center',
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
   },
 
   statbig: {
@@ -74,18 +75,6 @@ const ReservationMainScreen = ({navigation}) => {
       setCnt(2);
     }
   }, [check]);
-
-  // // useE
-  // const Test = async () => {
-  //   console.log('Geocoding start');
-  //   const res = await GeoCoding();
-  //   // console.log('res==', res.documents);
-  //   console.log('Geocoding end');
-  // };
-
-  // useEffect(() => {
-  //   Test();
-  // }, []);
 
   useEffect(() => {
     if (check.filter(i => i == true).length == cnt) {

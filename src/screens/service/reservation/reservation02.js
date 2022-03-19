@@ -12,6 +12,7 @@ import ServiceProgress from '../../../components/service/reservation/progress';
 import ImageSubmit from '../../../components/common/imageSubmit';
 import GetUserInfo from '../../../api/mypage/getUserInfo';
 import {useIsFocused} from '@react-navigation/native';
+import {PhoneValidation} from '../../../utils/validation';
 
 const styles = StyleSheet.create({
   title: {
@@ -78,16 +79,17 @@ const Reservation02 = ({route, navigation}) => {
   let checkString = '';
   const isFocused = useIsFocused();
 
+  async function fetchData() {
+    const userInfo = await GetUserInfo()
+      .then(res => res)
+      .catch(err => err);
+    setGuard({
+      name: userInfo.name,
+      phone: userInfo.phone,
+    });
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const userInfo = await GetUserInfo()
-        .then(res => res)
-        .catch(err => err);
-      setGuard({
-        name: userInfo.name,
-        phone: userInfo.phone,
-      });
-    }
     fetchData();
   }, [isFocused]);
 
@@ -108,13 +110,17 @@ const Reservation02 = ({route, navigation}) => {
 
   useEffect(() => {
     if (
-      result != '0' &&
+      result != '' &&
       user.name != '' &&
       user.phone != '' &&
+      PhoneValidation(user.phone) &&
       guard.name != '' &&
-      guard.phone != ''
+      guard.phone != '' &&
+      PhoneValidation(guard.phone)
     ) {
       setDisable(false);
+    } else {
+      setDisable(true);
     }
   }, [result, user]);
 
@@ -146,7 +152,7 @@ const Reservation02 = ({route, navigation}) => {
           <ServiceInputBox
             title={'보호자 정보를 입력해주세요.'}
             place1={'보호자 이름'}
-            place2={'보호자 전화번호'}
+            place2={'보호자 전화번호(ex.010-0000-0000)'}
             placetextcolor={'#dad8e0'}
             value={guard}
             setValue={setGuard}
@@ -154,7 +160,7 @@ const Reservation02 = ({route, navigation}) => {
           <ServiceInputBox
             title={'이용자 정보를 입력해주세요.'}
             place1={'이용자 이름'}
-            place2={'이용자 전화번호'}
+            place2={'이용자 전화번호(ex.010-0000-0000)'}
             placetextcolor={'#DAD8E0'}
             value={user}
             setValue={setUser}
@@ -256,6 +262,7 @@ const Reservation02 = ({route, navigation}) => {
               });
             }}
             disable={disable}
+            text={'다음단계'}
           />
         </View>
       </ScrollView>

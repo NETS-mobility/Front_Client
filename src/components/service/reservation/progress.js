@@ -42,29 +42,25 @@ const ServiceProgress = ({num}) => {
         num={num}
         stepNum={3}
       />
-      {/* <ServiceIndividualStep
-        style={styles.color4}
-        step={''}
-        num={num}
-        stepNum={4}
-      /> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   progress: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 28,
   },
   step: {
+    width: '30%',
     height: 30,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   bar: {
-    width: 110,
+    width: '100%',
     height: 8,
     borderRadius: 30,
     backgroundColor: '#19b7cd',
