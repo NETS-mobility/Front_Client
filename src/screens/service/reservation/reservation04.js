@@ -184,7 +184,10 @@ const Reservation04 = ({navigation, route}) => {
                   typoStyles.fw700,
                   styles.rightcontents,
                 ]}>
-                {dispatch?.dispatch1.expCarPickupTime.substring(11, 16)}
+                {dispatch?.dispatch1.expCarTerminateServiceTime.substring(
+                  11,
+                  16,
+                )}
               </Text>
             </View>
             <View style={styles.titlebox}>
@@ -203,7 +206,7 @@ const Reservation04 = ({navigation, route}) => {
                   typoStyles.fw700,
                   styles.rightcontents,
                 ]}>
-                {dispatch?.dispatch1.expCarPickupTime.substring(11, 16)}
+                {serviceKindId}
               </Text>
             </View>
             <View style={styles.titlebox}>
@@ -222,7 +225,7 @@ const Reservation04 = ({navigation, route}) => {
                   typoStyles.fw700,
                   styles.rightcontents,
                 ]}>
-                {dispatch?.dispatch1.expCarPickupTime.substring(11, 16)}
+                {pickupAddr}
               </Text>
             </View>
             <View style={styles.titlebox}>
@@ -241,7 +244,7 @@ const Reservation04 = ({navigation, route}) => {
                   typoStyles.fw700,
                   styles.rightcontents,
                 ]}>
-                {dispatch?.dispatch1.expCarPickupTime.substring(11, 16)}
+                {hospitalAddr}
               </Text>
             </View>
             <View style={styles.titlebox}>
@@ -260,7 +263,7 @@ const Reservation04 = ({navigation, route}) => {
                   typoStyles.fw700,
                   styles.rightcontents,
                 ]}>
-                {dispatch?.dispatch1.expCarPickupTime.substring(11, 16)}
+                {hopeReservationDate}
               </Text>
             </View>
           </View>
