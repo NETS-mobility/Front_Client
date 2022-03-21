@@ -169,10 +169,6 @@ const ServiceDatePicker = ({setDate}) => {
 
 const ServiceTimePicker = ({time, setTime, propName}) => {
   const newTime = time[propName];
-  // 문제... ->  <button onClick={testFunc()}/>
-
-  // <button onClick={()=>testFunc()}/>
-  // <button onClick={testFunc}/>
 
   useEffect(() => {
     if (newTime.timetype != '' && newTime.hour != '' && newTime.min != '') {

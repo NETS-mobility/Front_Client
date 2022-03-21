@@ -1,22 +1,3 @@
-// import React from 'react';
-// import {
-//   View,
-//   Text,
-//   StyleSheet,
-//   TouchableOpacity,
-//   ScrollView,
-// } from 'react-native';
-// import {btnStyles, shadowStyles} from '../../../components/common/button';
-// import typoStyles from '../../../assets/fonts/typography';
-// import CommonLayout from '../../../components/common/layout';
-// import ServiceProgress from '../../../components/service/reservation/progress';
-
-// import {
-//   Step1,
-//   Step2,
-//   Step3,
-// } from '../../../components/service/reservation/reservationPay';
-
 import React, {useEffect} from 'react';
 import {
   SafeAreaView,
@@ -28,6 +9,7 @@ import {
 import typoStyles from '../../../assets/fonts/typography';
 import {btnStyles} from '../../../components/common/button';
 import ReservationAPI from '../../../api/reservation/reservation';
+import {CheckObjEmpty} from '../../../utils/checkEmpty';
 
 // //배차 결과 나오기 전까지 로딩 화면
 // const Reservation04 = ({navigation}) => {
@@ -50,9 +32,8 @@ const styles = StyleSheet.create({
   },
 
   textbox: {
-    // flex: 1,
     width: '100%',
-    height: '45%',
+    height: '100%',
     marginTop: 52,
   },
 
@@ -78,6 +59,16 @@ const styles = StyleSheet.create({
   btn: {
     width: '100%',
     height: 47,
+    padding: 10,
+  },
+
+  btnAlign: {
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'flex-end',
+    marginBottom: 30,
   },
 
   login: {
@@ -113,182 +104,172 @@ const Reservation04 = ({navigation, route}) => {
     dispatch,
   } = data;
 
-  useEffect(() => {
-    console.log('dispatch==', dispatch);
-  }, []);
-
-  if (data.dispatch == {}) {
-    return (
-      <SafeAreaView style={styles.background}>
-        <View style={styles.bigbox}>
-          <View>
-            <Text
-              style={[typoStyles.fs32, typoStyles.fw700, typoStyles.textMain]}>
-              죄송합니다.{'\n'}배차 가능한 차량이 없습니다.
-            </Text>
-          </View>
+  return CheckObjEmpty(dispatch) ? (
+    <SafeAreaView style={styles.background}>
+      <View style={styles.bigbox}>
+        <View>
+          <Text
+            style={[typoStyles.fs32, typoStyles.fw700, typoStyles.textMain]}>
+            배차 가능한 차량이 없습니다.
+          </Text>
         </View>
+        <Text
+          style={[
+            typoStyles.fs20,
+            typoStyles.fw700,
+            typoStyles.textExplain,
+            styles.textbox,
+          ]}>
+          다른 일정을 선택해주세요.
+        </Text>
+      </View>
+      <View style={styles.btnAlign}>
         <TouchableOpacity onPress={() => navigation.push('Home')}>
-          <View style={[styles.loginbtn, btnStyles.btnBlue]}>
+          <View style={[styles.btn, btnStyles.btnWhite]}>
             <Text
-              style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
-              메인 화면으로 돌아가기
+              style={[typoStyles.fs15, typoStyles.fw700, typoStyles.textMain]}>
+              홈 화면으로 돌아가기
             </Text>
           </View>
         </TouchableOpacity>
-      </SafeAreaView>
-    );
-  } else {
-    return (
-      <SafeAreaView style={styles.background}>
-        <View style={styles.bigbox}>
-          <View>
+        <TouchableOpacity
+          onPress={() => navigation.replace('ReservationMainScreen')}>
+          <View style={[styles.btn, btnStyles.btnBlue]}>
             <Text
-              style={[typoStyles.fs32, typoStyles.fw700, typoStyles.textMain]}>
-              배차가{'\n'}완료되었습니다.
+              style={[typoStyles.fs15, typoStyles.fw700, typoStyles.textWhite]}>
+              다른 일정으로 예약하기
             </Text>
           </View>
-          <View style={styles.textbox}>
-            <View style={styles.titlebox}>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  typoStyles.textExplain,
-                  styles.leftcontents,
-                ]}>
-                픽업 예정 시간
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                {dispatch?.dispatch1.expCarPickupTime.substring(11, 16)}
-              </Text>
-            </View>
-            <View style={styles.titlebox}>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  typoStyles.textExplain,
-                  styles.leftcontents,
-                ]}>
-                서비스 종료 예정 시간
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                {dispatch?.dispatch1.expCarTerminateServiceTime.substring(
-                  11,
-                  16,
-                )}
-              </Text>
-            </View>
-            <View style={styles.titlebox}>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  typoStyles.textExplain,
-                  styles.leftcontents,
-                ]}>
-                서비스 종류
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                {serviceKindId}
-              </Text>
-            </View>
-            <View style={styles.titlebox}>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  typoStyles.textExplain,
-                  styles.leftcontents,
-                ]}>
-                픽업주소
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                {pickupAddr}
-              </Text>
-            </View>
-            <View style={styles.titlebox}>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  typoStyles.textExplain,
-                  styles.leftcontents,
-                ]}>
-                병원주소
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                {hospitalAddr}
-              </Text>
-            </View>
-            <View style={styles.titlebox}>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  typoStyles.textExplain,
-                  styles.leftcontents,
-                ]}>
-                예약 날짜
-              </Text>
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                {hopeReservationDate}
-              </Text>
-            </View>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  ) : (
+    <SafeAreaView style={styles.background}>
+      <View style={styles.bigbox}>
+        <View>
+          <Text
+            style={[typoStyles.fs32, typoStyles.fw700, typoStyles.textMain]}>
+            배차가{'\n'}완료되었습니다.
+          </Text>
+        </View>
+        <View style={styles.textbox}>
+          <View style={styles.titlebox}>
+            <Text
+              style={[
+                typoStyles.fs15,
+                typoStyles.fw700,
+                typoStyles.textExplain,
+                styles.leftcontents,
+              ]}>
+              픽업 예정 시간
+            </Text>
+            <Text
+              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
+              {dispatch?.dispatch1.expCarPickupTime.substring(11, 16)}
+            </Text>
+          </View>
+          <View style={styles.titlebox}>
+            <Text
+              style={[
+                typoStyles.fs15,
+                typoStyles.fw700,
+                typoStyles.textExplain,
+                styles.leftcontents,
+              ]}>
+              서비스 종료 예정 시간
+            </Text>
+            <Text
+              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
+              {dispatch?.dispatch1.expCarTerminateServiceTime.substring(11, 16)}
+            </Text>
+          </View>
+          <View style={styles.titlebox}>
+            <Text
+              style={[
+                typoStyles.fs15,
+                typoStyles.fw700,
+                typoStyles.textExplain,
+                styles.leftcontents,
+              ]}>
+              서비스 종류
+            </Text>
+            <Text
+              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
+              {serviceKindId}
+            </Text>
+          </View>
+          <View style={styles.titlebox}>
+            <Text
+              style={[
+                typoStyles.fs15,
+                typoStyles.fw700,
+                typoStyles.textExplain,
+                styles.leftcontents,
+              ]}>
+              픽업주소
+            </Text>
+            <Text
+              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
+              {pickupAddr}
+            </Text>
+          </View>
+          <View style={styles.titlebox}>
+            <Text
+              style={[
+                typoStyles.fs15,
+                typoStyles.fw700,
+                typoStyles.textExplain,
+                styles.leftcontents,
+              ]}>
+              병원주소
+            </Text>
+            <Text
+              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
+              {hospitalAddr}
+            </Text>
+          </View>
+          <View style={styles.titlebox}>
+            <Text
+              style={[
+                typoStyles.fs15,
+                typoStyles.fw700,
+                typoStyles.textExplain,
+                styles.leftcontents,
+              ]}>
+              예약 날짜
+            </Text>
+            <Text
+              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
+              {hopeReservationDate}
+            </Text>
           </View>
         </View>
-        <View style={styles.login}>
-          <TouchableOpacity
-            onPress={async () => {
-              const res = await ReservationAPI(data);
-            }}>
-            {/* 버튼 눌렀을 때 reservation api 연결, 그리고 결제화면으로 넘기깅 */}
-            <View style={[styles.btn, btnStyles.btnBlue]}>
-              <Text
-                style={[
-                  typoStyles.fs20,
-                  typoStyles.fw700,
-                  typoStyles.textWhite,
-                ]}>
-                결제하러가기
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    );
-  }
+      </View>
+      <View style={styles.btnAlign}>
+        <TouchableOpacity
+          onPress={async () => {
+            const res = await ReservationAPI(data);
+            navigation.push('ReservationPay');
+          }}>
+          {/* 버튼 눌렀을 때 reservation api 연결, 그리고 결제화면으로 넘기깅 */}
+          <View style={[styles.btn, btnStyles.btnBlue]}>
+            <Text
+              style={[typoStyles.fs15, typoStyles.fw700, typoStyles.textWhite]}>
+              결제하러 가기
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.push('Home')}>
+          <View style={[styles.btn, btnStyles.btnWhite]}>
+            <Text
+              style={[typoStyles.fs15, typoStyles.fw700, typoStyles.textMain]}>
+              홈 화면으로 돌아가기
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
 };
 
 export default Reservation04;

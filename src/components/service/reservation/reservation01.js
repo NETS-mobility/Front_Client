@@ -14,18 +14,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
 });
-// ResDate는 모두 필요
-
-// serviceName=='네츠 휠체어 플러스 왕복 서비스'
-// serviceName=='네츠 휠체어 왕복 서비스'
-//HomeAddr / HospitalAddr / DropAddr / ResArrTime / ResResTime / ResDepTime
-
-// serviceName=="네츠 휠체어 플러스 편도 서비스"
-// serviceName=="네츠 휠체어 편도 서비스"
-// 방향이 자택->병원이면
-// HomeAddr / HospitalAddr / ResArrTime / ResResTime
-// 방향이 병원->자택이면
-// DropAddr / HospitalAddr / ResArrTime
 
 export const GetAddr = ({serviceName, way, addr, setAddr}) => {
   if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
@@ -115,7 +103,7 @@ export const GetTime = ({
           <ServiceGowithPicker
             type={true}
             title={'병원 동행 예상 시간은 다음과 같습니다.'}
-            time={gowithTime} //귀가 출발 시간-병원 도착 시간으로 설정되도록 변경
+            time={gowithTime}
           />
         )}
       </>

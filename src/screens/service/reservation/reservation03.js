@@ -57,6 +57,7 @@ const Reservation03 = ({route, navigation}) => {
     validTargetKind,
     gowithHospitalTime,
   } = route.params;
+  console.log('moveDirection==', moveDirection);
 
   const [diagnosis, setDiagnosis] = useState('');
   const [etc, setEtc] = useState('');
@@ -106,8 +107,10 @@ const Reservation03 = ({route, navigation}) => {
   }, [xy]);
 
   useEffect(() => {
-    if (result != '0' && diagnosis != '') {
+    if (result != '' && diagnosis != '') {
       setDisable(false);
+    } else {
+      setDisable(true);
     }
   }, [result, diagnosis]);
 
@@ -213,6 +216,7 @@ const Reservation03 = ({route, navigation}) => {
         </ServiceBlock>
         <View style={styles.proset}>
           <NextBtn
+            text={'배차 가능 여부 확인하기'}
             navWhere={async () => {
               const res = await DispatchAPI({
                 revData: {
@@ -238,7 +242,7 @@ const Reservation03 = ({route, navigation}) => {
                 jwtToken: await GetToken(),
                 serviceKindId: serviceKindId,
                 moveDirection: moveDirection,
-                gowithHospitalTime: 20, //바꿔야댐
+                gowithHospitalTime: 160, //바꿔야댐
                 pickupAddr: resAddrs.homeAddr,
                 dropAddr: resAddrs.dropAddr,
                 hospitalAddr: resAddrs.hospitalAddr,

@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import NetsLogo from '../../assets/image/logo.svg';
+import NetsLogo from '../../assets/icon/logo_blue.svg';
 import btnStyles from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
 import {LoginBtn, SignBtn} from '../../components/login/LoginBtn';
