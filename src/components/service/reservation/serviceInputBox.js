@@ -88,7 +88,10 @@ const ServiceAddress = ({
               styles.inputbox,
               {
                 borderBottomColor:
-                  sido == '서울' || sido == '경기' || sido == ''
+                  sido == '서울' ||
+                  sido == '경기' ||
+                  sido == '인천' ||
+                  sido == ''
                     ? '#DAD8E0'
                     : '#fb7348',
               },
@@ -120,9 +123,9 @@ const ServiceAddress = ({
           </View>
         </View>
       </TouchableOpacity>
-      {sido != '서울' && sido != '경기' && sido != '' ? (
+      {sido != '서울' && sido != '경기' && sido != '인천' && sido != '' ? (
         <Text style={[typoStyles.fs14, typoStyles.textPrimary]}>
-          현재 서울, 경기 지역만 서비스 가능합니다.
+          현재 서울, 경기, 인천 지역만 서비스 가능합니다.
         </Text>
       ) : (
         <></>
@@ -138,8 +141,9 @@ const ServiceAddress = ({
         placeholder={'상세주소'}
         placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
-        value={detailAddr}
+        defaultValue={detailAddr}
         onChangeText={setDetailAddr}
+        returnKeyType={'next'}
       />
       {isModal ? (
         <PutAddress
@@ -185,8 +189,9 @@ const ServiceInputBox = ({
         placeholder={place1}
         placeholderTextColor={placetextcolor}
         autoCapitalize="none"
-        value={value.name}
+        defaultValue={value.name}
         onChangeText={text => setValue(prev => ({...prev, name: text}))}
+        returnKeyType={'next'}
       />
       <TextInput
         onFocus={() => setFocus2(true)}
@@ -199,8 +204,9 @@ const ServiceInputBox = ({
         placeholder={place2}
         placeholderTextColor={placetextcolor}
         autoCapitalize="none"
-        value={value.phone}
+        defaultValue={value.phone}
         onChangeText={text => setValue(prev => ({...prev, phone: text}))}
+        returnKeyType={'next'}
       />
     </View>
   );
@@ -235,8 +241,9 @@ const ServiceInputBoxWithoutBtn = ({title, place1, Text1, setText1}) => {
         placeholder={place1}
         placeholderTextColor={'#DAD8E0'}
         autoCapitalize="none"
-        value={Text1}
+        defaultValue={Text1}
         onChangeText={setText1}
+        returnKeyType={'next'}
       />
     </View>
   );

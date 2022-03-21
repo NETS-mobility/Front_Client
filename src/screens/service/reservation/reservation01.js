@@ -139,6 +139,16 @@ const Reservation01 = ({route, navigation}) => {
     ReservationTimeChange(resTimes, setResTimes, resDate, setResDate);
   }, [resTimes.resResTime.time]);
 
+  useEffect(() => {
+    const arrTimeForComp = new Date(`${resDate}T${resTimes.resArrTime.time}`);
+    const resTimeForComp = new Date(`${resDate}T${resTimes.resResTime.time}`);
+    if (resTimeForComp.getTime() < arrTimeForComp.getTime() + 20 * 60000) {
+      setDis(true);
+    } else {
+      setDis(false);
+    }
+  }, [resTimes.resArrTime.time]);
+
   return (
     <CommonLayout>
       <ScrollView style={styles.background}>
@@ -211,6 +221,7 @@ const Reservation01 = ({route, navigation}) => {
               });
             }}
             disable={dis}
+            text={'다음단계'}
           />
         </View>
       </ScrollView>

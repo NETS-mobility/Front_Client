@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
@@ -12,8 +12,11 @@ import ServiceBlock from '../../../components/service/serviceBlock';
 import {Payment} from '../../../components/service/payment/payment';
 import {ServiceDetailProgress} from '../../../components/service/detail/serviceDetail';
 import MapView from '../../../components/service/detail/MapView';
+import GetServiceDetail from '../../../api/reservation/serviceDetail';
 
-const ServiceDetail = () => {
+const ServiceDetail = ({navigation, route}) => {
+  const [id] = useState(route.params.detailId);
+  const [detail, setDetail] = useState({});
   const styles = StyleSheet.create({
     block1: {
       width: '100%',
@@ -34,6 +37,16 @@ const ServiceDetail = () => {
       alignSelf: 'center',
     },
   });
+
+  const GetDetailInfos = async () => {
+    setDetail(await GetServiceDetail(id));
+  };
+
+  useEffect(() => {
+    GetDetailInfos();
+  }, [id]);
+
+  console.log('res==,', detail);
   return (
     <CommonLayout>
       <ScrollView>
@@ -67,12 +80,12 @@ const ServiceDetail = () => {
         />
         <ServiceDetailProgress />
         <ManagerComment comment={'문 앞에 도착하면 연락드리겠습니다!'} />
-        <ServiceBlock>
+        {/* <ServiceBlock>
           <ServiceInfo />
         </ServiceBlock>
         <ServiceBlock>
           <Payment />
-        </ServiceBlock>
+        </ServiceBlock> */}
       </ScrollView>
     </CommonLayout>
   );
