@@ -54,6 +54,8 @@ export const GetTime = ({
   setDis,
   gowithTime,
   setGowithTime,
+  gowithPlusTime,
+  setGowithPlusTime,
 }) => {
   useEffect(() => {
     if (time.resArrTime.time != '0' && time.resDepTime.time != '0') {
@@ -76,12 +78,12 @@ export const GetTime = ({
   }, [time.resArrTime.time, time.resDepTime.time]);
 
   useEffect(() => {
-    if (gowithTime <= 0) {
+    if (gowithTime <= 0 || gowithPlusTime <= 0) {
       setDis(true);
     } else {
       setDis(false);
     }
-  }, [gowithTime]);
+  }, [gowithTime, gowithPlusTime]);
 
   if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
     return (
@@ -121,6 +123,8 @@ export const GetTime = ({
             type={false}
             title={'병원 동행 기본 시간은 다음과 같습니다.'}
             time={'20'} //관리자에서 설정한 기본 병원동행 시간으로 입력되도록 변경
+            gowithtime={gowithPlusTime}
+            setGowithtime={setGowithPlusTime}
           />
         </>
       );
@@ -132,6 +136,8 @@ export const GetTime = ({
             type={false}
             title={'병원 동행 기본 시간은 다음과 같습니다.'}
             time={'20'} //관리자에서 설정한 기본 병원동행 시간으로 입력되도록 변경
+            gowithtime={gowithPlusTime}
+            setGowithtime={setGowithPlusTime}
           />
         </>
       );

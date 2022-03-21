@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import ServiceBlock from '../../../components/service/serviceBlock';
-import {btnStyles} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import {NextBtn} from '../../../components/service/reservation/serviceBtn';
@@ -11,10 +10,7 @@ import {
   GetAddr,
   GetTime,
 } from '../../../components/service/reservation/reservation01';
-import CustomBtn from '../../../components/common/button';
 import ReservationTimeChange from '../../../components/service/reservation/reservationTimeChange';
-import {ServiceInputBoxWithoutBtn} from '../../../components/service/reservation/serviceInputBox';
-import {ServiceGowithPicker} from '../../../components/service/reservation/servicePicker';
 
 const styles = StyleSheet.create({
   background: {
@@ -68,7 +64,12 @@ const Reservation01 = ({route, navigation}) => {
     dropAddr: '0',
   });
   const [resDate, setResDate] = useState('0');
-  const [gowithtime, setGowithtime] = useState(-1);
+  const [gowithtime, setGowithtime] = useState(-1); //귀가출발시간-병원도착시간 => 왕복일 때 병원동행시간
+  const [gowithplustime, setGowithplustime] = useState(-1); //기본 20분+추가하고싶은 병원 동행시간 => 편도일 때
+
+  useEffect(() => {
+    console.log('resDate==', resDate);
+  }, [resDate]);
 
   useEffect(() => {
     const Test = async () => {
@@ -97,12 +98,15 @@ const Reservation01 = ({route, navigation}) => {
 
     if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
       if (
+        resDate != '--' &&
+        resDate != '0' &&
         resAddrs.homeAddr != '0' &&
         resAddrs.hospitalAddr != '0' &&
         resAddrs.dropAddr != '0' &&
         resTimes.resArrTime.time != '0' &&
         resTimes.resResTime.time != '0' &&
         resTimes.resDepTime.time != '0'
+        // gowithtime >= 0
       ) {
         setDis(false);
       } else setDis(true);
@@ -112,18 +116,24 @@ const Reservation01 = ({route, navigation}) => {
     ) {
       if (way) {
         if (
+          resDate != '--' &&
+          resDate != '0' &&
           resAddrs.homeAddr != '0' &&
           resAddrs.hospitalAddr != '0' &&
           resTimes.resArrTime.time != '0' &&
           resTimes.resResTime.time != '0'
+          // gowithplustime >= 0
         ) {
           setDis(false);
         } else setDis(true);
       } else {
         if (
+          resDate != '--' &&
+          resDate != '0' &&
           resAddrs.dropAddr != '0' &&
           resAddrs.hospitalAddr != '0' &&
           resTimes.resDepTime.time != '0'
+          // gowithtime >= 0
         ) {
           setDis(false);
         } else setDis(true);
@@ -148,6 +158,11 @@ const Reservation01 = ({route, navigation}) => {
       setDis(false);
     }
   }, [resTimes.resArrTime.time]);
+
+  useEffect(() => {
+    console.log('gowithtime', gowithtime);
+    console.log('gowithplustime', gowithplustime);
+  }, [gowithtime, gowithplustime]);
 
   return (
     <CommonLayout>
@@ -204,6 +219,8 @@ const Reservation01 = ({route, navigation}) => {
                 setDis={setDis}
                 gowithTime={gowithtime}
                 setGowithTime={setGowithtime}
+                gowithPlusTime={gowithplustime}
+                setGowithPlusTime={setGowithplustime}
               />
             </>
           )}
@@ -217,7 +234,10 @@ const Reservation01 = ({route, navigation}) => {
                 resAddrs: resAddrs,
                 resDate: resDate,
                 resTimes: resTimes,
-                gowithHospitalTime: gowithtime,
+                gowithHospitalTime:
+                  serviceKindID == 2 || serviceKindID == 4
+                    ? gowithplustime + 20
+                    : gowithtime,
               });
             }}
             disable={dis}

@@ -3,6 +3,7 @@ import axios from 'axios';
 const ReservationAPI = data => {
   const {dispatch, ...filtered} = data;
   const dispatch1 = data.dispatch.dispatch1;
+  const dispatch2 = data.dispatch.dispatch2;
   console.log('data===', data);
   console.log('dispatch1===', dispatch1);
   console.log('data.dispatch===', data.dispatch);
@@ -12,14 +13,16 @@ const ReservationAPI = data => {
     .post('/client/reserve', {
       data: filtered,
       dispatch1: dispatch1,
-      dispatch2: {
-        netsmanagerNum: 0,
-        carId: 0,
-        expMoveDistance: 0,
-        expMoveTime: 0,
-        expCarPickupTime: 'string',
-        expCarTerminateServiceTime: 'string',
-      },
+      dispatch2: dispatch2
+        ? dispatch2
+        : {
+            netsmanagerNum: 0,
+            carId: 0,
+            expMoveDistance: 0,
+            expMoveTime: 0,
+            expCarPickupTime: '',
+            expCarTerminateServiceTime: '',
+          },
       file: {},
     })
     .then(res => console.log(res.data))

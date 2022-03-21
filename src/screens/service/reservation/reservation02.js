@@ -94,6 +94,10 @@ const Reservation02 = ({route, navigation}) => {
   }, [isFocused]);
 
   useEffect(() => {
+    console.log('하ㅣ어리ㅓ나ㅣ어닐', gowithHospitalTime);
+  }, [gowithHospitalTime]);
+
+  useEffect(() => {
     for (let i = 0; i < 3; i++) {
       if (check[i]) {
         checkString += checkStaticString[i] + ',';

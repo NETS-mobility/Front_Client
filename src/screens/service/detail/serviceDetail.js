@@ -44,9 +44,8 @@ const ServiceDetail = ({navigation, route}) => {
 
   useEffect(() => {
     GetDetailInfos();
-  }, [id]);
+  }, []);
 
-  console.log('res==,', detail);
   return (
     <CommonLayout>
       <ScrollView>
@@ -60,7 +59,7 @@ const ServiceDetail = ({navigation, route}) => {
             ]}>
             서비스 상세보기
           </Text>
-          <ServiceStatus text={'현재 운행 중'} />
+          <ServiceStatus text={detail?.service?.reservation_state} />
         </View>
         <View style={styles.mapContainer}>
           <MapView
@@ -71,21 +70,30 @@ const ServiceDetail = ({navigation, route}) => {
           />
         </View>
         <ManagerProfile
-          name={'홍길동'}
-          certificate={['간호조무사', '요양보호사']}
-          comment={
-            '모든 일에 적극적이며 긍정적이라는 평가를 받아왔습니다. 따뜻한 배려와 친절함으로 동행하겠습니다.'
-          }
+          certificate={detail?.dispatch?.[0].netsmanager_certificate}
+          name={detail?.dispatch?.[0].netsmanager_name}
+          comment={detail?.dispatch?.[0].netsmanager_intro}
+          tel={detail?.dispatch?.[0].netsmanager_tel}
           type={2}
         />
-        <ServiceDetailProgress />
-        <ManagerComment comment={'문 앞에 도착하면 연락드리겠습니다!'} />
-        {/* <ServiceBlock>
-          <ServiceInfo />
-        </ServiceBlock>
+        <ServiceDetailProgress
+          progress={{
+            state: detail?.service_state,
+            state_time: detail?.service_state_time,
+          }}
+        />
+        <ManagerComment comment={detail?.dispatch?.[0].netsmanager_mention} />
         <ServiceBlock>
-          <Payment />
-        </ServiceBlock> */}
+          <ServiceInfo
+            num={2}
+            data={detail.service}
+            dispatch={detail.dispatch}
+          />
+        </ServiceBlock>
+
+        <ServiceBlock>
+          <Payment pay={detail?.payment} />
+        </ServiceBlock>
       </ScrollView>
     </CommonLayout>
   );

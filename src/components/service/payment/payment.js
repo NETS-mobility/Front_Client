@@ -2,7 +2,9 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 
-export const Payment = () => {
+export const Payment = ({pay}) => {
+  console.log('pay=', Number(pay?.charge).toLocaleString());
+
   return (
     <View>
       <View style={[styles.box, styles.boldLine]}>
@@ -30,20 +32,21 @@ export const Payment = () => {
         </Text>
         <Text
           style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
-          40,000원
+          {`${Number(pay?.charge).toLocaleString('ko-KR')}원`}
         </Text>
       </View>
-      <View style={[styles.box, styles.lightLine]}>
-        <Text
-          style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
-          부가세
-        </Text>
-        <Text
-          style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
-          4,000원
-        </Text>
-      </View>
-
+      {pay?.extraPay != '' && (
+        <View style={[styles.box, styles.lightLine]}>
+          <Text
+            style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
+            추가요금
+          </Text>
+          <Text
+            style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
+            {`${Number(pay?.extraPay).toLocaleString('ko-KR')}원`}
+          </Text>
+        </View>
+      )}
       <View style={styles.total}>
         <Text
           style={[
@@ -54,7 +57,9 @@ export const Payment = () => {
           최종결제금액
         </Text>
         <Text style={[typoStyles.fw700, typoStyles.fs18, typoStyles.textMain]}>
-          44,000원
+          {`${(Number(pay?.charge) + Number(pay?.extraPay)).toLocaleString(
+            'ko-KR',
+          )}원`}
         </Text>
       </View>
     </View>

@@ -242,7 +242,7 @@ const Reservation03 = ({route, navigation}) => {
                 jwtToken: await GetToken(),
                 serviceKindId: serviceKindId,
                 moveDirection: moveDirection,
-                gowithHospitalTime: 160, //바꿔야댐
+                gowithHospitalTime: gowithHospitalTime, //바꿔야댐
                 pickupAddr: resAddrs.homeAddr,
                 dropAddr: resAddrs.dropAddr,
                 hospitalAddr: resAddrs.hospitalAddr,

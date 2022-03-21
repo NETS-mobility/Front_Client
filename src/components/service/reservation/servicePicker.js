@@ -307,8 +307,13 @@ const ServiceTimePicker = ({time, setTime, propName}) => {
   );
 };
 
-const ServiceGowithPicker = ({type, title, time}) => {
-  const [gowithtime, setGowithtime] = useState('');
+const ServiceGowithPicker = ({
+  type,
+  title,
+  time,
+  gowithtime,
+  setGowithtime,
+}) => {
   const onChangeGowith = value => {
     setGowithtime(value);
   };
@@ -366,13 +371,12 @@ const ServiceGowithPicker = ({type, title, time}) => {
             onValueChange={value => onChangeGowith(value)}
             useNativeAndroidPickerStyle={false}
             items={[
-              {label: '추가시간 필요없음', value: '00', key: '0'},
-              {label: '20분', value: '20', key: '20'},
-              {label: '40분', value: '40', key: '40'},
-              {label: '1시간', value: '60', key: '60'},
-              {label: '1시간 20분', value: '80', key: '80'},
-              {label: '1시간 40분', value: '100', key: '100'},
-              {label: '2시간', value: '120', key: '120'},
+              {label: '20분', value: 20, key: '20'},
+              {label: '40분', value: 40, key: '40'},
+              {label: '1시간', value: 60, key: '60'},
+              {label: '1시간 20분', value: 80, key: '80'},
+              {label: '1시간 40분', value: 100, key: '100'},
+              {label: '2시간', value: 120, key: '120'},
             ]}
             style={{
               placeholder: styles.gowithbox,

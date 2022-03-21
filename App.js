@@ -5,7 +5,8 @@ import BottomTab from './src/components/common/bottomTab';
 import {GetToken} from './src/utils/controlToken';
 
 import axios from 'axios';
-axios.defaults.baseURL = 'http://10.0.2.2:5000';
+// axios.defaults.baseURL = 'http://10.0.2.2:5000';
+axios.defaults.baseURL = 'http://35.197.107.190:5000';
 
 export const RefreshContext = createContext({
   refresh: false,

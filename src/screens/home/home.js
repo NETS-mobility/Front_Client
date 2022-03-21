@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -16,6 +16,7 @@ import {
   NoTokenNoticeBlock,
 } from '../../components/home/noticeBlock';
 import {RefreshContext} from '../../../App';
+import GetHomeInfo from '../../api/home/GetHomeInfo';
 
 const Home = ({navigation}) => {
   const {refresh, setRefresh} = useContext(RefreshContext);
@@ -58,6 +59,20 @@ const Home = ({navigation}) => {
     },
   });
 
+  const [res, setRes] = useState([]);
+
+  const GetHomeNoti = async () => {
+    setRes(await GetHomeInfo());
+  };
+
+  useEffect(() => {
+    GetHomeNoti();
+  }, []);
+
+  useEffect(() => {
+    console.log('res?', res);
+  }, [res]);
+
   return (
     <CommonLayout>
       <Image
@@ -75,7 +90,11 @@ const Home = ({navigation}) => {
         {`네츠\n모빌리티`}
       </Text>
       <ScrollView>
-        {refresh != null ? <NoticeBlock /> : <NoTokenNoticeBlock />}
+        {refresh != null ? (
+          <NoticeBlock data={res} navi={navigation} />
+        ) : (
+          <NoTokenNoticeBlock />
+        )}
         <TouchableOpacity
           style={[shadowStyles.shadow, btnStyles.btnBlue, styles.btn]}
           onPress={() => {

@@ -11,7 +11,14 @@ import typoStyles from '../../../assets/fonts/typography';
 import {btnStyles} from '../../common/button';
 import ServiceBlock from '../serviceBlock';
 
-export const ManagerProfile = ({name, img, certificate, comment, type}) => {
+export const ManagerProfile = ({
+  name,
+  img,
+  certificate,
+  comment,
+  type,
+  tel,
+}) => {
   const styles = StyleSheet.create({
     infoBlock: {
       width: '100%',
@@ -49,9 +56,10 @@ export const ManagerProfile = ({name, img, certificate, comment, type}) => {
           </Text>
           <Text
             style={[typoStyles.fs12, typoStyles.fw700, typoStyles.textMain]}>
-            {certificate.map(data => {
-              return data + ' ';
-            })}
+            {certificate != undefined &&
+              certificate.map(data => {
+                return data.name + ' ';
+              })}
           </Text>
         </View>
       </View>
@@ -61,7 +69,7 @@ export const ManagerProfile = ({name, img, certificate, comment, type}) => {
       </Text>
       {type == 2 ? (
         <TouchableOpacity
-          onPress={() => Linking.openURL(`tel:02-0000-0000`)}
+          onPress={() => Linking.openURL(`tel:${tel}`)}
           style={[btnStyles.btnBlue, styles.btn]}>
           <Text
             style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textWhite]}>
@@ -104,6 +112,52 @@ export const ManagerComment = ({comment}) => {
   );
 };
 
+// -집-병원
+// 픽업주소
+// 병원주소
+// 희망병원도착시간
+// 진료검사예약
+
+// -병원-집
+// 병원주소
+// 귀가주소
+// 희망 귀가 출발 시간
+
+// -집-집
+// 픽
+// 병
+// 귀
+// 희망병원도착
+// 진료검사예약
+// 희망귀가출발
+
+// -집-집(2시간이상)
+// 픽
+// 병
+// 귀
+// 희망병원도착
+// 진료검사예약
+// 희망귀가출발
+// 차량2개
+// 매니저2명
+// 동행매니저
+
+const pickCategory = data => {
+  return [
+    ['서비스 번호', data.service_id],
+    ['픽업 주소', data?.pickup_address],
+    ['병원 주소', data?.drop_address],
+    ['귀가 주소', data?.drop_address],
+    ['픽업 예정 시간', data?.pickup_time.substring(0, 5)],
+    ['희망 병원 도착 시간', data?.hos_arrival_time.substring(0, 5)],
+    ['희망 귀가 출발 시간', data?.hos_arrival_time.substring(0, 5)],
+    ['진료/검사 예약 시간', data?.hos_care_time.substring(0, 5)],
+    ['차량 번호', dispatch?.[0]?.car_number],
+    ['네츠 매니저', dispatch?.[0]?.netsmanager_name],
+    ['동행 매니저', data?.gowithumanager],
+  ];
+};
+
 export const ServiceInfo = ({num, data, dispatch}) => {
   const styles = StyleSheet.create({
     title: {
@@ -126,41 +180,33 @@ export const ServiceInfo = ({num, data, dispatch}) => {
           서비스 정보
         </Text>
       )}
-      <ServiceInfoOneLine title={'서비스 번호'} value={data.service_id} />
+      <ServiceInfoOneLine title={'서비스 번호'} value={data?.service_id} />
       <ServiceInfoOneLine
         title={'픽업 예정 시간'}
-        value={data.pickup_time.substring(0, 5)}
+        value={data?.pickup_time.substring(0, 5)}
       />
-      <ServiceInfoOneLine title={'픽업 주소'} value={data.pickup_address} />
-      <ServiceInfoOneLine title={'병원'} value={'서울백병원'} />
+      <ServiceInfoOneLine title={'픽업 주소'} value={data?.pickup_address} />
+      <ServiceInfoOneLine title={'병원 주소'} value={data?.hos_address} />
       <ServiceInfoOneLine
         title={'희망 병원 도착 시간'}
-        value={data.hos_arrival_time}
+        value={data?.hos_arrival_time.substring(0, 5)}
       />
       <ServiceInfoOneLine
         title={'진료/검사 예약 시간'}
-        value={data.hos_care_time}
+        value={data?.hos_care_time.substring(0, 5)}
       />
       <ServiceInfoOneLine
         title={'네츠 매니저'}
-        value={dispatch[0].netsmanager_name}
+        value={dispatch?.[0]?.netsmanager_name}
       />
-      <ServiceInfoOneLine title={'차량 번호'} value={dispatch[0].car_number} />
-      <ServiceInfoOneLine title={'동행 매니저'} value={data.gowithumanager} />
+      <ServiceInfoOneLine
+        title={'차량 번호'}
+        value={dispatch?.[0]?.car_number}
+      />
+      <ServiceInfoOneLine title={'동행 매니저'} value={data?.gowithumanager} />
     </View>
   );
 };
-
-// <ServiceInfoOneLine title={'서비스 번호'} value={data.service_id} />
-// <ServiceInfoOneLine title={'픽업 예정 시간'} value={'11:00'} />
-// <ServiceInfoOneLine title={'픽업 주소'} value={'성북구 길음동 11-15'} />
-// <ServiceInfoOneLine title={'병원'} value={'서울백병원'} />
-// <ServiceInfoOneLine title={'희망 병원 도착 시간'} value={'12:00'} />
-// <ServiceInfoOneLine title={'진료/검사 예약 시간'} value={'12:30'} />
-// <ServiceInfoOneLine title={'귀가 출발 시간'} value={data} />
-// <ServiceInfoOneLine title={'네츠 매니저'} value={'홍길동'} />
-// <ServiceInfoOneLine title={'차량 번호'} value={data.dispatch} />
-// <ServiceInfoOneLine title={'동행 매니저'} value={data.gowithumanager} />
 
 const ServiceInfoOneLine = ({title, value}) => {
   const styles = StyleSheet.create({
@@ -169,6 +215,9 @@ const ServiceInfoOneLine = ({title, value}) => {
       marginBottom: 5,
     },
     title: {
+      width: '50%',
+    },
+    value: {
       width: '50%',
     },
   });

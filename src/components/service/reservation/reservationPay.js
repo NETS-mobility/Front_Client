@@ -33,7 +33,7 @@ export const Step1 = () => {
         onPress={() => changeState(true, false, false)}
         value={r1}
       />
-      <RadioButton
+      {/* <RadioButton
         text={'신용카드 결제'}
         onPress={() => changeState(false, true, false)}
         value={r2}
@@ -42,7 +42,7 @@ export const Step1 = () => {
         text={'간편 결제'}
         onPress={() => changeState(false, false, true)}
         value={r3}
-      />
+      /> */}
     </ServiceBlock>
   );
 };
@@ -60,7 +60,7 @@ export const Step2 = ({additional}) => {
         STEP2. 결제 금액 확인
       </Text>
       {additional ? <AdditionalPayment /> : <></>}
-      <Payment />
+      {/* <Payment pay={detail?.payment} /> */}
       {additional ? (
         <></>
       ) : (
