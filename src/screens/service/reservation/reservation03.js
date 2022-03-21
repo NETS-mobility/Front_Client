@@ -259,6 +259,27 @@ const Reservation03 = ({route, navigation}) => {
                 validTargetKind: validTargetKind,
                 dispatch: res,
               });
+              // navigation.push('Reservation04');
+              // ReservationAPI({
+              //   jwtToken: await GetToken(),
+              //   serviceKindId: serviceKindId,
+              //   moveDirection: moveDirection,
+              //   gowithHospitalTime: gowithHospitalTime, //바꿔야댐
+              //   pickupAddr: resAddrs.homeAddr,
+              //   dropAddr: resAddrs.dropAddr,
+              //   hospitalAddr: resAddrs.hospitalAddr,
+              //   hopeReservationDate: resDate,
+              //   hopeHospitalArrivalTime: resTimes.resArrTime.time,
+              //   fixedMedicalTime: resTimes.resResTime.time,
+              //   hopeHospitalDepartureTime: resTimes.resDepTime.time,
+              //   fixedMedicalDetail: diagnosis,
+              //   hopeRequires: result,
+              //   patientName: userInfo.name,
+              //   patientPhone: userInfo.phone,
+              //   protectorName: guardInfo.name,
+              //   protectorPhone: guardInfo.phone,
+              //   validTargetKind: validTargetKind,
+              // });
             }}
             disable={disable}
           />
