@@ -3,35 +3,32 @@ import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
 import FindAuthLayout from '../../components/findAuth/findAuthLayout';
 
-const FindPW3 = ({navigation}) => {
+const FindFail = ({navigation}) => {
   return (
     <FindAuthLayout
-      pageType="pw"
-      num={2}
-      btnType="login"
-      goNext={() => navigation.navigate('Login')}
+      pageType="id"
+      num={0}
+      btnType="sign"
+      goNext={() => navigation.navigate('SignUp')}
       goBack={() => navigation.pop()}>
       <Text
         style={[
           typoStyles.textExplain,
           typoStyles.fs15,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           styles.oneLine,
         ]}>
-        비밀번호 변경이 완료되었습니다.
+        가입되지 않은 사용자입니다.
       </Text>
-      <Text
-        style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
-        변경된 비밀번호로 로그인 해주세요.
+      <Text style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fw700]}>
+        회원가입을 진행해주세요.
       </Text>
     </FindAuthLayout>
   );
 };
 
 const styles = StyleSheet.create({
-  oneLine: {
-    marginBottom: 30,
-  },
+  oneLine: {marginBottom: 20},
 });
 
-export default FindPW3;
+export default FindFail;

@@ -2,13 +2,34 @@ import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
 import FindAuthLayout from '../../components/findAuth/findAuthLayout';
+import FindIDAPI from '../../api/auth/findIDAPI';
+import FindFail from './findFail';
 
-const FindID2 = ({navigation}) => {
-  return (
+const FindID2 = ({route, navigation}) => {
+  const {phone} = route.params;
+  const [email, setEmail] = useState('');
+
+  const getemail = async () => {
+    await FindIDAPI({phone: phone}).then(r => {
+      setTimeout(() => {
+        console.log('this is r: ', r);
+        setEmail(r);
+      }, 100);
+    });
+  };
+
+  useEffect(() => {
+    getemail();
+  }, []);
+
+  return email == undefined || email == '' ? (
+    <FindFail navigation={navigation} />
+  ) : (
     <FindAuthLayout
       pageType="id"
       num={0}
       btnType="login"
+      goNext={() => navigation.navigate('Login')}
       goBack={() => navigation.pop()}>
       <Text
         style={[
@@ -19,9 +40,8 @@ const FindID2 = ({navigation}) => {
         ]}>
         가입하신 아이디는
       </Text>
-      <Text
-        style={[typoStyles.textPrimary, typoStyles.fs20, typoStyles.fwBold]}>
-        jisu****@gmail.com
+      <Text style={[typoStyles.textPrimary, typoStyles.fs20, typoStyles.fw700]}>
+        {email}
         <Text
           style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
           입니다.
