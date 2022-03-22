@@ -3,6 +3,7 @@ import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
 import FindAuthLayout from '../../components/findAuth/findAuthLayout';
 import FindIDAPI from '../../api/auth/findIDAPI';
+import FindFail from './findFail';
 
 const FindID2 = ({route, navigation}) => {
   const {phone} = route.params;
@@ -21,11 +22,14 @@ const FindID2 = ({route, navigation}) => {
     getemail();
   }, []);
 
-  return (
+  return email == undefined || email == '' ? (
+    <FindFail navigation={navigation} />
+  ) : (
     <FindAuthLayout
       pageType="id"
       num={0}
       btnType="login"
+      goNext={() => navigation.navigate('Login')}
       goBack={() => navigation.pop()}>
       <Text
         style={[
@@ -37,7 +41,7 @@ const FindID2 = ({route, navigation}) => {
         가입하신 아이디는
       </Text>
       <Text style={[typoStyles.textPrimary, typoStyles.fs20, typoStyles.fw700]}>
-        {email.user_id}
+        {email}
         <Text
           style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fw700]}>
           입니다.

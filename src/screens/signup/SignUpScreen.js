@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, StyleSheet, View, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, ScrollView} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
 import {
   SignUpInputBox,
@@ -20,6 +20,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    paddingTop: 50,
+    paddingBottom: 80,
   },
 
   title: {
@@ -108,12 +110,13 @@ const SignUpScreen = ({navigation}) => {
     } //else if (res == 0) {
     //   setError('휴대전화 인증을 진행해주세요.');
     // }
-    else if (authNum != res) {
-      console.log('authNum: ', authNum);
-      console.log('res', res);
-      setError('인증번호가 일치하지 않습니다.');
-      // setRes(0);
-    } else if (!all) {
+    // else if (authNum != res) {
+    //   console.log('authNum: ', authNum);
+    //   console.log('res', res);
+    //   setError('인증번호가 일치하지 않습니다.');
+    //   // setRes(0);
+    // }
+    else if (!all) {
       setError('약관에 동의해주세요');
     } else {
       setError('');
@@ -162,115 +165,121 @@ const SignUpScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.backGround}>
-      <Text
-        style={[
-          styles.title,
-          typoStyles.fs32,
-          typoStyles.textMain,
-          typoStyles.fw700,
-        ]}>
-        회원가입
-      </Text>
-      <SignUpInputBoxWithBtn
-        isPass={false}
-        placeHolder={'이메일'}
-        text={email}
-        setText={setEmail}
-        onPress={() => {
-          setSuccess(1);
-          CheckDupAPI(email, setSuccess);
-        }}
-        btnName={'중복확인'}
-      />
-      <SignUpInputBox
-        isPass={true}
-        placeHolder={'비밀번호'}
-        text={password}
-        setText={setPassword}
-      />
-      <SignUpInputBox
-        isPass={true}
-        placeHolder={'비밀번호 확인'}
-        text={confirmPassword}
-        setText={setConfirmPassword}
-      />
-      <SignUpInputBox
-        isPass={false}
-        placeHolder={'이름'}
-        text={name}
-        setText={setName}
-      />
-      <SignUpInputBoxWithBtn
-        isPass={false}
-        placeHolder={'휴대전화'}
-        text={phone}
-        setText={setPhone}
-        onPress={() => {
-          CheckPhoneAPI({phone: phone}, setRes);
-        }}
-        btnName={'인증번호받기'}
-      />
-      <SignUpInputBox
-        isPass={false}
-        placeHolder={'인증번호'}
-        text={authNum}
-        setText={setAuthNum}
-      />
-      <View style={styles.bigcheckbox}>
-        <View style={styles.checkboxtopline}>
-          <CheckBox
-            text={'전체 선택'}
-            onPress={() => onClickAll()}
-            value={all}
-          />
-        </View>
-        <View style={styles.checkboxline}>
-          <CheckBox
-            text={'(필수) 서비스 이용약관 동의'}
-            onPress={() => setR1(!r1)}
-            value={r1}
-          />
-          <SignUpDetailBtn style={styles.detailbtn} />
-        </View>
-        <View style={styles.checkboxline}>
-          <CheckBox
-            text={'(필수) 개인정보 처리방침 동의'}
-            onPress={() => setR2(!r2)}
-            value={r2}
-          />
-          <SignUpDetailBtn style={styles.detailbtn} />
-        </View>
-        <View style={styles.checkboxline}>
-          <CheckBox
-            text={'(필수) 위치정보 이용 동의'}
-            onPress={() => setR3(!r3)}
-            value={r3}
-          />
-          <SignUpDetailBtn
-            navWhere={() => {
-              navigation.push('SignUpDetail');
-            }}
-            style={styles.detailbtn}
-          />
-        </View>
-      </View>
-
-      <Text
-        style={[typoStyles.fs12, typoStyles.fwRegular, typoStyles.textPrimary]}>
-        {error}
-      </Text>
-
-      <View style={styles.signupbtn}>
-        <LoginBtn
-          btnName={'가입하기'}
-          navWhere={() =>
-            // SignUpAPI({id: email, password: password, name: name, phone: phone})
-            Checksignup()
-          }
+    <ScrollView>
+      <SafeAreaView style={styles.backGround}>
+        <Text
+          style={[
+            styles.title,
+            typoStyles.fs32,
+            typoStyles.textMain,
+            typoStyles.fw700,
+          ]}>
+          회원가입
+        </Text>
+        <SignUpInputBoxWithBtn
+          isPass={false}
+          placeHolder={'이메일'}
+          text={email}
+          setText={setEmail}
+          onPress={() => {
+            setSuccess(1);
+            CheckDupAPI(email, setSuccess);
+          }}
+          btnName={'중복확인'}
         />
-      </View>
-    </SafeAreaView>
+        <SignUpInputBox
+          isPass={true}
+          placeHolder={'비밀번호'}
+          text={password}
+          setText={setPassword}
+        />
+        <SignUpInputBox
+          isPass={true}
+          placeHolder={'비밀번호 확인'}
+          text={confirmPassword}
+          setText={setConfirmPassword}
+        />
+        <SignUpInputBox
+          isPass={false}
+          placeHolder={'이름'}
+          text={name}
+          setText={setName}
+        />
+        <SignUpInputBoxWithBtn
+          isPass={false}
+          placeHolder={'휴대전화'}
+          text={phone}
+          setText={setPhone}
+          onPress={() => {
+            CheckPhoneAPI({phone: phone}, setRes);
+          }}
+          btnName={'인증번호받기'}
+        />
+        <SignUpInputBox
+          isPass={false}
+          placeHolder={'인증번호'}
+          text={authNum}
+          setText={setAuthNum}
+        />
+        <View style={styles.bigcheckbox}>
+          <View style={styles.checkboxtopline}>
+            <CheckBox
+              text={'전체 선택'}
+              onPress={() => onClickAll()}
+              value={all}
+            />
+          </View>
+          <View style={styles.checkboxline}>
+            <CheckBox
+              text={'(필수) 서비스 이용약관 동의'}
+              onPress={() => setR1(!r1)}
+              value={r1}
+            />
+            <SignUpDetailBtn style={styles.detailbtn} />
+          </View>
+          <View style={styles.checkboxline}>
+            <CheckBox
+              text={'(필수) 개인정보 처리방침 동의'}
+              onPress={() => setR2(!r2)}
+              value={r2}
+            />
+            <SignUpDetailBtn style={styles.detailbtn} />
+          </View>
+          <View style={styles.checkboxline}>
+            <CheckBox
+              text={'(필수) 위치정보 이용 동의'}
+              onPress={() => setR3(!r3)}
+              value={r3}
+            />
+            <SignUpDetailBtn
+              navWhere={() => {
+                navigation.push('SignUpDetail');
+              }}
+              style={styles.detailbtn}
+            />
+          </View>
+        </View>
+
+        <Text
+          style={[
+            typoStyles.fs12,
+            typoStyles.fwRegular,
+            typoStyles.textPrimary,
+          ]}>
+          {error}
+        </Text>
+
+        <View style={styles.signupbtn}>
+          <LoginBtn
+            btnName={'가입하기'}
+            navWhere={() =>
+              // SignUpAPI({id: email, password: password, name: name, phone: phone})
+              Checksignup()
+            }
+          />
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 

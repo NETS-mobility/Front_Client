@@ -13,6 +13,7 @@ import {
   FindPW,
   FindPW2,
   FindPW3,
+  FindFail,
 } from '../../screens/findAuth';
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,7 @@ const LoginNavigator = () => {
       <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="SignUpDetail" component={SignUpDetailScreen} />
       <Stack.Screen name="SignUpDone" component={SignUpDoneScreen} />
+      <Stack.Screen name="FindFail" component={FindFail} />
     </Stack.Navigator>
   );
 };

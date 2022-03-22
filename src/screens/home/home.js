@@ -10,15 +10,16 @@ import {
 import {btnStyles, shadowStyles} from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
 import CommonLayout from '../../components/common/layout';
-import {useIsFocused} from '@react-navigation/native';
 import {
   NoticeBlock,
   NoTokenNoticeBlock,
 } from '../../components/home/noticeBlock';
 import {RefreshContext} from '../../../App';
 import GetHomeInfo from '../../api/home/GetHomeInfo';
+import {useIsFocused} from '@react-navigation/native';
 
 const Home = ({navigation}) => {
+  const isFocused = useIsFocused();
   const {refresh, setRefresh} = useContext(RefreshContext);
   const styles = StyleSheet.create({
     img: {
@@ -67,7 +68,7 @@ const Home = ({navigation}) => {
 
   useEffect(() => {
     GetHomeNoti();
-  }, []);
+  }, [isFocused]);
 
   useEffect(() => {
     console.log('res?', res);

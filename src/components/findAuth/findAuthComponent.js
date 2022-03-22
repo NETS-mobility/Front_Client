@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
 
 export const InputBox = ({
+  isPass,
   placeholder,
   keyBoard,
   returnKey,
@@ -12,6 +13,7 @@ export const InputBox = ({
   const [focus, setFocus] = useState(false);
   return (
     <TextInput
+      secureTextEntry={isPass}
       placeholder={placeholder}
       placeholderTextColor={'#DAD8E0'}
       keyboardType={keyBoard}

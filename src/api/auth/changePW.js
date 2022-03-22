@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const ChangePWAPI = async data => {
-  await axios
-    .post('/client/login/changePw', data)
-    .then(res => {
-      console.log(res.data);
-    })
-    .catch(err => console.log(JSON.stringify(err)));
+  try {
+    const res = await axios.post('/client/login/changePw', data);
+    return res.data;
+  } catch (err) {
+    return err;
+  }
 };
 
 export default ChangePWAPI;
