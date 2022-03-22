@@ -15,6 +15,7 @@ export const InputBox = ({
     <TextInput
       secureTextEntry={isPass}
       placeholder={placeholder}
+      placeholderTextColor={'#DAD8E0'}
       keyboardType={keyBoard}
       returnKeyType={returnKey}
       value={value}
@@ -50,6 +51,7 @@ const style = StyleSheet.create({
     padding: 10,
     paddingTop: 26,
     borderBottomWidth: 3,
+    color: 'black',
   },
   iColor1: {
     borderBottomColor: '#19B7CD',

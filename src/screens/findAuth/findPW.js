@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, StyleSheet} from 'react-native';
-import CustomBtn, {btnStyles} from '../../assets/fonts/button';
+import CustomBtn, {btnStyles} from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
 import {InputBox} from '../../components/findAuth/findAuthComponent';
 import FindAuthLayout from '../../components/findAuth/findAuthLayout';
 import {PhoneValidation} from '../../utils/validation';
+import CheckPhoneAPI from '../../api/signup/checkPhone';
 
 const FindPW = ({navigation}) => {
   const [tel, setTel] = useState('');
@@ -70,11 +71,14 @@ const FindPW = ({navigation}) => {
         textStyleDisabled={[
           typoStyles.textWhite,
           typoStyles.fs14,
-          typoStyles.fwBold,
+          typoStyles.fw700,
         ]}
-        textStyle={[typoStyles.textWhite, typoStyles.fs14, typoStyles.fwBold]}
+        textStyle={[typoStyles.textWhite, typoStyles.fs14, typoStyles.fw700]}
         text={'인증번호 받기'}
         disabled={!PhoneValidation(tel)}
+        onPress={() => {
+          CheckPhoneAPI({phone: tel}, setRes);
+        }}
       />
       <InputBox
         placeholder="발송된 인증번호 입력"

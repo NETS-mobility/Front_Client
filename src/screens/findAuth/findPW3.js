@@ -15,13 +15,12 @@ const FindPW3 = ({navigation}) => {
         style={[
           typoStyles.textExplain,
           typoStyles.fs15,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           styles.oneLine,
         ]}>
         비밀번호 변경이 완료되었습니다.
       </Text>
-      <Text
-        style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
+      <Text style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fw700]}>
         변경된 비밀번호로 로그인 해주세요.
       </Text>
     </FindAuthLayout>

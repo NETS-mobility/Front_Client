@@ -7,7 +7,10 @@ import FindIDAPI from '../../api/auth/findIDAPI';
 import FindFail from './findFail';
 import ChangePWAPI from '../../api/auth/changePW';
 
-const FindPW2 = ({navigation}) => {
+const FindPW2 = ({route, navigation}) => {
+  const {phone} = route.params;
+
+  const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState();
   const [dis, setDis] = useState(true);
@@ -66,8 +69,7 @@ const FindPW2 = ({navigation}) => {
         setVal={setPw}
         styles={styles.pwInput}
       />
-      <Text
-        style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
+      <Text style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fw700]}>
         비밀번호를 다시 한 번 입력해주세요.
       </Text>
       <InputBox

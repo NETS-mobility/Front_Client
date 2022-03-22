@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 const ServiceBlock = ({children}) => {
   return (
     <View style={styles.serviceBlock}>
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     paddingVertical: 20,
     paddingHorizontal: 40,
-    elevation: 13,
+    elevation: 4,
   },
 });
 

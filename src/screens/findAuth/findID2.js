@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, StyleSheet} from 'react-native';
 import typoStyles from '../../assets/fonts/typography';
 import FindAuthLayout from '../../components/findAuth/findAuthLayout';
@@ -35,7 +35,7 @@ const FindID2 = ({route, navigation}) => {
         style={[
           typoStyles.textExplain,
           typoStyles.fs15,
-          typoStyles.fwBold,
+          typoStyles.fw700,
           styles.oneLine,
         ]}>
         가입하신 아이디는
@@ -43,7 +43,7 @@ const FindID2 = ({route, navigation}) => {
       <Text style={[typoStyles.textPrimary, typoStyles.fs20, typoStyles.fw700]}>
         {email}
         <Text
-          style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fwBold]}>
+          style={[typoStyles.textExplain, typoStyles.fs15, typoStyles.fw700]}>
           입니다.
         </Text>
       </Text>

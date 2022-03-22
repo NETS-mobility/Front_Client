@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Close from '../../assets/icon/close.svg';
-import CustomBtn, {btnStyles} from '../../assets/fonts/button';
+import CustomBtn, {btnStyles} from '../common/button';
 import typoStyles from '../../assets/fonts/typography';
 import {ProgressBar} from './findAuthComponent';
 import WholeLayout from '../wholeLayout';
@@ -37,7 +37,7 @@ const FindAuthLayout = ({
               style={[
                 typoStyles.textMain,
                 typoStyles.fs32,
-                typoStyles.fwBold,
+                typoStyles.fw700,
                 styles.title,
               ]}>
               {pageType == 'pw'
@@ -55,7 +55,7 @@ const FindAuthLayout = ({
             textStyle={[
               typoStyles.textWhite,
               typoStyles.fs20,
-              typoStyles.fwBold,
+              typoStyles.fw700,
             ]}
             text={btnType == 'login' ? '로그인' : '회원가입'}
             onPress={goNext}
@@ -63,11 +63,7 @@ const FindAuthLayout = ({
         ) : (
           <CustomBtn
             viewStyle={[btnStyles.btnWhite, styles.nextStepBtn]}
-            textStyle={[
-              typoStyles.textMain,
-              typoStyles.fs20,
-              typoStyles.fwBold,
-            ]}
+            textStyle={[typoStyles.textMain, typoStyles.fs20, typoStyles.fw700]}
             text={'계속'}
             onPress={goNext}
             disabled={disabled}
@@ -88,7 +84,8 @@ const styles = StyleSheet.create({
   block: {
     flex: 1,
     padding: 15,
-    paddingBottom: 31,
+    // paddingBottom: 31,
+    paddingBottom: 70, //bottomTab이 버튼을 가려 임시 수정, BottomTab해결 후 수정해야함.
     backgroundColor: '#fff',
   },
   title: {

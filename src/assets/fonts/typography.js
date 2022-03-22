@@ -4,6 +4,9 @@ const typoStyles = StyleSheet.create({
   fs32: {
     fontSize: 32,
   },
+  fs22: {
+    fontSize: 22,
+  },
   fs20: {
     fontSize: 20,
   },
@@ -21,6 +24,9 @@ const typoStyles = StyleSheet.create({
   },
   fs12: {
     fontSize: 12,
+  },
+  fs10: {
+    fontSize: 10,
   },
 
   /* color */
@@ -42,13 +48,19 @@ const typoStyles = StyleSheet.create({
   textWhite: {
     color: '#fff',
   },
+  textBlack: {
+    color: '#000',
+  },
 
   /* font-weight */
   fwRegular: {
     fontWeight: '400',
   },
-  fwBold: {
+  fw700: {
     fontWeight: '700',
+  },
+  fw900: {
+    fontWeight: '900',
   },
 
   /* line-height */
