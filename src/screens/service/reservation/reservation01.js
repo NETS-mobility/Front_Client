@@ -68,10 +68,6 @@ const Reservation01 = ({route, navigation}) => {
   const [gowithplustime, setGowithplustime] = useState(-1); //기본 20분+추가하고싶은 병원 동행시간 => 편도일 때
 
   useEffect(() => {
-    console.log('resDate==', resDate);
-  }, [resDate]);
-
-  useEffect(() => {
     const Test = async () => {
       if (resTimes.resResTime.time != '0' && resTimes.resArrTime.time != '0') {
         const compResTime = new Date();
@@ -90,12 +86,9 @@ const Reservation01 = ({route, navigation}) => {
         );
         if (compArrivalTime >= compResTime) {
           setDis(true);
-        } else {
-          setDis(false);
-        }
+        } else setDis(false);
       }
     };
-
     if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
       if (
         resDate != '--' &&
@@ -143,7 +136,7 @@ const Reservation01 = ({route, navigation}) => {
     if (!dis) {
       Test();
     }
-  }, [resAddrs, resTimes]);
+  }, [resDate, resAddrs, resTimes]);
 
   useEffect(() => {
     ReservationTimeChange(resTimes, setResTimes, resDate, setResDate);
