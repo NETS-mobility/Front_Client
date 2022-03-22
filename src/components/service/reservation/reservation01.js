@@ -78,7 +78,7 @@ export const GetTime = ({
   }, [time.resArrTime.time, time.resDepTime.time]);
 
   useEffect(() => {
-    if (gowithTime <= 0 || gowithPlusTime <= 0) {
+    if (gowithTime <= 0 && gowithPlusTime <= 0) {
       setDis(true);
     } else {
       setDis(false);

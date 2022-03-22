@@ -54,10 +54,6 @@ const ServiceHistory = ({navigation}) => {
     GetServiceLists();
   }, []);
 
-  useEffect(() => {
-    console.log('serviceIng=', serviceIng);
-  }, [serviceIng]);
-
   return (
     <CommonLayout>
       <ScrollView>
@@ -123,26 +119,12 @@ const ServiceHistory = ({navigation}) => {
                   goNext={() =>
                     navigation.navigate(`ServiceDetail`, {detailId})
                   }
-                  // date={'2021.10.20'}
-                  // type={'네츠 휠체어 플러스'}
-                  // goNext={navigation}
                 />
               );
             })
           ) : (
             <></>
           )}
-          {/* <ServiceHistoryBlock
-            date={'2021.10.20'}
-            type={'네츠 휠체어 플러스'}
-            // goNext={navigation}
-            goNext={() => navigation.navigate('ServiceDetail')}
-          />
-          <ServiceHistoryBlock
-            date={'2021.10.22'}
-            type={'네츠 휠체어 플러스'}
-            goNext={() => navigation.navigate('ServiceDetail')}
-          /> */}
         </View>
       </ScrollView>
     </CommonLayout>

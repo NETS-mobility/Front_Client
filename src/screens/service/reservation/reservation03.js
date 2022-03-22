@@ -233,7 +233,7 @@ const Reservation03 = ({route, navigation}) => {
                   old_hos_arr_time: resTimes.resArrTime.time,
                   old_hos_dep_time: resTimes.resDepTime.time,
                   rev_date: resDate,
-                  gowithHospitalTime: 20,
+                  gowithHospitalTime: gowithHospitalTime,
                   service_kind_id: serviceKindId,
                 },
               }).then(response => response);
