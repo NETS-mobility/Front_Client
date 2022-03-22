@@ -79,8 +79,7 @@ export const ServiceHistoryBlock = ({goNext, data, dispatch}) => {
       <ServiceInfo num={1} data={data} dispatch={dispatch} />
 
       <View style={styles.btnSection}>
-        {/* <ServiceStatus text={'서비스 종료'} /> */}
-        <ServiceStatus text={'서비스 진행 중'} />
+        <ServiceStatus text={data?.reservation_state} />
         <TouchableOpacity
           style={[btnStyles.btnBlue, styles.detailBtn]}
           onPress={goNext}>

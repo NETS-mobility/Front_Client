@@ -70,10 +70,10 @@ const ServiceDetail = ({navigation, route}) => {
           />
         </View>
         <ManagerProfile
-          certificate={detail?.dispatch?.[0].netsmanager_certificate}
-          name={detail?.dispatch?.[0].netsmanager_name}
-          comment={detail?.dispatch?.[0].netsmanager_intro}
-          tel={detail?.dispatch?.[0].netsmanager_tel}
+          certificate={detail?.dispatch?.[0]?.netsmanager_certificate}
+          name={detail?.dispatch?.[0]?.netsmanager_name}
+          comment={detail?.dispatch?.[0]?.netsmanager_intro}
+          tel={detail?.dispatch?.[0]?.netsmanager_tel}
           type={2}
         />
         <ServiceDetailProgress
@@ -82,12 +82,12 @@ const ServiceDetail = ({navigation, route}) => {
             state_time: detail?.service_state_time,
           }}
         />
-        <ManagerComment comment={detail?.dispatch?.[0].netsmanager_mention} />
+        <ManagerComment comment={detail?.dispatch?.[0]?.netsmanager_mention} />
         <ServiceBlock>
           <ServiceInfo
             num={2}
-            data={detail.service}
-            dispatch={detail.dispatch}
+            data={detail?.service}
+            dispatch={detail?.dispatch}
           />
         </ServiceBlock>
 

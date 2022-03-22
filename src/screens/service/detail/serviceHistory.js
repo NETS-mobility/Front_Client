@@ -107,24 +107,37 @@ const ServiceHistory = ({navigation}) => {
           </View>
         </View>
         <View>
-          {ing ? (
-            serviceIng != [] &&
-            serviceIng?.map((data, i) => {
-              const {dispatch, ...filteredData} = data;
-              const detailId = data.service_id;
-              return (
-                <ServiceHistoryBlock
-                  data={filteredData}
-                  dispatch={dispatch}
-                  goNext={() =>
-                    navigation.navigate(`ServiceDetail`, {detailId})
-                  }
-                />
-              );
-            })
-          ) : (
-            <></>
-          )}
+          {ing
+            ? serviceIng != [] &&
+              serviceIng?.map((data, i) => {
+                const {dispatch, ...filteredData} = data;
+                const detailId = data.service_id;
+                return (
+                  <ServiceHistoryBlock
+                    key={i}
+                    data={filteredData}
+                    dispatch={dispatch}
+                    goNext={() =>
+                      navigation.navigate(`ServiceDetail`, {detailId})
+                    }
+                  />
+                );
+              })
+            : serviceComp != [] &&
+              serviceComp?.map((data, i) => {
+                const {dispatch, ...filteredData} = data;
+                const detailId = data.service_id;
+                return (
+                  <ServiceHistoryBlock
+                    key={i}
+                    data={filteredData}
+                    dispatch={dispatch}
+                    goNext={() =>
+                      navigation.navigate(`ServiceDetail`, {detailId})
+                    }
+                  />
+                );
+              })}
         </View>
       </ScrollView>
     </CommonLayout>
