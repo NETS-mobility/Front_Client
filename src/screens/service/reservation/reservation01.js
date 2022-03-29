@@ -67,28 +67,29 @@ const Reservation01 = ({route, navigation}) => {
   const [gowithtime, setGowithtime] = useState(-1); //귀가출발시간-병원도착시간 => 왕복일 때 병원동행시간
   const [gowithplustime, setGowithplustime] = useState(-1); //기본 20분+추가하고싶은 병원 동행시간 => 편도일 때
 
+  // const Test = async () => {
+  //   if (resTimes.resResTime.time != '0' && resTimes.resArrTime.time != '0') {
+  //     const compResTime = new Date();
+  //     const compArrivalTime = new Date();
+  //     const testResTime = resTimes.resResTime.time;
+  //     const testArrTime = resTimes.resArrTime.time;
+  //     compResTime.setHours(
+  //       testResTime.substring(0, 2),
+  //       testResTime.substring(3, 5),
+  //       testResTime.substring(6, 8),
+  //     );
+  //     compArrivalTime.setHours(
+  //       testArrTime.substring(0, 2),
+  //       testArrTime.substring(3, 5),
+  //       testArrTime.substring(6, 8),
+  //     );
+  //     if (compArrivalTime >= compResTime) {
+  //       setDis(true);
+  //     } else setDis(false);
+  //   }
+  // };
+
   useEffect(() => {
-    const Test = async () => {
-      if (resTimes.resResTime.time != '0' && resTimes.resArrTime.time != '0') {
-        const compResTime = new Date();
-        const compArrivalTime = new Date();
-        const testResTime = resTimes.resResTime.time;
-        const testArrTime = resTimes.resArrTime.time;
-        compResTime.setHours(
-          testResTime.substring(0, 2),
-          testResTime.substring(3, 5),
-          testResTime.substring(6, 8),
-        );
-        compArrivalTime.setHours(
-          testArrTime.substring(0, 2),
-          testArrTime.substring(3, 5),
-          testArrTime.substring(6, 8),
-        );
-        if (compArrivalTime >= compResTime) {
-          setDis(true);
-        } else setDis(false);
-      }
-    };
     if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
       if (
         resDate != '--' &&
@@ -102,7 +103,9 @@ const Reservation01 = ({route, navigation}) => {
         // gowithtime >= 0
       ) {
         setDis(false);
-      } else setDis(true);
+      } else {
+        setDis(true);
+      }
     } else if (
       serviceName == '네츠 휠체어 플러스 편도 서비스' ||
       '네츠 휠체어 편도 서비스'
@@ -132,11 +135,7 @@ const Reservation01 = ({route, navigation}) => {
         } else setDis(true);
       }
     }
-
-    if (!dis) {
-      Test();
-    }
-  }, [resDate, resAddrs, resTimes]);
+  }, [resDate, resAddrs, resTimes, dis]);
 
   useEffect(() => {
     ReservationTimeChange(resTimes, setResTimes, resDate, setResDate);
@@ -153,9 +152,10 @@ const Reservation01 = ({route, navigation}) => {
   }, [resTimes.resArrTime.time]);
 
   useEffect(() => {
-    console.log('gowithtime', gowithtime);
-    console.log('gowithplustime', gowithplustime);
-  }, [gowithtime, gowithplustime]);
+    console.log('dis가 변한다.', dis);
+    console.log('현재 값=', resAddrs, resDate, resTimes, serviceName);
+    // if (!dis) Test();
+  }, [dis]);
 
   return (
     <CommonLayout>
