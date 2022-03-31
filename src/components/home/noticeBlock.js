@@ -40,9 +40,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 18,
   },
+  alignCenter: {
+    textAlign: 'center',
+  },
 });
 
 const NoticeBlock = ({data, navi}) => {
+  console.log('data=', data);
   return (
     <View style={styles.notiBlock}>
       <Text style={[typoStyles.textWhite, typoStyles.fs20, typoStyles.fw700]}>
@@ -61,15 +65,17 @@ const NoticeBlock = ({data, navi}) => {
       )}
       {data.service?.map((content, i) => {
         const pickupString = `${content.rev_date.substring(0, 10)}`;
+        const serviceType = `${content.service_type}`;
         return (
-          <TouchableOpacity style={styles.contents}>
+          <TouchableOpacity style={styles.contents} key={i}>
             <Text
               style={[
                 typoStyles.textExplainBold,
                 typoStyles.fs15,
                 typoStyles.fw700,
+                styles.alignCenter,
               ]}>
-              {`2022년 3월 19일\n네츠 휠체어 플러스`}
+              {`${pickupString}\n${serviceType}`}
             </Text>
           </TouchableOpacity>
         );
