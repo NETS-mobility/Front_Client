@@ -11,6 +11,7 @@ import {
   ReservationMainScreen,
 } from '../../screens/service';
 import {LoginMainScreen, LoginScreen} from '../../screens/login';
+import Loading from '../../screens/common/loading';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ const ReservationNavigator = () => {
       <Stack.Screen name="Reservation01" component={Reservation01} />
       <Stack.Screen name="Reservation02" component={Reservation02} />
       <Stack.Screen name="Reservation03" component={Reservation03} />
+      <Stack.Screen name="Loading" component={Loading} />
       <Stack.Screen name="Reservation04" component={Reservation04} />
       <Stack.Screen name="ReservationPay" component={ReservationPay} />
       <Stack.Screen

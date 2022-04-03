@@ -77,7 +77,6 @@ const Reservation03 = ({route, navigation}) => {
     '약국 동행',
     '기타',
   ];
-  const [loading, setLoading] = useState(false);
   let checkString = '';
 
   const [xy, setXY] = useState({
@@ -141,143 +140,109 @@ const Reservation03 = ({route, navigation}) => {
   }, [result]);
   return (
     <CommonLayout>
-      {loading ? (
-        <View style={styles.loadingBack}>
-          <Loading />
+      <ScrollView style={styles.background}>
+        <View style={styles.block1}>
+          <Text
+            style={[
+              typoStyles.fs32,
+              typoStyles.fw700,
+              typoStyles.textMain,
+              styles.title,
+            ]}>
+            서비스예약
+          </Text>
+          <ServiceProgress num={3} />
         </View>
-      ) : (
-        <ScrollView style={styles.background}>
-          <View style={styles.block1}>
+        <ServiceBlock>
+          <Text
+            style={[
+              typoStyles.fs18,
+              typoStyles.fwBold,
+              typoStyles.textMain,
+              styles.step1title,
+            ]}>
+            STEP1. 내원 정보
+          </Text>
+          <ServiceInputBoxWithoutBtn
+            title={'예약된 진료/검사 내용을 입력해주세요.'}
+            place1={'진료/검사 내용'}
+            Text1={diagnosis}
+            setText1={setDiagnosis}
+          />
+          <View style={styles.checkset}>
             <Text
               style={[
-                typoStyles.fs32,
-                typoStyles.fw700,
-                typoStyles.textMain,
-                styles.title,
-              ]}>
-              서비스예약
-            </Text>
-            <ServiceProgress num={3} />
-          </View>
-          <ServiceBlock>
-            <Text
-              style={[
-                typoStyles.fs18,
+                typoStyles.fs14,
                 typoStyles.fwBold,
-                typoStyles.textMain,
-                styles.step1title,
+                typoStyles.textExplain,
               ]}>
-              STEP1. 내원 정보
+              어떤 서비스가 필요하신지 선택해주세요.
             </Text>
-            <ServiceInputBoxWithoutBtn
-              title={'예약된 진료/검사 내용을 입력해주세요.'}
-              place1={'진료/검사 내용'}
-              Text1={diagnosis}
-              setText1={setDiagnosis}
+            <CheckBtn
+              num={0}
+              check={check}
+              setCheck={setCheck}
+              contents={'진료실 동행'}
             />
-            <View style={styles.checkset}>
-              <Text
-                style={[
-                  typoStyles.fs14,
-                  typoStyles.fwBold,
-                  typoStyles.textExplain,
-                ]}>
-                어떤 서비스가 필요하신지 선택해주세요.
-              </Text>
-              <CheckBtn
-                num={0}
-                check={check}
-                setCheck={setCheck}
-                contents={'진료실 동행'}
-              />
-              <CheckBtn
-                num={1}
-                check={check}
-                setCheck={setCheck}
-                contents={'지정한 보호자에게 진료 내용 전달'}
-              />
-              <CheckBtn
-                num={2}
-                check={check}
-                setCheck={setCheck}
-                contents={'진료 관련 서류 촬영 후 지정한 보호자에게 전달'}
-              />
-              <CheckBtn
-                num={3}
-                check={check}
-                setCheck={setCheck}
-                contents={'약국 동행'}
-              />
-              <CheckBtn
-                num={4}
-                check={check}
-                setCheck={setCheck}
-                contents={'기타 서비스'}
-              />
-            </View>
-            {check[4] == true ? (
-              <ServiceInputBoxWithoutBtn
-                title={'없음'}
-                place1={'입력'}
-                Text1={etc}
-                setText1={setEtc}
-              />
-            ) : (
-              <></>
-            )}
-          </ServiceBlock>
-          <View style={styles.proset}>
-            <NextBtn
-              text={'배차 가능 여부 확인하기'}
-              navWhere={async () => {
-                setLoading(true);
-                const res = await DispatchAPI({
-                  revData: {
-                    pickup: resAddrs.homeAddr,
-                    hos: resAddrs.hospitalAddr,
-                    drop: resAddrs.dropAddr,
-                    dire: moveDirection,
-                    pickup_x: xy.pickup_x,
-                    pickup_y: xy.pickup_y,
-                    drop_x: xy.drop_x,
-                    drop_y: xy.drop_y,
-                    hos_x: xy.hos_x,
-                    hos_y: xy.hos_y,
-                    old_hos_arr_time: resTimes.resArrTime.time,
-                    old_hos_dep_time: resTimes.resDepTime.time,
-                    rev_date: resDate,
-                    gowithHospitalTime: gowithHospitalTime,
-                    service_kind_id: serviceKindId,
-                  },
-                }).then(response => response);
-                console.log('배차성공?', res);
-                navigation.push('Reservation04', {
-                  jwtToken: await GetToken(),
-                  serviceKindId: serviceKindId,
-                  moveDirection: moveDirection,
-                  gowithHospitalTime: gowithHospitalTime, //바꿔야댐
-                  pickupAddr: resAddrs.homeAddr,
-                  dropAddr: resAddrs.dropAddr,
-                  hospitalAddr: resAddrs.hospitalAddr,
-                  hopeReservationDate: resDate,
-                  hopeHospitalArrivalTime: resTimes.resArrTime.time,
-                  fixedMedicalTime: resTimes.resResTime.time,
-                  hopeHospitalDepartureTime: resTimes.resDepTime.time,
-                  fixedMedicalDetail: diagnosis,
-                  hopeRequires: result,
-                  patientName: userInfo.name,
-                  patientPhone: userInfo.phone,
-                  protectorName: guardInfo.name,
-                  protectorPhone: guardInfo.phone,
-                  validTargetKind: validTargetKind,
-                  dispatch: res,
-                });
-              }}
-              disable={disable}
+            <CheckBtn
+              num={1}
+              check={check}
+              setCheck={setCheck}
+              contents={'지정한 보호자에게 진료 내용 전달'}
+            />
+            <CheckBtn
+              num={2}
+              check={check}
+              setCheck={setCheck}
+              contents={'진료 관련 서류 촬영 후 지정한 보호자에게 전달'}
+            />
+            <CheckBtn
+              num={3}
+              check={check}
+              setCheck={setCheck}
+              contents={'약국 동행'}
+            />
+            <CheckBtn
+              num={4}
+              check={check}
+              setCheck={setCheck}
+              contents={'기타 서비스'}
             />
           </View>
-        </ScrollView>
-      )}
+          {check[4] == true ? (
+            <ServiceInputBoxWithoutBtn
+              title={'없음'}
+              place1={'입력'}
+              Text1={etc}
+              setText1={setEtc}
+            />
+          ) : (
+            <></>
+          )}
+        </ServiceBlock>
+        <View style={styles.proset}>
+          <NextBtn
+            text={'배차 가능 여부 확인하기'}
+            navWhere={() => {
+              navigation.push('Loading', {
+                serviceKindId: serviceKindId,
+                moveDirection: moveDirection,
+                resAddrs: resAddrs,
+                resDate: resDate,
+                resTimes: resTimes,
+                guardInfo: guardInfo,
+                userInfo: userInfo,
+                validTargetKind: validTargetKind,
+                gowithHospitalTime: gowithHospitalTime,
+                xy: xy,
+                diagnosis: diagnosis,
+                result: result,
+              });
+            }}
+            disable={disable}
+          />
+        </View>
+      </ScrollView>
     </CommonLayout>
   );
 };
