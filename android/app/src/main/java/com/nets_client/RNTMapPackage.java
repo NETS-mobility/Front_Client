@@ -1,4 +1,4 @@
-package com.nets;
+package com.nets_client;
 
 import android.app.Activity;
 
