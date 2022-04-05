@@ -21,6 +21,7 @@
     "@react-navigation/native-stack": "^6.2.5",
     "axios": "^0.25.0",
     "intl": "^1.2.5",
+    "native-base": "^3.3.10",
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-daum-postcode": "^1.0.11",
