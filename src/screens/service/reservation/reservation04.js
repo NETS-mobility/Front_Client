@@ -83,6 +83,12 @@ const styles = StyleSheet.create({
 
 const Reservation04 = ({navigation, route}) => {
   const data = route.params;
+  // 9: ['차량 번호', dispatch?.[0]?.car_number],
+  // 10: ['네츠 매니저', dispatch?.[0]?.netsmanager_name],
+  // 12: ['차량 번호 1', dispatch?.[0]?.car_number],
+  // 13: ['차량 번호 2', dispatch?.[1]?.car_number],
+  // 14: ['네츠 매니저 1', dispatch?.[0]?.netsmanager_name],
+  // 15: ['네츠 매니저 2', dispatch?.[1]?.netsmanager_name],
   const {
     serviceKindId,
     moveDirection,
@@ -103,6 +109,21 @@ const Reservation04 = ({navigation, route}) => {
     validTargetKind,
     dispatch,
   } = data;
+
+  const serviceData = {
+    pickup_address: pickupAddr,
+    hos_address: hospitalAddr,
+    drop_address: dropAddr,
+    // pickup_time: dispatch?.expect_pickup_time,
+    // hos_arrival_time: '',
+    // hos_depart_time: '',
+    // hos_care_time: '',
+  };
+
+  useEffect(() => {
+    console.log('dispatch==', dispatch);
+    console.log('his_arrival_time==', hopeHospitalArrivalTime);
+  }, [dispatch]);
 
   return CheckObjEmpty(dispatch) ? (
     <SafeAreaView style={styles.background}>
@@ -153,242 +174,7 @@ const Reservation04 = ({navigation, route}) => {
           </Text>
         </View>
         <View style={styles.textbox}>
-          <View style={styles.titlebox}>
-            <Text
-              style={[
-                typoStyles.fs15,
-                typoStyles.fw700,
-                typoStyles.textExplain,
-                styles.leftcontents,
-              ]}>
-              예약 날짜
-            </Text>
-            <Text
-              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
-              {hopeReservationDate}
-            </Text>
-          </View>
-          <View style={styles.titlebox}>
-            <Text
-              style={[
-                typoStyles.fs15,
-                typoStyles.fw700,
-                typoStyles.textExplain,
-                styles.leftcontents,
-              ]}>
-              픽업 예정 시간
-            </Text>
-            <Text
-              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
-              {dispatch?.dispatch1.expCarPickupTime.substring(11, 16)}
-            </Text>
-          </View>
-          <View style={styles.titlebox}>
-            <Text
-              style={[
-                typoStyles.fs15,
-                typoStyles.fw700,
-                typoStyles.textExplain,
-                styles.leftcontents,
-              ]}>
-              서비스 종료 예정 시간
-            </Text>
-            <Text
-              style={[typoStyles.fs15, typoStyles.fw700, styles.rightcontents]}>
-              {dispatch?.dispatch1.expCarTerminateServiceTime.substring(11, 16)}
-            </Text>
-          </View>
-          <View style={styles.titlebox}>
-            <Text
-              style={[
-                typoStyles.fs15,
-                typoStyles.fw700,
-                typoStyles.textExplain,
-                styles.leftcontents,
-              ]}>
-              서비스 종류
-            </Text>
-            {serviceKindId == 2 ? (
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                네츠 휠체어 편도
-              </Text>
-            ) : serviceKindId == 3 ? (
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                네츠 휠체어 왕복
-              </Text>
-            ) : serviceKindId == 4 ? (
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                네츠 휠체어 플러스 편도
-              </Text>
-            ) : (
-              <Text
-                style={[
-                  typoStyles.fs15,
-                  typoStyles.fw700,
-                  styles.rightcontents,
-                ]}>
-                네츠 휠체어 플러스 왕복
-              </Text>
-            )}
-          </View>
-          {moveDirection == '집-병원' ? (
-            <>
-              <View style={styles.titlebox}>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    typoStyles.textExplain,
-                    styles.leftcontents,
-                  ]}>
-                  픽업주소
-                </Text>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    styles.rightcontents,
-                  ]}>
-                  {pickupAddr}
-                </Text>
-              </View>
-              <View style={styles.titlebox}>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    typoStyles.textExplain,
-                    styles.leftcontents,
-                  ]}>
-                  병원주소
-                </Text>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    styles.rightcontents,
-                  ]}>
-                  {hospitalAddr}
-                </Text>
-              </View>
-            </>
-          ) : moveDirection == '병원-집' ? (
-            <>
-              <View style={styles.titlebox}>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    typoStyles.textExplain,
-                    styles.leftcontents,
-                  ]}>
-                  병원주소
-                </Text>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    styles.rightcontents,
-                  ]}>
-                  {hospitalAddr}
-                </Text>
-              </View>
-              <View style={styles.titlebox}>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    typoStyles.textExplain,
-                    styles.leftcontents,
-                  ]}>
-                  드롭주소
-                </Text>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    styles.rightcontents,
-                  ]}>
-                  {dropAddr}
-                </Text>
-              </View>
-            </>
-          ) : (
-            <>
-              <View style={styles.titlebox}>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    typoStyles.textExplain,
-                    styles.leftcontents,
-                  ]}>
-                  픽업주소
-                </Text>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    styles.rightcontents,
-                  ]}>
-                  {pickupAddr}
-                </Text>
-              </View>
-              <View style={styles.titlebox}>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    typoStyles.textExplain,
-                    styles.leftcontents,
-                  ]}>
-                  병원주소
-                </Text>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    styles.rightcontents,
-                  ]}>
-                  {hospitalAddr}
-                </Text>
-              </View>
-              <View style={styles.titlebox}>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    typoStyles.textExplain,
-                    styles.leftcontents,
-                  ]}>
-                  드롭주소
-                </Text>
-                <Text
-                  style={[
-                    typoStyles.fs15,
-                    typoStyles.fw700,
-                    styles.rightcontents,
-                  ]}>
-                  {dropAddr}
-                </Text>
-              </View>
-            </>
-          )}
+          {/* <ServiceInfo num={3} data={data} dispatch={dispatch} /> */}
         </View>
       </View>
       <View style={styles.btnAlign}>

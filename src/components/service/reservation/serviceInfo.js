@@ -139,15 +139,19 @@ const pickCategory = (data, dispatch, pick) => {
   }
 };
 
-const CaseInfo = dispatchCase => {
+const CaseInfo = (num, dispatchCase) => {
   switch (dispatchCase) {
     case 1: //집-병원
+      if (num == 3) return [2, 3, 5, 6, 8, 9, 10];
       return [1, 2, 3, 5, 6, 8, 9, 10, 11];
     case 2: //병원-집
+      if (num == 3) return [3, 4, 7, 9, 10];
       return [1, 3, 4, 7, 9, 10, 11];
     case 3: //집-집 (배차 1번, 2시간 이하)
+      if (num == 3) return [2, 3, 4, 5, 6, 7, 8, 9, 10];
       return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     case 4: //왕복2시간이상
+      if (num == 3) return [2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15];
       return [1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15];
   }
 };
@@ -159,11 +163,11 @@ export const ServiceInfo = ({num, data, dispatch}) => {
     },
   });
 
-  const infos = CaseInfo(data?.dispatch_case);
+  const infos = CaseInfo(num, data?.dispatch_case);
 
   return (
     <View>
-      {num == 1 ? (
+      {num == 1 || num == 3 ? (
         <></>
       ) : (
         <Text
