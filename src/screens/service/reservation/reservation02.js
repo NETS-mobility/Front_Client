@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     backgroundColor: '#fff',
   },
+  errtext: {
+    marginTop: 4,
+  },
 });
 
 const Reservation02 = ({route, navigation}) => {
@@ -92,10 +95,6 @@ const Reservation02 = ({route, navigation}) => {
   useEffect(() => {
     fetchData();
   }, [isFocused]);
-
-  useEffect(() => {
-    console.log('하ㅣ어리ㅓ나ㅣ어닐', gowithHospitalTime);
-  }, [gowithHospitalTime]);
 
   useEffect(() => {
     for (let i = 0; i < 3; i++) {
@@ -161,6 +160,17 @@ const Reservation02 = ({route, navigation}) => {
             value={guard}
             setValue={setGuard}
           />
+          {!PhoneValidation(guard.phone) && (
+            <Text
+              style={[
+                typoStyles.fs12,
+                typoStyles.fwRegular,
+                typoStyles.textPrimary,
+                styles.errtext,
+              ]}>
+              휴대폰 형식은 000-0000-0000으로 입력해주세요.
+            </Text>
+          )}
           <ServiceInputBox
             title={'이용자 정보를 입력해주세요.'}
             place1={'이용자 이름'}
@@ -169,6 +179,17 @@ const Reservation02 = ({route, navigation}) => {
             value={user}
             setValue={setUser}
           />
+          {!PhoneValidation(user.phone) && (
+            <Text
+              style={[
+                typoStyles.fs12,
+                typoStyles.fwRegular,
+                typoStyles.textPrimary,
+                styles.errtext,
+              ]}>
+              휴대폰 형식은 000-0000-0000으로 입력해주세요.
+            </Text>
+          )}
         </ServiceBlock>
         <ServiceBlock>
           <Text
@@ -227,7 +248,7 @@ const Reservation02 = ({route, navigation}) => {
                 typoStyles.fwBold,
                 typoStyles.textExplain,
               ]}>
-              (당일 지참 가능하나,{' '}
+              (당일 지참 가능하나,
             </Text>
             <Text
               style={[
