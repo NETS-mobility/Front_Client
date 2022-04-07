@@ -151,12 +151,6 @@ const Reservation01 = ({route, navigation}) => {
     }
   }, [resTimes.resArrTime.time]);
 
-  useEffect(() => {
-    console.log('dis가 변한다.', dis);
-    console.log('현재 값=', resAddrs, resDate, resTimes, serviceName);
-    // if (!dis) Test();
-  }, [dis]);
-
   return (
     <CommonLayout>
       <ScrollView style={styles.background}>

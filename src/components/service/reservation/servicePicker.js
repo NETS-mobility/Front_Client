@@ -190,7 +190,7 @@ const ServiceTimePicker = ({time, setTime, propName}) => {
             },
           });
         }
-      } else {
+      } else if (newTime.timetype == '오전') {
         if (newTime.hour == '12') {
           setTime({
             ...time,
@@ -208,6 +208,14 @@ const ServiceTimePicker = ({time, setTime, propName}) => {
             },
           });
         }
+      } else {
+        setTime({
+          ...time,
+          [propName]: {
+            ...time[propName],
+            time: '0',
+          },
+        });
       }
     }
   }, [newTime.hour, newTime.min, newTime.timetype]);

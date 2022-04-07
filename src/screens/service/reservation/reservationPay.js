@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -16,6 +16,40 @@ import {
 } from '../../../components/service/reservation/reservationPay';
 
 const ReservationPay = ({navigation}) => {
+  const [method, setMethod] = useState('card');
+  const data = {
+    params: {
+      pg: 'kcp',
+      pay_method: method,
+      currency: undefined,
+      notice_url: undefined,
+      display: undefined,
+      merchant_uid: `mid_${reservation_id}`,
+      name: `${service_type}`,
+      amount: `${base_cost}`,
+      app_scheme: 'exampleforrn',
+      tax_free: true,
+      buyer_name: `${name}`,
+      buyer_tel: `${phone}`,
+      buyer_email: buyerEmail,
+      buyer_addr: undefined,
+      buyer_postcode: undefined,
+      custom_data: undefined,
+      vbank_due: undefined,
+      popup: undefined,
+      digital: undefined,
+      language: undefined,
+      biz_num: undefined,
+      customer_uid: undefined,
+      naverPopupMode: undefined,
+      naverUseCfm: undefined,
+      naverProducts: undefined,
+      m_redirect_url: IMPConst.M_REDIRECT_URL,
+      escrow,
+    },
+    tierCode,
+  };
+
   return (
     <CommonLayout>
       <ScrollView>
@@ -43,7 +77,7 @@ const ReservationPay = ({navigation}) => {
         <Step3 />
         <TouchableOpacity
           style={[btnStyles.btnBlue, styles.btn]}
-          onPress={() => navigation.push('ReservationComplete')}>
+          onPress={() => navigation.push('Payment', data)}>
           <Text
             style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
             결제

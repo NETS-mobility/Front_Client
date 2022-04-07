@@ -59,21 +59,23 @@ export const GetTime = ({
 }) => {
   useEffect(() => {
     if (time.resArrTime.time != '0' && time.resDepTime.time != '0') {
-      const TestArrTime = time.resArrTime.time;
-      const TestDepTime = time.resDepTime.time;
+      const TestArrTime = time?.resArrTime?.time;
+      const TestDepTime = time?.resDepTime?.time;
       const compArrTime = new Date();
       const compDepTime = new Date();
       compArrTime.setHours(
-        TestArrTime.substring(0, 2),
-        TestArrTime.substring(3, 5),
-        TestArrTime.substring(6, 8),
+        TestArrTime?.substring(0, 2),
+        TestArrTime?.substring(3, 5),
+        TestArrTime?.substring(6, 8),
       );
       compDepTime.setHours(
-        TestDepTime.substring(0, 2),
-        TestDepTime.substring(3, 5),
-        TestDepTime.substring(6, 8),
+        TestDepTime?.substring(0, 2),
+        TestDepTime?.substring(3, 5),
+        TestDepTime?.substring(6, 8),
       );
-      setGowithTime((compDepTime - compArrTime) / (60 * 1000));
+      setGowithTime(Math.floor((compDepTime - compArrTime) / (60 * 1000)));
+    } else {
+      setGowithTime(NaN);
     }
   }, [time.resArrTime.time, time.resDepTime.time]);
 
@@ -101,12 +103,14 @@ export const GetTime = ({
             ]}>
             {'귀가 출발 시간은 병원 도착 시간 이후로 설정해주세요.'}
           </Text>
-        ) : (
+        ) : !isNaN(gowithTime) ? (
           <ServiceGowithPicker
             type={true}
             title={'병원 동행 예상 시간은 다음과 같습니다.'}
             time={gowithTime}
           />
+        ) : (
+          <></>
         )}
       </>
     );
