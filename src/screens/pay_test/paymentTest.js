@@ -15,7 +15,7 @@ import {IMPConst} from 'iamport-react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const PaymentTest = ({navigation}) => {
-  const [pg, setPg] = useState('html5_inicis');
+  const [pg, setPg] = useState('kcp');
   const [tierCode, setTierCode] = useState(undefined);
   const [method, setMethod] = useState('card');
   const [cardQuota, setCardQuota] = useState(0);
@@ -116,7 +116,7 @@ const PaymentTest = ({navigation}) => {
               />
             </Stack>
           )}
-          {method === 'phone' && (
+          {/* {method === 'phone' && (
             <Stack direction={'row'}>
               <FormControl.Label alignItems={'center'} mb={2} w={'18%'}>
                 실물컨텐츠
@@ -127,8 +127,8 @@ const PaymentTest = ({navigation}) => {
                 onValueChange={value => setDigital(value)}
               />
             </Stack>
-          )}
-          <Stack direction={'row'}>
+          )} */}
+          {/* <Stack direction={'row'}>
             <FormControl.Label alignItems={'center'} mb={2} w={'18%'}>
               에스크로
             </FormControl.Label>
@@ -137,7 +137,7 @@ const PaymentTest = ({navigation}) => {
               value={escrow}
               onValueChange={value => setEscrow(value)}
             />
-          </Stack>
+          </Stack> */}
           <Stack direction={'row'}>
             <FormControl.Label alignItems={'center'} mb={2} w={'18%'}>
               주문명
@@ -257,46 +257,46 @@ const PaymentTest = ({navigation}) => {
                 data.params.vbank_due = vbankDue;
               }
 
-              // 다날 && 가상계좌의 경우, 사업자 등록번호 10자리 추가
-              if (method === 'vbank' && pg === 'danal_tpay') {
-                data.params.biz_num = bizNum;
-              }
+              // // 다날 && 가상계좌의 경우, 사업자 등록번호 10자리 추가
+              // if (method === 'vbank' && pg === 'danal_tpay') {
+              //   data.params.biz_num = bizNum;
+              // }
 
-              // 휴대폰 소액결제의 경우, 실물 컨텐츠 여부 추가
-              if (method === 'phone') {
-                data.params.digital = digital;
-              }
+              // // 휴대폰 소액결제의 경우, 실물 컨텐츠 여부 추가
+              // if (method === 'phone') {
+              //   data.params.digital = digital;
+              // }
 
-              // 정기결제의 경우, customer_uid 추가
-              if (pg === 'kcp_billing') {
-                data.params.customer_uid = `cuid_${new Date().getTime()}`;
-              }
+              // // 정기결제의 경우, customer_uid 추가
+              // if (pg === 'kcp_billing') {
+              //   data.params.customer_uid = `cuid_${new Date().getTime()}`;
+              // }
 
-              if (pg === 'naverpay') {
-                const today = new Date();
-                const oneMonthLater = new Date(
-                  today.setMonth(today.getMonth() + 1),
-                );
-                const dd = String(oneMonthLater.getDate()).padStart(2, '0');
-                const mm = String(oneMonthLater.getMonth() + 1).padStart(
-                  2,
-                  '0',
-                ); // January is 0!
-                const yyyy = oneMonthLater.getFullYear();
+              // if (pg === 'naverpay') {
+              //   const today = new Date();
+              //   const oneMonthLater = new Date(
+              //     today.setMonth(today.getMonth() + 1),
+              //   );
+              //   const dd = String(oneMonthLater.getDate()).padStart(2, '0');
+              //   const mm = String(oneMonthLater.getMonth() + 1).padStart(
+              //     2,
+              //     '0',
+              //   ); // January is 0!
+              //   const yyyy = oneMonthLater.getFullYear();
 
-                data.params.naverPopupMode = false;
-                data.params.naverUseCfm = `${yyyy}${mm}${dd}`;
-                data.params.naverProducts = [
-                  {
-                    categoryType: 'BOOK',
-                    categoryId: 'GENERAL',
-                    uid: '107922211',
-                    name: '한국사',
-                    payReferrer: 'NAVER_BOOK',
-                    count: 10,
-                  },
-                ];
-              }
+              //   data.params.naverPopupMode = false;
+              //   data.params.naverUseCfm = `${yyyy}${mm}${dd}`;
+              //   data.params.naverProducts = [
+              //     {
+              //       categoryType: 'BOOK',
+              //       categoryId: 'GENERAL',
+              //       uid: '107922211',
+              //       name: '한국사',
+              //       payReferrer: 'NAVER_BOOK',
+              //       count: 10,
+              //     },
+              //   ];
+              // }
 
               navigation.navigate('Payment', data);
             }}>

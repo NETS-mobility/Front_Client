@@ -13,6 +13,7 @@ import ReservationAPI from '../../../api/reservation/reservation';
 import {GetToken} from '../../../utils/controlToken';
 import GeoCoding from '../../../utils/geocoding';
 import DispatchAPI from '../../../api/dispatch/dispatch';
+import Loading from '../../common/loading';
 
 const styles = StyleSheet.create({
   title: {
@@ -42,6 +43,11 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 18,
     backgroundColor: '#fff',
+  },
+  loadingBack: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
@@ -217,69 +223,21 @@ const Reservation03 = ({route, navigation}) => {
         <View style={styles.proset}>
           <NextBtn
             text={'배차 가능 여부 확인하기'}
-            navWhere={async () => {
-              const res = await DispatchAPI({
-                revData: {
-                  pickup: resAddrs.homeAddr,
-                  hos: resAddrs.hospitalAddr,
-                  drop: resAddrs.dropAddr,
-                  dire: moveDirection,
-                  pickup_x: xy.pickup_x,
-                  pickup_y: xy.pickup_y,
-                  drop_x: xy.drop_x,
-                  drop_y: xy.drop_y,
-                  hos_x: xy.hos_x,
-                  hos_y: xy.hos_y,
-                  old_hos_arr_time: resTimes.resArrTime.time,
-                  old_hos_dep_time: resTimes.resDepTime.time,
-                  rev_date: resDate,
-                  gowithHospitalTime: gowithHospitalTime,
-                  service_kind_id: serviceKindId,
-                },
-              }).then(response => response);
-              console.log('배차성공?', res);
-              navigation.push('Reservation04', {
-                jwtToken: await GetToken(),
+            navWhere={() => {
+              navigation.push('Loading', {
                 serviceKindId: serviceKindId,
                 moveDirection: moveDirection,
-                gowithHospitalTime: gowithHospitalTime, //바꿔야댐
-                pickupAddr: resAddrs.homeAddr,
-                dropAddr: resAddrs.dropAddr,
-                hospitalAddr: resAddrs.hospitalAddr,
-                hopeReservationDate: resDate,
-                hopeHospitalArrivalTime: resTimes.resArrTime.time,
-                fixedMedicalTime: resTimes.resResTime.time,
-                hopeHospitalDepartureTime: resTimes.resDepTime.time,
-                fixedMedicalDetail: diagnosis,
-                hopeRequires: result,
-                patientName: userInfo.name,
-                patientPhone: userInfo.phone,
-                protectorName: guardInfo.name,
-                protectorPhone: guardInfo.phone,
+                resAddrs: resAddrs,
+                resDate: resDate,
+                resTimes: resTimes,
+                guardInfo: guardInfo,
+                userInfo: userInfo,
                 validTargetKind: validTargetKind,
-                dispatch: res,
+                gowithHospitalTime: gowithHospitalTime,
+                xy: xy,
+                diagnosis: diagnosis,
+                result: result,
               });
-              // navigation.push('Reservation04');
-              // ReservationAPI({
-              //   jwtToken: await GetToken(),
-              //   serviceKindId: serviceKindId,
-              //   moveDirection: moveDirection,
-              //   gowithHospitalTime: gowithHospitalTime, //바꿔야댐
-              //   pickupAddr: resAddrs.homeAddr,
-              //   dropAddr: resAddrs.dropAddr,
-              //   hospitalAddr: resAddrs.hospitalAddr,
-              //   hopeReservationDate: resDate,
-              //   hopeHospitalArrivalTime: resTimes.resArrTime.time,
-              //   fixedMedicalTime: resTimes.resResTime.time,
-              //   hopeHospitalDepartureTime: resTimes.resDepTime.time,
-              //   fixedMedicalDetail: diagnosis,
-              //   hopeRequires: result,
-              //   patientName: userInfo.name,
-              //   patientPhone: userInfo.phone,
-              //   protectorName: guardInfo.name,
-              //   protectorPhone: guardInfo.phone,
-              //   validTargetKind: validTargetKind,
-              // });
             }}
             disable={disable}
           />

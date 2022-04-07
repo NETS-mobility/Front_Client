@@ -16,6 +16,7 @@ const CommonLayout = ({children}) => {
 
 const styles = StyleSheet.create({
   layout: {
+    position: 'relative',
     flex: 1,
     paddingBottom: 65,
     backgroundColor: '#fff',
