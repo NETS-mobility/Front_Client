@@ -6,7 +6,9 @@ import ServiceDetailNavigator from '../../navigation/service/serviceDetail';
 import ReservationNavigator from '../../navigation/service/reservation';
 import AlarmNavigator from '../../navigation/alarm/alarm';
 import MypageNavigator from '../../navigation/mypage/mypageMain/mypageMain';
-import LoginNavigator from '../../navigation/login/login';
+import LoginNavigator from '../../navigation/auth/login';
+import AuthNavigator from '../../navigation/auth';
+import HomeNavigator from '../../navigation/home/home';
 import {RefreshContext} from '../../../App';
 
 const Tab = createBottomTabNavigator();
@@ -29,7 +31,7 @@ const BottomTab = () => {
         }}>
         <Tab.Screen
           name="홈"
-          component={ReservationNavigator}
+          component={HomeNavigator}
           options={{
             headerShown: false,
             tabBarIcon: ({color}) => (
@@ -40,7 +42,7 @@ const BottomTab = () => {
         {refresh == null ? (
           <Tab.Screen
             name="로그인"
-            component={LoginNavigator}
+            component={AuthNavigator}
             options={{
               headerShown: false,
               tabBarIcon: ({color}) => (

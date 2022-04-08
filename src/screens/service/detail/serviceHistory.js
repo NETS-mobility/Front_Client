@@ -108,10 +108,11 @@ const ServiceHistory = ({navigation}) => {
         </View>
         <View>
           {ing
-            ? serviceIng != [] &&
+            ? Array.isArray(serviceIng) &&
+              serviceIng.length != 0 &&
               serviceIng?.map((data, i) => {
                 const {dispatch, ...filteredData} = data;
-                const detailId = data.service_id;
+                const detailId = data?.service_id;
                 return (
                   <ServiceHistoryBlock
                     key={i}
@@ -123,10 +124,11 @@ const ServiceHistory = ({navigation}) => {
                   />
                 );
               })
-            : serviceComp != [] &&
+            : Array.isArray(serviceComp) &&
+              serviceComp.length != 0 &&
               serviceComp?.map((data, i) => {
                 const {dispatch, ...filteredData} = data;
-                const detailId = data.service_id;
+                const detailId = data?.service_id;
                 return (
                   <ServiceHistoryBlock
                     key={i}

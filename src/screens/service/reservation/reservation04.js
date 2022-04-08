@@ -10,6 +10,8 @@ import typoStyles from '../../../assets/fonts/typography';
 import {btnStyles} from '../../../components/common/button';
 import ReservationAPI from '../../../api/reservation/reservation';
 import {CheckObjEmpty} from '../../../utils/checkEmpty';
+import PreventBack from '../../../utils/preventBack';
+import {useFocusEffect} from '@react-navigation/native';
 
 // //배차 결과 나오기 전까지 로딩 화면
 // const Reservation04 = ({navigation}) => {
@@ -82,6 +84,7 @@ const styles = StyleSheet.create({
 });
 
 const Reservation04 = ({navigation, route}) => {
+  useFocusEffect(PreventBack);
   const data = route.params;
   // 9: ['차량 번호', dispatch?.[0]?.car_number],
   // 10: ['네츠 매니저', dispatch?.[0]?.netsmanager_name],

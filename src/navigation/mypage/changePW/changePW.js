@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ChangePW, ChangePW2, ChangePW3} from '../../../screens/mypage/changePW';
+import {ChangePW, ChangePW2, ChangePW3} from '../../../screens/mypage';
 
 const Stack = createNativeStackNavigator();
 const ChangePwNavigator = () => {

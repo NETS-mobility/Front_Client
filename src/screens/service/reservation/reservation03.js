@@ -224,7 +224,7 @@ const Reservation03 = ({route, navigation}) => {
           <NextBtn
             text={'배차 가능 여부 확인하기'}
             navWhere={() => {
-              navigation.push('Loading', {
+              navigation.replace('Loading', {
                 serviceKindId: serviceKindId,
                 moveDirection: moveDirection,
                 resAddrs: resAddrs,

@@ -11,7 +11,6 @@ import typoStyles from '../../../assets/fonts/typography';
 import {btnStyles} from '../../../components/common/button';
 import CommonLayout from '../../../components/common/layout';
 import CustomBtn from '../../../components/common/button';
-import GeoCoding from '../../../utils/geocoding';
 
 const styles = StyleSheet.create({
   background: {

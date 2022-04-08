@@ -57,7 +57,7 @@ const LoginScreen = ({navigation}) => {
               .then(res => {
                 if (res == 200) {
                   setRefresh(true);
-                  navigation.navigate('Home');
+                  navigation.replace('Home');
                 } else {
                   setRefresh(null);
                 }
@@ -74,7 +74,7 @@ const LoginScreen = ({navigation}) => {
               typoStyles.fwRegular,
               typoStyles.textExplain,
             ]}>
-            아이디 찾기{' '}
+            아이디 찾기
           </Text>
         </TouchableOpacity>
         <Text
@@ -92,7 +92,6 @@ const LoginScreen = ({navigation}) => {
               typoStyles.fwRegular,
               typoStyles.textExplain,
             ]}>
-            {' '}
             비밀번호 찾기
           </Text>
         </TouchableOpacity>

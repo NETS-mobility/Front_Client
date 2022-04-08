@@ -138,7 +138,7 @@ const SignUpScreen = ({navigation}) => {
       });
 
       if (res == 200) {
-        navigation.push('SignUpDone', {name: name, id: email, phone: phone});
+        navigation.replace('SignUpDone', {name: name, id: email, phone: phone});
       }
     }
   };
@@ -235,7 +235,12 @@ const SignUpScreen = ({navigation}) => {
               onPress={() => setR1(!r1)}
               value={r1}
             />
-            <SignUpDetailBtn style={styles.detailbtn} />
+            <SignUpDetailBtn
+              navWhere={() => {
+                navigation.push('SignUpDetail');
+              }}
+              style={styles.detailbtn}
+            />
           </View>
           <View style={styles.checkboxline}>
             <CheckBox
@@ -243,7 +248,12 @@ const SignUpScreen = ({navigation}) => {
               onPress={() => setR2(!r2)}
               value={r2}
             />
-            <SignUpDetailBtn style={styles.detailbtn} />
+            <SignUpDetailBtn
+              navWhere={() => {
+                navigation.push('SignUpDetail');
+              }}
+              style={styles.detailbtn}
+            />
           </View>
           <View style={styles.checkboxline}>
             <CheckBox
@@ -270,13 +280,7 @@ const SignUpScreen = ({navigation}) => {
         </Text>
 
         <View style={styles.signupbtn}>
-          <LoginBtn
-            btnName={'가입하기'}
-            navWhere={() =>
-              // SignUpAPI({id: email, password: password, name: name, phone: phone})
-              Checksignup()
-            }
-          />
+          <LoginBtn btnName={'가입하기'} navWhere={() => Checksignup()} />
         </View>
       </SafeAreaView>
     </ScrollView>
