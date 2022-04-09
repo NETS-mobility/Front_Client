@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const NoticeBlock = ({data, navi}) => {
+const NoticeBlock = ({data, navigation}) => {
   console.log('data=', data);
   return (
     <View style={styles.notiBlock}>
@@ -67,7 +67,16 @@ const NoticeBlock = ({data, navi}) => {
         const pickupString = `${content.rev_date.substring(0, 10)}`;
         const serviceType = `${content.service_type}`;
         return (
-          <TouchableOpacity style={styles.contents} key={i}>
+          <TouchableOpacity
+            style={styles.contents}
+            key={i}
+            onPress={() =>
+              navigation.navigate('서비스내역', {
+                screen: 'ServiceDetail',
+                params: {detailId: content?.id},
+                initial: false,
+              })
+            }>
             <Text
               style={[
                 typoStyles.textExplainBold,

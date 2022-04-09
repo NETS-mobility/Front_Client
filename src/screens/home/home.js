@@ -92,7 +92,7 @@ const Home = ({navigation}) => {
       </Text>
       <ScrollView>
         {refresh != null ? (
-          <NoticeBlock data={res} navi={navigation} />
+          <NoticeBlock data={res} navigation={navigation} />
         ) : (
           <NoTokenNoticeBlock />
         )}

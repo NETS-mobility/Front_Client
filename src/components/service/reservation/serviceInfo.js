@@ -184,7 +184,9 @@ export const ServiceInfo = ({num, data, dispatch}) => {
       {infos != undefined &&
         infos.map((infoData, i) => {
           const result = pickCategory(data, dispatch, infoData);
-          return <ServiceInfoOneLine title={result[0]} value={result[1]} />;
+          return (
+            <ServiceInfoOneLine key={i} title={result[0]} value={result[1]} />
+          );
         })}
     </View>
   );
