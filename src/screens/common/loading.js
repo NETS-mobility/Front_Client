@@ -3,6 +3,8 @@ import {HStack, Spinner, Heading, NativeBaseProvider} from 'native-base';
 import {View, StyleSheet} from 'react-native';
 import DispatchAPI from '../../api/dispatch/dispatch';
 import {GetToken} from '../../utils/controlToken';
+import PreventBack from '../../utils/preventBack';
+import {useFocusEffect} from '@react-navigation/native';
 
 const Loading = ({route, navigation}) => {
   const {
@@ -28,6 +30,8 @@ const Loading = ({route, navigation}) => {
     },
   });
 
+  useFocusEffect(PreventBack);
+
   const dispatch = async () => {
     const res = await DispatchAPI({
       revData: {
@@ -48,7 +52,7 @@ const Loading = ({route, navigation}) => {
         service_kind_id: serviceKindId,
       },
     }).then(response => response);
-    navigation.push('Reservation04', {
+    navigation.navigate('Reservation04', {
       jwtToken: await GetToken(),
       serviceKindId: serviceKindId,
       moveDirection: moveDirection,

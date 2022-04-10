@@ -72,13 +72,13 @@ export const ServiceDetailProgress = ({progress}) => {
   const {state, state_time} = progress;
   const GetLineFill = () => {
     let lineFill = '0%';
-    if (state > 4) {
+    if (state > 5) {
       lineFill = '100%';
-    } else if (state > 3) {
+    } else if (state > 4) {
       lineFill = '75%';
-    } else if (state > 2) {
+    } else if (state > 3) {
       lineFill = '50%';
-    } else if (state > 1) {
+    } else if (state > 2) {
       lineFill = '25%';
     }
     return lineFill;
@@ -127,29 +127,39 @@ export const ServiceDetailProgress = ({progress}) => {
         </View>
 
         <DetailProgressCircle
-          time={state_time?.[1].substring(11, 16)}
+          time={
+            state_time?.[2] != null ? state_time?.[2].substring(11, 16) : ''
+          }
           text={'픽업완료'}
-          circleFill={state > 0}
-        />
-        <DetailProgressCircle
-          time={state_time?.[2].substring(11, 16)}
-          text={'병원도착'}
           circleFill={state > 1}
         />
         <DetailProgressCircle
-          time={state_time?.[3].substring(11, 16)}
-          text={'귀가차량\n병원도착'}
+          time={
+            state_time?.[3] != null ? state_time?.[3].substring(11, 16) : ''
+          }
+          text={'병원도착'}
           circleFill={state > 2}
         />
         <DetailProgressCircle
-          time={state_time?.[4].substring(11, 16)}
-          text={'귀가출발'}
+          time={
+            state_time?.[4] != null ? state_time?.[4].substring(11, 16) : ''
+          }
+          text={'귀가차량\n병원도착'}
           circleFill={state > 3}
         />
         <DetailProgressCircle
-          time={state_time?.[5].substring(11, 16)}
-          text={'서비스종료'}
+          time={
+            state_time?.[5] != null ? state_time?.[5].substring(11, 16) : ''
+          }
+          text={'귀가출발'}
           circleFill={state > 4}
+        />
+        <DetailProgressCircle
+          time={
+            state_time?.[6] != null ? state_time?.[6].substring(11, 16) : ''
+          }
+          text={'서비스종료'}
+          circleFill={state > 5}
         />
       </View>
     </ServiceBlock>

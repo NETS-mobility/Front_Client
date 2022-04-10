@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,7 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {btnStyles, shadowStyles} from '../../../components/common/button';
+import CustomBtn, {
+  btnStyles,
+  shadowStyles,
+} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import {
@@ -14,41 +17,23 @@ import {
   Step2,
   Step3,
 } from '../../../components/service/reservation/reservationPay';
+import {GetPayInfo} from '../../../api/payment/GetPayInfo';
+import {IMPConst} from 'iamport-react-native';
 
-const ReservationPay = ({navigation}) => {
-  const [method, setMethod] = useState('card');
-  const data = {
-    params: {
-      pg: 'kcp',
-      pay_method: method,
-      currency: undefined,
-      notice_url: undefined,
-      display: undefined,
-      merchant_uid: `mid_${reservation_id}`,
-      name: `${service_type}`,
-      amount: `${base_cost}`,
-      app_scheme: 'exampleforrn',
-      tax_free: true,
-      buyer_name: `${name}`,
-      buyer_tel: `${phone}`,
-      buyer_email: buyerEmail,
-      buyer_addr: undefined,
-      buyer_postcode: undefined,
-      custom_data: undefined,
-      vbank_due: undefined,
-      popup: undefined,
-      digital: undefined,
-      language: undefined,
-      biz_num: undefined,
-      customer_uid: undefined,
-      naverPopupMode: undefined,
-      naverUseCfm: undefined,
-      naverProducts: undefined,
-      m_redirect_url: IMPConst.M_REDIRECT_URL,
-      escrow,
-    },
-    tierCode,
+const ReservationPay = ({navigation, route}) => {
+  const {reservationId} = route.params;
+  const [method, setMethod] = useState('');
+  const [iamport, setIamport] = useState();
+  const [dis1, setDis1] = useState(true);
+  const [dis2, setDis2] = useState(true);
+
+  const GetIamportInfo = async () => {
+    setIamport(await GetPayInfo(reservationId));
   };
+
+  useEffect(() => {
+    GetIamportInfo();
+  }, []);
 
   return (
     <CommonLayout>
@@ -72,17 +57,58 @@ const ReservationPay = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <Step1 />
-        <Step2 />
-        <Step3 />
-        <TouchableOpacity
-          style={[btnStyles.btnBlue, styles.btn]}
-          onPress={() => navigation.push('Payment', data)}>
-          <Text
-            style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
-            결제
-          </Text>
-        </TouchableOpacity>
+        <Step1 setMethod={setMethod} setDis={setDis1} />
+        <Step2 id={reservationId} />
+        <Step3 setDis={setDis2} />
+        <CustomBtn
+          viewStyle={[btnStyles.btnBlue, styles.btn]}
+          viewStyleDisabled={[btnStyles.btnDisable, styles.btn]}
+          text={'결제'}
+          textStyle={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}
+          textStyleDisabled={[
+            typoStyles.fs20,
+            typoStyles.fw700,
+            typoStyles.textWhite,
+          ]}
+          disabled={dis1 || dis2}
+          onPress={() => {
+            const data = {
+              params: {
+                display: {
+                  card_quota: iamport.cardQuota,
+                },
+                pg: 'kcp.A52CY',
+                pay_method: method,
+                currency: undefined,
+                notice_url: undefined,
+                display: undefined,
+                merchant_uid: iamport.merchantUid,
+                name: iamport.name,
+                amount: iamport.amount,
+                app_scheme: 'exampleforrn',
+                tax_free: true,
+                buyer_name: iamport.buyerName,
+                buyer_tel: iamport.buyerTel,
+                buyer_email: iamport.buyerEmail,
+                buyer_addr: undefined,
+                buyer_postcode: undefined,
+                custom_data: undefined,
+                vbank_due: iamport.vbankDue,
+                popup: undefined,
+                digital: undefined,
+                language: undefined,
+                biz_num: undefined,
+                customer_uid: undefined,
+                naverPopupMode: undefined,
+                naverUseCfm: undefined,
+                naverProducts: undefined,
+                m_redirect_url: IMPConst.M_REDIRECT_URL,
+                escrow: undefined,
+              },
+              tierCode: undefined,
+            };
+            navigation.push('Payment', {data: data});
+          }}></CustomBtn>
       </ScrollView>
     </CommonLayout>
   );

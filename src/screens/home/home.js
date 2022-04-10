@@ -70,10 +70,6 @@ const Home = ({navigation}) => {
     GetHomeNoti();
   }, [isFocused]);
 
-  useEffect(() => {
-    console.log('res?', res);
-  }, [res]);
-
   return (
     <CommonLayout>
       <Image
@@ -92,7 +88,7 @@ const Home = ({navigation}) => {
       </Text>
       <ScrollView>
         {refresh != null ? (
-          <NoticeBlock data={res} navi={navigation} />
+          <NoticeBlock data={res} navigation={navigation} />
         ) : (
           <NoTokenNoticeBlock />
         )}

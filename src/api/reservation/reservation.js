@@ -1,16 +1,12 @@
 import axios from 'axios';
 
-const ReservationAPI = data => {
+const ReservationAPI = async data => {
   const {dispatch, ...filtered} = data;
   const dispatch1 = data.dispatch.dispatch1;
   const dispatch2 = data.dispatch.dispatch2;
-  console.log('data===', data);
-  console.log('dispatch1===', dispatch1);
-  console.log('data.dispatch===', data.dispatch);
-  console.log('filtered===', filtered);
 
-  const result = axios
-    .post('/client/reserve', {
+  try {
+    const result = await axios.post('/client/reserve', {
       data: filtered,
       dispatch1: dispatch1,
       dispatch2: dispatch2
@@ -24,10 +20,11 @@ const ReservationAPI = data => {
             expCarTerminateServiceTime: '',
           },
       file: {},
-    })
-    .then(res => console.log(res.data))
-    .catch(err => console.log(JSON.stringify(err)));
-  return result;
+    });
+    return result.data;
+  } catch (err) {
+    return err;
+  }
 };
 
 /*
