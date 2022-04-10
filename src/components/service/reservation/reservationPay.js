@@ -6,7 +6,7 @@ import ServiceBlock from '../serviceBlock';
 import {Payment} from '../payment/payment';
 import {AdditionalPayment} from '../payment/additionalPayment';
 
-export const Step1 = () => {
+export const Step1 = ({setMethod}) => {
   const [r1, setR1] = useState(false);
   const [r2, setR2] = useState(false);
   const [r3, setR3] = useState(false);
@@ -30,15 +30,21 @@ export const Step1 = () => {
       </Text>
       <RadioButton
         text={'무통장 입금'}
-        onPress={() => changeState(true, false, false)}
+        onPress={() => {
+          changeState(true, false, false);
+          setMethod('vbank');
+        }}
         value={r1}
       />
-      {/* <RadioButton
+      <RadioButton
         text={'신용카드 결제'}
-        onPress={() => changeState(false, true, false)}
+        onPress={() => {
+          changeState(false, true, false);
+          setMethod('card');
+        }}
         value={r2}
       />
-      <RadioButton
+      {/*<RadioButton
         text={'간편 결제'}
         onPress={() => changeState(false, false, true)}
         value={r3}
@@ -47,7 +53,7 @@ export const Step1 = () => {
   );
 };
 
-export const Step2 = ({additional}) => {
+export const Step2 = ({additional, id}) => {
   return (
     <ServiceBlock>
       <Text
@@ -60,7 +66,7 @@ export const Step2 = ({additional}) => {
         STEP2. 결제 금액 확인
       </Text>
       {additional ? <AdditionalPayment /> : <></>}
-      {/* <Payment pay={detail?.payment} /> */}
+      <Payment id={id} />
       {additional ? (
         <></>
       ) : (

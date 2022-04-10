@@ -173,7 +173,15 @@ const Reservation04 = ({navigation, route}) => {
         <View>
           <Text
             style={[typoStyles.fs32, typoStyles.fw700, typoStyles.textMain]}>
-            배차가{'\n'}완료되었습니다.
+            배차가{'\n'}가능한 차량이 있습니다.
+          </Text>
+          <Text
+            style={[
+              typoStyles.fs20,
+              typoStyles.fw700,
+              typoStyles.textExplainBold,
+            ]}>
+            계속 진행하시겠습니까?
           </Text>
         </View>
         <View style={styles.textbox}>
@@ -184,12 +192,16 @@ const Reservation04 = ({navigation, route}) => {
         <TouchableOpacity
           onPress={async () => {
             const res = await ReservationAPI(data);
-            navigation.push('ReservationPay');
+            navigation.navigate('ReservationPay', {
+              screen: 'ReservationPay',
+              params: {reservationId: res.reservationId},
+              initial: false,
+            });
           }}>
           <View style={[styles.btn, btnStyles.btnBlue]}>
             <Text
               style={[typoStyles.fs15, typoStyles.fw700, typoStyles.textWhite]}>
-              결제하러 가기
+              예약 계속 진행하기
             </Text>
           </View>
         </TouchableOpacity>
@@ -197,7 +209,7 @@ const Reservation04 = ({navigation, route}) => {
           <View style={[styles.btn, btnStyles.btnWhite]}>
             <Text
               style={[typoStyles.fs15, typoStyles.fw700, typoStyles.textMain]}>
-              홈 화면으로 돌아가기
+              예약 취소하기
             </Text>
           </View>
         </TouchableOpacity>

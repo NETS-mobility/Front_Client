@@ -1,9 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
+import GetBaseCost from '../../../api/payment/GetBaseCost';
 
-export const Payment = ({pay}) => {
-  console.log('pay=', Number(pay?.charge).toLocaleString());
+const PaymentLine = ({title, price}) => {
+  return (
+    <View style={[styles.box, styles.lightLine]}>
+      <Text style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
+        {title}
+      </Text>
+      <Text style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
+        {`${Number(price).toLocaleString('ko-KR')}원`}
+      </Text>
+    </View>
+  );
+};
+
+export const Payment = ({id}) => {
+  const [baseCost, setBaseCost] = useState({});
+  const BaseCost = async () => {
+    setBaseCost(await GetBaseCost(id));
+  };
+
+  useEffect(() => {
+    BaseCost();
+  }, []);
 
   return (
     <View>
@@ -25,27 +46,29 @@ export const Payment = ({pay}) => {
           금액
         </Text>
       </View>
-      <View style={[styles.box, styles.lightLine]}>
-        <Text
-          style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
-          서비스요금
-        </Text>
-        <Text
-          style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
-          {`${Number(pay?.charge).toLocaleString('ko-KR')}원`}
-        </Text>
-      </View>
-      {pay?.extraPay != '' && (
-        <View style={[styles.box, styles.lightLine]}>
-          <Text
-            style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
-            추가요금
-          </Text>
-          <Text
-            style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textExplain]}>
-            {`${Number(pay?.extraPay).toLocaleString('ko-KR')}원`}
-          </Text>
-        </View>
+      {baseCost?.baseCost != 0 && (
+        <PaymentLine title={'서비스요금'} price={baseCost?.baseCost} />
+      )}
+      {baseCost?.overMoveDistanceCost != 0 && (
+        <PaymentLine
+          title={`추가 거리 요금(${baseCost?.overMoveDistance}km)`}
+          price={baseCost?.overMoveDistanceCost}
+        />
+      )}
+      {baseCost?.overGowithTimeCost != 0 && (
+        <PaymentLine
+          title={`추가 시간 요금(${baseCost?.overGowithTime}분)`}
+          price={baseCost?.overGowithTimeCost}
+        />
+      )}
+      {baseCost?.nightCost != 0 && (
+        <PaymentLine
+          title={`심야할증(${baseCost?.nightmin}분)`}
+          price={baseCost?.nightCost}
+        />
+      )}
+      {baseCost?.weekendCost != 0 && (
+        <PaymentLine title={`주말 할증`} price={baseCost?.weekendCost} />
       )}
       <View style={styles.total}>
         <Text
@@ -57,9 +80,7 @@ export const Payment = ({pay}) => {
           최종결제금액
         </Text>
         <Text style={[typoStyles.fw700, typoStyles.fs18, typoStyles.textMain]}>
-          {`${(Number(pay?.charge) + Number(pay?.extraPay)).toLocaleString(
-            'ko-KR',
-          )}원`}
+          {`${Number(baseCost?.TotalBaseCost).toLocaleString('ko-KR')}원`}
         </Text>
       </View>
     </View>

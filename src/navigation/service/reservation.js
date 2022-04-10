@@ -27,7 +27,7 @@ const ReservationNavigator = () => {
       <Stack.Screen name="Reservation03" component={Reservation03} />
       <Stack.Screen name="Loading" component={Loading} />
       <Stack.Screen name="Reservation04" component={Reservation04} />
-      <Stack.Screen name="Payment" component={PaymentNavigator} />
+      <Stack.Screen name="ReservationPay" component={PaymentNavigator} />
       <Stack.Screen
         name="ReservationComplete"
         component={ReservationComplete}

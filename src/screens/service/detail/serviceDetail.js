@@ -92,7 +92,7 @@ const ServiceDetail = ({navigation, route}) => {
         </ServiceBlock>
 
         <ServiceBlock>
-          <Payment pay={detail?.payment} />
+          <Payment id={id} />
         </ServiceBlock>
       </ScrollView>
     </CommonLayout>

@@ -192,7 +192,7 @@ export const ServiceInfo = ({num, data, dispatch}) => {
   );
 };
 
-const ServiceInfoOneLine = ({title, value}) => {
+export const ServiceInfoOneLine = ({title, value}) => {
   const styles = StyleSheet.create({
     line: {
       flexDirection: 'row',
@@ -211,7 +211,7 @@ const ServiceInfoOneLine = ({title, value}) => {
         style={[
           styles.title,
           typoStyles.fs14,
-          typoStyles.fwRegular,
+          typoStyles.fw700,
           typoStyles.textExplain,
         ]}>
         {title}
