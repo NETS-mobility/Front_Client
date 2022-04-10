@@ -1,26 +1,39 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {NavigationContainer} from '@react-navigation/native';
 import ServiceDetailNavigator from '../../navigation/service/serviceDetail';
-import ReservationNavigator from '../../navigation/service/reservation';
 import AlarmNavigator from '../../navigation/alarm/alarm';
 import MypageNavigator from '../../navigation/mypage/mypageMain/mypageMain';
-import LoginNavigator from '../../navigation/auth/login';
 import AuthNavigator from '../../navigation/auth';
 import HomeNavigator from '../../navigation/home/home';
 import {RefreshContext} from '../../../App';
+import {createNavigationContainerRef} from '@react-navigation/native';
 
+const ref = createNavigationContainerRef();
 const Tab = createBottomTabNavigator();
 const BottomTab = () => {
   const {refresh, setRefresh} = useContext(RefreshContext);
+  const [routeName, setRouteName] = useState();
+  const noBottomTab = ['Payment', 'Loading', 'Reservation04'];
+  const hide = noBottomTab.includes(ref.current?.getCurrentRoute()?.name);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={ref}
+      onReady={() => {
+        setRouteName(ref.getCurrentRoute().name);
+      }}
+      onStateChange={async () => {
+        const previousRouteName = routeName;
+        const currentRouteName = ref.getCurrentRoute().name;
+        setRouteName(currentRouteName);
+      }}>
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: '#19b7cd',
           tabBarStyle: {
+            display: hide ? 'none' : 'flex',
             height: 65,
             position: 'absolute',
             bottom: 0,
@@ -39,6 +52,7 @@ const BottomTab = () => {
             ),
           }}
         />
+
         {refresh == null ? (
           <Tab.Screen
             name="로그인"
