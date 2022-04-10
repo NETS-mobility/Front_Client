@@ -12,6 +12,7 @@ import ReservationAPI from '../../../api/reservation/reservation';
 import {CheckObjEmpty} from '../../../utils/checkEmpty';
 import PreventBack from '../../../utils/preventBack';
 import {useFocusEffect} from '@react-navigation/native';
+import {ServiceInfo} from '../../../components/service/reservation/serviceInfo';
 
 // //배차 결과 나오기 전까지 로딩 화면
 // const Reservation04 = ({navigation}) => {
@@ -37,6 +38,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     marginTop: 52,
+    alignSelf: 'center',
+    paddingHorizontal: 30,
   },
 
   rightcontents: {
@@ -114,13 +117,14 @@ const Reservation04 = ({navigation, route}) => {
   } = data;
 
   const serviceData = {
+    dispatch_case: dispatch?.service?.dispatch_case,
     pickup_address: pickupAddr,
     hos_address: hospitalAddr,
     drop_address: dropAddr,
-    // pickup_time: dispatch?.expect_pickup_time,
-    // hos_arrival_time: '',
-    // hos_depart_time: '',
-    // hos_care_time: '',
+    pickup_time: dispatch?.service?.pickup_time,
+    hos_arrival_time: dispatch?.service?.hos_arrival_time,
+    hos_depart_time: dispatch?.service?.hos_depart_time,
+    hos_care_time: fixedMedicalTime,
   };
 
   useEffect(() => {
@@ -184,7 +188,7 @@ const Reservation04 = ({navigation, route}) => {
           </Text>
         </View>
         <View style={styles.textbox}>
-          {/* <ServiceInfo num={3} data={data} dispatch={dispatch} /> */}
+          <ServiceInfo num={3} data={serviceData} dispatch={dispatch} />
         </View>
       </View>
       <View style={styles.btnAlign}>
