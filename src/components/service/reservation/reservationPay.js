@@ -6,16 +6,23 @@ import ServiceBlock from '../serviceBlock';
 import {Payment} from '../payment/payment';
 import {AdditionalPayment} from '../payment/additionalPayment';
 
-export const Step1 = ({setMethod}) => {
+export const Step1 = ({setMethod, setDis}) => {
   const [r1, setR1] = useState(false);
   const [r2, setR2] = useState(false);
-  const [r3, setR3] = useState(false);
+  // const [r3, setR3] = useState(false);
 
-  const changeState = (r1, r2, r3) => {
+  const changeState = (r1, r2) => {
     setR1(r1);
     setR2(r2);
-    setR3(r3);
+    // setR3(r3);
   };
+  useEffect(() => {
+    if (r1 || r2) {
+      setDis(false);
+    } else {
+      setDis(true);
+    }
+  }, [r1, r2]);
 
   return (
     <ServiceBlock>
@@ -105,7 +112,7 @@ export const Step2 = ({additional, id}) => {
   );
 };
 
-export const Step3 = () => {
+export const Step3 = ({setDis}) => {
   const [all, setAll] = useState(false);
   const [r1, setR1] = useState(false);
   const [r2, setR2] = useState(false);
@@ -115,8 +122,12 @@ export const Step3 = () => {
   useEffect(() => {
     if (r1 && r2 && r3 && r4) {
       setAll(true);
+      setDis(false);
     } else if (!(r1 && r2 && r3 && r4)) {
       setAll(false);
+      setDis(true);
+    } else {
+      setDis(true);
     }
   }, [r1, r2, r3, r4]);
 

@@ -6,7 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {btnStyles, shadowStyles} from '../../../components/common/button';
+import CustomBtn, {
+  btnStyles,
+  shadowStyles,
+} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import {
@@ -21,6 +24,8 @@ const ReservationPay = ({navigation, route}) => {
   const {reservationId} = route.params;
   const [method, setMethod] = useState('');
   const [iamport, setIamport] = useState();
+  const [dis1, setDis1] = useState(true);
+  const [dis2, setDis2] = useState(true);
 
   const GetIamportInfo = async () => {
     setIamport(await GetPayInfo(reservationId));
@@ -52,11 +57,20 @@ const ReservationPay = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
 
-        <Step1 setMethod={setMethod} />
+        <Step1 setMethod={setMethod} setDis={setDis1} />
         <Step2 id={reservationId} />
-        <Step3 />
-        <TouchableOpacity
-          style={[btnStyles.btnBlue, styles.btn]}
+        <Step3 setDis={setDis2} />
+        <CustomBtn
+          viewStyle={[btnStyles.btnBlue, styles.btn]}
+          viewStyleDisabled={[btnStyles.btnDisable, styles.btn]}
+          text={'결제'}
+          textStyle={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}
+          textStyleDisabled={[
+            typoStyles.fs20,
+            typoStyles.fw700,
+            typoStyles.textWhite,
+          ]}
+          disabled={dis1 || dis2}
           onPress={() => {
             const data = {
               params: {
@@ -94,12 +108,7 @@ const ReservationPay = ({navigation, route}) => {
               tierCode: undefined,
             };
             navigation.push('Payment', {data: data});
-          }}>
-          <Text
-            style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
-            결제
-          </Text>
-        </TouchableOpacity>
+          }}></CustomBtn>
       </ScrollView>
     </CommonLayout>
   );
