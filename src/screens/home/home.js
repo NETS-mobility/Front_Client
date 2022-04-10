@@ -70,10 +70,6 @@ const Home = ({navigation}) => {
     GetHomeNoti();
   }, [isFocused]);
 
-  useEffect(() => {
-    console.log('res?', res);
-  }, [res]);
-
   return (
     <CommonLayout>
       <Image
@@ -90,6 +86,20 @@ const Home = ({navigation}) => {
         ]}>
         {`네츠\n모빌리티`}
       </Text>
+      <TouchableOpacity
+        style={[shadowStyles.shadow, btnStyles.btnBlue, styles.btn]}
+        onPress={async () => {
+          navigation.navigate('ReservationMainScreen', {
+            screen: 'ReservationPay',
+            params: {
+              screen: 'ReservationPay',
+              params: {reservationId: '220409175231'},
+              initial: false,
+            },
+            initial: false,
+          });
+        }}
+      />
       <ScrollView>
         {refresh != null ? (
           <NoticeBlock data={res} navigation={navigation} />

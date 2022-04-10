@@ -4,7 +4,6 @@ const SignUpAPI = async data => {
   await axios
     .post('/client/register', data)
     .then(res => {
-      console.log('api==', res.status);
       status = res.status;
     })
     .catch(err => console.log(JSON.stringify(err)));

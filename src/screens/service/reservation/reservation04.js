@@ -125,7 +125,6 @@ const Reservation04 = ({navigation, route}) => {
 
   useEffect(() => {
     console.log('dispatch==', dispatch);
-    console.log('his_arrival_time==', hopeHospitalArrivalTime);
   }, [dispatch]);
 
   return CheckObjEmpty(dispatch) ? (

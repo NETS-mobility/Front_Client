@@ -21,7 +21,6 @@ const ReservationAPI = async data => {
           },
       file: {},
     });
-    console.log('reservationAPI=', result.data);
     return result.data;
   } catch (err) {
     return err;

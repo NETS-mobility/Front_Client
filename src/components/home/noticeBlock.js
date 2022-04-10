@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
 });
 
 const NoticeBlock = ({data, navigation}) => {
-  console.log('data=', data);
   return (
     <View style={styles.notiBlock}>
       <Text style={[typoStyles.textWhite, typoStyles.fs20, typoStyles.fw700]}>
