@@ -7,6 +7,7 @@ import typoStyles from '../../assets/fonts/typography';
 import {ServiceInfoOneLine} from '../../components/service/reservation/serviceInfo';
 import CommonLayout from '../../components/common/layout';
 import CustomBtn, {btnStyles} from '../../components/common/button';
+import ToKoreanTime from '../../utils/toKoreanTime';
 
 const styles = StyleSheet.create({
   block: {
@@ -45,6 +46,7 @@ const PaymentResultTest = ({route, navigation}) => {
   const [success, setSuccess] = useState('');
   const [result, setResult] = useState();
   const {data} = route.params;
+  const [newDate, setNewDate] = useState('');
   console.log('result data================', data);
 
   const GetResult = async () => {
@@ -65,22 +67,36 @@ const PaymentResultTest = ({route, navigation}) => {
     GetResult();
   }, []);
 
+  const UnixToKST = () => {
+    const date = new Date(result?.vbank_date * 1000);
+    const kstTime = ToKoreanTime(date);
+    let checkMonth = kstTime?.getMonth() + 1;
+    let checkDate = kstTime?.getDate();
+    let checkHour = kstTime?.getHours();
+    let checkMinute = kstTime?.getMinutes();
+    let checkSeconds = kstTime?.getSeconds();
+    if (checkMonth < 10) checkMonth = `0${checkMonth}`;
+    if (checkDate < 10) checkDate = `0${checkDate}`;
+    if (checkHour < 10) checkHour = `0${checkHour}`;
+    if (checkMinute < 10) checkMinute = `0${checkMinute}`;
+    if (checkSeconds < 10) checkSeconds = `0${checkSeconds}`;
+    setNewDate(
+      kstTime?.getFullYear() +
+        '-' +
+        checkMonth +
+        '-' +
+        checkDate +
+        ' ' +
+        checkHour +
+        ':' +
+        checkMinute +
+        ':' +
+        checkSeconds,
+    );
+  };
+
   useEffect(() => {
-    const date = result?.vbank_date;
-    console.log('new Date = ', new Date(date * 1000));
-    const newDate =
-      date?.getFullYear() +
-      '-' +
-      (date?.getMonth() + 1) +
-      '-' +
-      date?.getDate() +
-      ' ' +
-      date?.getHours() +
-      ':' +
-      date?.getMinutes() +
-      ':' +
-      date?.getSeconds();
-    console.log('new Date time = ', newDate);
+    UnixToKST();
   }, [result]);
 
   return (
@@ -144,10 +160,7 @@ const PaymentResultTest = ({route, navigation}) => {
                 title={'입금 계좌'}
                 value={result?.vbank_num}
               />
-              <ServiceInfoOneLine
-                title={'입금 기한'}
-                value={result?.vbank_date}
-              />
+              <ServiceInfoOneLine title={'입금 기한'} value={newDate} />
             </>
           ) : success === false ? (
             <Text>고객센터에 문의해주세요.</Text>

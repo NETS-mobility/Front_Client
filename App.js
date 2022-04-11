@@ -37,13 +37,10 @@ const App = () => {
         lng={27.602706}
       /> */}
       <RefreshContext.Provider value={value}>
-        <BottomTab />
+        <NativeBaseProvider>
+          <BottomTab />
+        </NativeBaseProvider>
       </RefreshContext.Provider>
-      {/* <NativeBaseProvider>
-        <SafeAreaProvider>
-          <IamportNavigation />
-        </SafeAreaProvider>
-      </NativeBaseProvider> */}
     </>
   );
 };
