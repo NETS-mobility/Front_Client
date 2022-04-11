@@ -188,7 +188,11 @@ const Reservation04 = ({navigation, route}) => {
           </Text>
         </View>
         <View style={styles.textbox}>
-          <ServiceInfo num={3} data={serviceData} dispatch={dispatch} />
+          <ServiceInfo
+            num={3}
+            data={serviceData}
+            dispatch={dispatch?.dispatch}
+          />
         </View>
       </View>
       <View style={styles.btnAlign}>

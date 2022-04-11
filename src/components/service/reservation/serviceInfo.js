@@ -119,17 +119,25 @@ const pickCategory = (data, dispatch, pick) => {
     2: ['픽업 주소', data?.pickup_address],
     3: ['병원 주소', data?.hos_address],
     4: ['귀가 주소', data?.drop_address],
-    5: ['픽업 예정 시간', data?.pickup_time?.substring(0, 5)],
+    5: ['픽업 예정 시간', dispatch?.[0]?.expCarPickupTime?.substring(11, 16)],
     6: ['희망 병원 도착 시간', data?.hos_arrival_time?.substring(0, 5)],
     7: ['희망 귀가 출발 시간', data?.hos_depart_time?.substring(0, 5)],
-    8: ['진료/검사 예약 시간', data?.hos_care_time.substring(0, 5)],
-    9: ['차량 번호', dispatch?.[0]?.car_number],
-    10: ['네츠 매니저', dispatch?.[0]?.netsmanager_name],
-    11: ['동행 매니저', data?.gowithumanager],
-    12: ['차량 번호 1', dispatch?.[0]?.car_number],
-    13: ['차량 번호 2', dispatch?.[1]?.car_number],
-    14: ['네츠 매니저 1', dispatch?.[0]?.netsmanager_name],
-    15: ['네츠 매니저 2', dispatch?.[1]?.netsmanager_name],
+    8: ['진료/검사 예약 시간', data?.hos_care_time?.substring(0, 5)],
+    9: [
+      '서비스 종료 예정 시간',
+      dispatch?.[0]?.expCarTerminateServiceTime?.substring(11, 16),
+    ],
+    10: [
+      '서비스 종료 예정 시간',
+      dispatch?.[1]?.expCarTerminateServiceTime?.substring(11, 16),
+    ],
+    11: ['차량 번호', dispatch?.[0]?.car_number],
+    12: ['네츠 매니저', dispatch?.[0]?.netsmanager_name],
+    13: ['동행 매니저', data?.gowithumanager],
+    14: ['차량 번호 1', dispatch?.[0]?.car_number],
+    15: ['차량 번호 2', dispatch?.[1]?.car_number],
+    16: ['네츠 매니저 1', dispatch?.[0]?.netsmanager_name],
+    17: ['네츠 매니저 2', dispatch?.[1]?.netsmanager_name],
   };
   const categoryKey = Object.keys(categories);
   for (let i = 0; i < categoryKey.length; i++) {
@@ -142,17 +150,17 @@ const pickCategory = (data, dispatch, pick) => {
 const CaseInfo = (num, dispatchCase) => {
   switch (dispatchCase) {
     case 1: //집-병원
-      if (num == 3) return [2, 3, 5, 6, 8, 9, 10];
-      return [1, 2, 3, 5, 6, 8, 9, 10, 11];
+      if (num == 3) return [2, 3, 5, 6, 8, 9, 11, 12];
+      return [1, 2, 3, 5, 6, 8, 9, 11, 12, 13];
     case 2: //병원-집
-      if (num == 3) return [3, 4, 7, 9, 10];
-      return [1, 3, 4, 7, 9, 10, 11];
+      if (num == 3) return [3, 4, 7, 9, 11, 12];
+      return [1, 3, 4, 7, 9, 11, 12, 13];
     case 3: //집-집 (배차 1번, 2시간 이하)
-      if (num == 3) return [2, 3, 4, 5, 6, 7, 8, 9, 10];
-      return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      if (num == 3) return [2, 3, 4, 5, 6, 7, 8, 9, 11, 12];
+      return [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12];
     case 4: //왕복2시간이상
-      if (num == 3) return [2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15];
-      return [1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15];
+      if (num == 3) return [2, 3, 4, 5, 6, 7, 8, 10, 14, 15, 16, 17];
+      return [1, 2, 3, 4, 5, 6, 7, 8, 10, 13, 14, 15, 16, 17];
   }
 };
 
@@ -162,7 +170,6 @@ export const ServiceInfo = ({num, data, dispatch}) => {
       marginBottom: 17,
     },
   });
-
   const infos = CaseInfo(num, data?.dispatch_case);
 
   return (
