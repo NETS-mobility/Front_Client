@@ -51,7 +51,7 @@ export const Payment = ({id}) => {
       )}
       {baseCost?.overMoveDistanceCost != 0 && (
         <PaymentLine
-          title={`추가 거리 요금(${baseCost?.overMoveDistance}km)`}
+          title={`추가 거리 요금(${baseCost?.overMoveDistance?.toFixed(2)}km)`}
           price={baseCost?.overMoveDistanceCost}
         />
       )}
