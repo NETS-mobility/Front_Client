@@ -12,6 +12,7 @@ import ServiceProgress from '../../../components/service/reservation/progress';
 import ImageSubmit from '../../../components/common/imageSubmit';
 import GetUserInfo from '../../../api/mypage/getUserInfo';
 import {useIsFocused} from '@react-navigation/native';
+import {PhoneValidation} from '../../../utils/validation';
 
 const styles = StyleSheet.create({
   title: {
@@ -49,11 +50,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     backgroundColor: '#fff',
   },
+  errtext: {
+    marginTop: 4,
+  },
 });
 
 const Reservation02 = ({route, navigation}) => {
-  const {serviceKindId, moveDirection, resAddrs, resDate, resTimes} =
-    route.params;
+  const {
+    serviceKindId,
+    moveDirection,
+    resAddrs,
+    resDate,
+    resTimes,
+    gowithHospitalTime,
+  } = route.params;
 
   const [img, setImg] = useState('');
   const [guard, setGuard] = useState({
@@ -68,22 +78,21 @@ const Reservation02 = ({route, navigation}) => {
   const [result, setResult] = useState('');
   const [disable, setDisable] = useState(true);
 
-  console.log('res02==', serviceKindId);
-
   const checkStaticString = ['고령자', '장애인', '거동불편자'];
   let checkString = '';
   const isFocused = useIsFocused();
 
+  async function fetchData() {
+    const userInfo = await GetUserInfo()
+      .then(res => res)
+      .catch(err => err);
+    setGuard({
+      name: userInfo.name,
+      phone: userInfo.phone,
+    });
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const userInfo = await GetUserInfo()
-        .then(res => res)
-        .catch(err => err);
-      setGuard({
-        name: userInfo.name,
-        phone: userInfo.phone,
-      });
-    }
     fetchData();
   }, [isFocused]);
 
@@ -103,14 +112,20 @@ const Reservation02 = ({route, navigation}) => {
   }, [check]);
 
   useEffect(() => {
-    if (result != '0' && user.name != '' && user.phone != '') {
+    if (
+      result != '' &&
+      user.name != '' &&
+      user.phone != '' &&
+      PhoneValidation(user.phone) &&
+      guard.name != '' &&
+      guard.phone != '' &&
+      PhoneValidation(guard.phone)
+    ) {
       setDisable(false);
+    } else {
+      setDisable(true);
     }
   }, [result, user]);
-
-  useEffect(() => {
-    console.log('guard===', guard);
-  }, [guard]);
 
   return (
     <CommonLayout>
@@ -140,19 +155,41 @@ const Reservation02 = ({route, navigation}) => {
           <ServiceInputBox
             title={'보호자 정보를 입력해주세요.'}
             place1={'보호자 이름'}
-            place2={'보호자 전화번호'}
+            place2={'보호자 전화번호(ex.010-0000-0000)'}
             placetextcolor={'#dad8e0'}
             value={guard}
             setValue={setGuard}
           />
+          {!PhoneValidation(guard.phone) && (
+            <Text
+              style={[
+                typoStyles.fs12,
+                typoStyles.fwRegular,
+                typoStyles.textPrimary,
+                styles.errtext,
+              ]}>
+              휴대폰 형식은 000-0000-0000으로 입력해주세요.
+            </Text>
+          )}
           <ServiceInputBox
             title={'이용자 정보를 입력해주세요.'}
             place1={'이용자 이름'}
-            place2={'이용자 전화번호'}
+            place2={'이용자 전화번호(ex.010-0000-0000)'}
             placetextcolor={'#DAD8E0'}
             value={user}
             setValue={setUser}
           />
+          {!PhoneValidation(user.phone) && (
+            <Text
+              style={[
+                typoStyles.fs12,
+                typoStyles.fwRegular,
+                typoStyles.textPrimary,
+                styles.errtext,
+              ]}>
+              휴대폰 형식은 000-0000-0000으로 입력해주세요.
+            </Text>
+          )}
         </ServiceBlock>
         <ServiceBlock>
           <Text
@@ -211,7 +248,7 @@ const Reservation02 = ({route, navigation}) => {
                 typoStyles.fwBold,
                 typoStyles.textExplain,
               ]}>
-              (당일 지참 가능하나,{' '}
+              (당일 지참 가능하나,
             </Text>
             <Text
               style={[
@@ -246,9 +283,11 @@ const Reservation02 = ({route, navigation}) => {
                 guardInfo: guard,
                 userInfo: user,
                 validTargetKind: result,
+                gowithHospitalTime: gowithHospitalTime,
               });
             }}
             disable={disable}
+            text={'다음단계'}
           />
         </View>
       </ScrollView>

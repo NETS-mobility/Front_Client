@@ -12,7 +12,15 @@ import typoStyles from '../../assets/fonts/typography';
 import {ProgressBar} from './findAuthComponent';
 import WholeLayout from '../wholeLayout';
 
-const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
+const FindAuthLayout = ({
+  pageType,
+  num,
+  btnType,
+  children,
+  goNext,
+  goBack,
+  disabled,
+}) => {
   return (
     <WholeLayout check={1}>
       <View style={styles.block}>
@@ -41,7 +49,7 @@ const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
             {children}
           </View>
         </ScrollView>
-        {btnType == 'login' ? (
+        {btnType == 'login' || btnType == 'sign' ? (
           <CustomBtn
             viewStyle={[btnStyles.btnBlue, styles.nextStepBtn]}
             textStyle={[
@@ -49,7 +57,7 @@ const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
               typoStyles.fs20,
               typoStyles.fw700,
             ]}
-            text={'로그인'}
+            text={btnType == 'login' ? '로그인' : '회원가입'}
             onPress={goNext}
           />
         ) : (
@@ -58,6 +66,13 @@ const FindAuthLayout = ({pageType, num, btnType, children, goNext, goBack}) => {
             textStyle={[typoStyles.textMain, typoStyles.fs20, typoStyles.fw700]}
             text={'계속'}
             onPress={goNext}
+            disabled={disabled}
+            viewStyleDisabled={[btnStyles.btnDisable, styles.nextStepBtn]}
+            textStyleDisabled={[
+              typoStyles.textExplainBold,
+              typoStyles.fs20,
+              typoStyles.fw700,
+            ]}
           />
         )}
       </View>
@@ -69,7 +84,8 @@ const styles = StyleSheet.create({
   block: {
     flex: 1,
     padding: 15,
-    paddingBottom: 31,
+    // paddingBottom: 31,
+    paddingBottom: 70, //bottomTab이 버튼을 가려 임시 수정, BottomTab해결 후 수정해야함.
     backgroundColor: '#fff',
   },
   title: {

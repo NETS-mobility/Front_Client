@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import NetsLogo from '../../assets/image/logo.svg';
+import NetsLogo from '../../assets/icon/logo_blue.svg';
 import LoginInputBox from '../../components/login/LoginInputBox';
 import {LoginBtn} from '../../components/login/LoginBtn';
 import LoginAPI from '../../api/login/login';
@@ -57,7 +57,7 @@ const LoginScreen = ({navigation}) => {
               .then(res => {
                 if (res == 200) {
                   setRefresh(true);
-                  navigation.navigate('Home');
+                  navigation.replace('Home');
                 } else {
                   setRefresh(null);
                 }
@@ -74,7 +74,7 @@ const LoginScreen = ({navigation}) => {
               typoStyles.fwRegular,
               typoStyles.textExplain,
             ]}>
-            아이디 찾기{' '}
+            아이디 찾기
           </Text>
         </TouchableOpacity>
         <Text
@@ -92,7 +92,6 @@ const LoginScreen = ({navigation}) => {
               typoStyles.fwRegular,
               typoStyles.textExplain,
             ]}>
-            {' '}
             비밀번호 찾기
           </Text>
         </TouchableOpacity>

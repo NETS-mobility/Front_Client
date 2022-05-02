@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const NextBtn = ({navWhere, disable}) => {
+const NextBtn = ({navWhere, disable, text}) => {
   return (
     <TouchableOpacity onPress={navWhere} disabled={disable}>
       <View
@@ -47,7 +47,7 @@ const NextBtn = ({navWhere, disable}) => {
         }>
         <Text
           style={[typoStyles.fs20, typoStyles.textWhite, typoStyles.fwBold]}>
-          다음단계
+          {text}
         </Text>
       </View>
     </TouchableOpacity>

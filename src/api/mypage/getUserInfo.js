@@ -1,10 +1,16 @@
 import axios from 'axios';
 import {GetToken} from '../../utils/controlToken';
 const GetUserInfo = async () => {
-  const result = await axios
-    .post('/client/mypage', {jwtToken: await GetToken().then(res => res)})
-    .then(res => res.data)
-    .catch(err => err);
-  return result;
+  console.log(await GetToken());
+  try {
+    const res = await axios.post('/client/mypage', {
+      jwtToken: await GetToken().then(res => res),
+    });
+    return res.data;
+  } catch (err) {
+    console.log('err=', err.response);
+    return err.response.status;
+  }
 };
+
 export default GetUserInfo;

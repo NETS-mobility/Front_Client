@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
 import ServiceBlock from '../../../components/service/serviceBlock';
-import {btnStyles} from '../../../components/common/button';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import {NextBtn} from '../../../components/service/reservation/serviceBtn';
@@ -11,7 +10,7 @@ import {
   GetAddr,
   GetTime,
 } from '../../../components/service/reservation/reservation01';
-import CustomBtn from '../../../components/common/button';
+import ReservationTimeChange from '../../../components/service/reservation/reservationTimeChange';
 
 const styles = StyleSheet.create({
   background: {
@@ -54,29 +53,58 @@ const Reservation01 = ({route, navigation}) => {
 
   const [dis, setDis] = useState(true);
   const [resTimes, setResTimes] = useState({
-    resResTime: '0',
-    resArrTime: '0',
-    resDepTime: '0',
+    resResTime: {time: '0', timetype: '', hour: '', min: ''},
+    resArrTime: {time: '0', timetype: '', hour: '', min: ''},
+    resDepTime: {time: '0', timetype: '', hour: '', min: ''},
   });
+
   const [resAddrs, setResAddrs] = useState({
     hospitalAddr: '0',
     homeAddr: '0',
     dropAddr: '0',
   });
   const [resDate, setResDate] = useState('0');
-  console.log('res01==', serviceKindID);
+  const [gowithtime, setGowithtime] = useState(-1); //귀가출발시간-병원도착시간 => 왕복일 때 병원동행시간
+  const [gowithplustime, setGowithplustime] = useState(-1); //기본 20분+추가하고싶은 병원 동행시간 => 편도일 때
+
+  // const Test = async () => {
+  //   if (resTimes.resResTime.time != '0' && resTimes.resArrTime.time != '0') {
+  //     const compResTime = new Date();
+  //     const compArrivalTime = new Date();
+  //     const testResTime = resTimes.resResTime.time;
+  //     const testArrTime = resTimes.resArrTime.time;
+  //     compResTime.setHours(
+  //       testResTime.substring(0, 2),
+  //       testResTime.substring(3, 5),
+  //       testResTime.substring(6, 8),
+  //     );
+  //     compArrivalTime.setHours(
+  //       testArrTime.substring(0, 2),
+  //       testArrTime.substring(3, 5),
+  //       testArrTime.substring(6, 8),
+  //     );
+  //     if (compArrivalTime >= compResTime) {
+  //       setDis(true);
+  //     } else setDis(false);
+  //   }
+  // };
 
   useEffect(() => {
     if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
       if (
+        resDate != '--' &&
+        resDate != '0' &&
         resAddrs.homeAddr != '0' &&
         resAddrs.hospitalAddr != '0' &&
         resAddrs.dropAddr != '0' &&
-        resTimes.resArrTime != '0' &&
-        resTimes.resResTime != '0' &&
-        resTimes.resDepTime != '0'
+        resTimes.resArrTime.time != '0' &&
+        resTimes.resResTime.time != '0' &&
+        resTimes.resDepTime.time != '0'
+        // gowithtime >= 0
       ) {
         setDis(false);
+      } else {
+        setDis(true);
       }
     } else if (
       serviceName == '네츠 휠체어 플러스 편도 서비스' ||
@@ -84,25 +112,44 @@ const Reservation01 = ({route, navigation}) => {
     ) {
       if (way) {
         if (
+          resDate != '--' &&
+          resDate != '0' &&
           resAddrs.homeAddr != '0' &&
           resAddrs.hospitalAddr != '0' &&
-          resTimes.resArrTime != '0' &&
-          resTimes.resResTime != '0'
+          resTimes.resArrTime.time != '0' &&
+          resTimes.resResTime.time != '0'
+          // gowithplustime >= 0
         ) {
           setDis(false);
-        }
+        } else setDis(true);
       } else {
         if (
+          resDate != '--' &&
+          resDate != '0' &&
           resAddrs.dropAddr != '0' &&
           resAddrs.hospitalAddr != '0' &&
-          resTimes.resDepTime != '0'
+          resTimes.resDepTime.time != '0'
+          // gowithtime >= 0
         ) {
           setDis(false);
-        }
+        } else setDis(true);
       }
     }
-    console.log(resAddrs, resTimes);
-  }, [resAddrs, resTimes]);
+  }, [resDate, resAddrs, resTimes, dis]);
+
+  useEffect(() => {
+    ReservationTimeChange(resTimes, setResTimes, resDate, setResDate);
+  }, [resTimes.resResTime.time]);
+
+  useEffect(() => {
+    const arrTimeForComp = new Date(`${resDate}T${resTimes.resArrTime.time}`);
+    const resTimeForComp = new Date(`${resDate}T${resTimes.resResTime.time}`);
+    if (resTimeForComp.getTime() < arrTimeForComp.getTime() + 20 * 60000) {
+      setDis(true);
+    } else {
+      setDis(false);
+    }
+  }, [resTimes.resArrTime.time]);
 
   return (
     <CommonLayout>
@@ -147,12 +194,23 @@ const Reservation01 = ({route, navigation}) => {
             STEP2. 일정 설정
           </Text>
           <ResDate setDate={setResDate} />
-          <GetTime
-            serviceName={serviceName}
-            way={way}
-            time={resTimes}
-            setTime={setResTimes}
-          />
+          {resDate == '--' ? (
+            <></>
+          ) : (
+            <>
+              <GetTime
+                serviceName={serviceName}
+                way={way}
+                time={resTimes}
+                setTime={setResTimes}
+                setDis={setDis}
+                gowithTime={gowithtime}
+                setGowithTime={setGowithtime}
+                gowithPlusTime={gowithplustime}
+                setGowithPlusTime={setGowithplustime}
+              />
+            </>
+          )}
         </ServiceBlock>
         <View style={styles.btn}>
           <NextBtn
@@ -163,9 +221,14 @@ const Reservation01 = ({route, navigation}) => {
                 resAddrs: resAddrs,
                 resDate: resDate,
                 resTimes: resTimes,
+                gowithHospitalTime:
+                  serviceKindID == 2 || serviceKindID == 4
+                    ? gowithplustime + 20
+                    : gowithtime,
               });
             }}
             disable={dis}
+            text={'다음단계'}
           />
         </View>
       </ScrollView>

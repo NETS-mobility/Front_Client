@@ -3,9 +3,13 @@ import {StyleSheet, StatusBar} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import BottomTab from './src/components/common/bottomTab';
 import {GetToken} from './src/utils/controlToken';
-
+import {NativeBaseProvider} from 'native-base';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://10.0.2.2:5000';
+import Home_Test from './src/screens/pay_test/homeTest';
+import IamportNavigation from './src/navigation/pay_test/pay_test';
+// axios.defaults.baseURL = 'http://10.0.2.2:5000';
+axios.defaults.baseURL = 'http://35.197.107.190:5000';
 
 export const RefreshContext = createContext({
   refresh: false,
@@ -33,7 +37,9 @@ const App = () => {
         lng={27.602706}
       /> */}
       <RefreshContext.Provider value={value}>
-        <BottomTab />
+        <NativeBaseProvider>
+          <BottomTab />
+        </NativeBaseProvider>
       </RefreshContext.Provider>
     </>
   );

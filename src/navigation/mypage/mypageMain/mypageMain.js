@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {MypageMain, ChangeInfo} from '../../../screens/mypage';
 import Home from '../../../screens/home/home';
 import FaqScreen from '../../../screens/mypage/faq/faq';
+import ChangePwNavigator from '../changePW/changePW';
 
 const Stack = createNativeStackNavigator();
 const MypageNavigator = () => {
@@ -14,6 +15,7 @@ const MypageNavigator = () => {
       <Stack.Screen name="ChangeInfo" component={ChangeInfo} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="FAQ" component={FaqScreen} />
+      <Stack.Screen name="ChangePW" component={ChangePwNavigator} />
     </Stack.Navigator>
   );
 };

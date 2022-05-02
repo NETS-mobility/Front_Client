@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -10,11 +10,17 @@ import {
 import {btnStyles, shadowStyles} from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
 import CommonLayout from '../../components/common/layout';
+import {
+  NoticeBlock,
+  NoTokenNoticeBlock,
+} from '../../components/home/noticeBlock';
+import {RefreshContext} from '../../../App';
+import GetHomeInfo from '../../api/home/GetHomeInfo';
 import {useIsFocused} from '@react-navigation/native';
 
 const Home = ({navigation}) => {
-  //  const isFocused = useIsFocused();
-
+  const isFocused = useIsFocused();
+  const {refresh, setRefresh} = useContext(RefreshContext);
   const styles = StyleSheet.create({
     img: {
       position: 'relative',
@@ -54,14 +60,15 @@ const Home = ({navigation}) => {
     },
   });
 
-  // React.useEffect(() => {
-  //   const unsubscribe = navigation.addListener('focus', () => {
-  //     // The screen is focused
-  //     // Call any action and update data
-  //   });
-  //   // Return the function to unsubscribe from the event so it gets removed on unmount
-  //   return unsubscribe;
-  // }, [navigation]);
+  const [res, setRes] = useState([]);
+
+  const GetHomeNoti = async () => {
+    setRes(await GetHomeInfo());
+  };
+
+  useEffect(() => {
+    GetHomeNoti();
+  }, [isFocused]);
 
   return (
     <CommonLayout>
@@ -80,18 +87,17 @@ const Home = ({navigation}) => {
         {`네츠\n모빌리티`}
       </Text>
       <ScrollView>
-        <Text
-          style={[
-            typoStyles.textPrimary,
-            typoStyles.fs32,
-            typoStyles.fw700,
-            styles.text,
-          ]}>
-          문구 추가
-        </Text>
+        {refresh != null ? (
+          <NoticeBlock data={res} navigation={navigation} />
+        ) : (
+          <NoTokenNoticeBlock />
+        )}
         <TouchableOpacity
           style={[shadowStyles.shadow, btnStyles.btnBlue, styles.btn]}
-          onPress={() => navigation.push('ReservationMainScreen')}>
+          onPress={() => {
+            if (refresh != null) navigation.push('ReservationMainScreen');
+            else navigation.push('LoginMain');
+          }}>
           <Text
             style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
             클릭해서 서비스 예약하기

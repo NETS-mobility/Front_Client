@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import NetsLogo from '../../assets/image/logo.svg';
+import NetsLogo from '../../assets/icon/logo_blue.svg';
 import typoStyles from '../../assets/fonts/typography';
 
 const styles = StyleSheet.create({

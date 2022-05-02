@@ -6,16 +6,23 @@ import ServiceBlock from '../serviceBlock';
 import {Payment} from '../payment/payment';
 import {AdditionalPayment} from '../payment/additionalPayment';
 
-export const Step1 = () => {
+export const Step1 = ({setMethod, setDis}) => {
   const [r1, setR1] = useState(false);
   const [r2, setR2] = useState(false);
-  const [r3, setR3] = useState(false);
+  // const [r3, setR3] = useState(false);
 
-  const changeState = (r1, r2, r3) => {
+  const changeState = (r1, r2) => {
     setR1(r1);
     setR2(r2);
-    setR3(r3);
+    // setR3(r3);
   };
+  useEffect(() => {
+    if (r1 || r2) {
+      setDis(false);
+    } else {
+      setDis(true);
+    }
+  }, [r1, r2]);
 
   return (
     <ServiceBlock>
@@ -30,24 +37,30 @@ export const Step1 = () => {
       </Text>
       <RadioButton
         text={'무통장 입금'}
-        onPress={() => changeState(true, false, false)}
+        onPress={() => {
+          changeState(true, false, false);
+          setMethod('vbank');
+        }}
         value={r1}
       />
       <RadioButton
         text={'신용카드 결제'}
-        onPress={() => changeState(false, true, false)}
+        onPress={() => {
+          changeState(false, true, false);
+          setMethod('card');
+        }}
         value={r2}
       />
-      <RadioButton
+      {/*<RadioButton
         text={'간편 결제'}
         onPress={() => changeState(false, false, true)}
         value={r3}
-      />
+      /> */}
     </ServiceBlock>
   );
 };
 
-export const Step2 = ({additional}) => {
+export const Step2 = ({additional, id}) => {
   return (
     <ServiceBlock>
       <Text
@@ -60,7 +73,7 @@ export const Step2 = ({additional}) => {
         STEP2. 결제 금액 확인
       </Text>
       {additional ? <AdditionalPayment /> : <></>}
-      <Payment />
+      <Payment id={id} />
       {additional ? (
         <></>
       ) : (
@@ -99,7 +112,7 @@ export const Step2 = ({additional}) => {
   );
 };
 
-export const Step3 = () => {
+export const Step3 = ({setDis}) => {
   const [all, setAll] = useState(false);
   const [r1, setR1] = useState(false);
   const [r2, setR2] = useState(false);
@@ -109,8 +122,12 @@ export const Step3 = () => {
   useEffect(() => {
     if (r1 && r2 && r3 && r4) {
       setAll(true);
+      setDis(false);
     } else if (!(r1 && r2 && r3 && r4)) {
       setAll(false);
+      setDis(true);
+    } else {
+      setDis(true);
     }
   }, [r1, r2, r3, r4]);
 

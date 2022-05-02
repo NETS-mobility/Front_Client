@@ -1,16 +1,7 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
-import NetsLogo from '../../assets/image/logo.svg';
-import btnStyles from '../../components/common/button';
-import typoStyles from '../../assets/fonts/typography';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import NetsLogo from '../../assets/icon/logo_blue.svg';
 import {LoginBtn, SignBtn} from '../../components/login/LoginBtn';
-import {NavigationContainer} from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   wrap: {
@@ -35,14 +26,14 @@ const LoginMainScreen = ({navigation}) => {
       <NetsLogo width={175} height={70} style={styles.netImg} />
       <LoginBtn
         navWhere={() => {
-          navigation.push('Login');
+          navigation.navigate('Login');
         }}
         btnName={'로그인'}
         style={styles.loginBtn}
       />
       <SignBtn
         navWhere={() => {
-          navigation.navigate('SignUp');
+          navigation.push('SignUp');
         }}
         btnName={'회원가입'}
         style={styles.signBtn}

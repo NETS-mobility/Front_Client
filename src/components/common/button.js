@@ -36,7 +36,7 @@ export const RadioButton = ({text, onPress, value}) => {
             width: 15,
             borderRadius: 7.5,
             borderWidth: 2,
-            borderColor: '#DAD8E0',
+            borderColor: '#19b7cd',
             alignItems: 'center',
             justifyContent: 'center',
             marginRight: 9,
@@ -45,10 +45,10 @@ export const RadioButton = ({text, onPress, value}) => {
         {value ? (
           <View
             style={{
-              height: 8,
-              width: 8,
-              borderRadius: 4,
-              backgroundColor: '#DAD8E0',
+              height: 15,
+              width: 15,
+              borderRadius: 7.5,
+              backgroundColor: '#19b7cd',
             }}
           />
         ) : null}

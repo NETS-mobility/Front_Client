@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
@@ -12,8 +12,11 @@ import ServiceBlock from '../../../components/service/serviceBlock';
 import {Payment} from '../../../components/service/payment/payment';
 import {ServiceDetailProgress} from '../../../components/service/detail/serviceDetail';
 import MapView from '../../../components/service/detail/MapView';
+import GetServiceDetail from '../../../api/reservation/serviceDetail';
 
-const ServiceDetail = () => {
+const ServiceDetail = ({navigation, route}) => {
+  const [id] = useState(route.params.detailId);
+  const [detail, setDetail] = useState({});
   const styles = StyleSheet.create({
     block1: {
       width: '100%',
@@ -34,6 +37,15 @@ const ServiceDetail = () => {
       alignSelf: 'center',
     },
   });
+
+  const GetDetailInfos = async () => {
+    setDetail(await GetServiceDetail(id));
+  };
+
+  useEffect(() => {
+    GetDetailInfos();
+  }, []);
+
   return (
     <CommonLayout>
       <ScrollView>
@@ -47,7 +59,7 @@ const ServiceDetail = () => {
             ]}>
             서비스 상세보기
           </Text>
-          <ServiceStatus text={'현재 운행 중'} />
+          <ServiceStatus text={detail?.service?.reservation_state} />
         </View>
         <View style={styles.mapContainer}>
           <MapView
@@ -58,20 +70,29 @@ const ServiceDetail = () => {
           />
         </View>
         <ManagerProfile
-          name={'홍길동'}
-          certificate={['간호조무사', '요양보호사']}
-          comment={
-            '모든 일에 적극적이며 긍정적이라는 평가를 받아왔습니다. 따뜻한 배려와 친절함으로 동행하겠습니다.'
-          }
+          certificate={detail?.dispatch?.[0]?.netsmanager_certificate}
+          name={detail?.dispatch?.[0]?.netsmanager_name}
+          comment={detail?.dispatch?.[0]?.netsmanager_intro}
+          tel={detail?.dispatch?.[0]?.netsmanager_tel}
           type={2}
         />
-        <ServiceDetailProgress />
-        <ManagerComment comment={'문 앞에 도착하면 연락드리겠습니다!'} />
+        <ServiceDetailProgress
+          progress={{
+            state: detail?.service_state,
+            state_time: detail?.service_state_time,
+          }}
+        />
+        <ManagerComment comment={detail?.dispatch?.[0]?.netsmanager_mention} />
         <ServiceBlock>
-          <ServiceInfo />
+          <ServiceInfo
+            num={2}
+            data={detail?.service}
+            dispatch={detail?.dispatch}
+          />
         </ServiceBlock>
+
         <ServiceBlock>
-          <Payment />
+          <Payment id={id} />
         </ServiceBlock>
       </ScrollView>
     </CommonLayout>

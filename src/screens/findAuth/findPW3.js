@@ -9,6 +9,7 @@ const FindPW3 = ({navigation}) => {
       pageType="pw"
       num={2}
       btnType="login"
+      goNext={() => navigation.navigate('Login')}
       goBack={() => navigation.pop()}>
       <Text
         style={[

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 import typoStyles from '../../../assets/fonts/typography';
 import CommonLayout from '../../../components/common/layout';
 import {ServiceHistoryBlock} from '../../../components/service/detail/serviceHistoryComponent';
+import GetServiceList from '../../../api/reservation/serviceList';
 
 const ServiceHistory = ({navigation}) => {
   const styles = StyleSheet.create({
@@ -39,6 +40,20 @@ const ServiceHistory = ({navigation}) => {
       backgroundColor: '#DAD8E0',
     },
   });
+
+  const [ing, setIng] = useState(true);
+  const [serviceIng, setServiceIng] = useState([]);
+  const [serviceComp, setServiceComp] = useState([]);
+
+  const GetServiceLists = async () => {
+    setServiceIng(await GetServiceList(0));
+    setServiceComp(await GetServiceList(1));
+  };
+
+  useEffect(() => {
+    GetServiceLists();
+  }, []);
+
   return (
     <CommonLayout>
       <ScrollView>
@@ -53,42 +68,78 @@ const ServiceHistory = ({navigation}) => {
             서비스 내역
           </Text>
           <View style={styles.selectSection}>
-            <TouchableOpacity style={styles.selectBtn}>
+            <TouchableOpacity
+              style={styles.selectBtn}
+              onPress={() => setIng(true)}>
               <Text
                 style={[
                   typoStyles.fs13,
                   typoStyles.fw700,
-                  typoStyles.textMain,
+                  ing ? typoStyles.textMain : typoStyles.textDisable,
                 ]}>
                 진행 내역
               </Text>
-              <View style={[styles.selectBar, styles.active]} />
+              <View
+                style={[
+                  styles.selectBar,
+                  ing ? styles.active : styles.nonActive,
+                ]}
+              />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.selectBtn}>
+            <TouchableOpacity
+              style={styles.selectBtn}
+              onPress={() => setIng(false)}>
               <Text
                 style={[
                   typoStyles.fs13,
                   typoStyles.fw700,
-                  typoStyles.textDisable,
+                  ing ? typoStyles.textDisable : typoStyles.textMain,
                 ]}>
                 완료 내역
               </Text>
-              <View style={[styles.selectBar, styles.nonActive]} />
+              <View
+                style={[
+                  styles.selectBar,
+                  ing ? styles.nonActive : styles.active,
+                ]}
+              />
             </TouchableOpacity>
           </View>
         </View>
         <View>
-          <ServiceHistoryBlock
-            date={'2021.10.20'}
-            type={'네츠 휠체어 플러스'}
-            goNext={navigation}
-            goNext={() => navigation.navigate('ServiceDetail')}
-          />
-          <ServiceHistoryBlock
-            date={'2021.10.22'}
-            type={'네츠 휠체어 플러스'}
-            goNext={() => navigation.navigate('ServiceDetail')}
-          />
+          {ing
+            ? Array.isArray(serviceIng) &&
+              serviceIng.length != 0 &&
+              serviceIng?.map((data, i) => {
+                const {dispatch, ...filteredData} = data;
+                const detailId = data?.service_id;
+                return (
+                  <ServiceHistoryBlock
+                    key={i}
+                    data={filteredData}
+                    dispatch={dispatch}
+                    goNext={() =>
+                      navigation.navigate(`ServiceDetail`, {detailId})
+                    }
+                  />
+                );
+              })
+            : Array.isArray(serviceComp) &&
+              serviceComp.length != 0 &&
+              serviceComp?.map((data, i) => {
+                const {dispatch, ...filteredData} = data;
+                const detailId = data?.service_id;
+                return (
+                  <ServiceHistoryBlock
+                    key={i}
+                    data={filteredData}
+                    dispatch={dispatch}
+                    goNext={() =>
+                      navigation.navigate(`ServiceDetail`, {detailId})
+                    }
+                  />
+                );
+              })}
         </View>
       </ScrollView>
     </CommonLayout>

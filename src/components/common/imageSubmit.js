@@ -15,7 +15,6 @@ const ImageSubmit = ({img, setImg}) => {
 
   const selectImg = () => {
     launchImageLibrary({mediaType: 'photo'}, res => {
-      console.log(res.assets[0].fileName);
       setImg(res.assets[0].fileName);
     });
   };

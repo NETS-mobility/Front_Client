@@ -39,7 +39,7 @@ export const ServiceStatus = ({text}) => {
   );
 };
 
-export const ServiceHistoryBlock = ({date, type, goNext}) => {
+export const ServiceHistoryBlock = ({goNext, data, dispatch}) => {
   const styles = StyleSheet.create({
     serviceType: {
       flexDirection: 'row',
@@ -59,6 +59,7 @@ export const ServiceHistoryBlock = ({date, type, goNext}) => {
       height: 30,
     },
   });
+
   return (
     <ServiceBlock>
       <View style={styles.serviceType}>
@@ -69,17 +70,16 @@ export const ServiceHistoryBlock = ({date, type, goNext}) => {
             typoStyles.textExplainBold,
             styles.date,
           ]}>
-          {date}
+          {data.rev_date.substring(0, 10)}
         </Text>
         <Text style={[typoStyles.fs14, typoStyles.fw700, typoStyles.textMain]}>
-          {type}
+          {data.service_type}
         </Text>
       </View>
-      <ServiceInfo num={1} />
+      <ServiceInfo num={1} data={data} dispatch={dispatch} />
 
       <View style={styles.btnSection}>
-        {/* <ServiceStatus text={'서비스 종료'} /> */}
-        <ServiceStatus text={'서비스 진행 중'} />
+        <ServiceStatus text={data?.reservation_state} />
         <TouchableOpacity
           style={[btnStyles.btnBlue, styles.detailBtn]}
           onPress={goNext}>

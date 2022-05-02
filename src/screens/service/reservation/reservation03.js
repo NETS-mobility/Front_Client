@@ -11,6 +11,9 @@ import {ServiceInputBoxWithoutBtn} from '../../../components/service/reservation
 import ServiceProgress from '../../../components/service/reservation/progress';
 import ReservationAPI from '../../../api/reservation/reservation';
 import {GetToken} from '../../../utils/controlToken';
+import GeoCoding from '../../../utils/geocoding';
+import DispatchAPI from '../../../api/dispatch/dispatch';
+import Loading from '../../common/loading';
 
 const styles = StyleSheet.create({
   title: {
@@ -41,6 +44,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     backgroundColor: '#fff',
   },
+  loadingBack: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 const Reservation03 = ({route, navigation}) => {
@@ -53,14 +61,13 @@ const Reservation03 = ({route, navigation}) => {
     guardInfo,
     userInfo,
     validTargetKind,
+    gowithHospitalTime,
   } = route.params;
+  console.log('moveDirection==', moveDirection);
 
   const [diagnosis, setDiagnosis] = useState('');
   const [etc, setEtc] = useState('');
   const [disable, setDisable] = useState(true);
-
-  console.log('res03==', serviceKindId);
-
   const [check, setCheck] = useState([false, false, false, false, false]);
   const [result, setResult] = useState('');
   const checkStaticString = [
@@ -72,9 +79,44 @@ const Reservation03 = ({route, navigation}) => {
   ];
   let checkString = '';
 
+  const [xy, setXY] = useState({
+    pickup_x: 0,
+    pickup_y: 0,
+    drop_x: 0,
+    drop_y: 0,
+    hos_x: 0,
+    hos_y: 0,
+  });
+
+  const GetXY = async (addr, prop) => {
+    await GeoCoding(addr).then(res => {
+      const prop_x = `${prop}_x`;
+      const prop_y = `${prop}_y`;
+      setXY(prev => ({...prev, [prop_x]: res.x, [prop_y]: res.y}));
+    });
+  };
+
   useEffect(() => {
-    if (result != '0' && diagnosis != '') {
+    if (resAddrs.homeAddr != '0') {
+      GetXY(resAddrs.homeAddr, 'pickup');
+    }
+    if (resAddrs.hospitalAddr != '0') {
+      GetXY(resAddrs.hospitalAddr, 'hos');
+    }
+    if (resAddrs.dropAddr != '0') {
+      GetXY(resAddrs.dropAddr, 'drop');
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('xy==', xy);
+  }, [xy]);
+
+  useEffect(() => {
+    if (result != '' && diagnosis != '') {
       setDisable(false);
+    } else {
+      setDisable(true);
     }
   }, [result, diagnosis]);
 
@@ -180,31 +222,21 @@ const Reservation03 = ({route, navigation}) => {
         </ServiceBlock>
         <View style={styles.proset}>
           <NextBtn
-            navWhere={async () => {
-              navigation.push('Reservation04');
-              ReservationAPI({
-                jwtToken: await GetToken(),
-                reservationId: '123456789',
+            text={'배차 가능 여부 확인하기'}
+            navWhere={() => {
+              navigation.replace('Loading', {
                 serviceKindId: serviceKindId,
                 moveDirection: moveDirection,
-                gowithHospitalTime: 20,
-                pickupBaseAddr: resAddrs.homeAddr,
-                pickupDetailAddr: '123동',
-                dropBaseAddr: resAddrs.dropAddr,
-                dropDetailAddr: '123동',
-                hospitalBaseAddr: resAddrs.hospitalAddr,
-                hospitalDetailAddr: '123동',
-                hospitalName: '백병원',
-                hopeReservationDate: resDate,
-                hopeHospitalArrivalTime: resTimes.resArrTime,
-                fixedMedicalTime: resTimes.resResTime,
-                hopeHospitalDepartureTime: resTimes.resDepTime,
-                fixedMedicalDetail: diagnosis,
-                hopeRequires: result,
-                patientName: userInfo.name,
-                patientPhone: userInfo.phone,
+                resAddrs: resAddrs,
+                resDate: resDate,
+                resTimes: resTimes,
+                guardInfo: guardInfo,
+                userInfo: userInfo,
                 validTargetKind: validTargetKind,
-                reservationStateId: 1,
+                gowithHospitalTime: gowithHospitalTime,
+                xy: xy,
+                diagnosis: diagnosis,
+                result: result,
               });
             }}
             disable={disable}

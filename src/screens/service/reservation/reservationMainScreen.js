@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
   },
 
   qbox: {
+    flex: 1,
     alignItems: 'center',
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
   },
 
   statbig: {
@@ -74,18 +75,16 @@ const ReservationMainScreen = ({navigation}) => {
     }
   }, [check]);
 
-  // useE
-
   useEffect(() => {
     if (check.filter(i => i == true).length == cnt) {
       if (check[0] && check[2]) {
         if (check[4]) {
           setServiceName('네츠 휠체어 플러스 왕복 서비스');
-          setServiceKindID(1);
+          setServiceKindID(5);
           setMoveDirection('집-집');
         } else {
           setServiceName('네츠 휠체어 플러스 편도 서비스');
-          setServiceKindID(1);
+          setServiceKindID(4);
           if (check[6]) {
             setMoveDirection('집-병원');
           } else {
@@ -95,7 +94,7 @@ const ReservationMainScreen = ({navigation}) => {
       } else if (check[0] && check[3]) {
         if (check[4]) {
           setServiceName('네츠 휠체어 왕복 서비스');
-          setServiceKindID(2);
+          setServiceKindID(3);
           setMoveDirection('집-집');
         } else {
           setServiceName('네츠 휠체어 편도 서비스');
@@ -103,7 +102,7 @@ const ReservationMainScreen = ({navigation}) => {
         }
       } else if (check[1]) {
         setServiceName('네츠 무브 서비스');
-        setServiceKindID(3);
+        setServiceKindID(1);
       }
     } else {
       setServiceName('모든 질문에 답해주세요.');
