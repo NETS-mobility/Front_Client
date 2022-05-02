@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const ArrowBtn = ({contents}) => {
+const ArrowBtn = ({contents, onPress}) => {
   return (
-    <View style={[styles.btn, btnStyles.btnBlue]}>
+    <TouchableOpacity onPress={onPress} style={[styles.btn, btnStyles.btnBlue]}>
       <View style={styles.textset}>
         <Text
           style={[typoStyles.fs18, typoStyles.fwBold, typoStyles.textWhite]}>
@@ -36,7 +36,7 @@ const ArrowBtn = ({contents}) => {
           {'>'}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
