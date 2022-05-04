@@ -4,6 +4,9 @@ const typoStyles = StyleSheet.create({
   fs32: {
     fontSize: 32,
   },
+  fs28: {
+    fontSize: 28,
+  },
   fs22: {
     fontSize: 22,
   },
