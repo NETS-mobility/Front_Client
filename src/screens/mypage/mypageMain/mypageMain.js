@@ -137,7 +137,10 @@ const MypageMain = ({navigation}) => {
           />
           <ArrowBtn contents={'공지사항'} />
           <ArrowBtn contents={'예약 변경 및 취소 수수료 안내'} />
-          <ArrowBtn contents={'약관 상세 확인'} />
+          <ArrowBtn
+            contents={'약관 상세 확인'}
+            onPress={() => navigation.navigate('Clause')}
+          />
         </View>
       </SafeAreaView>
     </CommonLayout>
