@@ -1,12 +1,15 @@
 import CommonLayout from '../../../components/common/layout';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import GetFAQ from '../../../api/mypage/getFAQ';
 import React, {Fragment, useEffect, useState} from 'react';
 import FaqBlock from '../../../components/mypage/faqBlock';
 
 const styles = StyleSheet.create({
+  faqScreen: {
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+  },
   title: {
     width: '80%',
     justifyContent: 'space-between',
@@ -14,38 +17,33 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 30,
   },
-  setcenter: {
+  faqLists: {
     alignItems: 'center',
+    paddingBottom: 30,
   },
 });
 
 const FaqScreen = () => {
   const [faqData, setFaqData] = useState();
-  const [faqClick, setFaqClick] = useState([]);
+  const [faqClick, setFaqClick] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       setFaqData(await GetFAQ());
     };
-
     fetchData();
   }, []);
 
   useEffect(() => {
-    if (faqData != undefined) {
+    faqData != undefined &&
       faqData.forEach(data => {
-        setFaqClick(prev => [...prev, false]);
+        setFaqClick(prev => ({...prev, [data.id]: false}));
       });
-    }
   }, [faqData]);
-
-  useEffect(() => {
-    console.log('click!==', faqClick);
-  }, [faqClick]);
 
   return (
     <CommonLayout>
-      <SafeAreaView>
+      <ScrollView style={styles.faqScreen}>
         <View style={styles.title}>
           <Text
             style={[typoStyles.fs32, typoStyles.fwBold, typoStyles.textMain]}>
@@ -58,23 +56,23 @@ const FaqScreen = () => {
               <Fragment key={i}>
                 <FaqBlock
                   type={'q'}
-                  content={data.question}
+                  content={`Q. ${data.question}`}
                   onPress={() => {
-                    // setFaqClick(prev => [...prev, !faqClick[i]]);
-
-                    const test = faqClick;
-                    test.splice(i, 1, !faqClick[i]);
-                    console.log('test=', test);
-                    setFaqClick(test);
-                    console.log('faqClick=', faqClick);
+                    setFaqClick(prev => ({
+                      ...prev,
+                      [data.id]: !faqClick[data.id],
+                    }));
                   }}
+                  clicked={faqClick[data.id]}
                 />
-                {faqClick[0] && <FaqBlock type={'a'} content={data.answer} />}
+                {faqClick[data.id] && (
+                  <FaqBlock type={'a'} content={`A. ${data.answer}`} />
+                )}
               </Fragment>
             );
           })}
         </View>
-      </SafeAreaView>
+      </ScrollView>
     </CommonLayout>
   );
 };
