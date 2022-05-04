@@ -63,6 +63,7 @@ const Reservation02 = ({route, navigation}) => {
     resDate,
     resTimes,
     gowithHospitalTime,
+    hosName,
   } = route.params;
 
   const [img, setImg] = useState('');
@@ -284,6 +285,7 @@ const Reservation02 = ({route, navigation}) => {
                 userInfo: user,
                 validTargetKind: result,
                 gowithHospitalTime: gowithHospitalTime,
+                hosName: hosName,
               });
             }}
             disable={disable}

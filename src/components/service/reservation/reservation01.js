@@ -15,12 +15,24 @@ const styles = StyleSheet.create({
   },
 });
 
-export const GetAddr = ({serviceName, way, addr, setAddr}) => {
+export const GetAddr = ({
+  serviceName,
+  way,
+  addr,
+  setAddr,
+  hosName,
+  setHosName,
+}) => {
   if (serviceName == '네츠 휠체어 플러스 왕복 서비스') {
     return (
       <>
         <HomeAddr addr={addr} setAddr={setAddr} />
-        <HospitalAddr addr={addr} setAddr={setAddr} />
+        <HospitalAddr
+          addr={addr}
+          setAddr={setAddr}
+          hosName={hosName}
+          setHosName={setHosName}
+        />
         <DropAddr addr={addr} setAddr={setAddr} />
       </>
     );
@@ -32,14 +44,24 @@ export const GetAddr = ({serviceName, way, addr, setAddr}) => {
       return (
         <>
           <HomeAddr addr={addr} setAddr={setAddr} />
-          <HospitalAddr addr={addr} setAddr={setAddr} />
+          <HospitalAddr
+            addr={addr}
+            setAddr={setAddr}
+            hosName={hosName}
+            setHosName={setHosName}
+          />
         </>
       );
     } else {
       return (
         <>
           <DropAddr addr={addr} setAddr={setAddr} />
-          <HospitalAddr addr={addr} setAddr={setAddr} />
+          <HospitalAddr
+            addr={addr}
+            setAddr={setAddr}
+            hosName={hosName}
+            setHosName={setHosName}
+          />
         </>
       );
     }
