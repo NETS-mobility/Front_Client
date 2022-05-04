@@ -62,6 +62,7 @@ const Reservation03 = ({route, navigation}) => {
     userInfo,
     validTargetKind,
     gowithHospitalTime,
+    hosName,
   } = route.params;
   console.log('moveDirection==', moveDirection);
 
@@ -234,6 +235,7 @@ const Reservation03 = ({route, navigation}) => {
                 userInfo: userInfo,
                 validTargetKind: validTargetKind,
                 gowithHospitalTime: gowithHospitalTime,
+                hosName: hosName,
                 xy: xy,
                 diagnosis: diagnosis,
                 result: result,

@@ -17,6 +17,7 @@ const Loading = ({route, navigation}) => {
     userInfo,
     validTargetKind,
     gowithHospitalTime,
+    hosName,
     xy,
     diagnosis,
     result,
@@ -57,6 +58,7 @@ const Loading = ({route, navigation}) => {
       serviceKindId: serviceKindId,
       moveDirection: moveDirection,
       gowithHospitalTime: gowithHospitalTime, //바꿔야댐
+      hospitalName: hosName,
       pickupAddr: resAddrs.homeAddr,
       dropAddr: resAddrs.dropAddr,
       hospitalAddr: resAddrs.hospitalAddr,
