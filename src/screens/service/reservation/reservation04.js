@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
-    marginBottom: 30,
+    marginBottom: 10,
   },
 
   login: {
@@ -102,6 +102,7 @@ const Reservation04 = ({navigation, route}) => {
     pickupAddr,
     dropAddr,
     hospitalAddr,
+    hospitalName,
     hopeReservationDate,
     hopeHospitalArrivalTime,
     fixedMedicalTime,
