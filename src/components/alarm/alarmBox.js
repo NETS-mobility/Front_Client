@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const AlarmBoxBtn = ({btnName}) => {
+const AlarmBoxBtn = ({btnName, onPress}) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <View style={[btnStyles.btnBlue, styles.btnsize]}>
         <Text
           style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textWhite]}>
@@ -31,7 +31,7 @@ const AlarmBoxBtn = ({btnName}) => {
   );
 };
 
-const AlarmBox = ({alarmName, alarmExplain, alarmTime, btnName}) => {
+const AlarmBox = ({alarmName, alarmExplain, alarmTime, btnName, onPress}) => {
   return (
     <BlueBlock>
       <View style={styles.title}>
@@ -48,7 +48,7 @@ const AlarmBox = ({alarmName, alarmExplain, alarmTime, btnName}) => {
         서비스 일자: {alarmTime}
       </Text>
       <View style={styles.wrapbtn}>
-        <AlarmBoxBtn btnName={btnName} />
+        <AlarmBoxBtn btnName={btnName} onPress={onPress} />
       </View>
     </BlueBlock>
   );

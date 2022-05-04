@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, View, ScrollView} from 'react-native';
 import CommonLayout from '../../components/common/layout';
 import typoStyles from '../../assets/fonts/typography';
 import {btnStyles} from '../../components/common/button';
 import {AlarmBox} from '../../components/alarm/alarmBox';
+import ViewAlarm from '../../api/alarm/viewAlarm';
 
 const styles = StyleSheet.create({
   title: {
@@ -13,6 +14,19 @@ const styles = StyleSheet.create({
 });
 
 const AlarmScreen = () => {
+  const [alarms, setAlarms] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setAlarms(await ViewAlarm());
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log('alarms=', alarms);
+  }, [alarms]);
+
   return (
     <CommonLayout>
       <ScrollView>
