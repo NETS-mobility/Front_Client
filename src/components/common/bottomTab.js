@@ -7,15 +7,24 @@ import AlarmNavigator from '../../navigation/alarm/alarm';
 import MypageNavigator from '../../navigation/mypage/mypageMain/mypageMain';
 import AuthNavigator from '../../navigation/auth';
 import HomeNavigator from '../../navigation/home/home';
+import StartNavigator from '../../navigation/start/start';
 import {RefreshContext} from '../../../App';
+import CheckFirstLaunch from '../../utils/checkFirstLaunch';
 import {createNavigationContainerRef} from '@react-navigation/native';
 
 const ref = createNavigationContainerRef();
 const Tab = createBottomTabNavigator();
-const BottomTab = () => {
+const BottomTab = ({isFirst}) => {
   const {refresh, setRefresh} = useContext(RefreshContext);
   const [routeName, setRouteName] = useState();
-  const noBottomTab = ['Payment', 'Loading', 'Reservation04'];
+  const noBottomTab = [
+    'Payment',
+    'Loading',
+    'Reservation04',
+    'StartFirst',
+    'StartSecond',
+    'StartThird',
+  ];
   const hide = noBottomTab.includes(ref.current?.getCurrentRoute()?.name);
 
   return (
@@ -42,6 +51,17 @@ const BottomTab = () => {
             fontSize: 13,
           },
         }}>
+        {isFirst ? (
+          <Tab.Screen
+            name="시작"
+            component={StartNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
+        ) : (
+          <></>
+        )}
         <Tab.Screen
           name="홈"
           component={HomeNavigator}

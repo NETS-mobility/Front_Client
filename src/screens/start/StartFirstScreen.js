@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, StyleSheet, ImageBackground, View} from 'react-native';
 import {StartLeftBox} from '../../components/start/StartTextBox';
-import { StartOrangeCircle, StartWhiteCircle } from '../../components/start/StartCircle';
+import {
+  StartOrangeCircle,
+  StartWhiteCircle,
+} from '../../components/start/StartCircle';
 
 const styles = StyleSheet.create({
   ImageStyle: {
     position: 'absolute',
     opacity: 0.6,
     width: '100%',
-    height: '100%',    
+    height: '100%',
   },
 
   ImageBackgroundContiner: {
@@ -18,7 +21,7 @@ const styles = StyleSheet.create({
   },
 
   left: {
-    position:'absolute',
+    position: 'absolute',
     top: 90,
   },
 
@@ -26,18 +29,27 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems:'flex-end',
+    alignItems: 'flex-end',
     marginBottom: 29,
   },
 });
 
-const StartFirstScreen = () => {
+const StartFirstScreen = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.push('StartSecond');
+    }, 2500);
+  }, []);
   return (
     <SafeAreaView>
       <View style={styles.ImageBackgroundContiner}>
-        <ImageBackground source={require('../../assets/image/startimg1.png')} resizeMode='contain' style={styles.ImageStyle} />
+        <ImageBackground
+          source={require('../../assets/image/startimg1.png')}
+          resizeMode="contain"
+          style={styles.ImageStyle}
+        />
         <View style={styles.left}>
-          <StartLeftBox text={"비응급\n병원이동\n서비스"}/>
+          <StartLeftBox text={'비응급\n병원이동\n서비스'} />
         </View>
         <View style={styles.CircleSet}>
           <StartOrangeCircle />
