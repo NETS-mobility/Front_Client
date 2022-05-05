@@ -47,10 +47,6 @@ const SignUpInputBoxWithBtn = ({
 }) => {
   const [isfocused, setFocus] = useState(false);
 
-  useEffect(() => {
-    console.log(text);
-  }, [text]);
-
   return (
     <View style={styles.outside}>
       <TextInput

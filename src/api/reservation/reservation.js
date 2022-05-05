@@ -2,8 +2,13 @@ import axios from 'axios';
 
 const ReservationAPI = async data => {
   const {dispatch, ...filtered} = data;
-  const dispatch1 = data.dispatch.dispatch1;
-  const dispatch2 = data.dispatch.dispatch2;
+  const dispatch1 = data?.dispatch?.dispatch?.[0];
+  const dispatch2 = data?.dispatch?.dispatch?.[1];
+  console.log('data?==', data);
+  console.log('dispatch1?=', dispatch1);
+  console.log('dispatch2?=', dispatch2);
+  console.log('data?.dispatch?.dispatch?.[0]', data?.dispatch?.dispatch?.[0]);
+  console.log('data?.dispatch?.dispatch?.[1]', data?.dispatch?.dispatch?.[1]);
 
   try {
     const result = await axios.post('/client/reserve', {
@@ -21,7 +26,6 @@ const ReservationAPI = async data => {
           },
       file: {},
     });
-    console.log('reservationAPI=', result.data);
     return result.data;
   } catch (err) {
     return err;

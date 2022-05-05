@@ -63,6 +63,8 @@ const Reservation01 = ({route, navigation}) => {
     homeAddr: '0',
     dropAddr: '0',
   });
+
+  const [hosName, setHosName] = useState('');
   const [resDate, setResDate] = useState('0');
   const [gowithtime, setGowithtime] = useState(-1); //귀가출발시간-병원도착시간 => 왕복일 때 병원동행시간
   const [gowithplustime, setGowithplustime] = useState(-1); //기본 20분+추가하고싶은 병원 동행시간 => 편도일 때
@@ -99,7 +101,8 @@ const Reservation01 = ({route, navigation}) => {
         resAddrs.dropAddr != '0' &&
         resTimes.resArrTime.time != '0' &&
         resTimes.resResTime.time != '0' &&
-        resTimes.resDepTime.time != '0'
+        resTimes.resDepTime.time != '0' &&
+        hosName != ''
         // gowithtime >= 0
       ) {
         setDis(false);
@@ -117,7 +120,8 @@ const Reservation01 = ({route, navigation}) => {
           resAddrs.homeAddr != '0' &&
           resAddrs.hospitalAddr != '0' &&
           resTimes.resArrTime.time != '0' &&
-          resTimes.resResTime.time != '0'
+          resTimes.resResTime.time != '0' &&
+          hosName != ''
           // gowithplustime >= 0
         ) {
           setDis(false);
@@ -128,14 +132,15 @@ const Reservation01 = ({route, navigation}) => {
           resDate != '0' &&
           resAddrs.dropAddr != '0' &&
           resAddrs.hospitalAddr != '0' &&
-          resTimes.resDepTime.time != '0'
+          resTimes.resDepTime.time != '0' &&
+          hosName != ''
           // gowithtime >= 0
         ) {
           setDis(false);
         } else setDis(true);
       }
     }
-  }, [resDate, resAddrs, resTimes, dis]);
+  }, [resDate, resAddrs, resTimes, dis, hosName]);
 
   useEffect(() => {
     ReservationTimeChange(resTimes, setResTimes, resDate, setResDate);
@@ -181,6 +186,8 @@ const Reservation01 = ({route, navigation}) => {
             way={way}
             addr={resAddrs}
             setAddr={setResAddrs}
+            hosName={hosName}
+            setHosName={setHosName}
           />
         </ServiceBlock>
         <ServiceBlock>
@@ -225,6 +232,7 @@ const Reservation01 = ({route, navigation}) => {
                   serviceKindID == 2 || serviceKindID == 4
                     ? gowithplustime + 20
                     : gowithtime,
+                hosName: hosName,
               });
             }}
             disable={dis}

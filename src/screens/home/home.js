@@ -70,10 +70,6 @@ const Home = ({navigation}) => {
     GetHomeNoti();
   }, [isFocused]);
 
-  useEffect(() => {
-    console.log('res?', res);
-  }, [res]);
-
   return (
     <CommonLayout>
       <Image
