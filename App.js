@@ -8,6 +8,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import axios from 'axios';
 import Home_Test from './src/screens/pay_test/homeTest';
 import IamportNavigation from './src/navigation/pay_test/pay_test';
+import CheckFirstLaunch from './src/utils/checkFirstLaunch';
 // axios.defaults.baseURL = 'http://10.0.2.2:5000';
 axios.defaults.baseURL = 'http://35.197.107.190:5000';
 
@@ -18,9 +19,11 @@ export const RefreshContext = createContext({
 
 const App = () => {
   const [refresh, setRefresh] = useState();
+  const [isFirst, setIsFirst] = useState(false);
   const value = useMemo(() => ({refresh, setRefresh}), [refresh, setRefresh]);
   const mainR = async () => {
     await GetToken().then(r => setRefresh(r));
+    await CheckFirstLaunch().then(r => setIsFirst(r));
   };
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const App = () => {
       /> */}
       <RefreshContext.Provider value={value}>
         <NativeBaseProvider>
-          <BottomTab />
+          <BottomTab isFirst={isFirst} />
         </NativeBaseProvider>
       </RefreshContext.Provider>
     </>
