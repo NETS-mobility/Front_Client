@@ -8,9 +8,11 @@ const GetServiceDetail = async service_id => {
         service_id: service_id,
       },
     );
+    console.log('data!', res.data);
     return res.data;
   } catch (err) {
-    return err;
+    console.log('err!=', err);
+    return err.response.status;
   }
 };
 
