@@ -82,7 +82,7 @@ const FindID = ({navigation}) => {
           styles.errMsg,
         ]}>
         {!PhoneValidation(tel)
-          ? '휴대전화 번호 형식은 010-0000-0000입니다.'
+          ? '형식을 010(02)-0000-0000또는 02-000-0000입니다.'
           : isnext == 2
           ? '인증번호를 올바르게 입력해주세요.'
           : ''}
