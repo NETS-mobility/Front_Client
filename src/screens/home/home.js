@@ -17,6 +17,7 @@ import {
 import {RefreshContext} from '../../../App';
 import GetHomeInfo from '../../api/home/GetHomeInfo';
 import {useIsFocused} from '@react-navigation/native';
+import GetNewToken from '../../api/auth/GetNewToken';
 
 const Home = ({navigation}) => {
   const isFocused = useIsFocused();
@@ -94,9 +95,15 @@ const Home = ({navigation}) => {
         )}
         <TouchableOpacity
           style={[shadowStyles.shadow, btnStyles.btnBlue, styles.btn]}
-          onPress={() => {
-            if (refresh != null) navigation.push('ReservationMainScreen');
-            else navigation.push('LoginMain');
+          onPress={async () => {
+            const res = await GetNewToken();
+            if (refresh != null && res) {
+              console.log('여기');
+              navigation.push('ReservationMainScreen');
+            } else {
+              console.log('이렇게');
+              navigation.push('LoginMain');
+            }
           }}>
           <Text
             style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
