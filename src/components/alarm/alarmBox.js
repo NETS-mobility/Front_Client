@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
 import BlueBlock from '../../components/mypage/blueBlock';
 import typoStyles from '../../assets/fonts/typography';
 import {btnStyles} from '../common/button';
+import GetServiceDetail from '../../api/reservation/serviceDetail';
 
 const styles = StyleSheet.create({
   title: {
@@ -18,20 +19,32 @@ const styles = StyleSheet.create({
   },
 });
 
-const AlarmBoxBtn = ({btnName, onPress}) => {
+const AlarmBoxBtn = ({navigation, id}) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity
+      onPress={async () => {
+        const res = await GetServiceDetail(id);
+        if (res != undefined && res == 400) {
+          Alert.alert(
+            '존재하지 않는 예약입니다',
+            '결제 기한이 지나 취소되었거나, 취소 요청하신 예약입니다.',
+            [{text: '확인', style: 'cancel'}],
+          );
+        } else {
+          navigation.navigate(`ServiceDetail`, {id});
+        }
+      }}>
       <View style={[btnStyles.btnBlue, styles.btnsize]}>
         <Text
           style={[typoStyles.fs14, typoStyles.fwBold, typoStyles.textWhite]}>
-          {btnName}
+          상세보기
         </Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-const AlarmBox = ({alarmName, alarmExplain, alarmTime, btnName, onPress}) => {
+const AlarmBox = ({alarmName, alarmExplain, alarm, id, navigation}) => {
   return (
     <BlueBlock>
       <View style={styles.title}>
@@ -45,10 +58,10 @@ const AlarmBox = ({alarmName, alarmExplain, alarmTime, btnName, onPress}) => {
       </Text>
       <Text
         style={[typoStyles.fs15, typoStyles.fwBold, typoStyles.textExplain]}>
-        서비스 일자: {alarmTime}
+        서비스 일자: {alarm}
       </Text>
       <View style={styles.wrapbtn}>
-        <AlarmBoxBtn btnName={btnName} onPress={onPress} />
+        <AlarmBoxBtn navigation={navigation} id={id} />
       </View>
     </BlueBlock>
   );
