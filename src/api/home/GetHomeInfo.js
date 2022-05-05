@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {GetToken} from '../../utils/controlToken';
+import {GetToken, DeleteToken} from '../../utils/controlToken';
+
 const GetHomeInfo = async () => {
   try {
     const res = await axios.post('/client', {jwtToken: await GetToken()});

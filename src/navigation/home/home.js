@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ReservationNavigator from '../service/reservation';
 import ServiceDetailNavigator from '../service/serviceDetail';
 import AuthNavigator from '../auth';
 import Home from '../../screens/home/home';
+import StartNavigator from '../start/start';
 const Stack = createNativeStackNavigator();
 
 const HomeNavigator = () => {
