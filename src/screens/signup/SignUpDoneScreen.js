@@ -110,7 +110,7 @@ const SignUpDoneScreen = ({route, navigation}) => {
         </View>
       </View>
       <View style={styles.login}>
-        <TouchableOpacity onPress={() => navigation.replace('Login')}>
+        <TouchableOpacity onPress={() => navigation.replace('LoginMain')}>
           <View style={[styles.loginbtn, btnStyles.btnBlue]}>
             <Text
               style={[typoStyles.fs20, typoStyles.fw700, typoStyles.textWhite]}>
