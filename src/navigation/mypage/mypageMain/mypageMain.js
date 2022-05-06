@@ -6,6 +6,7 @@ import FaqScreen from '../../../screens/mypage/faq/faq';
 import ChangePwNavigator from '../changePW/changePW';
 import ClauseScreen from '../../../screens/mypage/clause/clause';
 import ClauseDetailScreen from '../../../screens/mypage/clause/clauseDetail';
+import Withdrawal from '../../../screens/mypage/withdrawal/withdrawal';
 
 const Stack = createNativeStackNavigator();
 const MypageNavigator = () => {
@@ -20,6 +21,7 @@ const MypageNavigator = () => {
       <Stack.Screen name="ChangePW" component={ChangePwNavigator} />
       <Stack.Screen name="Clause" component={ClauseScreen} />
       <Stack.Screen name="ClauseDetail" component={ClauseDetailScreen} />
+      <Stack.Screen name="Withdrawal" component={Withdrawal} />
     </Stack.Navigator>
   );
 };

@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   arrowset: {
     alignItems: 'center',
-    height: 300,
+    height: '60%',
     justifyContent: 'space-between',
     marginTop: 20,
   },
@@ -140,6 +140,10 @@ const MypageMain = ({navigation}) => {
           <ArrowBtn
             contents={'약관 상세 확인'}
             onPress={() => navigation.navigate('Clause')}
+          />
+          <ArrowBtn
+            contents={'회원 탈퇴'}
+            onPress={() => navigation.navigate('Withdrawal')}
           />
         </View>
       </SafeAreaView>
