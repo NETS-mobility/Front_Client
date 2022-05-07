@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ChangeInput = ({title, place1, Text1, setText1}) => {
+const ChangeInput = ({title, place1, Text1, setText1, isPass}) => {
   const [isfocused, setFocus] = useState(false);
 
   return (
@@ -58,6 +58,7 @@ const ChangeInput = ({title, place1, Text1, setText1}) => {
       <TextInput
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
+        secureTextEntry={isPass}
         style={[
           styles.detailbox,
           {borderBottomColor: isfocused ? '#19B7CD' : '#DAD8E0'},

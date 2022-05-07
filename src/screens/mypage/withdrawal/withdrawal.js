@@ -54,7 +54,7 @@ const Withdrawal = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [reason, setReason] = useState('');
   const [disable, setDisable] = useState(true);
-  const [errmsg, setErrmsg] = useState('');
+  const [errmsg, setErrmsg] = useState('이메일과 비밀번호를 입력해주세요.');
   useEffect(() => {
     if (email != '' && password != '') {
       setDisable(false);
@@ -87,6 +87,7 @@ const Withdrawal = ({navigation}) => {
             place1={'비밀번호'}
             Text1={password}
             setText1={setPassword}
+            isPass={true}
           />
           <ChangeInput
             title={'탈퇴사유'}
@@ -99,7 +100,7 @@ const Withdrawal = ({navigation}) => {
         <View style={styles.wrapbtn}>
           <Text
             style={[
-              typoStyles.fs20,
+              typoStyles.fs14,
               typoStyles.fwBold,
               styles.successMsg,
               typoStyles.textPrimary,
