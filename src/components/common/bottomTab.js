@@ -57,6 +57,7 @@ const BottomTab = ({isFirst}) => {
             component={StartNavigator}
             options={{
               headerShown: false,
+              tabBarButton: () => null,
             }}
           />
         ) : (
