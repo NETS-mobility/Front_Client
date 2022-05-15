@@ -72,7 +72,7 @@ export const Step2 = ({additional, id}) => {
         ]}>
         STEP2. 결제 금액 확인
       </Text>
-      {additional ? <AdditionalPayment /> : <></>}
+      {additional ? <AdditionalPayment id={id} /> : <></>}
       <Payment id={id} />
       {additional ? (
         <></>

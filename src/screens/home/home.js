@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {btnStyles, shadowStyles} from '../../components/common/button';
 import typoStyles from '../../assets/fonts/typography';
@@ -18,6 +19,8 @@ import {RefreshContext} from '../../../App';
 import GetHomeInfo from '../../api/home/GetHomeInfo';
 import {useIsFocused} from '@react-navigation/native';
 import GetNewToken from '../../api/auth/GetNewToken';
+import NetsHowToUseImg from '../../assets/image/nets_howtouse.jpeg';
+import {CheckWaitPay} from '../../api/reservation/checkWaitPay';
 
 const Home = ({navigation}) => {
   const isFocused = useIsFocused();
@@ -48,13 +51,17 @@ const Home = ({navigation}) => {
       width: 328,
       height: 47,
       alignSelf: 'center',
-      marginBottom: 40,
+      marginBottom: 20,
     },
     howTo: {
       width: '100%',
       height: 347,
       backgroundColor: '#c4c4c4',
       justifyContent: 'center',
+    },
+    useimg: {
+      width: '100%',
+      height: 600,
     },
     tempTxt: {
       textAlign: 'center',
@@ -96,13 +103,22 @@ const Home = ({navigation}) => {
         <TouchableOpacity
           style={[shadowStyles.shadow, btnStyles.btnBlue, styles.btn]}
           onPress={async () => {
-            const res = await GetNewToken();
-            if (refresh != null && res) {
-              console.log('여기');
-              navigation.push('ReservationMainScreen');
+            const check = await CheckWaitPay();
+            if (check === undefined) {
+              const res = await GetNewToken();
+              if (refresh != null && res) {
+                console.log('여기');
+                navigation.push('ReservationMainScreen');
+              } else {
+                console.log('이렇게');
+                navigation.push('LoginMain');
+              }
             } else {
-              console.log('이렇게');
-              navigation.push('LoginMain');
+              Alert.alert(
+                '미결제 예약이 있습니다.',
+                `이전에 결제되지 않은 예약이 있습니다. 결제를 완료하신 후 서비스 예약이 가능합니다.\n미 결제 서비스 번호: ${check}`,
+                [{text: '확인', style: 'cancel'}],
+              );
             }
           }}>
           <Text
@@ -111,9 +127,11 @@ const Home = ({navigation}) => {
           </Text>
         </TouchableOpacity>
 
-        <View style={styles.howTo}>
-          <Text style={styles.tempTxt}>이용안내 이미지</Text>
-        </View>
+        <Image
+          source={NetsHowToUseImg}
+          style={styles.useimg}
+          resizeMode={'contain'}
+        />
       </ScrollView>
     </CommonLayout>
   );
