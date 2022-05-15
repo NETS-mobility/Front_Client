@@ -8,6 +8,7 @@ import {ServiceInfoOneLine} from '../../components/service/reservation/serviceIn
 import CommonLayout from '../../components/common/layout';
 import CustomBtn, {btnStyles} from '../../components/common/button';
 import ToKoreanTime from '../../utils/toKoreanTime';
+import {SetCompletePay} from '../../api/payment/SetCompletePay';
 
 const styles = StyleSheet.create({
   block: {
@@ -65,6 +66,7 @@ const PaymentResultTest = ({route, navigation}) => {
 
   useEffect(() => {
     GetResult();
+    console.log('내가원하는건이데이터==', data);
   }, []);
 
   const UnixToKST = () => {
@@ -172,7 +174,10 @@ const PaymentResultTest = ({route, navigation}) => {
           text={'확인'}
           viewStyle={[btnStyles.btnBlue, styles.okBtn]}
           textStyle={[typoStyles.fw700, typoStyles.fs20, typoStyles.textWhite]}
-          onPress={() => navigation.replace('Home')}
+          onPress={async () => {
+            const res = await SetCompletePay(data.imp_uid, data.merchant_uid);
+            navigation.replace('Home');
+          }}
         />
       </SafeAreaView>
     </CommonLayout>
