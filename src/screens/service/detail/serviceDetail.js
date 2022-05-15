@@ -80,6 +80,7 @@ const ServiceDetail = ({navigation, route}) => {
           progress={{
             state: detail?.service_state,
             state_time: detail?.service_state_time,
+            dispatch_case: detail?.service?.dispatch_case,
           }}
         />
         <ManagerComment comment={detail?.dispatch?.[0]?.netsmanager_mention} />
