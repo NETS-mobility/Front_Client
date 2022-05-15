@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const AdditionalPayment = () => {
+export const AdditionalPayment = ({id}) => {
   return (
     <View style={styles.additionalBlock}>
       <View style={[styles.box, styles.boldLine]}>

@@ -4,6 +4,7 @@ import ReservationNavigator from '../service/reservation';
 import ServiceDetailNavigator from '../service/serviceDetail';
 import AuthNavigator from '../auth';
 import Home from '../../screens/home/home';
+import AdditionalPayNavigator from '../service/additionalPayment';
 import StartNavigator from '../start/start';
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ const HomeNavigator = () => {
         name="ReservationMainScreen"
         component={ReservationNavigator}
       />
+      <Stack.Screen name="AdditionalPay" component={AdditionalPayNavigator} />
       <Stack.Screen name="ServiceHistory" component={ServiceDetailNavigator} />
       <Stack.Screen name="LoginMain" component={AuthNavigator} />
     </Stack.Navigator>
