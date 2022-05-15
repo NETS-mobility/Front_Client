@@ -8,7 +8,6 @@ const GetPayResult = async (imp_uid, token) => {
     console.log('pay result=======', res);
     return res;
   } catch (err) {
-    console.log('err=======', err);
     return err;
   }
 };

@@ -10,7 +10,6 @@ const GetExtraCost = async id => {
     console.log('res=', res);
     return res.data;
   } catch (err) {
-    console.log('err=', err.response);
     return err;
   }
 };

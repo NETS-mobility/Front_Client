@@ -10,7 +10,7 @@ const GetPayInfo = async id => {
     console.log('pay info=', res);
     return res.data;
   } catch (err) {
-    console.log('err=', err.response);
+    console.log('err in pay info=', err.response);
     return err;
   }
 };
@@ -23,7 +23,6 @@ const GetBankType = async () => {
     console.log('bank type===', res);
     return res.data;
   } catch (err) {
-    console.log('err=', err.response);
     return err;
   }
 };

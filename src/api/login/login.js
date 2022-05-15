@@ -10,7 +10,7 @@ const LoginAPI = async data => {
         resolve(res.status);
       })
       .catch(err => {
-        console.log(JSON.stringify(err));
+        console.log(JSON.stringify(err.response));
       });
   });
 };

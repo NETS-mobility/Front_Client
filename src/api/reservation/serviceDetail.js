@@ -10,8 +10,10 @@ const GetServiceDetail = async service_id => {
         jwtToken: await GetToken(),
       },
     );
+    console.log('data!', res.data);
     return res.data;
   } catch (err) {
+    console.log('err!=', err);
     return err.response.status;
   }
 };
