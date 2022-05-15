@@ -1,4 +1,5 @@
 import axios from 'axios';
+import React, {useEffect} from 'react';
 const GetPayResult = async (imp_uid, token) => {
   try {
     const res = await axios.get(`https://api.iamport.kr/payments/${imp_uid}`, {
