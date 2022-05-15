@@ -66,7 +66,6 @@ const PaymentResultTest = ({route, navigation}) => {
 
   useEffect(() => {
     GetResult();
-    console.log('내가원하는건이데이터==', data);
   }, []);
 
   const UnixToKST = () => {

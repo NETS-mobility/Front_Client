@@ -10,7 +10,6 @@ const GetBaseCost = async id => {
     console.log('res=', res);
     return res.data.baseCost;
   } catch (err) {
-    console.log('err=', err.response);
     return err;
   }
 };

@@ -10,7 +10,6 @@ const PayToken = async () => {
     console.log('res=', res);
     return res.data.response.access_token;
   } catch (err) {
-    console.log('err in PayToken', err);
     return err;
   }
 };

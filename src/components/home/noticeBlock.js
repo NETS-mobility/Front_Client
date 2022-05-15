@@ -92,10 +92,11 @@ const NoticeBlock = ({data, navigation}) => {
       {additionalPay?.map((content, i) => {
         return (
           <WhiteBlock
+            key={i}
             content={content}
             i={i}
             onPress={() => {
-              navigation.navigate('ReservationPay', {
+              navigation.navigate('Payment', {
                 screen: 'ReservationPay',
                 params: {reservationId: content?.id},
                 initial: false,
@@ -119,10 +120,11 @@ const NoticeBlock = ({data, navigation}) => {
       {basicPay?.map((content, i) => {
         return (
           <WhiteBlock
+            key={i}
             content={content}
             i={i}
             onPress={() => {
-              navigation.navigate('ReservationPay', {
+              navigation.navigate('Payment', {
                 screen: 'ReservationPay',
                 params: {reservationId: content?.id},
                 initial: false,
@@ -157,6 +159,7 @@ const NoticeBlock = ({data, navigation}) => {
       {reserve?.map((content, i) => {
         return (
           <WhiteBlock
+            key={i}
             content={content}
             i={i}
             onPress={() =>

@@ -8,7 +8,6 @@ const GetUserInfo = async () => {
     });
     return res.data;
   } catch (err) {
-    console.log('err=', err.response);
     return err.response.status;
   }
 };
