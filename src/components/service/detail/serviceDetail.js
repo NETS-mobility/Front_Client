@@ -1,12 +1,18 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import typoStyles from '../../../assets/fonts/typography';
 import ServiceBlock from '../serviceBlock';
 
-const DetailProgressCircle = ({time, text, circleFill}) => {
+const DetailProgressCircle = ({time, text, circleFill, count}) => {
+  const GetWidth = () => {
+    if (count == 4) return '33%';
+    else if (count == 5) return '25%';
+    else return '20%';
+  };
+
   const styles = StyleSheet.create({
     oneStep: {
-      width: '25%',
+      width: GetWidth(),
       alignItems: 'center',
     },
     bigCircle: {
@@ -68,18 +74,112 @@ const DetailProgressCircle = ({time, text, circleFill}) => {
   );
 };
 
+/*
+  왕복: 1~6
+  집-병원: 1~3, 6
+  병원-집: 1, 4~6
+  
+  [사용자]
+  왕복 2시간 이상
+  1. [차량출발, 픽업완료, 병원도착완료, 서비스 종료]
+  2. [귀가차량 병원도착, 귀가출발, 서비스 종료]
+
+  왕복 2시간 이하
+  1. [차량출발, 픽업완료, 병원도착완료, 귀가출발, 서비스 종료]
+
+  편도(집-병원)
+  1. [차량출발, 픽업완료, 병원도착완료, 서비스 종료]
+
+  편도(병원-집)
+  1. [차량 출발, 귀가차량 병원도착, 귀가출발, 서비스 종료]
+  */
+
+const pickCategory = (data, pick) => {
+  const categories = {
+    1: ['차량출발', data?.carDep],
+    2: ['픽업완료', data?.pickup],
+    3: ['병원도착\n완료', data?.arrivalHos],
+    4: ['귀가차량\n병원도착', data?.carReady],
+    5: ['귀가출발', data?.goHome],
+    6: ['서비스종료', data?.complete],
+  };
+  const categoryKey = Object.keys(categories);
+  for (let i = 0; i < categoryKey.length; i++) {
+    if (categoryKey[i] == pick) {
+      return categories[categoryKey[i]];
+    }
+  }
+};
+
+const CaseInfo = dispatchCase => {
+  switch (dispatchCase) {
+    case 1: //집-병원
+      return [1, 2, 3, 6];
+    case 2: //병원-집
+      return [1, 4, 5, 6];
+    case 3: //집-집(2시간 이하)
+      return [1, 2, 3, 5, 6];
+    case 4: //집-집(2시간 이상)
+      return [1, 2, 3, 4, 5, 6];
+  }
+};
+
 export const ServiceDetailProgress = ({progress}) => {
-  const {state, state_time} = progress;
-  const GetLineFill = () => {
+  const {state, state_time, dispatch_case} = progress;
+  const infos = CaseInfo(dispatch_case);
+  console.log(progress);
+  console.log(infos);
+
+  const GetLineFill = num => {
     let lineFill = '0%';
-    if (state > 5) {
-      lineFill = '100%';
-    } else if (state > 4) {
-      lineFill = '75%';
-    } else if (state > 3) {
-      lineFill = '50%';
-    } else if (state > 2) {
-      lineFill = '25%';
+    if (num == 4) {
+      if (dispatch_case == 1) {
+        if (state > 6) {
+          lineFill = '122%';
+        } else if (state > 3) {
+          lineFill = '99%';
+        } else if (state > 2) {
+          lineFill = '66%';
+        } else if (state > 1) {
+          lineFill = '33%';
+        }
+      } else {
+        if (state > 6) {
+          lineFill = '122%';
+        } else if (state > 5) {
+          lineFill = '99%';
+        } else if (state > 4) {
+          lineFill = '66%';
+        } else if (state > 1) {
+          lineFill = '33%';
+        }
+      }
+    } else if (num == 5) {
+      if (state > 6) {
+        lineFill = '125%';
+      } else if (state > 5) {
+        lineFill = '100%';
+      } else if (state > 3) {
+        lineFill = '75%';
+      } else if (state > 2) {
+        lineFill = '50%';
+      } else if (state > 1) {
+        lineFill = '25%';
+      }
+    } else {
+      if (state > 6) {
+        lineFill = '120%';
+      } else if (state > 5) {
+        lineFill = '100%';
+      } else if (state > 4) {
+        lineFill = '80%';
+      } else if (state > 3) {
+        lineFill = '60%';
+      } else if (state > 2) {
+        lineFill = '40%';
+      } else if (state > 1) {
+        lineFill = '20%';
+      }
     }
     return lineFill;
   };
@@ -102,9 +202,23 @@ export const ServiceDetailProgress = ({progress}) => {
       backgroundColor: '#dad8e0',
       zIndex: 2,
     },
-    lineBlue: {
+    lineBlue4: {
       position: 'absolute',
-      width: GetLineFill(),
+      width: GetLineFill(4),
+      height: 13,
+      backgroundColor: '#19b7cd',
+      zIndex: 3,
+    },
+    lineBlue5: {
+      position: 'absolute',
+      width: GetLineFill(5),
+      height: 13,
+      backgroundColor: '#19b7cd',
+      zIndex: 3,
+    },
+    lineBlue6: {
+      position: 'absolute',
+      width: GetLineFill(6),
       height: 13,
       backgroundColor: '#19b7cd',
       zIndex: 3,
@@ -123,44 +237,25 @@ export const ServiceDetailProgress = ({progress}) => {
       </Text>
       <View style={styles.steps}>
         <View style={styles.lineGray}>
-          <View style={styles.lineBlue} />
+          {infos?.length == 4 ? (
+            <View style={styles.lineBlue4} />
+          ) : infos?.length == 5 ? (
+            <View style={styles.lineBlue5} />
+          ) : (
+            <View style={styles.lineBlue6} />
+          )}
         </View>
-
-        <DetailProgressCircle
-          time={
-            state_time?.[2] != null ? state_time?.[2].substring(11, 16) : ''
-          }
-          text={'픽업완료'}
-          circleFill={state > 1}
-        />
-        <DetailProgressCircle
-          time={
-            state_time?.[3] != null ? state_time?.[3].substring(11, 16) : ''
-          }
-          text={'병원도착'}
-          circleFill={state > 2}
-        />
-        <DetailProgressCircle
-          time={
-            state_time?.[4] != null ? state_time?.[4].substring(11, 16) : ''
-          }
-          text={'귀가차량\n병원도착'}
-          circleFill={state > 3}
-        />
-        <DetailProgressCircle
-          time={
-            state_time?.[5] != null ? state_time?.[5].substring(11, 16) : ''
-          }
-          text={'귀가출발'}
-          circleFill={state > 4}
-        />
-        <DetailProgressCircle
-          time={
-            state_time?.[6] != null ? state_time?.[6].substring(11, 16) : ''
-          }
-          text={'서비스종료'}
-          circleFill={state > 5}
-        />
+        {infos?.map((data, i) => {
+          const result = pickCategory(state_time, data);
+          return (
+            <DetailProgressCircle
+              time={result[1]?.substring(11, 16)}
+              text={result[0]}
+              circleFill={state >= infos[i]}
+              count={infos?.length}
+            />
+          );
+        })}
       </View>
     </ServiceBlock>
   );

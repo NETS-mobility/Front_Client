@@ -43,49 +43,130 @@ const styles = StyleSheet.create({
   alignCenter: {
     textAlign: 'center',
   },
+  noticeText: {
+    marginTop: 30,
+    marginBottom: -7,
+  },
 });
 
+const WhiteBlock = ({content, i, onPress}) => {
+  const pickupString = `${content.rev_date.substring(0, 10)}`;
+  const serviceType = `${content.service_type}`;
+  return (
+    <TouchableOpacity style={styles.contents} key={i} onPress={onPress}>
+      <Text
+        style={[
+          typoStyles.textExplainBold,
+          typoStyles.fs15,
+          typoStyles.fw700,
+          styles.alignCenter,
+        ]}>
+        {`${pickupString}\n${serviceType}`}
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
 const NoticeBlock = ({data, navigation}) => {
+  const reserve = data?.service?.filter(i => i.pay_state == 1);
+  const basicPay = data?.service?.filter(i => i.pay_state == 2);
+  const additionalPay = data?.service?.filter(i => i.pay_state == 3);
+
   return (
     <View style={styles.notiBlock}>
       <Text style={[typoStyles.textWhite, typoStyles.fs20, typoStyles.fw700]}>
         {data?.name}님, 안녕하세요!
       </Text>
-      {data.service?.length ? (
+
+      {additionalPay?.length > 0 && (
         <Text
-          style={[typoStyles.textWhite, typoStyles.fs14, typoStyles.fwRegular]}>
+          style={[
+            typoStyles.textWhite,
+            typoStyles.fs14,
+            typoStyles.fwRegular,
+            styles.noticeText,
+          ]}>
+          추가결제가 필요한 예약내역이 있습니다.
+        </Text>
+      )}
+      {additionalPay?.map((content, i) => {
+        return (
+          <WhiteBlock
+            content={content}
+            i={i}
+            onPress={() => {
+              navigation.navigate('ReservationPay', {
+                screen: 'ReservationPay',
+                params: {reservationId: content?.id},
+                initial: false,
+              });
+            }}
+          />
+        );
+      })}
+
+      {basicPay?.length > 0 && (
+        <Text
+          style={[
+            typoStyles.textWhite,
+            typoStyles.fs14,
+            typoStyles.fwRegular,
+            styles.noticeText,
+          ]}>
+          결제가 필요한 예약내역이 있습니다.
+        </Text>
+      )}
+      {basicPay?.map((content, i) => {
+        return (
+          <WhiteBlock
+            content={content}
+            i={i}
+            onPress={() => {
+              navigation.navigate('ReservationPay', {
+                screen: 'ReservationPay',
+                params: {reservationId: content?.id},
+                initial: false,
+              });
+            }}
+          />
+        );
+      })}
+
+      {reserve?.length ? (
+        <Text
+          style={[
+            typoStyles.textWhite,
+            typoStyles.fs14,
+            typoStyles.fwRegular,
+            styles.noticeText,
+          ]}>
           예약된 서비스가 있습니다.
         </Text>
       ) : (
         <Text
-          style={[typoStyles.textWhite, typoStyles.fs14, typoStyles.fwRegular]}>
+          style={[
+            typoStyles.textWhite,
+            typoStyles.fs14,
+            typoStyles.fwRegular,
+            styles.noticeText,
+          ]}>
           예약된 서비스가 없습니다.
         </Text>
       )}
-      {data.service?.map((content, i) => {
-        const pickupString = `${content.rev_date.substring(0, 10)}`;
-        const serviceType = `${content.service_type}`;
+
+      {reserve?.map((content, i) => {
         return (
-          <TouchableOpacity
-            style={styles.contents}
-            key={i}
+          <WhiteBlock
+            content={content}
+            i={i}
             onPress={() =>
               navigation.navigate('서비스내역', {
                 screen: 'ServiceDetail',
                 params: {detailId: content?.id},
                 initial: false,
               })
-            }>
-            <Text
-              style={[
-                typoStyles.textExplainBold,
-                typoStyles.fs15,
-                typoStyles.fw700,
-                styles.alignCenter,
-              ]}>
-              {`${pickupString}\n${serviceType}`}
-            </Text>
-          </TouchableOpacity>
+            }
+          />
         );
       })}
     </View>
