@@ -154,8 +154,8 @@ export const ServiceDetailProgress = ({progress}) => {
           lineFill = '33%';
         }
       }
-    } else if (num == 6) {
-      if (state > 5) {
+    } else if (num == 5) {
+      if (state > 6) {
         lineFill = '125%';
       } else if (state > 5) {
         lineFill = '100%';
@@ -168,17 +168,17 @@ export const ServiceDetailProgress = ({progress}) => {
       }
     } else {
       if (state > 6) {
-        lineFill = '100%';
+        lineFill = '120%';
       } else if (state > 5) {
-        lineFill = '83%';
+        lineFill = '100%';
       } else if (state > 4) {
-        lineFill = '67%';
+        lineFill = '80%';
       } else if (state > 3) {
-        lineFill = '50%';
+        lineFill = '60%';
       } else if (state > 2) {
-        lineFill = '33%';
+        lineFill = '40%';
       } else if (state > 1) {
-        lineFill = '17%';
+        lineFill = '20%';
       }
     }
     return lineFill;
@@ -251,7 +251,7 @@ export const ServiceDetailProgress = ({progress}) => {
             <DetailProgressCircle
               time={result[1]?.substring(11, 16)}
               text={result[0]}
-              circleFill={state > i}
+              circleFill={state >= infos[i]}
               count={infos?.length}
             />
           );
