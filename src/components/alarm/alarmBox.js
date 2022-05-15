@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Alert} from 'react-native';
 import BlueBlock from '../../components/mypage/blueBlock';
 import typoStyles from '../../assets/fonts/typography';
@@ -19,10 +19,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const AlarmBoxBtn = ({navigation, id}) => {
+const AlarmBoxBtn = ({navigation, title, id}) => {
   return (
     <TouchableOpacity
       onPress={async () => {
+        console.log('이 id는==', id);
         const res = await GetServiceDetail(id);
         if (res != undefined && res == 400) {
           Alert.alert(
@@ -31,7 +32,22 @@ const AlarmBoxBtn = ({navigation, id}) => {
             [{text: '확인', style: 'cancel'}],
           );
         } else {
-          navigation.navigate(`ServiceDetail`, {id});
+          if (title === '결제요청' || title === '결제독촉') {
+            navigation.navigate('Payment', {
+              screen: 'ReservationPay',
+              params: {reservationId: id},
+            });
+          } else if (
+            title === '병원동행 추가요금 결제' ||
+            title === '대기요금 결제'
+          ) {
+            navigation.navigate('AdditionalPay', {
+              screen: 'ReservationPay',
+              params: {reservationId: id},
+            });
+          } else {
+            navigation.navigate(`ServiceDetail`, {id});
+          }
         }
       }}>
       <View style={[btnStyles.btnBlue, styles.btnsize]}>
@@ -61,7 +77,7 @@ const AlarmBox = ({alarmName, alarmExplain, alarm, id, navigation}) => {
         서비스 일자: {alarm}
       </Text>
       <View style={styles.wrapbtn}>
-        <AlarmBoxBtn navigation={navigation} id={id} />
+        <AlarmBoxBtn navigation={navigation} title={alarmName} id={id} />
       </View>
     </BlueBlock>
   );
