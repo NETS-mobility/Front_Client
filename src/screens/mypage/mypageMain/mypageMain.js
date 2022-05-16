@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   arrowset: {
     alignItems: 'center',
     height: '60%',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     marginTop: 20,
   },
 });
@@ -135,8 +135,8 @@ const MypageMain = ({navigation}) => {
             contents={'자주 묻는 질문'}
             onPress={() => navigation.navigate('FAQ')}
           />
-          <ArrowBtn contents={'공지사항'} />
-          <ArrowBtn contents={'예약 변경 및 취소 수수료 안내'} />
+          {/* <ArrowBtn contents={'공지사항'} />
+          <ArrowBtn contents={'예약 변경 및 취소 수수료 안내'} /> */}
           <ArrowBtn
             contents={'약관 상세 확인'}
             onPress={() => navigation.navigate('Clause')}
