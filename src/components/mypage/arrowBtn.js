@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     width: '80%',
     height: 50,
     alignContent: 'space-between',
+    marginTop: 10,
   },
   textset: {
     width: '83%',

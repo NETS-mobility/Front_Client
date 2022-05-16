@@ -51,7 +51,7 @@ const BottomTab = ({isFirst}) => {
             fontSize: 13,
           },
         }}>
-        {isFirst ? (
+        {/* {isFirst ? (
           <Tab.Screen
             name="시작"
             component={StartNavigator}
@@ -62,7 +62,7 @@ const BottomTab = ({isFirst}) => {
           />
         ) : (
           <></>
-        )}
+        )} */}
         <Tab.Screen
           name="홈"
           component={HomeNavigator}
